@@ -14,6 +14,11 @@ public class DatumFromScratch {
 		
 	}
 	
+	/**
+	 * 
+	 * @param datum
+	 */
+	
 	public DatumFromScratch(Date datum){
 		dag = datum.getDay();
 		maand = datum.getMonth();
