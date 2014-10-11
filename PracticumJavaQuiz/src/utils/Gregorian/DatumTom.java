@@ -14,7 +14,7 @@ public class DatumTom {
 	
 	public DatumTom() {
 		this.datum = new GregorianCalendar();
-		this.datum.setTime(new Date());
+		
 		
 	}
 	
@@ -32,7 +32,7 @@ public class DatumTom {
 	}
 	
 	public int getMaand() {
-		return this.datum.get(Calendar.MONTH);
+		return this.datum.get(Calendar.MONTH)+1;
 	}
 	
 	public int getJaar() {
@@ -44,7 +44,7 @@ public class DatumTom {
 	}
 	
 	public void setMaand(int maand) {
-		this.datum.set(Calendar.MONTH, maand);
+		this.datum.set(Calendar.MONTH, maand-1);
 	}
 	
 	public void setJaar(int jaar) {
@@ -69,27 +69,27 @@ public class DatumTom {
 		
 	}
 	
-	public
 	
-	public boolean kleinerDan(DatumTom datum){
-		if (this.getJaar() < datum.getJaar()){
+	
+	public boolean kleinerDan(DatumTom eenDatum){
+		if (this.getJaar() < eenDatum.getJaar()){
 			return true;
 		}
 		else {
-			if (this.getJaar()> datum.getJaar()) {
+			if (this.getJaar()> eenDatum.getJaar()) {
 				return false;
 			}
 			else {
-				if (this.getMaand() < datum.getMaand()){
+				if (this.getMaand() < eenDatum.getMaand()){
 					return true;
 					
 				}
 				else {
-					if (this.getMaand() > datum.getMaand()){
+					if (this.getMaand() > eenDatum.getMaand()){
 						return false;
 					}
 					else {
-						if (this.getDag() < datum.getDag()) {
+						if (this.getDag() < eenDatum.getDag()) {
 							return true;
 						}
 						else {return false;}
@@ -98,6 +98,30 @@ public class DatumTom {
 			}
 			
 		}
-		return false;
+		
+	}
+	
+	public int verschilInJaren(DatumTom d) {
+		int verschil;
+		if (this.kleinerDan(d)){
+			verschil = d.getJaar() - this.getJaar();
+			if (this.getMaand() >= d.getMaand()) {
+				verschil = (this.getMaand() > d.getMaand()? verschil--:verschil);
+				if (this.getMaand() == d.getMaand()) {
+					verschil = (this.getDag()>d.getDag()?verschil--:verschil);
+				}
+			}
+		}
+		else {
+			verschil = this.getJaar() - d.getJaar();
+			if (d.getMaand() >= this.getMaand()) {
+				verschil = (d.getMaand()>this.getMaand()?verschil--:verschil);
+				if (d.getMaand() == this.getMaand()){
+					verschil = (d.getDag()>this.getDag()?verschil--:verschil);
+				}
+			}
+		}
+		return verschil;
+		
 	}
 }
