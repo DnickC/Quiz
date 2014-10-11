@@ -75,9 +75,9 @@ public class Datum {
 		}
 	}
 	
-	public void setMaand(int maand)
+	public void setMaand(int maand) // hierbij kan een validation rule worden toegevoegd in de GUI 
 	{
-		if (maand < 12 && maand > 1 )
+		if (maand <= 12 && maand >= 1 )
 		{
 			datumVandaag.set(Calendar.MONTH, maand);
 		}
