@@ -123,6 +123,22 @@ public class Datum {
 		
 	}
 	
+	public boolean kleinerDan (Calendar d)
+	{
+		
+		if (compareTo(d) >= 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+			
+			
+			
+		
+	}
 	
 
 	public String toString()
