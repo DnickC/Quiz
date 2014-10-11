@@ -6,6 +6,7 @@ import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/
 import java.util.GregorianCalendar;
 
 public class Datum {
+	//test
 	private SimpleDateFormat amerikaansDatumFormaat = new SimpleDateFormat("yyyy/MM/dd");
 	private SimpleDateFormat europeesDatumFormaat = new SimpleDateFormat("dd/MM/yyyy");
 	private SimpleDateFormat volledigeDatum = new SimpleDateFormat("dd/MMM/yyyy");
