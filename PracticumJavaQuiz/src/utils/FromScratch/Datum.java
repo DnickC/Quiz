@@ -68,7 +68,6 @@ public class Datum {
 	
 	private void setDag (int dag)
 	{
-		this.valideerDag(dag);
 		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
 			this.dag = dag;
 		} 
@@ -129,7 +128,7 @@ public class Datum {
 		
 	}
 	
-	/** kleinerDan method : bepaalt of een datum kleiner is dan huidig datumobject */
+	//** kleinerDan method : bepaalt of een datum kleiner is dan huidig datumobject */
 	public boolean kleinerDan (Datum d){
 		if(compareTo(d) == -1 || compareTo(d) == 0){
 			return true;
@@ -151,16 +150,48 @@ public class Datum {
 		int vandaag = julianDayCalculator(this.jaar, this.maand,this.dag);
 		int dat = julianDayCalculator(d.jaar,d.maand,d.dag);
 		return vandaag-dat;
-		return 0;
-	}
+			}
 	
-	public void veranderDatum (Datum datum, int aantalDagen ){
-		
-		
+	public void veranderDatum (Datum datum, int aantalDagen,boolean opaf ){
+		int teller = 0;
+		if(opaf == true){
+			do{
+			voegDagToe(datum);
+			teller++;
+			}while(teller <= aantalDagen);
+		}else{
+			do{
+				trekDagAf(datum);
+				teller ++;
+			}while(teller <= aantalDagen);
+		}
 	}
 	
 	public Datum trekDagAf(Datum datum){
-		if(datum.maand == 
+		if(datum.maand == 3){
+			if(datum.dag == 1){
+				if(valideerDag(datum)== true){
+					datum.dag = 29;
+				}else{
+					datum.dag = 28;
+					
+				}
+				datum.maand--;
+			}
+		}
+		if(datum.dag == 1){
+			if(datum.maand == 1){
+				datum.maand = 12;
+				datum.dag = 31;
+				datum.jaar--;
+				}else{
+					datum.maand --;
+					datum.dag = dagenPerMaand[datum.maand];
+				}
+			}else{
+				datum.dag--;
+			}
+			return datum;
 	}
 	
 	public Datum voegDagToe(Datum datum){
@@ -170,10 +201,6 @@ public class Datum {
 						datum.dag++;
 					}else{
 						datum.dag = 1;
-						if(datum.maand == 12){
-						datum.maand = 1;
-						datum.jaar++;
-					}else{
 						datum.maand ++;
 					}
 				}
@@ -191,7 +218,7 @@ public class Datum {
 					datum.dag++;
 				}
 			  }
-			}
+			return datum;
 	}
 	
 	public int julianDayCalculator(int y,int m, int d){
