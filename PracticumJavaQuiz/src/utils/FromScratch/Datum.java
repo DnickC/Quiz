@@ -14,7 +14,6 @@ public class Datum {
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
 	
 	public Datum(){
-		
 		dag = datumVandaag.getDay();
 		maand = datumVandaag.getMonth();
 		jaar = datumVandaag.getYear();
@@ -152,19 +151,40 @@ public class Datum {
 		return vandaag-dat;
 			}
 	
-	public void veranderDatum (Datum datum, int aantalDagen,boolean opaf ){
+	public void veranderVoidDatum (int aantalDagen,boolean opaf ){
+		
 		int teller = 0;
 		if(opaf == true){
 			do{
-			voegDagToe(datum);
+			voegDagToe(new Datum(datumVandaag));
 			teller++;
 			}while(teller <= aantalDagen);
 		}else{
 			do{
-				trekDagAf(datum);
+				trekDagAf(new Datum(datumVandaag));
 				teller ++;
 			}while(teller <= aantalDagen);
 		}
+	}
+	
+	public Datum veranderDatum (Datum datum, int aantalDagen,boolean opaf ){
+		int day = datum.dag;
+		int month = datum.maand;
+		int year = datum.jaar;
+		Datum dat = new Datum(day,month,year);
+		int teller = 0;
+		if(opaf == true){
+			do{
+			voegDagToe(dat);
+			teller++;
+			}while(teller <= aantalDagen);
+		}else{
+			do{
+				trekDagAf(dat);
+				teller ++;
+			}while(teller <= aantalDagen);
+		}
+		return dat;
 	}
 	
 	public Datum trekDagAf(Datum datum){
