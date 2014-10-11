@@ -116,10 +116,13 @@ public class Datum {
 		return europeesDatumFormaat.format(datumVandaag.getTime());
 	}
 	
-	public int kleinerDan(Date d)
+	public int compareTo(Calendar d)
 	{
-		boolean isKleiner = datumVandaag.compareTo(d);
+		
+		return datumVandaag.compareTo(d);
+		
 	}
+	
 	
 
 	public String toString()
@@ -135,4 +138,6 @@ public class Datum {
 		boolean schrikkeljaar = ((GregorianCalendar) datumVandaag).isLeapYear(jaar);
 		return schrikkeljaar;
 	}
+	
+	
 }
