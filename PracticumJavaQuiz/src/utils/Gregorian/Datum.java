@@ -40,15 +40,15 @@ public class Datum {
 	
 	// constructor met datum object : /// Conversie nodig van date naar GC
 	public Datum(Date datum){
-		// datumVandaag.setTime(datum);
+		datumVandaag.setTime(datum);
 		 
 	}
 	
 	
 	//constructor met param d,m,j
 	
-	public Datum (int d, int m , int j){
-		datumVandaag = new GregorianCalendar(d,m,j);
+	public Datum (int dag, int maand , int jaar){
+		datumVandaag = new GregorianCalendar(dag,maand,jaar);
 	}
 	
 	//constructor met String param
@@ -57,6 +57,8 @@ public class Datum {
 		
 		String[] splitDate = datum.split("/");
 		dag = Integer.parseInt(splitDate[0]);
+		maand = Integer.parseInt(splitDate[1]);
+		jaar = Integer.parseInt(splitDate[2]);
 		
 	}
 
@@ -121,9 +123,9 @@ public String toString()
 }
 
 	//Methode schrikkeljaar
-	public boolean schrikkeljaar(int jaar){
-		boolean isLeapYear = ((GregorianCalendar) datumVandaag).isLeapYear(datumVandaag.YEAR);
-		return isLeapYear;
+	public boolean IsLeapYear(){
+		boolean schrikkeljaar = ((GregorianCalendar) datumVandaag).isLeapYear(datumVandaag.YEAR);
+		return schrikkeljaar;
 		
 	}
 	
