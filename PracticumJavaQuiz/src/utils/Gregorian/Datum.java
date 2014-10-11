@@ -88,7 +88,19 @@ public class Datum {
 	
 	public void setDag(int dag)
 	{
-		
+		if (maand == 2)
+		{
+			boolean isLeapYear = ((GregorianCalendar) datumVandaag).isLeapYear(datumVandaag.YEAR);
+			if (isLeapYear == true)
+			{
+				dagenPerMaand[3] = 29;
+			}
+		}
+		if (dag > 0 && dag <= dagenPerMaand[maand])
+		{
+			this.dag = dag;
+		}
+
 	}
 	
 	
