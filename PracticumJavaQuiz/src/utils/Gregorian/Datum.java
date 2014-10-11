@@ -92,7 +92,7 @@ public class Datum {
 	{
 		if (maand == 2)
 		{
-			boolean isLeapYear = ((GregorianCalendar) datumVandaag).isLeapYear(datumVandaag.YEAR);
+			isLeapYear(datumVandaag.YEAR);
 			if (isLeapYear == true)
 			{
 				dagenPerMaand[3] = 29;
@@ -122,9 +122,11 @@ public String toString()
 	return volledigeDatum.format(datumVandaag.getTime());
 }
 
-	//Methode schrikkeljaar
-	public boolean IsLeapYear(){
-		boolean schrikkeljaar = ((GregorianCalendar) datumVandaag).isLeapYear(datumVandaag.YEAR);
+	
+//Methode schrikkeljaar
+
+public boolean isLeapYear(int jaar){
+		boolean schrikkeljaar = ((GregorianCalendar) datumVandaag).isLeapYear(jaar);
 		return schrikkeljaar;
 		
 	}
