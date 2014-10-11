@@ -92,8 +92,7 @@ public class Datum {
 	{
 		if (maand == 2)
 		{
-			isLeapYear(datumVandaag.YEAR);
-			if (isLeapYear == true)
+			if (isLeapYear(datumVandaag.YEAR) == true)
 			{
 				dagenPerMaand[3] = 29;
 			}
