@@ -115,21 +115,24 @@ public class Datum {
 	{
 		return europeesDatumFormaat.format(datumVandaag.getTime());
 	}
+	
+	public int kleinerDan(Date d)
+	{
+		boolean isKleiner = datumVandaag.compareTo(d);
+	}
+	
 
-public String toString()
-{
-	return volledigeDatum.format(datumVandaag.getTime());
-}
+	public String toString()
+	{
+		return volledigeDatum.format(datumVandaag.getTime());
+	}
 
 	
 //Methode schrikkeljaar
 
-public boolean isLeapYear(int jaar){
+	public boolean isLeapYear(int jaar)
+	{
 		boolean schrikkeljaar = ((GregorianCalendar) datumVandaag).isLeapYear(jaar);
 		return schrikkeljaar;
-		
 	}
-	
-	
-	
 }
