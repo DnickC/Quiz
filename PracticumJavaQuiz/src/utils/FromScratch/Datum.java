@@ -34,7 +34,7 @@ public class Datum {
 	public Datum(String datum){
 		dag = datum.codePointCount(0, 1);
 		maand = datum.codePointCount(3, 4);
-		jaar = datum.codePointCount(5, 6);
+		jaar = datum.codePointCount(5, 6); // 5 = " / " , dus 6 tot 9 ?
 	}
 		
 		/** setDatum method */
