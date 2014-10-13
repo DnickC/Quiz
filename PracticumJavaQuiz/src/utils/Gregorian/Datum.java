@@ -126,14 +126,12 @@ public class Datum {
 	public boolean kleinerDan (Calendar d)
 	{
 		
-		if (compareTo(d) >= 0)
-		{
-			return false;
-		}
-		else
+		if (compareTo(d) < 0)
 		{
 			return true;
 		}
+		
+		return false;
 			
 			
 			
