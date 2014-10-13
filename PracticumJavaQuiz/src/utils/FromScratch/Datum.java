@@ -13,6 +13,16 @@ public class Datum {
 	private static final String[] naamVanMaand = 
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
 	
+	public int getDag(){
+		return dag;
+	}
+	public int getMaand(){
+		return maand;
+	}
+	public int getJaar(){
+		return jaar;
+	}
+	
 	public Datum(){
 		dag = datumVandaag.getDay();
 		maand = datumVandaag.getMonth();
@@ -102,10 +112,12 @@ public class Datum {
 		return String.format("%02d/%s/%d", this.dag, naamVanMaand [this.maand], this.jaar);		
 	}
 	
-	public boolean equals (Datum datum){
-		//if(object date instanceOf Date){ indien het met alle objecten moet geregeld worden
+	public boolean equals (Object object){
+		if(object instanceof Date){ 
+			Datum datum = (Datum)object;
 		if(this.dag == datum.dag && this.maand == datum.maand && this.jaar == datum.jaar){
 			return true;
+		}
 		}
 		return false;
 	}
