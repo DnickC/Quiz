@@ -23,6 +23,36 @@ public class Datum {
 		return jaar;
 	}
 	
+	private void setJaar (int jaar)
+	{
+		if (jaar >= 0) {
+			this.jaar = jaar;
+		} 
+		else {
+			throw new IllegalArgumentException("ongeldig jaartal");
+		}
+	}
+	
+	private void setMaand (int maand)
+	{
+		if (maand > 0 && maand <= 12 ) {
+			this.maand = maand;
+		} 
+		else {
+			throw new IllegalArgumentException("ongeldige maand");
+		}
+	}
+	
+	private void setDag (int dag)
+	{
+		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
+			this.dag = dag;
+		} 
+		else {
+			throw new IllegalArgumentException("ongeldige dag");
+		}
+	}	
+	
 	public Datum(){
 		dag = datumVandaag.getDay();
 		maand = datumVandaag.getMonth();
@@ -55,35 +85,7 @@ public class Datum {
 		this.setDag(dag);		
 	}
 	
-	private void setJaar (int jaar)
-	{
-		if (jaar >= 0) {
-			this.jaar = jaar;
-		} 
-		else {
-			throw new IllegalArgumentException("ongeldig jaartal");
-		}
-	}
-	
-	private void setMaand (int maand)
-	{
-		if (maand > 0 && maand <= 12 ) {
-			this.maand = maand;
-		} 
-		else {
-			throw new IllegalArgumentException("ongeldige maand");
-		}
-	}
-	
-	private void setDag (int dag)
-	{
-		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
-			this.dag = dag;
-		} 
-		else {
-			throw new IllegalArgumentException("ongeldige dag");
-		}
-	}
+
 	
 	// methode om schrikkeldag te valideren
 	public boolean valideerDag (Datum datum)
