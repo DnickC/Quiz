@@ -143,7 +143,7 @@ public class Datum {
 	
 	//** kleinerDan method : bepaalt of een datum kleiner is dan huidig datumobject */
 	public boolean kleinerDan (Datum d){
-		if(compareTo(d) == -1 || compareTo(d) == 0){
+		if(compareTo(d) == -1){
 			return true;
 		}
 		return false;		
@@ -151,7 +151,7 @@ public class Datum {
 	
 	public int verschilInJaren (Datum d){
 		int dagen = verschilInDagen(d);
-		return dagen/365;  // floor? 
+		return dagen/365;  
 	}
 	
 	public int verschilInMaanden (Datum d){
@@ -170,35 +170,31 @@ public class Datum {
 		int teller = 0;
 		if(opaf == true){
 			do{
-			voegDagToe(new Datum(datumVandaag));
+			voegDagToe(this);
 			teller++;
 			}while(teller <= aantalDagen);
 		}else{
 			do{
-				trekDagAf(new Datum(datumVandaag));
+				trekDagAf(this);
 				teller ++;
 			}while(teller <= aantalDagen);
 		}
 	}
 	
 	public Datum veranderDatum (Datum datum, int aantalDagen,boolean opaf ){
-		int day = datum.dag;
-		int month = datum.maand;
-		int year = datum.jaar;
-		Datum dat = new Datum(day,month,year);
-		int teller = 0;
+				int teller = 0;
 		if(opaf == true){
 			do{
-			voegDagToe(dat);
+			voegDagToe(datum);
 			teller++;
 			}while(teller <= aantalDagen);
 		}else{
 			do{
-				trekDagAf(dat);
+				trekDagAf(datum);
 				teller ++;
 			}while(teller <= aantalDagen);
 		}
-		return dat;
+		return datum;
 	}
 	
 	public Datum trekDagAf(Datum datum){

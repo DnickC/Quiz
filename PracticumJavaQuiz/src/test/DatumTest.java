@@ -12,20 +12,22 @@ import org.junit.Before;
 
 public class DatumTest {
 	
-	private Datum geldigeNietSchrikkelDatum,dezelfdeGeldigeDatum,schrikkelDatum,ongeldigeSchrikkelDatum,schrikkelDatum2,ongeldigeDatum,intDatum,dateDatum;
+	private Datum veranderDat,veranderDatDown,vandaagDeDag,geldigeNietSchrikkelDatum,dezelfdeGeldigeDatum,schrikkelDatum,ongeldigeSchrikkelDatum,schrikkelDatum2,ongeldigeDatum,intDatum,dateDatum;
 	private Date datumVandaag = new Date();
 	
 	@Before
 	
 	public void letsGo(){
-		geldigeNietSchrikkelDatum = new Datum("11/10/2014");
-		dezelfdeGeldigeDatum = new Datum("11/10/2014");
+		geldigeNietSchrikkelDatum = new Datum("15/10/2016");
+		dezelfdeGeldigeDatum = new Datum("15/10/2016");
+		vandaagDeDag = new Datum();
+		veranderDat = new Datum("25/10/2016");
+		veranderDatDown = new Datum("05/10/2016");
 		schrikkelDatum = new Datum("26/02/2016");
 		schrikkelDatum2 = new Datum("02/03/2016");
 		ongeldigeSchrikkelDatum = new Datum("29/02/2014");
 		intDatum = new Datum(11,10,2014);
 		dateDatum = new Datum(datumVandaag);
-		
 	}
 
 	@Test 
@@ -106,8 +108,61 @@ public class DatumTest {
 		assertEquals(-1,schrikkelDatum.compareTo(geldigeNietSchrikkelDatum));
 	}
 
+	@Test
+	public void test_VerschillenInJaren_True(){
+		assertEquals(2,geldigeNietSchrikkelDatum.verschilInJaren(vandaagDeDag));
+	}
+	
+	@Test
+	public void test_VerschillenInMaanden_True(){
+		assertEquals(24,geldigeNietSchrikkelDatum.verschilInMaanden(vandaagDeDag));
+	}
+	
+	@Test
+	public void test_VerschillenInDagen_True(){
+		assertEquals(731,geldigeNietSchrikkelDatum.verschilInDagen(vandaagDeDag));
+	}
+	
+	@Test
+	public void test_veranderVoidDatum_Up(){
+		boolean result = false;
+		geldigeNietSchrikkelDatum.veranderVoidDatum(10,true);
+		if(geldigeNietSchrikkelDatum == veranderDat){
+			result = true;
+		}
+		assertEquals(true,result);
+	}
+	
+	public void test_veranderVoidDatum_Down(){
+		boolean result = false;
+		geldigeNietSchrikkelDatum.veranderVoidDatum(10,false);
+		if(geldigeNietSchrikkelDatum == veranderDat){
+			result = true;
+		}
+		assertEquals(true,result);
+	}
 	
 	
+	@Test 
+	public void test_veranderDatum_Up(){
+		Datum resDate = geldigeNietSchrikkelDatum.veranderDatum(geldigeNietSchrikkelDatum, 10, true);
+		boolean result = false;
+		if(resDate == veranderDat){
+			result = true;
+		}
+		assertEquals(true,result);
+	}
+	
+	public void test_veranderDatum_Down(){
+		Datum resDate = geldigeNietSchrikkelDatum.veranderDatum(geldigeNietSchrikkelDatum, 10, false);
+		boolean result = false;
+		if(resDate == veranderDatDown){
+			result = true;
+		}
+		assertEquals(true,result);
+	}
+	
+
 	
 	
 
