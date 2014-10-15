@@ -143,6 +143,8 @@ public class Datum {
 
 	
 //Methode schrikkeljaar
+	
+	
 
 	public boolean isLeapYear(int jaar)
 	{
@@ -184,4 +186,19 @@ public class Datum {
 		
 	}
 	
+	public int verschilInMaanden(Datum d)
+	{
+		Datum vroegsteDatum;
+		Datum laatsteDatum;
+		
+		int verschilInMaanden;
+		int verschilInJaren;
+		
+		verschilInJaren = verschilInJaren(d);
+		
+		verschilInMaanden = 
+		
+	}
 }
+
+	
