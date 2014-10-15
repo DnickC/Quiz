@@ -9,7 +9,7 @@ import org.junit.Before;
 
 
 
-
+@SuppressWarnings("deprecation")
 public class DatumTest {
 	
 	private Datum veranderDat,veranderDatDown,vandaagDeDag,geldigeNietSchrikkelDatum,dezelfdeGeldigeDatum,schrikkelDatum,ongeldigeSchrikkelDatum,schrikkelDatum2,ongeldigeDatum,intDatum,dateDatum;

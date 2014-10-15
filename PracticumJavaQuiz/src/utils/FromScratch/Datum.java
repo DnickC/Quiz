@@ -1,6 +1,7 @@
 package utils.FromScratch;
 import java.util.Date;
 
+@SuppressWarnings("deprecation")
 public class Datum {
 	private Date datumVandaag = new Date(); 
 	private int dag;
@@ -58,7 +59,7 @@ public class Datum {
 		maand = datumVandaag.getMonth();
 		jaar = datumVandaag.getYear();
 	}
-		
+	
 	public Datum(Date datum){
 		dag = datum.getDay();
 		maand = datum.getMonth();
@@ -117,9 +118,9 @@ public class Datum {
 	public boolean equals (Object object){
 		if(object instanceof Date){ 
 			Datum datum = (Datum)object;
-		if(this.dag == datum.dag && this.maand == datum.maand && this.jaar == datum.jaar){
-			return true;
-		}
+			if(this.dag == datum.dag && this.maand == datum.maand && this.jaar == datum.jaar){
+				return true;
+			}
 		}
 		return false;
 	}
