@@ -3,6 +3,31 @@ import java.util.Date;
 
 @SuppressWarnings("deprecation")
 public class Datum {
+	
+	public static void main(String [] args){
+		Datum legeDatum = new Datum();
+		Datum geldigeDatum = new Datum("12/05/2014");
+		Datum dateInput = new Datum(new Date());
+		Datum intInput = new Datum(12,05,2014);
+		Datum smaller = new Datum("12/05/2013");
+		Datum bigger = new Datum("12/05/2015");
+		String americaan = geldigeDatum.getDatumInAmerikaansFormaat();
+		String euro = geldigeDatum.getDatumInEuropeesFormaat();
+		boolean resultEqualTrue = geldigeDatum.equals(geldigeDatum);
+		boolean resultEqualTrue2 = geldigeDatum.equals(americaan);
+		boolean resultEqualFalse = geldigeDatum.equals(intInput);
+		int resultCompareEQ = geldigeDatum.compareTo(geldigeDatum);
+		int resultCompareS = geldigeDatum.compareTo(smaller);
+		int resultCompareL = geldigeDatum.compareTo(bigger);
+		int verschilInDagen = geldigeDatum.verschilInDagen(bigger);
+		int verschilInMaanden = geldigeDatum.verschilInMaanden(bigger);
+		int verschilInJaren = geldigeDatum.verschilInJaren(bigger);
+		Boolean result = geldigeDatum.valideerDag(geldigeDatum);
+		Datum geldigeDatumUp = geldigeDatum.veranderDatum(geldigeDatum ,10, true);
+		Datum geldigeDatumDown = geldigeDatum.veranderDatum(geldigeDatum,20,false);
+
+	}
+	
 	private Date datumVandaag = new Date(); 
 	private int dag;
 	private int maand;
