@@ -154,22 +154,20 @@ public class Datum {
 	
 	public int verschilInJaren(Datum d)
 	{
-		Datum vroegsteDatum;
-		Datum laatsteDatum;
+		Datum vroegsteDatum = null;
+		Datum laatsteDatum = null;
 		int verschilInJaren;
 		
 		if(this.jaar == d.jaar)
 		{
 			return 0;
 		}
-		
-		if(this.jaar < d.jaar)
+		else if(this.jaar < d.jaar)
 		{
 			vroegsteDatum = this;
 			laatsteDatum = d;
-		}
-		
-		if(this.jaar > d.jaar)
+		}		
+		else if(this.jaar > d.jaar)
 		{
 			vroegsteDatum = d;
 			laatsteDatum = this;
@@ -180,9 +178,18 @@ public class Datum {
 		{
 			return --verschilInJaren;
 		}
-		else if()
-		
-		return;
+		else if(laatsteDatum.maand == vroegsteDatum.maand)
+		{
+			if(laatsteDatum.dag >= vroegsteDatum.dag)
+			{
+				return verschilInJaren;
+			}
+		}
+		else if(laatsteDatum.maand > vroegsteDatum.maand)
+		{
+			return verschilInJaren;
+		}
+		return --verschilInJaren;
 		
 	}
 	
