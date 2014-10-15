@@ -20,8 +20,9 @@ public class Datum {
 	
 	private static final String[] naamVanMaand = 
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
-	
-	//Constructor zonder param
+	/**
+	*Constructor zonder param
+	*/
 	public Datum ()
 	{
 		
@@ -131,11 +132,7 @@ public class Datum {
 			return true;
 		}
 		
-		return false;
-			
-			
-			
-		
+		return false;		
 	}
 	
 
@@ -153,5 +150,38 @@ public class Datum {
 		return schrikkeljaar;
 	}
 	
+	public int verschilInJaren(Datum d)
+	{
+		Datum vroegsteDatum;
+		Datum laatsteDatum;
+		int verschilInJaren;
+		
+		if(this.jaar == d.jaar)
+		{
+			return 0;
+		}
+		
+		if(this.jaar < d.jaar)
+		{
+			vroegsteDatum = this;
+			laatsteDatum = d;
+		}
+		
+		if(this.jaar > d.jaar)
+		{
+			vroegsteDatum = d;
+			laatsteDatum = this;
+		}
+		
+		verschilInJaren = laatsteDatum.jaar - vroegsteDatum.jaar;
+		if(laatsteDatum.maand < vroegsteDatum.maand)
+		{
+			return --verschilInJaren;
+		}
+		else if()
+		
+		return;
+		
+	}
 	
 }
