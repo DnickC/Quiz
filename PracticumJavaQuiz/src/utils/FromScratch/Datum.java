@@ -6,26 +6,45 @@ public class Datum {
 	
 	public static void main(String [] args){
 		Datum legeDatum = new Datum();
+		System.out.println(legeDatum.toString());
+		Datum schrikkelDatum = new Datum("29/02/2016");
+		System.out.println(schrikkelDatum.toString());
 		Datum geldigeDatum = new Datum("12/05/2014");
-		Datum dateInput = new Datum(new Date());
+		System.out.println(geldigeDatum.toString());
+		Datum dateInput = new Datum(new Date(2014,05,12));
+		System.out.println(dateInput.toString());
 		Datum intInput = new Datum(12,05,2014);
+		System.out.println(intInput.toString());
 		Datum smaller = new Datum("12/05/2013");
+		System.out.println(smaller.toString());
 		Datum bigger = new Datum("12/05/2015");
 		String americaan = geldigeDatum.getDatumInAmerikaansFormaat();
+		System.out.println(americaan);
 		String euro = geldigeDatum.getDatumInEuropeesFormaat();
+		System.out.println(euro);
 		boolean resultEqualTrue = geldigeDatum.equals(geldigeDatum);
-		boolean resultEqualTrue2 = geldigeDatum.equals(americaan);
-		boolean resultEqualFalse = geldigeDatum.equals(intInput);
+		System.out.println(resultEqualTrue);
+		boolean resultEqualTrue2 = geldigeDatum.equals(intInput);
+		System.out.println(resultEqualTrue2);
+		boolean resultEqualFalse = geldigeDatum.equals(smaller);
+		System.out.println(resultEqualFalse);
 		int resultCompareEQ = geldigeDatum.compareTo(geldigeDatum);
 		int resultCompareS = geldigeDatum.compareTo(smaller);
 		int resultCompareL = geldigeDatum.compareTo(bigger);
 		int verschilInDagen = geldigeDatum.verschilInDagen(bigger);
+		System.out.println(verschilInDagen);
 		int verschilInMaanden = geldigeDatum.verschilInMaanden(bigger);
+		System.out.println(verschilInMaanden);
 		int verschilInJaren = geldigeDatum.verschilInJaren(bigger);
-		Boolean result = geldigeDatum.valideerDag(geldigeDatum);
+		System.out.println(verschilInJaren);
+		Boolean resultSchrikkelFalse = geldigeDatum.valideerDag(geldigeDatum);
+		System.out.println(resultSchrikkelFalse);
+		Boolean resultSchrikkelTrue = geldigeDatum.valideerDag(schrikkelDatum);
+		System.out.println(resultSchrikkelTrue);
 		Datum geldigeDatumUp = geldigeDatum.veranderDatum(geldigeDatum ,10, true);
+		System.out.println(geldigeDatumUp.toString());
 		Datum geldigeDatumDown = geldigeDatum.veranderDatum(geldigeDatum,20,false);
-
+		System.out.println(geldigeDatumDown.toString());
 	}
 	
 	private Date datumVandaag = new Date(); 
@@ -34,7 +53,7 @@ public class Datum {
 	private int jaar;
 	
 	private static final int[] dagenPerMaand = 
-		{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	
 	private static final String[] naamVanMaand = 
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
@@ -80,16 +99,17 @@ public class Datum {
 	}	
 	
 	public Datum(){
-		dag = datumVandaag.getDay();
-		maand = datumVandaag.getMonth();
 		jaar = datumVandaag.getYear();
+		maand = datumVandaag.getMonth();
+		dag = datumVandaag.getDay();
+		
 	}
 	
 	public Datum(Date datum){
-		dag = datum.getDay();
-		maand = datum.getMonth();
 		jaar = datum.getYear();
-				
+		maand = datum.getMonth();
+		dag = datum.getDay();
+						
 	}
 	
 	public Datum(int dag, int maand, int jaar){
@@ -98,9 +118,9 @@ public class Datum {
 	
 	public Datum(String datum){
 		String[] splitdate = datum.split("/");
-		this.setDag(Integer.parseInt(splitdate[0]));
-		this.setMaand(Integer.parseInt(splitdate[1]));
 		this.setJaar( Integer.parseInt(splitdate[2]));
+		this.setMaand(Integer.parseInt(splitdate[1]));
+		this.setDag(Integer.parseInt(splitdate[0]));		
 	}
 		
 		/** setDatum method */
@@ -116,7 +136,7 @@ public class Datum {
 	// methode om schrikkeldag te valideren
 	public boolean valideerDag (Datum datum)
 	{
-		if (datum.maand == 2 && datum.dag == 29 && ((datum.jaar % 4 == 0 && datum.jaar % 100 != 0) || datum.jaar % 400 == 0 )) {
+		if (((datum.maand == 2) && (datum.dag == 29)) && (((datum.jaar % 4 == 0) && (datum.jaar % 100 != 0)) || (datum.jaar % 400 == 0 ))) {
 			return true;			
 		}
 		return false;
@@ -137,11 +157,11 @@ public class Datum {
 	/** toString method */
 	public String toString()
 	{
-		return String.format("%02d/%s/%d", this.dag, naamVanMaand [this.maand], this.jaar);		
+		return String.format("%02d %s %d", this.dag, naamVanMaand [this.maand], this.jaar);		
 	}
 	
 	public boolean equals (Object object){
-		if(object instanceof Date){ 
+		if(object instanceof Datum){ 
 			Datum datum = (Datum)object;
 			if(this.dag == datum.dag && this.maand == datum.maand && this.jaar == datum.jaar){
 				return true;
@@ -188,7 +208,7 @@ public class Datum {
 	public int verschilInDagen (Datum d){
 		int vandaag = julianDayCalculator(this.jaar, this.maand,this.dag);
 		int dat = julianDayCalculator(d.jaar,d.maand,d.dag);
-		return vandaag-dat;
+		return dat-vandaag;
 			}
 	
 	public void veranderVoidDatum (int aantalDagen,boolean opaf ){

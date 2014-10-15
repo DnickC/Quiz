@@ -17,13 +17,13 @@ public class DatumTest {
 	
 	@Before
 	
-	public void letsGo(){
+	public void SetTest(){
 		geldigeNietSchrikkelDatum = new Datum("15/10/2016");
 		dezelfdeGeldigeDatum = new Datum("15/10/2016");
-		vandaagDeDag = new Datum();
+		vandaagDeDag = new Datum("15/10/2018");
 		veranderDat = new Datum("25/10/2016");
 		veranderDatDown = new Datum("05/10/2016");
-		schrikkelDatum = new Datum("26/02/2016");
+		schrikkelDatum = new Datum("29/02/2016");
 		schrikkelDatum2 = new Datum("02/03/2016");
 		ongeldigeSchrikkelDatum = new Datum("29/02/2014");
 		intDatum = new Datum(11,10,2014);
@@ -32,14 +32,14 @@ public class DatumTest {
 
 	@Test 
 	public void test_setGeldige_datum(){
-			assertEquals(11,geldigeNietSchrikkelDatum.getDag());
+			assertEquals(15,geldigeNietSchrikkelDatum.getDag());
 			assertEquals(10,geldigeNietSchrikkelDatum.getMaand());
-			assertEquals(2014,geldigeNietSchrikkelDatum.getJaar());
+			assertEquals(2016,geldigeNietSchrikkelDatum.getJaar());
 	}
 	
 	@Test
 	public void test_setGeldige_Schrikkeldatum(){
-			assertEquals(26,schrikkelDatum.getDag());
+			assertEquals(29,schrikkelDatum.getDag());
 			assertEquals(02,schrikkelDatum.getMaand());
 			assertEquals(2016,schrikkelDatum.getJaar());
 	}
