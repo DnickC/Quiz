@@ -20,51 +20,91 @@ public class Datum {
 	
 	private static final String[] naamVanMaand = 
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
+	
+	
 	/**
-	*Constructor zonder param
-	*/
+	 * 
+	 * Constructor zonder parameters
+	 */
+	
 	public Datum ()
 	{
 		
-		dag = Calendar.DAY_OF_MONTH;
+		dag = Calendar.DAY;
 		maand = Calendar.MONTH;
 		jaar = Calendar.YEAR;
 		
-		//oorspronkelijk -- gaf melding dat het beter static kon worden gemaakt:
-		/*
-		 * dag = datumVandaag.DAY_OF_MONTH;
-		 * maand = datumVandaag.MONTH;
-		 * jaar = datumVandaag.YEAR;
-		 */
+	
 	}
 	
+	/**
+	 * Constructor met datum object als parameter
+	 * @param datum
+	 */
 	
-	// constructor met datum object : /// Conversie nodig van date naar GC
 	public Datum(Date datum){
-		datumVandaag.setTime(datum);
+		try
+		{
+			datumVandaag.setTime(datum);
+		} 
+		catch(Exception ex){
+			throw ex;
+			
+		}
+		
 		 
 	}
 	
 	
-	//constructor met param d,m,j
 	
+	/**
+	 * Constructor met parameters dag, maand, jaar
+	 * @param dag
+	 * @param maand
+	 * @param jaar
+	 */
 	public Datum (int dag, int maand , int jaar){
-		datumVandaag = new GregorianCalendar(dag,maand,jaar);
+		try{
+			datumVandaag = new GregorianCalendar(dag,maand,jaar);
+		}
+		catch (Exception ex)
+		{
+			throw ex;
+		}
+		
 	}
 	
-	//constructor met String param
 	
+	/**
+	 * Constructor met een String als parameter
+	 * (geldigheidscontrole kan nog in GUI aangemaakt worden met een Validationrule)
+	 * @param datum
+	 */
 	public Datum(String datum){
+		try
+		{
+			String[] splitDate = datum.split("/");
+			dag = Integer.parseInt(splitDate[0]);
+			maand = Integer.parseInt(splitDate[1]);
+			jaar = Integer.parseInt(splitDate[2]);
+		}
+		catch(Exception ex)
+		{
+			throw ex;
+		}
 		
-		String[] splitDate = datum.split("/");
-		dag = Integer.parseInt(splitDate[0]);
-		maand = Integer.parseInt(splitDate[1]);
-		jaar = Integer.parseInt(splitDate[2]);
 		
 	}
 
-	/**Set methoden:*/
-	public void setJaar(int jaar)
+	/**
+	 * Set methoden
+	 * @param jaar
+	 * @param maand
+	 * @param dag
+	 */
+	
+	
+	private void setJaar(int jaar)
 	{
 		if(jaar >= 0)
 		{
@@ -76,7 +116,7 @@ public class Datum {
 		}
 	}
 	
-	public void setMaand(int maand) // hierbij kan een validation rule worden toegevoegd in de GUI 
+	private void setMaand(int maand)
 	{
 		if (maand <= 12 && maand >= 1 )
 		{
@@ -89,7 +129,7 @@ public class Datum {
 		}
 	}
 	
-	public void setDag(int dag)
+	private void setDag(int dag)
 	{
 		if (maand == 2)
 		{
@@ -106,6 +146,7 @@ public class Datum {
 	}
 	
 	
+	
 	public String getDatumInAmerikaansFormaat()
 	{
 				
@@ -117,14 +158,44 @@ public class Datum {
 		return europeesDatumFormaat.format(datumVandaag.getTime());
 	}
 	
-	public int compareTo(Calendar d)
+	public String toString()
+	{
+		return volledigeDatum.format(datumVandaag.getTime());
+	}
+	
+	/**
+	 * compareTo(Datum datum)
+	 * @param d
+	 * @return
+	 */
+	public int compareTo(Datum d)
 	{
 		
-		return datumVandaag.compareTo(d);
+		return this.compareTo(d);
 		
 	}
 	
-	public boolean kleinerDan (Calendar d)
+	/**
+	 * equalsTo(Object object)
+	 * @param o
+	 * @return
+	 */
+	public boolean equalsTo(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * kleinerDan(Calendar calendar)
+	 * @param d
+	 * @return
+	 */
+	public boolean kleinerDan (Datum d)
 	{
 		
 		if (compareTo(d) < 0)
@@ -136,26 +207,30 @@ public class Datum {
 	}
 	
 
-	public String toString()
-	{
-		return volledigeDatum.format(datumVandaag.getTime());
-	}
-
-	
-//Methode schrikkeljaar
-	
 	
 
+	/**
+	 * Schrikkeljaar
+	 * @param jaar
+	 * @return
+	 */
+
+	
 	public boolean isLeapYear(int jaar)
 	{
 		boolean schrikkeljaar = ((GregorianCalendar) datumVandaag).isLeapYear(jaar);
 		return schrikkeljaar;
 	}
 	
+	public boolean isLeapYear(Datum d)
+	{
+		boolean schrikkeljaar = d.isLeapYear(d.jaar);
+		return schrikkeljaar;
+	}
+	
 	public int verschilInJaren(Datum d)
 	{
-		Datum vroegsteDatum = null;
-		Datum laatsteDatum = null;
+		Datum vroegsteDatum = null,laatsteDatum = null;
 		int verschilInJaren;
 		
 		if(this.jaar == d.jaar)
@@ -195,15 +270,97 @@ public class Datum {
 	
 	public int verschilInMaanden(Datum d)
 	{
-		Datum vroegsteDatum;
-		Datum laatsteDatum;
+		Datum vroegsteDatum,laatsteDatum;
+		int vroegsteMaand,laatsteMaand,verschilInJaren,verschilInMaanden = 0;
 		
-		int verschilInMaanden;
-		int verschilInJaren;
+		
+		if (this.kleinerDan(d))
+		{
+			vroegsteDatum = this;
+			laatsteDatum = d;
+		}
+		else
+		{
+			vroegsteDatum = d;
+			laatsteDatum = this;
+		}
+		
 		
 		verschilInJaren = verschilInJaren(d);
 		
-		verschilInMaanden = 
+		
+		if(isLeapYear(d))
+		{
+			verschilInMaanden++;
+			
+		}
+		
+		if (verschilInJaren == 0 && vroegsteDatum.maand == laatsteDatum.maand)
+		{
+			return 0;
+		}
+		else
+		{
+			vroegsteMaand = 12 - vroegsteDatum.maand;
+			laatsteMaand = laatsteDatum.maand;
+			if (vroegsteDatum.dag > laatsteDatum.dag)
+			{
+				--verschilInMaanden;
+			}
+			
+			verschilInMaanden = (verschilInJaren * 12) + vroegsteMaand + laatsteMaand;
+		}
+		
+		return verschilInMaanden;
+		
+		
+		
+	}
+	
+	public int verschilInDagen(Datum d)
+	{
+		Datum vroegsteDatum, laatsteDatum;
+		int aantalDagen = 0;
+		if (this.dag == d.dag)
+		{
+			return 0;
+		}
+		
+		if (this.kleinerDan(d))
+		{
+			vroegsteDatum = this;
+			laatsteDatum = d;
+		}
+		else
+		{
+			vroegsteDatum = d;
+			laatsteDatum = this;
+		}
+		
+		Calendar dagenTellen = (Calendar) vroegsteDatum.clone();
+		
+		while(dagenTellen.before(laatsteDatum))
+		{
+			dagenTellen.add(dag, 1);
+			aantalDagen++;
+		}
+		
+		return aantalDagen;
+		
+	}
+	
+	/**
+	 * Verhoogt of verlaagt darum met aantal dagen
+	 * @param aantalDagen
+	 */
+	
+	public void veranderDatum(int aantalDagen)
+	{
+		
+	}
+	
+	public Datum veranderDatum(int aantalDagen)
+	{
 		
 	}
 }
