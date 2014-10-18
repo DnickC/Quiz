@@ -85,12 +85,12 @@ public class DatumTest {
 	
 	@Test
 	public void test_ValideerSchrikkelDatum_False(){
-		assertFalse(geldigeNietSchrikkelDatum.valideerDag(geldigeNietSchrikkelDatum));
+		assertFalse(geldigeNietSchrikkelDatum.isLeapYear(geldigeNietSchrikkelDatum));
 	}
 	
 	@Test
 	public void test_ValideerSchrikkelDatum_True(){
-		assertTrue(schrikkelDatum.valideerDag(schrikkelDatum));
+		assertTrue(schrikkelDatum.isLeapYear(schrikkelDatum));
 	}
 	
 	@Test

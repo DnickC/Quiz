@@ -3,6 +3,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
+
+/** 
+ * Datum class
+ * 
+ * @author Andy Poron
+ *
+ */
+
 public class Datum {
 	
 	public static void main(String [] args){
@@ -38,9 +46,9 @@ public class Datum {
 		System.out.println(verschilInMaanden);
 		int verschilInJaren = geldigeDatum.verschilInJaren(bigger);
 		System.out.println(verschilInJaren);
-		Boolean resultSchrikkelFalse = geldigeDatum.valideerDag(geldigeDatum);
+		Boolean resultSchrikkelFalse = geldigeDatum.isLeapYear(geldigeDatum);
 		System.out.println(resultSchrikkelFalse);
-		Boolean resultSchrikkelTrue = geldigeDatum.valideerDag(schrikkelDatum);
+		Boolean resultSchrikkelTrue = geldigeDatum.isLeapYear(schrikkelDatum);
 		System.out.println(resultSchrikkelTrue);
 		Datum geldigeDatumUp = geldigeDatum.veranderDatum(geldigeDatum ,10, true);
 		System.out.println(geldigeDatumUp.toString());
@@ -59,6 +67,10 @@ public class Datum {
 	private static final String[] naamVanMaand = 
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
 	
+	/**
+	 * Getter for Datum variables
+	 *
+	 */
 	public int getDag(){
 		return dag;
 	}
@@ -68,7 +80,10 @@ public class Datum {
 	public int getJaar(){
 		return jaar;
 	}
-	
+	/**
+	 * Checks & Sets input data
+	 * 
+	 */
 	private void setJaar (int jaar)
 	{
 		if (jaar >= 0) {
@@ -92,7 +107,7 @@ public class Datum {
 	private void setDag (int dag)
 	{
 		if(this.maand == 2){
-			if(eenSchrikkelJaar(this.jaar)==true){
+			if(isLeapYear(this.jaar)==true){
 				dagenPerMaand[2] = 29;
 			}
 		}
@@ -104,6 +119,20 @@ public class Datum {
 		}
 	}	
 	
+	public void setDatum (int dag, int maand, int jaar)
+	{
+		this.setJaar(jaar);
+		this.setMaand(maand);
+		this.setDag(dag);		
+	}
+	
+	/**
+	 * Constructor that sets today's date when no data has been given. 
+	 * @author Andy
+	 * @param nothing
+	 * 
+	 */
+	
 	public Datum(){
 		jaar = datumVandaag.getYear();
 		maand = datumVandaag.getMonth();
@@ -111,6 +140,10 @@ public class Datum {
 		
 	}
 	
+	/**
+	 * Constructor that converts Date to Datum.
+	 * @param Date datum
+	 */
 	public Datum(Date datum){
 		this.setJaar(datum.getYear()); 
 		this.setMaand(datum.getMonth()-1);
@@ -118,9 +151,21 @@ public class Datum {
 						
 	}
 	
+	/**
+	 * Constructor that creates a Datum class with Int values
+	 * @param int dag
+	 * @param int maand
+	 * @param int jaar
+	 */
+	
 	public Datum(int dag, int maand, int jaar){
 		this.setDatum(dag, maand, jaar); 		
 	}
+	
+	/**
+	 * Constructor that creates a Datum class from String value
+	 * @param  String datum
+	 */
 	
 	public Datum(String datum){
 		String[] splitdate = datum.split("/");
@@ -129,15 +174,12 @@ public class Datum {
 		this.setDag(Integer.parseInt(splitdate[0]));		
 	}
 		
-		/** setDatum method */
-	public void setDatum (int dag, int maand, int jaar)
-	{
-		this.setJaar(jaar);
-		this.setMaand(maand);
-		this.setDag(dag);		
-	}
-	
-	public boolean eenSchrikkelJaar (int jaar)
+	/**
+	 * Checks if the given year is a leapyear
+	 * @param int jaar
+	 * @return boolean
+	 */
+	public boolean isLeapYear (int jaar)
 	{
 		if (((jaar % 4 == 0) && (jaar % 100 != 0)) || (jaar % 400 == 0 )) {
 			return true;			
@@ -145,8 +187,12 @@ public class Datum {
 		return false;
 	}
 	
-	// methode om schrikkeldag te valideren
-	public boolean valideerDag (Datum datum)
+	/** 
+	 * Checks if the given date is in a leapyear
+	 * @param  Datum datum
+	 * @return boolean
+	 */
+	public boolean isLeapYear (Datum datum)
 	{
 		if (((datum.maand == 2) && (datum.dag == 29)) && (((datum.jaar % 4 == 0) && (datum.jaar % 100 != 0)) || (datum.jaar % 400 == 0 ))) {
 			return true;			
@@ -154,13 +200,19 @@ public class Datum {
 		return false;
 	}
 	
-	/** getDatumInAmerikaansFormaat method */
+	/**
+	 * Converts date the American format
+	 * @return string
+	 */
 	public String getDatumInAmerikaansFormaat ()
 	{
 		return String.format("%4d/%02d/%02d", this.jaar, this.maand, this.dag);		
 	}
 	
-	/** getDatumInEuropeesFormaat method */
+	/**
+	 * Converts date to the European format
+	 * @return string 
+	 */
 	public String getDatumInEuropeesFormaat ()
 	{
 		return String.format("%02d/%02d/%4d", this.dag, this.maand, this.jaar);		
@@ -171,7 +223,9 @@ public class Datum {
 	{
 		return String.format("%02d %s %d", this.dag, naamVanMaand [this.maand], this.jaar);		
 	}
-	
+	/**
+	 * 
+	 */
 	public boolean equals (Object object){
 		if(object instanceof Datum){ 
 			Datum datum = (Datum)object;
@@ -199,7 +253,6 @@ public class Datum {
 		
 	}
 	
-	//** kleinerDan method : bepaalt of een datum kleiner is dan huidig datumobject */
 	public boolean kleinerDan (Datum d){
 		if(compareTo(d) == -1){
 			return true;
@@ -258,7 +311,7 @@ public class Datum {
 	public Datum trekDagAf(Datum datum){
 		if(datum.maand == 3){
 			if(datum.dag == 1){
-				if(valideerDag(datum)== true){
+				if(isLeapYear(datum)== true){
 					datum.dag = 29;
 				}else{
 					datum.dag = 28;
@@ -285,7 +338,7 @@ public class Datum {
 	public Datum voegDagToe(Datum datum){
 			if (datum.maand == 2){
 				if(datum.dag == 28){
-					if(valideerDag(datum)== true){
+					if(isLeapYear(datum)== true){
 						datum.dag++;
 					}else{
 						datum.dag = 1;
