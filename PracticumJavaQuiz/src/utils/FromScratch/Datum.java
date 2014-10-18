@@ -53,7 +53,7 @@ public class Datum {
 	private int jaar;
 	
 	private static final int[] dagenPerMaand = 
-		{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	
 	private static final String[] naamVanMaand = 
 		{ null, "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" };
@@ -90,6 +90,11 @@ public class Datum {
 	
 	private void setDag (int dag)
 	{
+		if(this.maand == 2){
+			if(eenSchrikkelJaar(this.jaar)==true){
+				dagenPerMaand[3] = 29;
+			}
+		}
 		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
 			this.dag = dag;
 		} 
@@ -106,9 +111,9 @@ public class Datum {
 	}
 	
 	public Datum(Date datum){
-		jaar = datum.getYear();
-		maand = datum.getMonth();
-		dag = datum.getDay();
+		this.setJaar(datum.getYear()); 
+		this.setMaand(datum.getMonth());
+		this.setDag(datum.getDay());;
 						
 	}
 	
@@ -131,7 +136,13 @@ public class Datum {
 		this.setDag(dag);		
 	}
 	
-
+	public boolean eenSchrikkelJaar (int jaar)
+	{
+		if (((jaar % 4 == 0) && (jaar % 100 != 0)) || (jaar % 400 == 0 )) {
+			return true;			
+		}
+		return false;
+	}
 	
 	// methode om schrikkeldag te valideren
 	public boolean valideerDag (Datum datum)
@@ -209,21 +220,21 @@ public class Datum {
 		int vandaag = julianDayCalculator(this.jaar, this.maand,this.dag);
 		int dat = julianDayCalculator(d.jaar,d.maand,d.dag);
 		return dat-vandaag;
-			}
+	}
 	
 	public void veranderVoidDatum (int aantalDagen,boolean opaf ){
 		
-		int teller = 0;
+		int teller = 1;
 		if(opaf == true){
 			do{
 			voegDagToe(this);
 			teller++;
-			}while(teller <= aantalDagen);
+			}while(teller < aantalDagen);
 		}else{
 			do{
 				trekDagAf(this);
 				teller ++;
-			}while(teller <= aantalDagen);
+			}while(teller < aantalDagen);
 		}
 	}
 	
@@ -233,12 +244,12 @@ public class Datum {
 			do{
 			voegDagToe(datum);
 			teller++;
-			}while(teller <= aantalDagen);
+			}while(teller < aantalDagen);
 		}else{
 			do{
 				trekDagAf(datum);
 				teller ++;
-			}while(teller <= aantalDagen);
+			}while(teller < aantalDagen);
 		}
 		return datum;
 	}
@@ -290,10 +301,11 @@ public class Datum {
 					}else{
 						datum.maand ++;
 					}
-				}else{
-					datum.dag++;
 				}
-			  }
+			}else{
+				datum.dag++;
+			}
+			  
 			return datum;
 	}
 	

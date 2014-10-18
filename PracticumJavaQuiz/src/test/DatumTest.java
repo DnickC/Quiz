@@ -154,7 +154,7 @@ public class DatumTest {
 	}
 	
 	public void test_veranderDatum_Down(){
-		Datum resDate = geldigeNietSchrikkelDatum.veranderDatum(geldigeNietSchrikkelDatum, 10, false);
+		Datum resDate = geldigeNietSchrikkelDatum.veranderDatum(geldigeNietSchrikkelDatum, 20, false);
 		boolean result = false;
 		if(resDate == veranderDatDown){
 			result = true;
