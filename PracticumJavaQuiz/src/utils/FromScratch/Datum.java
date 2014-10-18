@@ -224,7 +224,9 @@ public class Datum {
 		return String.format("%02d %s %d", this.dag, naamVanMaand [this.maand], this.jaar);		
 	}
 	/**
-	 * 
+	 * Checks if the given object equals the class-date
+	 * @param Object 
+	 * @return boolean
 	 */
 	public boolean equals (Object object){
 		if(object instanceof Datum){ 
@@ -235,6 +237,14 @@ public class Datum {
 		}
 		return false;
 	}
+	
+	/**
+	 * Compares the given date to the class-date. 
+	 * @param Datum datum
+	 * @return 0 when they are equals
+	 * @return -1 when given date is bigger
+	 * @return 1 when the given date is smaller
+	 */
 	
 	public int compareTo (Datum datum){
 		if(this.dag == datum.dag && this.maand == datum.maand && this.jaar == datum.jaar){
@@ -253,6 +263,12 @@ public class Datum {
 		
 	}
 	
+	/** 
+	 * checks if the given date is smaller then the class-date
+	 * @param Datum 
+	 * @return true when smaller
+	 */
+	
 	public boolean kleinerDan (Datum d){
 		if(compareTo(d) == -1){
 			return true;
@@ -260,6 +276,11 @@ public class Datum {
 		return false;		
 	}
 	
+	/**
+	 * Calculates the difference in years/months/days
+	 * @param Datum
+	 * @return number of year/months/days
+	 */
 	public int verschilInJaren (Datum d){
 		int dagen = verschilInDagen(d);
 		return dagen/365;  
@@ -275,6 +296,13 @@ public class Datum {
 		int dat = julianDayCalculator(d.jaar,d.maand,d.dag);
 		return dat-vandaag;
 	}
+	
+	/**
+	 * Adds/removes a given number of days from the class-date. 
+	 * @param int NumberOfDays
+	 * @param boolean opaf 
+	 * 
+	 */
 	
 	public void veranderVoidDatum (int aantalDagen,boolean opaf ){
 		
@@ -308,6 +336,11 @@ public class Datum {
 		return datum;
 	}
 	
+	/**
+	 * retracts a day from a date
+	 * @param Datum Datum
+	 * @return Datum
+	 */
 	public Datum trekDagAf(Datum datum){
 		if(datum.maand == 3){
 			if(datum.dag == 1){
@@ -334,7 +367,11 @@ public class Datum {
 			}
 			return datum;
 	}
-	
+	/**
+	 * Adds a day to a date
+	 * @param Datum datum
+	 * @return Datum datum 
+	 */
 	public Datum voegDagToe(Datum datum){
 			if (datum.maand == 2){
 				if(datum.dag == 28){
@@ -363,6 +400,13 @@ public class Datum {
 			return datum;
 	}
 	
+	/**
+	 * Gets the number of days from the start of the Julian Calender till the given Date.
+	 * @param int year
+	 * @param int month
+	 * @param int days
+	 * @return int amount of day
+	 */
 	public int julianDayCalculator(int y,int m, int d){
 		y+= 8000;
 		if(m<3){y--;m+=12;}

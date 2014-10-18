@@ -126,7 +126,7 @@ public class DatumTest {
 	@Test
 	public void test_veranderVoidDatum_Up(){
 		boolean result = false;
-		geldigeNietSchrikkelDatum.veranderVoidDatum(11,true);
+		geldigeNietSchrikkelDatum.veranderVoidDatum(10,true);
 		if(geldigeNietSchrikkelDatum.getDag() == veranderDat.getDag() && geldigeNietSchrikkelDatum.getMaand() == veranderDat.getMaand() &&  geldigeNietSchrikkelDatum.getJaar() == veranderDat.getJaar()){
 			result = true;
 		}
