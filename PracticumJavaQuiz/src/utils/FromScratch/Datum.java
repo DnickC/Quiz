@@ -230,12 +230,12 @@ public class Datum {
 			do{
 			voegDagToe(this);
 			teller++;
-			}while(teller < aantalDagen);
+			}while(teller <= aantalDagen);
 		}else{
 			do{
 				trekDagAf(this);
 				teller ++;
-			}while(teller < aantalDagen);
+			}while(teller <= aantalDagen);
 		}
 	}
 	
