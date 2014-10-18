@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/how-do-i-convert-a-java-sql-date-object-into-a-gregoriancalendar
 import java.util.GregorianCalendar;
 
+import utils.FromScratch.Datum;
+
 public class Datum extends GregorianCalendar{
 	
 
@@ -371,7 +373,56 @@ public class Datum extends GregorianCalendar{
 		}
 		
 		return aantalDagen;
-		
+	}
+	
+	public void veranderDatumVoid(int aantalDagen, boolean opaf)
+	{
+		int teller = 1;
+		if(opaf = true)
+		{
+			do
+			{
+				voegDagToe(this);
+				teller++;
+			}while (teller <= aantalDagen);
+		}
+		else
+		{
+			do
+			{
+				trekDagAf(this);
+				teller++;
+			}while (teller <= aantalDagen);
+		}
+	}
+	
+	public Datum veranderDatum(Datum datum, int aantalDagen, boolean opaf)
+	{
+		int teller = 1;
+		if(opaf = true)
+		{
+			do
+			{
+				voegDagToe(datum);
+				teller++;
+			}while (teller <= aantalDagen)
+		}
+		else
+		{
+			do
+			{
+				trekDagAf(datum);
+				teller++;
+			}while (teller <= aantalDagen);
+		}
+	}
+	
+	public Datum trekDagAf(Datum datum)
+	{
+		if(datum.maand == 3 && datum.dag == 1)
+		{
+			
+		}
 	}
 	
 	/**
