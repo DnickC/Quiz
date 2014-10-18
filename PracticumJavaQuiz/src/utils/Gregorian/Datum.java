@@ -1,24 +1,12 @@
 package utils.Gregorian;
 
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/how-do-i-convert-a-java-sql-date-object-into-a-gregoriancalendar
 import java.util.GregorianCalendar;
 
 public class Datum extends GregorianCalendar{
 	
-<<<<<<< HEAD
-	public static void main(String [] args)
-	{
-		Datum geldigeDatum = new Datum("4/4/2011");
-		Datum bigger = new Datum("18/06/2015");
-		Datum smaller = new Datum("06/09/1998");
-		//int verschilInDagen = geldigeDatum.verschilInDagen(bigger);
-		int verschilInMaanden = geldigeDatum.verschilInMaanden(bigger);
-		int verschilInJaren = geldigeDatum.verschilInJaren(bigger);
-	}
-	
-=======
+
 	public static void main(String args [])
 	{
 		Datum date = new Datum();
@@ -26,23 +14,12 @@ public class Datum extends GregorianCalendar{
 		
 		Datum date1 = new Datum(1,1,1990);
 		System.out.println(date1);
-		
-		
-		
+
+		Datum dateString = new Datum("1/9/2010");
+		dateString.toString();
 		
 	}
-	
-	
-	
 
-
-	
-
-
-
-
-
->>>>>>> origin/master
 	//test
 	private SimpleDateFormat amerikaansDatumFormaat = new SimpleDateFormat("yyyy/MM/dd");
 	private SimpleDateFormat europeesDatumFormaat = new SimpleDateFormat("dd/MM/yyyy");
@@ -175,7 +152,7 @@ public class Datum extends GregorianCalendar{
 	{
 		if (maand == 2)
 		{
-			if (isLeapYear(this.YEAR) == true)
+			if (isLeapYear(Calendar.YEAR) == true)
 			{
 				dagenPerMaand[3] = 29;
 			}
