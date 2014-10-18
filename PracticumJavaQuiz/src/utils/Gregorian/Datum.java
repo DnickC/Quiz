@@ -421,8 +421,66 @@ public class Datum extends GregorianCalendar{
 	{
 		if(datum.maand == 3 && datum.dag == 1)
 		{
-			
+			if(isLeapYear(datum) == true)
+			{
+				datum.dag = 29;
+			}
+			else
+			{
+				datum.dag = 28;
+			}
+			datum.maand--;
 		}
+		else if (datum.dag == 1)
+			if(datum.maand == 1)
+				{
+					datum.dag = 31;
+					datum.maand = 12;
+					datum.jaar--;
+				}
+			else
+			{
+				datum.maand--;
+				datum.dag = dagenPerMaand[datum.maand];
+			}
+		else
+		{
+			datum.dag--;
+		}
+		
+		return datum;
+	}
+	
+	public Datum voegDagToe(Datum datum)
+	{
+		if(datum.maand == 2 && datum.dag == 28)
+		{
+			if(isLeapYear(datum) == true)
+			{
+				datum.dag = 29;
+			}
+			else
+			{
+				datum.dag = 1;
+				datum.maand++;
+			}
+		}
+		if(datum.dag == dagenPerMaand[datum.maand])
+		{
+			if(datum.maand == 12)
+			{
+				datum.dag = 1;
+				datum.maand = 1;
+				datum.jaar++;
+			}
+			else
+			{
+				datum.dag = 1;
+				datum.maand++;
+			}
+		}
+		
+		return datum;
 	}
 	
 	/**
