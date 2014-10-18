@@ -6,6 +6,30 @@ import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/
 import java.util.GregorianCalendar;
 
 public class Datum {
+	
+	public static void main(String args [])
+	{
+		Datum date = new Datum();
+		System.out.println(date);
+		
+		Datum date1 = new Datum(1,1,1990);
+		System.out.println(date1);
+		
+		date1.amerikaansDatumFormaat
+		
+		
+	}
+	
+	
+	
+
+
+	
+
+
+
+
+
 	//test
 	private SimpleDateFormat amerikaansDatumFormaat = new SimpleDateFormat("yyyy/MM/dd");
 	private SimpleDateFormat europeesDatumFormaat = new SimpleDateFormat("dd/MM/yyyy");
@@ -30,8 +54,8 @@ public class Datum {
 	public Datum ()
 	{
 		
-		dag = Calendar.DAY;
-		maand = Calendar.MONTH;
+		dag = Calendar.DAY_OF_MONTH;
+		maand = (Calendar.MONTH)+1;
 		jaar = Calendar.YEAR;
 		
 	
@@ -65,7 +89,9 @@ public class Datum {
 	 */
 	public Datum (int dag, int maand , int jaar){
 		try{
-			datumVandaag = new GregorianCalendar(dag,maand,jaar);
+			setDag(dag);
+			setMaand(maand);
+			setJaar(jaar);
 		}
 		catch (Exception ex)
 		{
@@ -108,7 +134,7 @@ public class Datum {
 	{
 		if(jaar >= 0)
 		{
-			datumVandaag.set(Calendar.YEAR, jaar);
+			datumVandaag.set(Calendar.YEAR,jaar);
 		}
 		else
 		{
@@ -120,7 +146,7 @@ public class Datum {
 	{
 		if (maand <= 12 && maand >= 1 )
 		{
-			datumVandaag.set(Calendar.MONTH, maand);
+			datumVandaag.set(Calendar.MONTH, (maand - 1));
 		}
 		else
 		{
@@ -171,7 +197,19 @@ public class Datum {
 	public int compareTo(Datum d)
 	{
 		
-		return this.compareTo(d);
+		if ((this.jaar == d.jaar) && (this.maand == d.maand)
+				&& (this.dag == d.dag)) {
+			return 0;
+		} else if ((this.jaar > d.jaar)) {
+			return 1;
+		} else if ((this.jaar == d.jaar) && (this.maand > d.maand)) {
+			return 1;
+		} else if ((this.jaar == d.jaar) && (this.maand == d.maand)
+				&& (this.dag > d.dag)) {
+			return 1;
+		} else {
+			return -1;
+		}
 		
 	}
 	
@@ -317,7 +355,7 @@ public class Datum {
 		
 	}
 	
-	public int verschilInDagen(Datum d)
+	public int verschilInDagen(Datum d) throws CloneNotSupportedException
 	{
 		Datum vroegsteDatum, laatsteDatum;
 		int aantalDagen = 0;
@@ -350,12 +388,17 @@ public class Datum {
 	}
 	
 	/**
-	 * Verhoogt of verlaagt darum met aantal dagen
+	 * Verhoogt of verlaagt datum met aantal dagen
 	 * @param aantalDagen
 	 */
 	
+	/**
+	 * 
+	 * @param aantalDagen
+	
 	public void veranderDatum(int aantalDagen)
 	{
+		
 		
 	}
 	
@@ -363,6 +406,8 @@ public class Datum {
 	{
 		
 	}
+	*/
+	
 }
 
 	
