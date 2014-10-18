@@ -47,7 +47,7 @@ public class DatumTest {
 	@Test
 	public void test_DateTypeDatum(){
 		assertEquals(datumVandaag.getDay(),dateDatum.getDag());
-		assertEquals(datumVandaag.getMonth(),dateDatum.getMaand());
+		assertEquals(datumVandaag.getMonth()-1,dateDatum.getMaand());
 		assertEquals(datumVandaag.getYear(),dateDatum.getJaar());
 	}
 	
@@ -120,14 +120,14 @@ public class DatumTest {
 	
 	@Test
 	public void test_VerschillenInDagen_True(){
-		assertEquals(731,geldigeNietSchrikkelDatum.verschilInDagen(vandaagDeDag));
+		assertEquals(730,geldigeNietSchrikkelDatum.verschilInDagen(vandaagDeDag));
 	}
 	
 	@Test
 	public void test_veranderVoidDatum_Up(){
 		boolean result = false;
-		geldigeNietSchrikkelDatum.veranderVoidDatum(10,true);
-		if(geldigeNietSchrikkelDatum == veranderDat){
+		geldigeNietSchrikkelDatum.veranderVoidDatum(11,true);
+		if(geldigeNietSchrikkelDatum.getDag() == veranderDat.getDag() && geldigeNietSchrikkelDatum.getMaand() == veranderDat.getMaand() &&  geldigeNietSchrikkelDatum.getJaar() == veranderDat.getJaar()){
 			result = true;
 		}
 		assertEquals(true,result);
@@ -135,8 +135,8 @@ public class DatumTest {
 	
 	public void test_veranderVoidDatum_Down(){
 		boolean result = false;
-		geldigeNietSchrikkelDatum.veranderVoidDatum(10,false);
-		if(geldigeNietSchrikkelDatum == veranderDat){
+		geldigeNietSchrikkelDatum.veranderVoidDatum(11,false);
+		if(geldigeNietSchrikkelDatum.getDag() == veranderDat.getDag() && geldigeNietSchrikkelDatum.getMaand() == veranderDat.getMaand() &&  geldigeNietSchrikkelDatum.getJaar() == veranderDat.getJaar()){
 			result = true;
 		}
 		assertEquals(true,result);
@@ -147,7 +147,7 @@ public class DatumTest {
 	public void test_veranderDatum_Up(){
 		Datum resDate = geldigeNietSchrikkelDatum.veranderDatum(geldigeNietSchrikkelDatum, 10, true);
 		boolean result = false;
-		if(resDate == veranderDat){
+		if(resDate.getDag() == veranderDat.getDag() && resDate.getMaand() == veranderDat.getMaand() && resDate.getJaar() == veranderDat.getJaar()){
 			result = true;
 		}
 		assertEquals(true,result);
@@ -156,7 +156,7 @@ public class DatumTest {
 	public void test_veranderDatum_Down(){
 		Datum resDate = geldigeNietSchrikkelDatum.veranderDatum(geldigeNietSchrikkelDatum, 20, false);
 		boolean result = false;
-		if(resDate == veranderDatDown){
+		if(resDate.getDag() == veranderDatDown.getDag() && resDate.getMaand() == veranderDatDown.getMaand() && resDate.getJaar() == veranderDatDown.getJaar()){
 			result = true;
 		}
 		assertEquals(true,result);

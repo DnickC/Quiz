@@ -1,4 +1,5 @@
 package utils.FromScratch;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
@@ -11,7 +12,7 @@ public class Datum {
 		System.out.println(schrikkelDatum.toString());
 		Datum geldigeDatum = new Datum("12/05/2014");
 		System.out.println(geldigeDatum.toString());
-		Datum dateInput = new Datum(new Date(2014,05,12));
+		Datum dateInput = new Datum(new Date(2014,06,13)); // wat gebeurd er ? 
 		System.out.println(dateInput.toString());
 		Datum intInput = new Datum(12,05,2014);
 		System.out.println(intInput.toString());
@@ -92,7 +93,7 @@ public class Datum {
 	{
 		if(this.maand == 2){
 			if(eenSchrikkelJaar(this.jaar)==true){
-				dagenPerMaand[3] = 29;
+				dagenPerMaand[2] = 29;
 			}
 		}
 		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
@@ -112,7 +113,7 @@ public class Datum {
 	
 	public Datum(Date datum){
 		this.setJaar(datum.getYear()); 
-		this.setMaand(datum.getMonth());
+		this.setMaand(datum.getMonth()-1);
 		this.setDag(datum.getDay());;
 						
 	}
