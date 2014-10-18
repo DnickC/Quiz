@@ -18,7 +18,7 @@ public class Datum extends GregorianCalendar{
 		System.out.println(date1);
 
 		Datum dateString = new Datum("1/9/2010");
-		dateString.toString();
+		
 		
 	}
 
