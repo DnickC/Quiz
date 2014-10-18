@@ -1,11 +1,11 @@
 package utils.Gregorian;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/how-do-i-convert-a-java-sql-date-object-into-a-gregoriancalendar
 import java.util.GregorianCalendar;
 
-public class Datum {
+public class Datum extends GregorianCalendar{
 	
 <<<<<<< HEAD
 	public static void main(String [] args)
@@ -27,7 +27,7 @@ public class Datum {
 		Datum date1 = new Datum(1,1,1990);
 		System.out.println(date1);
 		
-		date1.amerikaansDatumFormaat
+		
 		
 		
 	}
@@ -71,18 +71,21 @@ public class Datum {
 		maand = (Calendar.MONTH)+1;
 		jaar = Calendar.YEAR;
 		
-	
 	}
 	
+	
+
 	/**
 	 * Constructor met datum object als parameter
 	 * @param datum
 	 */
 	
-	public Datum(Date datum){
+	public Datum(Datum datum){
 		try
 		{
-			datumVandaag.setTime(datum);
+			this.setDag(datum.dag);
+			this.setMaand(datum.maand);
+			this.setJaar(datum.jaar);
 		} 
 		catch(Exception ex){
 			throw ex;
@@ -91,8 +94,7 @@ public class Datum {
 		
 		 
 	}
-	
-	
+
 	
 	/**
 	 * Constructor met parameters dag, maand, jaar
@@ -143,11 +145,12 @@ public class Datum {
 	 */
 	
 	
+	
 	private void setJaar(int jaar)
 	{
 		if(jaar >= 0)
 		{
-			datumVandaag.set(Calendar.YEAR,jaar);
+			this.set(Calendar.YEAR,jaar);
 		}
 		else
 		{
@@ -159,7 +162,7 @@ public class Datum {
 	{
 		if (maand <= 12 && maand >= 1 )
 		{
-			datumVandaag.set(Calendar.MONTH, (maand - 1));
+			this.set(Calendar.MONTH, (maand - 1));
 		}
 		else
 		{
@@ -172,7 +175,7 @@ public class Datum {
 	{
 		if (maand == 2)
 		{
-			if (isLeapYear(datumVandaag.YEAR) == true)
+			if (isLeapYear(this.YEAR) == true)
 			{
 				dagenPerMaand[3] = 29;
 			}
@@ -189,17 +192,17 @@ public class Datum {
 	public String getDatumInAmerikaansFormaat()
 	{
 				
-		return amerikaansDatumFormaat.format(datumVandaag.getTime());
+		return amerikaansDatumFormaat.format(this.getTime());
 	}
 	
 	public String getDatumInEuropeesFormaat()
 	{
-		return europeesDatumFormaat.format(datumVandaag.getTime());
+		return europeesDatumFormaat.format(this.getTime());
 	}
 	
 	public String toString()
 	{
-		return volledigeDatum.format(datumVandaag.getTime());
+		return volledigeDatum.format(this.getTime());
 	}
 	
 	/**
