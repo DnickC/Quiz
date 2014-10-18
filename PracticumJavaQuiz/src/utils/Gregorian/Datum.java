@@ -6,6 +6,17 @@ import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/
 import java.util.GregorianCalendar;
 
 public class Datum {
+	
+	public static void main(String [] args)
+	{
+		Datum geldigeDatum = new Datum("4/4/2011");
+		Datum bigger = new Datum("18/06/2015");
+		Datum smaller = new Datum("06/09/1998");
+		//int verschilInDagen = geldigeDatum.verschilInDagen(bigger);
+		int verschilInMaanden = geldigeDatum.verschilInMaanden(bigger);
+		int verschilInJaren = geldigeDatum.verschilInJaren(bigger);
+	}
+	
 	//test
 	private SimpleDateFormat amerikaansDatumFormaat = new SimpleDateFormat("yyyy/MM/dd");
 	private SimpleDateFormat europeesDatumFormaat = new SimpleDateFormat("dd/MM/yyyy");
@@ -289,12 +300,6 @@ public class Datum {
 		verschilInJaren = verschilInJaren(d);
 		
 		
-		if(isLeapYear(d))
-		{
-			verschilInMaanden++;
-			
-		}
-		
 		if (verschilInJaren == 0 && vroegsteDatum.maand == laatsteDatum.maand)
 		{
 			return 0;
@@ -337,7 +342,7 @@ public class Datum {
 			laatsteDatum = this;
 		}
 		
-		Calendar dagenTellen = (Calendar) vroegsteDatum.clone();
+		//Calendar dagenTellen = (Calendar) vroegsteDatum.clone();
 		
 		while(dagenTellen.before(laatsteDatum))
 		{
