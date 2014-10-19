@@ -21,4 +21,7 @@ public class Persoon {
 		return this.geboorteDatum;
 	}
 	
+	public String toString() {
+		return getNaam() +" "+ getGeboorteDatum();
+	}
 }

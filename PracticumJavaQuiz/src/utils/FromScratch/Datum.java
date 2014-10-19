@@ -1,6 +1,7 @@
 package utils.FromScratch;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.PatternSyntaxException;
 
 @SuppressWarnings("deprecation")
 
@@ -56,7 +57,6 @@ public class Datum {
 		System.out.println(geldigeDatumDown.toString());
 	}
 	
-	private Date datumVandaag = new Date(); 
 	private int dag;
 	private int maand;
 	private int jaar;
@@ -113,6 +113,7 @@ public class Datum {
 		}
 		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
 			this.dag = dag;
+			dagenPerMaand[2] = 28;
 		} 
 		else {
 			throw new IllegalArgumentException("ongeldige dag");
@@ -134,6 +135,7 @@ public class Datum {
 	 */
 	
 	public Datum(){
+		final Date datumVandaag = new Date(); 
 		jaar = datumVandaag.getYear();
 		maand = datumVandaag.getMonth();
 		dag = datumVandaag.getDay();
@@ -165,13 +167,18 @@ public class Datum {
 	/**
 	 * Constructor that creates a Datum class from String value
 	 * @param  String datum
+	 * @throws Exception 
 	 */
 	
 	public Datum(String datum){
-		String[] splitdate = datum.split("/");
-		this.setJaar( Integer.parseInt(splitdate[2]));
-		this.setMaand(Integer.parseInt(splitdate[1]));
-		this.setDag(Integer.parseInt(splitdate[0]));		
+		try {
+			String[] splitdate = datum.split("/");
+			this.setJaar( Integer.parseInt(splitdate[2]));
+			this.setMaand(Integer.parseInt(splitdate[1]));
+			this.setDag(Integer.parseInt(splitdate[0]));
+		} catch (Exception e) {
+			throw e;
+		}		
 	}
 		
 	/**
