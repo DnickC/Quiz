@@ -14,7 +14,7 @@ public class DatumTom {
 	
 	public DatumTom() {
 		this.datum = new GregorianCalendar();
-		
+		datum.
 		
 	}
 	
