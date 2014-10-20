@@ -111,12 +111,12 @@ public class Datum {
 	{
 		if(this.maand == 2){
 			if(isLeapYear(this.jaar)==true){
-				dagenPerMaand[2] = 29;
+				dagenPerMaand[3] = 29;
 			}
 		}
 		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
 			this.dag = dag;
-			dagenPerMaand[2] = 28;
+			dagenPerMaand[3] = 28;
 		} 
 		else {
 			throw new IllegalArgumentException("ongeldige dag");

@@ -47,7 +47,7 @@ public class DatumTest {
 	@Test
 	public void test_DateTypeDatum(){
 		assertEquals(datumVandaag.getDay(),dateDatum.getDag());
-		assertEquals(datumVandaag.getMonth()-1,dateDatum.getMaand());
+		assertEquals(datumVandaag.getMonth(),dateDatum.getMaand());
 		assertEquals(datumVandaag.getYear(),dateDatum.getJaar());
 	}
 	
