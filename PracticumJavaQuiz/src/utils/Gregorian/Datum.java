@@ -405,7 +405,7 @@ public class Datum extends GregorianCalendar{
 			{
 				voegDagToe(datum);
 				teller++;
-			}while (teller <= aantalDagen)
+			}while (teller <= aantalDagen);
 		}
 		else
 		{
@@ -481,29 +481,7 @@ public class Datum extends GregorianCalendar{
 		}
 		
 		return datum;
-	}
-	
-	/**
-	 * Verhoogt of verlaagt datum met aantal dagen
-	 * @param aantalDagen
-	 */
-	
-	/**
-	 * 
-	 * @param aantalDagen
-	
-	public void veranderDatum(int aantalDagen)
-	{
-		
-		
-	}
-	
-	public Datum veranderDatum(int aantalDagen)
-	{
-		
-	}
-	*/
-	
+	}	
 }
 
 	
