@@ -1,11 +1,15 @@
 package utils.Gregorian;
 
-import java.util.Date;
+
 import java.util.GregorianCalendar;
 import java.util.Calendar;
-import utils.Utils;
+
+import javax.swing.JOptionPane;
+
+import utils.Utility.MaandenVanHetJaar;
+
 import java.util.concurrent.TimeUnit;
-import utils.Utils.MaandenVanHetJaar;
+
 
 
 public class DatumTom {
@@ -14,17 +18,28 @@ public class DatumTom {
 	
 	public DatumTom() {
 		this.datum = new GregorianCalendar();
-		datum.
+		
 		
 	}
 	
-	public DatumTom(int dag, int maand, int jaar) {
-		this.datum = new GregorianCalendar(jaar,maand,dag);
+	public DatumTom(int dag, int maand, int jaar)  {
+		try {
+			this.datum = new GregorianCalendar(jaar,maand,dag);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 	
 	public DatumTom(String strDatum){
-		String[] array = strDatum.split("/");
-		this.datum = new GregorianCalendar(Integer.parseInt(array[2]),Integer.parseInt(array[1]),Integer.parseInt(array[0]));
+		try {
+			String[] array = strDatum.split("/");
+			if (array.length != 3) { throw new Exception("Foutieve invoer");}
+			this.datum = new GregorianCalendar(Integer.parseInt(array[2]),Integer.parseInt(array[1]),Integer.parseInt(array[0]));
+			}
+			catch (Exception e){
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
 	}
 	
 	public int getDag() {
@@ -95,22 +110,43 @@ public class DatumTom {
 		}
 	
 	public int verschilInMaanden(DatumTom d) {
-		int verschil = this.verschilInJaren(d);
 		int maanden;
-		if (this.kleinerDan(d)==true){
-			if (this.datum.get(Calendar.DAY_OF_YEAR)> d.getGCal().get(Calendar.DAY_OF_YEAR)){
-				maanden = 12 - ((this.datum.get(Calendar.MONTH)+1) - (d.getGCal().get(Calendar.MONTH) + 1));
+		if (this.datum.get(Calendar.DAY_OF_YEAR)> d.getGCal().get(Calendar.DAY_OF_YEAR)){
+				maanden = 12 - ((this.getMaand() - d.getMaand()));
+				if (this.getDag()< d.getDag()) {
+					maanden--;
+				}
 				
 			}
-			else {
-				
+		else {
+				maanden = d.getMaand()-this.getMaand();
+				if (this.getDag() > d.getDag()){
+					maanden--;
+				}
 			}
-		}
-	}
+		return ((this.verschilInJaren(d)*12) + maanden);
 		
+	}
+	
+	public long verschilInDagen(DatumTom d){
+		long millisec = this.datum.getTimeInMillis() - d.getGCal().getTimeInMillis();
+		return TimeUnit.DAYS.toDays(millisec);
+		
+	
+	}
+	
+	public void veranderDatum(int dagen){
+		this.datum.add(Calendar.DAY_OF_YEAR, dagen);
+	}
 	
 	public GregorianCalendar getGCal() {
 		return this.datum;
+		
 	}
+	
+	public int compareTo(DatumTom d){
+		return this.datum.compareTo(d.getGCal());
+	}
+	
 	
 }
