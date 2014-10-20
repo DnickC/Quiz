@@ -1,6 +1,7 @@
 package utils.FromScratch;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 import java.util.regex.PatternSyntaxException;
 
 @SuppressWarnings("deprecation")
@@ -56,9 +57,8 @@ public class Datum {
 		System.out.println(geldigeDatumUp.toString());
 		Datum geldigeDatumDown = geldigeDatum.veranderDatum(geldigeDatum,20,false);
 		System.out.println(geldigeDatumDown.toString());
-		
 		}
-	}
+	
 	
 	private int dag;
 	private int maand;
@@ -111,12 +111,12 @@ public class Datum {
 	{
 		if(this.maand == 2){
 			if(isLeapYear(this.jaar)==true){
-				dagenPerMaand[3] = 29;
+				dagenPerMaand[2] = 29;
 			}
 		}
 		if (dag > 0 && dag <= dagenPerMaand [maand] ) {
 			this.dag = dag;
-			dagenPerMaand[3] = 28;
+			dagenPerMaand[2] = 28;
 		} 
 		else {
 			throw new IllegalArgumentException("ongeldige dag");
@@ -175,20 +175,22 @@ public class Datum {
 	
 	public Datum(String datum) throws Exception{
 		
-		if (datum.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})") ||
-				datum.matches("([0-9]{1})/([0-9]{2})/([0-9]{4})") ||
-				datum.matches("([0-9]{2})/([0-9]{1})/([0-9]{4})")) 
-		{
-			String[] splitdate = datum.split("/");
-			this.setJaar( Integer.parseInt(splitdate[2]));
-			this.setMaand(Integer.parseInt(splitdate[1]));
-			this.setDag(Integer.parseInt(splitdate[0]));
-		}
-		else {
-			//throw new IllegalFormatException("datum is verkeerd formaat");
-			//throw new PatternSyntaxException("datum is verkeerd formaat", datum, dag);
-			throw new Exception("datum in verkeerd formaat");
-		}
+		 	try {
+				String[] splitdate = datum.split("(/)|(-)|(\\.)");
+				this.setJaar( Integer.parseInt(splitdate[2]));
+				this.setMaand(Integer.parseInt(splitdate[1]));
+				this.setDag(Integer.parseInt(splitdate[0]));
+			} 
+		 	catch (ArrayIndexOutOfBoundsException a){
+		 		throw new ArrayIndexOutOfBoundsException("Ongeldig formaat van datum, geldige tekens zijn: '-' en '/' en '.' ");
+		 	}
+		 	
+		 	catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+				
+			//throw new Exception("datum in verkeerd formaat");
+		
 	}	
 	/**
 	 * Checks if the given year is a leapyear
