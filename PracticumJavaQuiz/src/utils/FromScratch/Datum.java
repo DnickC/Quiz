@@ -15,6 +15,7 @@ import java.util.regex.PatternSyntaxException;
 public class Datum {
 	
 	public static void main(String [] args){
+		
 		Datum legeDatum = new Datum();
 		System.out.println(legeDatum.toString());
 		Datum schrikkelDatum = new Datum("29/02/2016");
@@ -55,6 +56,8 @@ public class Datum {
 		System.out.println(geldigeDatumUp.toString());
 		Datum geldigeDatumDown = geldigeDatum.veranderDatum(geldigeDatum,20,false);
 		System.out.println(geldigeDatumDown.toString());
+		
+		}
 	}
 	
 	private int dag;
