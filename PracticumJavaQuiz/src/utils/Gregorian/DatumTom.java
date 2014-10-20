@@ -3,8 +3,8 @@ package utils.Gregorian;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
-
 import utils.Utils;
+import java.util.concurrent.TimeUnit;
 import utils.Utils.MaandenVanHetJaar;
 
 
@@ -65,63 +65,52 @@ public class DatumTom {
 	}
 	
 	public boolean equals(DatumTom datum) {
-		return (this.getDag()==datum.getDag()&&this.getMaand()==datum.getMaand()&&this.getJaar()==datum.getJaar()?true:false);
+		return this.datum.equals(datum.getGCal());
 		
 	}
 	
 	
 	
 	public boolean kleinerDan(DatumTom eenDatum){
-		if (this.getJaar() < eenDatum.getJaar()){
-			return true;
-		}
-		else {
-			if (this.getJaar()> eenDatum.getJaar()) {
-				return false;
-			}
-			else {
-				if (this.getMaand() < eenDatum.getMaand()){
-					return true;
-					
-				}
-				else {
-					if (this.getMaand() > eenDatum.getMaand()){
-						return false;
-					}
-					else {
-						if (this.getDag() < eenDatum.getDag()) {
-							return true;
-						}
-						else {return false;}
-					}
-				}
-			}
-			
-		}
+		long verschil = this.datum.getTimeInMillis() - eenDatum.getGCal().getTimeInMillis();
+		return (verschil<0?true:false);
 		
 	}
 	
 	public int verschilInJaren(DatumTom d) {
-		int verschil;
-		if (this.kleinerDan(d)){
-			verschil = d.getJaar() - this.getJaar();
-			if (this.getMaand() >= d.getMaand()) {
-				verschil = (this.getMaand() > d.getMaand()? verschil--:verschil);
-				if (this.getMaand() == d.getMaand()) {
-					verschil = (this.getDag()>d.getDag()?verschil--:verschil);
-				}
+		int verschil = (this.kleinerDan(d) == true?d.getGCal().get(Calendar.YEAR)-this.datum.get(Calendar.YEAR):this.datum.get(Calendar.YEAR)-d.getGCal().get(Calendar.YEAR));
+		if (this.kleinerDan(d)==true) {
+			if (this.datum.get(Calendar.DAY_OF_YEAR)> d.getGCal().get(Calendar.DAY_OF_YEAR)){
+				verschil--;
+			
 			}
 		}
 		else {
-			verschil = this.getJaar() - d.getJaar();
-			if (d.getMaand() >= this.getMaand()) {
-				verschil = (d.getMaand()>this.getMaand()?verschil--:verschil);
-				if (d.getMaand() == this.getMaand()){
-					verschil = (d.getDag()>this.getDag()?verschil--:verschil);
-				}
+			if (d.getGCal().get(Calendar.DAY_OF_YEAR) > this.datum.get(Calendar.DAY_OF_YEAR)){
+				verschil--;
 			}
+		
 		}
 		return verschil;
-		
+		}
+	
+	public int verschilInMaanden(DatumTom d) {
+		int verschil = this.verschilInJaren(d);
+		int maanden;
+		if (this.kleinerDan(d)==true){
+			if (this.datum.get(Calendar.DAY_OF_YEAR)> d.getGCal().get(Calendar.DAY_OF_YEAR)){
+				maanden = 12 - ((this.datum.get(Calendar.MONTH)+1) - (d.getGCal().get(Calendar.MONTH) + 1));
+				
+			}
+			else {
+				
+			}
+		}
 	}
+		
+	
+	public GregorianCalendar getGCal() {
+		return this.datum;
+	}
+	
 }
