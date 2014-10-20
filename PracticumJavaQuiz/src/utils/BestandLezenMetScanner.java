@@ -9,33 +9,20 @@ import utils.FromScratch.Datum;
 import utils.Persoon;
 
 public class BestandLezenMetScanner {
-	public static void main(String [] args){
-		BestandLezenMetScanner sc = new BestandLezenMetScanner();
-		sc.leesPersonenVanBestand();
-	}
 	
+	ArrayList<Persoon> personenLijst = new ArrayList<Persoon>();
+	StringBuilder ongeldigeDatums = new StringBuilder();
+	Scanner scanner = null;
+
 	public void leesPersonenVanBestand() {
-		
-		Scanner scanner = null;
-		String exceptionMessage;
 		
 		try {
 			File file = new File("PracticumJavaQuiz//src//bestanden//personen.txt");
 			scanner = new Scanner(file);
-		}
-		catch(FileNotFoundException ex){
-			System.out.println("Bestand niet gevonden");
-		}
-		catch(Exception ex){
-			System.out.println(ex.getMessage());
-		}
+			ongeldigeDatums.append("Ongeldige datums uit het inputbestand: ");
+			ongeldigeDatums.append(System.lineSeparator());
 			
-		ArrayList<Persoon> personenLijst = new ArrayList<Persoon>();
-		ArrayList<String> ongeldigeDatums = new ArrayList<String>();
-			
-		while (scanner.hasNext()){
-			boolean isGeldigeDatum = false;
-			exceptionMessage = "";
+			while (scanner.hasNext()){
 			String lijn = "";
 			String [] velden = null;
 			String naam = "";
@@ -46,37 +33,77 @@ public class BestandLezenMetScanner {
 					velden = lijn.split( "\\t+" );
 					naam = velden[0];
 					datum = new Datum(velden[1]);
-					isGeldigeDatum = true;
 					Persoon persoon = new Persoon(naam, datum);
 					personenLijst.add(persoon);
-
-				}
-				catch (IllegalArgumentException i) {
-					exceptionMessage = i.getMessage();
-					i.printStackTrace();
 				}
 				catch (Exception e) {
-					e.printStackTrace();
-					exceptionMessage = e.getMessage();
+					ongeldigeDatums.append(lijn +"\t"+ e.getMessage());
+					ongeldigeDatums.append(System.lineSeparator());
 				}
-				finally {
-					
-					if (!isGeldigeDatum) {
-						ongeldigeDatums.add(velden[1] +" "+ exceptionMessage);
-					}
-				}
+			}
 		}
+		catch(FileNotFoundException ex){
+			System.out.println("Bestand niet gevonden");
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+			
+		
 			
 		if (scanner != null){
 			scanner.close();
 		}
 		
+		
 		//output: naam en geboortedatum van de oudste en jongste persoon + verschil in dagen en jaren
-		String output = "";
+		StringBuilder output = new StringBuilder();
+		//output.
 		
-		System.out.println(output);
 		
-		System.out.println("\n" + ongeldigeDatums);		  
 		
+		//output.append(ongeldigeDatums);
+		System.out.println(ongeldigeDatums);
+		
+	}
+	
+	private Persoon getOudste() {
+		Persoon oudste = null;
+		
+		if (personenLijst.get(0) != null) {
+			oudste = personenLijst.get(0);
+		}
+		
+		for (int i = 1; i < personenLijst.size(); i++) {
+			
+			if (personenLijst.get(i).getGeboorteDatum().kleinerDan(oudste.getGeboorteDatum())) {
+				oudste = personenLijst.get(i);
+			}
+		}
+		return oudste;
+	}
+	private Persoon getJongste() {
+		Persoon jongste = null;
+		
+		if (personenLijst.get(0) != null) {
+			jongste = personenLijst.get(0);
+		}
+		for (int i = 1; i < personenLijst.size(); i++) {
+			if (jongste.getGeboorteDatum().kleinerDan(personenLijst.get(i).getGeboorteDatum())) {
+				jongste = personenLijst.get(i);
+			}
+		}
+		return jongste;
+	}
+	private void getVerschilInDagenEnJaren() {
+		// TODO Auto-generated method stub
+		
+	}
+	public static void main(String [] args){
+		BestandLezenMetScanner sc = new BestandLezenMetScanner();
+		sc.leesPersonenVanBestand();
+		sc.getOudste();
+		sc.getJongste();
+		sc.getVerschilInDagenEnJaren();
 	}
 }

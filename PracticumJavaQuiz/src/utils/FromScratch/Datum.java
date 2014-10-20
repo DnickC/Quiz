@@ -170,17 +170,23 @@ public class Datum {
 	 * @throws Exception 
 	 */
 	
-	public Datum(String datum){
-		try {
+	public Datum(String datum) throws Exception{
+		
+		if (datum.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})") ||
+				datum.matches("([0-9]{1})/([0-9]{2})/([0-9]{4})") ||
+				datum.matches("([0-9]{2})/([0-9]{1})/([0-9]{4})")) 
+		{
 			String[] splitdate = datum.split("/");
 			this.setJaar( Integer.parseInt(splitdate[2]));
 			this.setMaand(Integer.parseInt(splitdate[1]));
 			this.setDag(Integer.parseInt(splitdate[0]));
-		} catch (Exception e) {
-			throw e;
-		}		
-	}
-		
+		}
+		else {
+			//throw new IllegalFormatException("datum is verkeerd formaat");
+			//throw new PatternSyntaxException("datum is verkeerd formaat", datum, dag);
+			throw new Exception("datum in verkeerd formaat");
+		}
+	}	
 	/**
 	 * Checks if the given year is a leapyear
 	 * @param int jaar
