@@ -1,4 +1,4 @@
-package test;
+package utils.test;
 import java.util.Date;
 
 import utils.FromScratch.Datum;
@@ -17,7 +17,7 @@ public class DatumTest {
 	
 	@Before
 	
-	public void SetTest(){
+	public void SetTest() throws Exception{
 		geldigeNietSchrikkelDatum = new Datum("15/10/2016");
 		dezelfdeGeldigeDatum = new Datum("15/10/2016");
 		vandaagDeDag = new Datum("15/10/2018");
@@ -52,12 +52,12 @@ public class DatumTest {
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void test_OngeldigeSchrikkelDatum(){
+	public void test_OngeldigeSchrikkelDatum() throws Exception{
 		ongeldigeDatum = new Datum("32/12/2014");
 	}
 	
 	@Test  (expected = IllegalArgumentException.class)
-	public void test_OngeldigeDatum(){
+	public void test_OngeldigeDatum() throws Exception{
 		ongeldigeDatum = new Datum("42/13/2090");
 	}
 	

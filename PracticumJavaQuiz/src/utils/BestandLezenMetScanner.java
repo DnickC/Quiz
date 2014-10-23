@@ -19,6 +19,8 @@ public class BestandLezenMetScanner {
 	Persoon jongste = null;
 	Persoon oudste = null;
 
+	
+	
 	public void leesPersonenVanBestand() {
 		
 		try {

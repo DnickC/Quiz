@@ -21,6 +21,7 @@ public class Persoon {
 		return this.geboorteDatum;
 	}
 	
+	@Override
 	public String toString() {
 		return getNaam() +" "+ getGeboorteDatum();
 	}
