@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar; // Bron : http://stackoverflow.com/questions/9115897/how-do-i-convert-a-java-sql-date-object-into-a-gregoriancalendar
 import java.util.GregorianCalendar;
 
-import utils.FromScratch.Datum;
 
 public class Datum extends GregorianCalendar{
 	
@@ -43,13 +42,11 @@ public class Datum extends GregorianCalendar{
 	 * Constructor zonder parameters
 	 */
 	
-	public Datum ()
-	{
-		
+	public Datum()
+	{		
 		dag = Calendar.DAY_OF_MONTH;
 		maand = (Calendar.MONTH)+1;
-		jaar = Calendar.YEAR;
-		
+		jaar = Calendar.YEAR;		
 	}
 	
 	
@@ -59,19 +56,18 @@ public class Datum extends GregorianCalendar{
 	 * @param datum
 	 */
 	
-	public Datum(Datum datum){
+	public Datum(Datum datum)
+	{
 		try
 		{
 			this.setDag(datum.dag);
 			this.setMaand(datum.maand);
 			this.setJaar(datum.jaar);
 		} 
-		catch(Exception ex){
+		catch(Exception ex)
+		{
 			throw ex;
-			
-		}
-		
-		 
+		}		 
 	}
 
 	
@@ -141,7 +137,7 @@ public class Datum extends GregorianCalendar{
 	{
 		if (maand <= 12 && maand >= 1 )
 		{
-			this.set(Calendar.MONTH, (maand - 1));
+			this.set(Calendar.MONTH, (maand /*- 1*/)); //klopt dit?
 		}
 		else
 		{
@@ -162,11 +158,13 @@ public class Datum extends GregorianCalendar{
 		if (dag > 0 && dag <= dagenPerMaand[maand])
 		{
 			this.dag = dag;
+			dagenPerMaand[3]=28;
 		}
-
+		else
+		{
+			throw new IllegalArgumentException("Ongeldige dag.");
+		}
 	}
-	
-	
 	
 	public String getDatumInAmerikaansFormaat()
 	{
@@ -189,18 +187,18 @@ public class Datum extends GregorianCalendar{
 	 * @param d
 	 * @return
 	 */
-	public int compareTo(Datum d)
+	public int compareTo(Datum datum)
 	{
 		
-		if ((this.jaar == d.jaar) && (this.maand == d.maand)
-				&& (this.dag == d.dag)) {
+		if ((this.jaar == datum.jaar) && (this.maand == datum.maand)
+				&& (this.dag == datum.dag)) {
 			return 0;
-		} else if ((this.jaar > d.jaar)) {
+		} else if ((this.jaar > datum.jaar)) {
 			return 1;
-		} else if ((this.jaar == d.jaar) && (this.maand > d.maand)) {
+		} else if ((this.jaar == datum.jaar) && (this.maand > datum.maand)) {
 			return 1;
-		} else if ((this.jaar == d.jaar) && (this.maand == d.maand)
-				&& (this.dag > d.dag)) {
+		} else if ((this.jaar == datum.jaar) && (this.maand == datum.maand)
+				&& (this.dag > datum.dag)) {
 			return 1;
 		} else {
 			return -1;
@@ -213,9 +211,9 @@ public class Datum extends GregorianCalendar{
 	 * @param o
 	 * @return
 	 */
-	public boolean equalsTo(Object o)
+	public boolean equals(Object object)
 	{
-		if (this == o)
+		if (this == object)
 		{
 			return true;
 		}
@@ -263,7 +261,8 @@ public class Datum extends GregorianCalendar{
 	
 	public int verschilInJaren(Datum d)
 	{
-		Datum vroegsteDatum = null,laatsteDatum = null;
+		Datum vroegsteDatum = null;
+		Datum laatsteDatum = null;
 		int verschilInJaren;
 		
 		if(this.jaar == d.jaar)
@@ -344,13 +343,13 @@ public class Datum extends GregorianCalendar{
 		
 	}
 	
-	public int verschilInDagen(Datum d) throws CloneNotSupportedException
+	public int verschilInDagen(Datum d)
 	{
 		Datum vroegsteDatum, laatsteDatum;
 		int aantalDagen = 0;
-		if (this.dag == d.dag)
+		if (this.equals(d))
 		{
-			return 0;
+				return 0;
 		}
 		
 		if (this.kleinerDan(d))
@@ -364,7 +363,7 @@ public class Datum extends GregorianCalendar{
 			laatsteDatum = this;
 		}
 		
-		//Calendar dagenTellen = (Calendar) vroegsteDatum.clone();
+		Calendar dagenTellen = (Calendar) vroegsteDatum.clone();
 		
 		while(dagenTellen.before(laatsteDatum))
 		{
@@ -375,46 +374,61 @@ public class Datum extends GregorianCalendar{
 		return aantalDagen;
 	}
 	
-	public void veranderDatumVoid(int aantalDagen, boolean opaf)
+	public void veranderVoidDatum(int aantalDagen, boolean opaf) throws Exception
 	{
-		int teller = 1;
-		if(opaf = true)
+		if(aantalDagen > 0)
 		{
-			do
+			int teller = 1;
+			if(opaf = true)
 			{
-				voegDagToe(this);
-				teller++;
-			}while (teller <= aantalDagen);
+				do
+				{
+					voegDagToe(this);
+					teller++;
+				}while (teller <= aantalDagen);
+			}
+			else
+			{
+				do
+				{
+					trekDagAf(this);
+					teller++;
+				}while (teller <= aantalDagen);
+			}
 		}
 		else
 		{
-			do
-			{
-				trekDagAf(this);
-				teller++;
-			}while (teller <= aantalDagen);
+			throw new Exception("Aantal dagen moet groter zijn dan 0");
 		}
 	}
 	
-	public Datum veranderDatum(Datum datum, int aantalDagen, boolean opaf)
+	public Datum veranderDatum(Datum datum, int aantalDagen, boolean opaf) throws Exception
 	{
-		int teller = 1;
-		if(opaf = true)
+		if(aantalDagen > 0)
 		{
-			do
+			int teller = 1;
+			if(opaf = true)
 			{
-				voegDagToe(datum);
-				teller++;
-			}while (teller <= aantalDagen);
+				do
+				{
+					voegDagToe(datum);
+					teller++;
+				}while (teller <= aantalDagen);
+			}
+			else
+			{
+				do
+				{
+					trekDagAf(datum);
+					teller++;
+				}while (teller <= aantalDagen);
+			}
 		}
 		else
 		{
-			do
-			{
-				trekDagAf(datum);
-				teller++;
-			}while (teller <= aantalDagen);
+			throw new Exception("Aantal dagen moet groter dan 0 zijn.");
 		}
+		return datum;
 	}
 	
 	public Datum trekDagAf(Datum datum)
@@ -465,7 +479,7 @@ public class Datum extends GregorianCalendar{
 				datum.maand++;
 			}
 		}
-		if(datum.dag == dagenPerMaand[datum.maand])
+		else if(datum.dag == dagenPerMaand[datum.maand])
 		{
 			if(datum.maand == 12)
 			{
@@ -479,7 +493,10 @@ public class Datum extends GregorianCalendar{
 				datum.maand++;
 			}
 		}
-		
+		else
+		{
+			datum.dag++;
+		}
 		return datum;
 	}	
 }
