@@ -14,10 +14,61 @@ public class Opdracht implements Comparable, Cloneable {
 	private int maxAantalPogingen = 0;
 	private List<String> antwoordHints = new ArrayList<String>();
 	private int maxAntwoordTijd = 0;
-	private List<QuizOpdracht>quizOpdrachten;
+	private List<QuizOpdracht>quizOpdrachten;  // MOet dit wel hier komen? Komt dit niet in opdrachtencatalogus?
 	private OpdrachtCategorie opdrachtCategorie;
 	
+	public String getVraag(){
+		return vraag;
+	}
 	
+	public String getJuisteAntwoord(){
+		return juisteAntwoord;
+	}
+	
+	public int getMaxAantalPogingen(){
+		return maxAantalPogingen;
+	}
+	
+	public int getMaxAntwoordTijd(){
+		return maxAntwoordTijd;
+	}
+	
+	public OpdrachtCategorie getOpdrachtCategorie(){
+		return opdrachtCategorie;
+	}
+	
+	public List<String> getAntwoordHints(){
+		return antwoordHints;
+	}
+	
+	public void setVraag(String vraag){
+		this.vraag = vraag;
+	}
+	
+	public void setAntwoord(String antwoord){
+		this.juisteAntwoord = antwoord;
+	}
+	
+	public void setMaxAantalPogingen(int aantal){
+		this.maxAantalPogingen = aantal;
+	}
+	
+	public void setMaxAntwoordTijd(int aantalTijd){
+		this.maxAntwoordTijd = aantalTijd;
+	}
+	
+	public void addAntwoordHint(String hint){
+		this.antwoordHints.add(hint);
+	}
+	
+	//remove hint op bepaald punt
+	public Opdracht(){
+		this.vraag = null;
+		this.juisteAntwoord = null;
+		this.maxAantalPogingen = 0;
+		this.maxAntwoordTijd = 0;
+	}
+
 	
 	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd) {
 		this.vraag = vraag;
