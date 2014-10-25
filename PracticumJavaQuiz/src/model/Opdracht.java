@@ -13,8 +13,9 @@ public class Opdracht implements Comparable, Cloneable {
 	private String juisteAntwoord = null;
 	private int maxAantalPogingen = 0;
 	private List<String> antwoordHints = new ArrayList<String>();
+	private int hintNummer = 0;
 	private int maxAntwoordTijd = 0;
-	private List<QuizOpdracht>quizOpdrachten;  // MOet dit wel hier komen? Komt dit niet in opdrachtencatalogus?
+	//private List<QuizOpdracht>quizOpdrachten;  // MOet dit wel hier komen? Komt dit niet in opdrachtencatalogus?
 	private OpdrachtCategorie opdrachtCategorie;
 	
 	public String getVraag(){
@@ -37,8 +38,21 @@ public class Opdracht implements Comparable, Cloneable {
 		return opdrachtCategorie;
 	}
 	
-	public List<String> getAntwoordHints(){
-		return antwoordHints;
+	public String getHint(){
+		if(hintNummer <= antwoordHints.size()){
+			hintNummer++;
+			return antwoordHints.get(hintNummer-1).toString();
+		}else {
+			return "Geen hints meer beschikbaar";
+		}
+	}
+	
+	public void setOpdrachtCategorie(OpdrachtCategorie opdrachtCate){
+		this.opdrachtCategorie = opdrachtCate;
+	}
+	
+	public void setHint(String hint){
+		antwoordHints.add(hint);
 	}
 	
 	public void setVraag(String vraag){
@@ -50,7 +64,11 @@ public class Opdracht implements Comparable, Cloneable {
 	}
 	
 	public void setMaxAantalPogingen(int aantal){
+		if(aantal >= 1 && aantal <= 10){
 		this.maxAantalPogingen = aantal;
+		}else{
+			throw new NumberFormatException("Aantal pogingen niet geldig");
+		}
 	}
 	
 	public void setMaxAntwoordTijd(int aantalTijd){
@@ -61,30 +79,30 @@ public class Opdracht implements Comparable, Cloneable {
 		this.antwoordHints.add(hint);
 	}
 	
-	//remove hint op bepaald punt
 	public Opdracht(){
 		this.vraag = null;
 		this.juisteAntwoord = null;
 		this.maxAantalPogingen = 0;
 		this.maxAntwoordTijd = 0;
+		this.opdrachtCategorie = null;
 	}
-
-	
+		
 	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd) {
 		this.vraag = vraag;
 		this.juisteAntwoord = juisteAntwoord;
 		this.maxAantalPogingen = maxAantalPogingen;
 		this.maxAntwoordTijd = maxAntwoordTijd;
-		this.quizOpdrachten = new ArrayList<QuizOpdracht>();
+		//this.quizOpdrachten = new ArrayList<QuizOpdracht>();
 	}
 	
-	protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
+/*	protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 	
 	protected void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
+	*/
 	
 
 	@Override
