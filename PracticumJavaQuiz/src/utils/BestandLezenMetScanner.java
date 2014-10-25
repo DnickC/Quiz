@@ -6,14 +6,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import utils.FromScratch.Datum;
+//import utils.Gregorian.Datum;
+
 import utils.Persoon;
 
 public class BestandLezenMetScanner {
 	
 	ArrayList<Persoon> personenLijst = new ArrayList<Persoon>();
 	StringBuilder ongeldigeDatums = new StringBuilder();
+	StringBuilder output = new StringBuilder();
 	Scanner scanner = null;
+	Persoon jongste = null;
+	Persoon oudste = null;
 
+	
+	
 	public void leesPersonenVanBestand() {
 		
 		try {
@@ -49,27 +56,12 @@ public class BestandLezenMetScanner {
 			System.out.println(ex.getMessage());
 		}
 			
-		
-			
 		if (scanner != null){
 			scanner.close();
 		}
-		
-		
-		//output: naam en geboortedatum van de oudste en jongste persoon + verschil in dagen en jaren
-		StringBuilder output = new StringBuilder();
-		//output.
-		
-		
-		
-		//output.append(ongeldigeDatums);
-		System.out.println(ongeldigeDatums);
-		
 	}
 	
-	private Persoon getOudste() {
-		Persoon oudste = null;
-		
+	private void getOudste() {
 		if (personenLijst.get(0) != null) {
 			oudste = personenLijst.get(0);
 		}
@@ -80,30 +72,57 @@ public class BestandLezenMetScanner {
 				oudste = personenLijst.get(i);
 			}
 		}
-		return oudste;
 	}
-	private Persoon getJongste() {
-		Persoon jongste = null;
-		
+	
+	private void getJongste() {
 		if (personenLijst.get(0) != null) {
 			jongste = personenLijst.get(0);
 		}
-		for (int i = 1; i < personenLijst.size(); i++) {
+		for (int i = 1; i < personenLijst.size(); i++){
 			if (jongste.getGeboorteDatum().kleinerDan(personenLijst.get(i).getGeboorteDatum())) {
 				jongste = personenLijst.get(i);
 			}
 		}
-		return jongste;
 	}
-	private void getVerschilInDagenEnJaren() {
-		// TODO Auto-generated method stub
-		
+	
+	private void printOudste(){
+		this.getOudste();
+		System.out.println("De oudste persoon is " + oudste.getNaam() + " en is geboren op " + oudste.getGeboorteDatum().toString());
 	}
+	
+	private void printJongste(){
+		this.getJongste();
+		System.out.println("De jongste persoon is " + jongste.getNaam() + " en is geboren op " + jongste.getGeboorteDatum().toString());
+	}
+	
+	private int getVerschilInDagen(){
+		return oudste.getGeboorteDatum().verschilInDagen(jongste.getGeboorteDatum());
+	}
+	
+	private int getVerschilInJaren(){
+		return oudste.getGeboorteDatum().verschilInJaren(jongste.getGeboorteDatum());
+	}
+	
+	private void printVerschilInDagen(){
+		System.out.println("Het verschil in dagen tussen de oudste en jongste persoon is " + this.getVerschilInDagen());
+	}
+	
+	private void printVerschilInJaren(){
+		System.out.println("Het verschil in jaren is " + this.getVerschilInJaren());
+	}
+	
+	public void printOutput(){
+		this.printOudste();
+		this.printJongste();
+		this.printVerschilInDagen();
+		this.printVerschilInJaren();
+		System.out.println(ongeldigeDatums);
+	}
+	
 	public static void main(String [] args){
 		BestandLezenMetScanner sc = new BestandLezenMetScanner();
 		sc.leesPersonenVanBestand();
-		sc.getOudste();
-		sc.getJongste();
-		sc.getVerschilInDagenEnJaren();
+		sc.printOutput();
 	}
 }
+
