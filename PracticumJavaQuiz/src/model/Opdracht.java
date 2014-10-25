@@ -11,11 +11,11 @@ public class Opdracht implements Comparable, Cloneable {
 	
 	private String vraag = null;
 	private String juisteAntwoord = null;
-	private int maxAantalPogingen = 0;
+	private int maxAantalPogingen = 1;
 	private List<String> antwoordHints = new ArrayList<String>();
 	private int hintNummer = 0;
-	private int maxAntwoordTijd = 0;
-	//private List<QuizOpdracht>quizOpdrachten;  // MOet dit wel hier komen? Komt dit niet in opdrachtencatalogus?
+	private int maxAntwoordTijd = 10000;
+	private List<QuizOpdracht>quizOpdrachten;  
 	private OpdrachtCategorie opdrachtCategorie;
 	
 	public String getVraag(){
@@ -53,6 +53,11 @@ public class Opdracht implements Comparable, Cloneable {
 	
 	public void setHint(String hint){
 		antwoordHints.add(hint);
+		String[] splitHint = hint.split("(/)|(-)|(;)");
+		
+		this.setJaar( Integer.parseInt(splitdate[2]));
+		this.setMaand(Integer.parseInt(splitdate[1]));
+		this.setDag(Integer.parseInt(splitdate[0]));
 	}
 	
 	public void setVraag(String vraag){
@@ -87,23 +92,23 @@ public class Opdracht implements Comparable, Cloneable {
 		this.opdrachtCategorie = null;
 	}
 		
-	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd) {
-		this.vraag = vraag;
-		this.juisteAntwoord = juisteAntwoord;
-		this.maxAantalPogingen = maxAantalPogingen;
-		this.maxAntwoordTijd = maxAntwoordTijd;
+	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint) {
+		setVraag(vraag);
+		setAntwoord(juisteAntwoord);
+		setMaxAantalPogingen(maxAantalPogingen);
+		setMaxAntwoordTijd(maxAntwoordTijd);
+		setHint(hint);
+				
 		//this.quizOpdrachten = new ArrayList<QuizOpdracht>();
 	}
 	
-/*	protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
+    protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 	
 	protected void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
-	*/
-	
 
 	@Override
 	public boolean equals (Object object){
