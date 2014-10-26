@@ -5,7 +5,7 @@ import java.util.List;
 
 public class QuizCatalogus {
 	
-	private List<Quiz> quizzes = new ArrayList<>();
+	private ArrayList<Quiz> quizzes = new ArrayList<>();
 	
 	public QuizCatalogus(List<Quiz> quizes)
 	{
