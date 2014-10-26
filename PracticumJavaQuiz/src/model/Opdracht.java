@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 import java.util.ArrayList;
+import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
@@ -17,6 +18,7 @@ public class Opdracht implements Comparable, Cloneable {
 	private int maxAntwoordTijd = 10000;
 	private List<QuizOpdracht>quizOpdrachten;  
 	private OpdrachtCategorie opdrachtCategorie;
+	private Datum initalisatieDatum = new Datum();
 	
 	public String getVraag(){
 		return vraag;
@@ -52,12 +54,14 @@ public class Opdracht implements Comparable, Cloneable {
 	}
 	
 	public void setHint(String hint){
-		antwoordHints.add(hint);
+		try{
 		String[] splitHint = hint.split("(/)|(-)|(;)");
+		while(hintNummer <= splitHint.length){
+		this.antwoordHints.add(splitHint[hintNummer]);
+		hintNummer++;
+		 }
+		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
 		
-		this.setJaar( Integer.parseInt(splitdate[2]));
-		this.setMaand(Integer.parseInt(splitdate[1]));
-		this.setDag(Integer.parseInt(splitdate[0]));
 	}
 	
 	public void setVraag(String vraag){
@@ -112,10 +116,9 @@ public class Opdracht implements Comparable, Cloneable {
 
 	@Override
 	public boolean equals (Object object){
-		if(object instanceof Opdracht && object == this) {
+		if(object instanceof Opdracht && (Opdracht)object == this) {
 			return true;
-		}
-		else {
+		}else {
 			return false;
 		}	
 	}
@@ -129,10 +132,21 @@ public class Opdracht implements Comparable, Cloneable {
 	public String toString() {
 		return String.format("%S ( %S )", this.vraag, this.juisteAntwoord);
 	}
-
+// Wat moet er vergeleken worden zodat er bepaald wordt of het 0 / 1 of -1 is ? 
 	@Override
-	public int compareTo(Object arg0) {
-		return 0;
+	public int compareTo(Object object) {
+		if(object instanceof Opdracht){
+			Opdracht input = (Opdracht)object;
+			if(this.vraag == input.vraag && this.juisteAntwoord == input.juisteAntwoord){
+				if(this.maxAantalPogingen < input.maxAantalPogingen || this.maxAntwoordTijd < input.maxAntwoordTijd){
+					return -1;
+				}
+				return 0;
+			}else{
+				return 1;
+			}
+			
+		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");
 	}
 
 }
