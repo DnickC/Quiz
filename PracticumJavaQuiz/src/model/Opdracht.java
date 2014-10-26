@@ -1,105 +1,116 @@
 package model;
 
+//import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 
 //import utils.FromScratch.Datum;
 
-public class Opdracht implements Comparable, Cloneable {
+public class Opdracht implements Comparable<Opdracht>, Cloneable {
 	
-	private enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
+	public enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
 	
 	private String vraag = null;
 	private String juisteAntwoord = null;
 	private int maxAantalPogingen = 1;
 	private List<String> antwoordHints = new ArrayList<String>();
-	private int hintNummer = 0;
 	private int maxAntwoordTijd = 10000;
-	private List<QuizOpdracht>quizOpdrachten;  
 	private OpdrachtCategorie opdrachtCategorie;
 	
-	public String getVraag(){
-		return vraag;
-	}
+	private List<QuizOpdracht>quizOpdrachten;
 	
-	public String getJuisteAntwoord(){
-		return juisteAntwoord;
-	}
 	
-	public int getMaxAantalPogingen(){
-		return maxAantalPogingen;
+	public Opdracht(){
+		this.vraag = null;
+		this.juisteAntwoord = null;
+		this.maxAantalPogingen = 0;
+		this.antwoordHints = null;
+		this.maxAntwoordTijd = 0;
+		this.opdrachtCategorie = null;
 	}
-	
-	public int getMaxAntwoordTijd(){
-		return maxAntwoordTijd;
-	}
-	
-	public OpdrachtCategorie getOpdrachtCategorie(){
-		return opdrachtCategorie;
-	}
-	
-	public String getHint(){
-		if(hintNummer <= antwoordHints.size()){
-			hintNummer++;
-			return antwoordHints.get(hintNummer-1).toString();
-		}else {
-			return "Geen hints meer beschikbaar";
-		}
-	}
-	
-	public void setOpdrachtCategorie(OpdrachtCategorie opdrachtCate){
-		this.opdrachtCategorie = opdrachtCate;
-	}
-	
-	public void setHint(String hint){
-		antwoordHints.add(hint);
-		String[] splitHint = hint.split("(/)|(-)|(;)");
 		
-		this.setJaar( Integer.parseInt(splitdate[2]));
-		this.setMaand(Integer.parseInt(splitdate[1]));
-		this.setDag(Integer.parseInt(splitdate[0]));
+	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
+		this.setVraag(vraag);
+		this.setJuisteAntwoord(juisteAntwoord);
+		this.setMaxAantalPogingen(maxAantalPogingen);
+		this.setHint(hint);
+		this.setMaxAntwoordTijd(maxAntwoordTijd);
+		this.setOpdrachtCategorie(categorie);
 	}
 	
 	public void setVraag(String vraag){
 		this.vraag = vraag;
 	}
 	
-	public void setAntwoord(String antwoord){
+	public String getVraag(){
+		return vraag;
+	}
+	
+	public void setJuisteAntwoord(String antwoord){
 		this.juisteAntwoord = antwoord;
 	}
 	
+	public String getJuisteAntwoord(){
+		return juisteAntwoord;
+	}
+	
 	public void setMaxAantalPogingen(int aantal){
-		if(aantal >= 1 && aantal <= 10){
+		if(aantal >= 1 && aantal <= 10) {
 		this.maxAantalPogingen = aantal;
-		}else{
+		}
+		else {
 			throw new NumberFormatException("Aantal pogingen niet geldig");
 		}
+	}
+	
+	public int getMaxAantalPogingen(){
+		return maxAantalPogingen;
 	}
 	
 	public void setMaxAntwoordTijd(int aantalTijd){
 		this.maxAntwoordTijd = aantalTijd;
 	}
 	
-	public void addAntwoordHint(String hint){
-		this.antwoordHints.add(hint);
+	public int getMaxAntwoordTijd(){
+		return maxAntwoordTijd;
 	}
 	
-	public Opdracht(){
-		this.vraag = null;
-		this.juisteAntwoord = null;
-		this.maxAantalPogingen = 0;
-		this.maxAntwoordTijd = 0;
-		this.opdrachtCategorie = null;
+	public void setOpdrachtCategorie(OpdrachtCategorie opdrachtCate){
+		this.opdrachtCategorie = opdrachtCate;
 	}
+	
+	public OpdrachtCategorie getOpdrachtCategorie(){
+		return opdrachtCategorie;
+	}
+	
+	public void setHint(String hint){
 		
-	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint) {
-		setVraag(vraag);
-		setAntwoord(juisteAntwoord);
-		setMaxAantalPogingen(maxAantalPogingen);
-		setMaxAntwoordTijd(maxAntwoordTijd);
-		setHint(hint);
-				
-		//this.quizOpdrachten = new ArrayList<QuizOpdracht>();
+		String[] splitHint = hint.split("(/)|(-)|(;)");
+		
+		for (int i = 0; i <= splitHint.length; i++) {
+			antwoordHints.add(splitHint[i]);
+		}
+	}
+	
+	public String getHint(){
+		int hintNummer = 0;
+		
+		if(hintNummer <= antwoordHints.size()) {
+			hintNummer++;
+			return antwoordHints.get(hintNummer-1).toString();
+		}
+		else {
+			return "Geen hints meer beschikbaar";
+		}
+	}
+
+	public Boolean isJuisteAntwoord(String antwoord) {
+		if (this.juisteAntwoord == antwoord) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
     protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
@@ -111,7 +122,7 @@ public class Opdracht implements Comparable, Cloneable {
 	}
 
 	@Override
-	public boolean equals (Object object){
+	public boolean equals(Object object){
 		if(object instanceof Opdracht && object == this) {
 			return true;
 		}
@@ -131,7 +142,7 @@ public class Opdracht implements Comparable, Cloneable {
 	}
 
 	@Override
-	public int compareTo(Object arg0) {
+	public int compareTo(Opdracht arg0) {
 		return 0;
 	}
 
