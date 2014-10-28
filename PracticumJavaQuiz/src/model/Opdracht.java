@@ -7,7 +7,7 @@ import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
-public class Opdracht implements Comparable<Opdracht>, Cloneable {
+public class Opdracht {
 	
 	public enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
 	
@@ -16,6 +16,7 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 	private int maxAantalPogingen = 1;
 	private List<String> antwoordHints = new ArrayList<String>();
 	private int maxAntwoordTijd = 10000;
+	private int hintNummer = 0;
 	private OpdrachtCategorie opdrachtCategorie;
 	private Datum initalisatieDatum = new Datum();
 	
@@ -30,7 +31,6 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 		this.maxAntwoordTijd = 0;
 		this.opdrachtCategorie = null;
 	}
-<<<<<<< HEAD
 	
 	public void setHint(String hint){
 		try{
@@ -39,9 +39,10 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 		this.antwoordHints.add(splitHint[hintNummer]);
 		hintNummer++;
 		 }
-		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 		
-=======
 		
 	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
 		this.setVraag(vraag);
@@ -50,7 +51,7 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 		this.setHint(hint);
 		this.setMaxAntwoordTijd(maxAntwoordTijd);
 		this.setOpdrachtCategorie(categorie);
->>>>>>> origin/master
+
 	}
 	
 	public void setVraag(String vraag){
@@ -98,7 +99,7 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 		return opdrachtCategorie;
 	}
 	
-	public void setHint(String hint){
+	/*public void setHint(String hint){
 		
 		String[] splitHint = hint.split("(/)|(-)|(;)");
 		
@@ -106,7 +107,7 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 			antwoordHints.add(splitHint[i]);
 		}
 	}
-	
+	*/
 	public String getHint(){
 		int hintNummer = 0;
 		
@@ -136,14 +137,8 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 
-	@Override
-<<<<<<< HEAD
-	public boolean equals (Object object){
-		if(object instanceof Opdracht && (Opdracht)object == this) {
-=======
 	public boolean equals(Object object){
 		if(object instanceof Opdracht && object == this) {
->>>>>>> origin/master
 			return true;
 		}else {
 			return false;
@@ -160,8 +155,7 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 		return String.format("%S ( %S )", this.vraag, this.juisteAntwoord);
 	}
 // Wat moet er vergeleken worden zodat er bepaald wordt of het 0 / 1 of -1 is ? 
-	@Override
-<<<<<<< HEAD
+
 	public int compareTo(Object object) {
 		if(object instanceof Opdracht){
 			Opdracht input = (Opdracht)object;
@@ -174,11 +168,7 @@ public class Opdracht implements Comparable<Opdracht>, Cloneable {
 				return 1;
 			}
 			
-		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");
-=======
-	public int compareTo(Opdracht arg0) {
-		return 0;
->>>>>>> origin/master
+		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
 	}
 
 }
