@@ -1,4 +1,6 @@
 package model;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Quiz {
 	
@@ -6,16 +8,23 @@ public class Quiz {
 	{
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
+	//extra info meegeven met enum voor af te toetsen later?
 	
 	private String onderwerp = null;
+	private List<String> onderwerpen = new ArrayList<>();
 	private int leerjaar = 0;
 	private boolean isTest = false;
 	private boolean isUniekeDeelname = false;
 	private QuizStatus quizStatus = null;
+<<<<<<< HEAD
 	//private QuizCatalogus quizCatalog;
 	private Leraar auteur;
 	
 	public Quiz() // deze constructor kan ook default leeg zijn nee? dubbele code or my bad
+=======
+	
+	public Quiz()
+>>>>>>> origin/master
 	{
 		this.onderwerp = null;
 		this.leerjaar = 0;
@@ -24,16 +33,23 @@ public class Quiz {
 		this.quizStatus = null;
 	}
 	
-	public Quiz(String onderwerp, int leerjaar, boolean isTest)
+	public Quiz(String onderwerp, int leerjaar, boolean isTest) throws Exception
 	{
 		this.setOnderwerp(onderwerp);
 		this.setLeerjaar(leerjaar);
 		this.setIsTest(isTest);
 	}
 	
-	public void setOnderwerp(String onderwerp)
+	public void setOnderwerp(String onderwerp) throws Exception
 	{
-		this.onderwerp = onderwerp;
+		if (testOnderwerp(onderwerp) == true)
+		{
+			this.onderwerp = onderwerp;
+		}
+		else
+		{
+			throw new Exception("Ingegeven onderwerp is niet geldig!");
+		}
 		// check onderwerp toevoegen
 	}
 	
@@ -69,6 +85,37 @@ public class Quiz {
 		return isTest;
 	}
 	
+<<<<<<< HEAD
 	
+=======
+	public boolean testOnderwerp(String onderwerp)
+	{
+		int telGelijkeWoorden = 0;
+		String []ondArray = onderwerp.split(" ");
+		for(int i = 0; i<ondArray.length; i++)
+		{
+			String bestaandOnderwerp = onderwerpen.get(i);
+			String []bestaandOndArray = bestaandOnderwerp.split(" ");
+			for(int j = 0; j<bestaandOndArray.length; j++);
+			{
+				if (bestaandOndArray[j].toString() == ondArray[i].toString())
+				{
+					telGelijkeWoorden++;
+				}
+			}
+		}
+		//klopt iets niet om item met index "j" uit bestaandOndArray te halen
+		
+		//hoeveel woorden gelijk geeft ongeldig?
+		if (telGelijkeWoorden > 2)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+>>>>>>> origin/master
 	
 }
