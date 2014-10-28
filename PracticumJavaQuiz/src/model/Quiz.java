@@ -12,8 +12,10 @@ public class Quiz {
 	private boolean isTest = false;
 	private boolean isUniekeDeelname = false;
 	private QuizStatus quizStatus = null;
-		
-	public Quiz()
+	//private QuizCatalogus quizCatalog;
+	private Leraar auteur;
+	
+	public Quiz() // deze constructor kan ook default leeg zijn nee? dubbele code or my bad
 	{
 		this.onderwerp = null;
 		this.leerjaar = 0;
@@ -66,5 +68,7 @@ public class Quiz {
 	{
 		return isTest;
 	}
+	
+	
 	
 }
