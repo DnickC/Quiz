@@ -216,6 +216,8 @@ public class Datum {
 			return true;			
 		}
 		return false;
+		
+	
 	}
 	
 	/**
@@ -312,7 +314,7 @@ public class Datum {
 	public int verschilInDagen (Datum d){
 		int vandaag = julianDayCalculator(this.jaar, this.maand,this.dag);
 		int dat = julianDayCalculator(d.jaar,d.maand,d.dag);
-		return dat-vandaag;
+		return dat-vandaag; // Math.Abs?
 	}
 	
 	/**
@@ -390,7 +392,7 @@ public class Datum {
 	 * @param Datum datum
 	 * @return Datum datum 
 	 */
-	public Datum voegDagToe(Datum datum){
+	public Datum voegDagToe(Datum datum){  // @param int instead of Datum?
 			if (datum.maand == 2){
 				if(datum.dag == 28){
 					if(isLeapYear(datum)== true){
