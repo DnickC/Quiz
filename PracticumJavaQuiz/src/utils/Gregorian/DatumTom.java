@@ -167,7 +167,7 @@ public class DatumTom {
 	}
 	
 	public static boolean isSchrikkelJaar(int jaar) {
-		return ((jaar %4==0&&jaar%100!=0)||jaar%400==0)
+		return ((jaar %4==0&&jaar%100!=0)||jaar%400==0);
 	}
 	}
 	
