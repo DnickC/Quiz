@@ -2,10 +2,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz {
+public class Quiz implements Comparable<Quiz>, Cloneable {
 	
-	public enum QuizStatus
-	{
+	public enum QuizStatus {
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
 	//extra info meegeven met enum voor af te toetsen later?
@@ -16,16 +15,12 @@ public class Quiz {
 	private boolean isTest = false;
 	private boolean isUniekeDeelname = false;
 	private QuizStatus quizStatus = null;
-<<<<<<< HEAD
 	//private QuizCatalogus quizCatalog;
-	private Leraar auteur;
+	//private Leraar auteur; // beter in quizcatalogus?
 	
-	public Quiz() // deze constructor kan ook default leeg zijn nee? dubbele code or my bad
-=======
-	
-	public Quiz()
->>>>>>> origin/master
-	{
+	//public Quiz() // deze constructor kan ook default leeg zijn nee? dubbele code or my bad
+
+	public Quiz() {
 		this.onderwerp = null;
 		this.leerjaar = 0;
 		this.isTest = false;
@@ -75,6 +70,10 @@ public class Quiz {
 		return leerjaar;
 	}
 	
+	public QuizStatus getStatus () {
+		return this.quizStatus;
+	}
+	
 	public void setIsTest(boolean isTest)
 	{
 		this.isTest = isTest;
@@ -85,18 +84,15 @@ public class Quiz {
 		return isTest;
 	}
 	
-<<<<<<< HEAD
-	
-=======
 	public boolean testOnderwerp(String onderwerp)
 	{
 		int telGelijkeWoorden = 0;
-		String []ondArray = onderwerp.split(" ");
-		for(int i = 0; i<ondArray.length; i++)
+		String [] ondArray = onderwerp.split(" ");
+		for(int i = 0; i < ondArray.length; i++)
 		{
 			String bestaandOnderwerp = onderwerpen.get(i);
 			String []bestaandOndArray = bestaandOnderwerp.split(" ");
-			for(int j = 0; j<bestaandOndArray.length; j++);
+			for(int j = 0; j < bestaandOndArray.length; j++);
 			{
 				if (bestaandOndArray[j].toString() == ondArray[i].toString())
 				{
@@ -116,6 +112,28 @@ public class Quiz {
 			return true;
 		}
 	}
->>>>>>> origin/master
+
+	@Override
+	public boolean equals (Object object){
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+	
+	@Override
+	public int compareTo(Quiz o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

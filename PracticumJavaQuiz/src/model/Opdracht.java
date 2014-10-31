@@ -3,20 +3,18 @@ package model;
 //import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
+
 import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
-public class Opdracht {
-	
-	public enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
+public class Opdracht implements Comparable<Opdracht>, Cloneable {
 	
 	private String vraag = null;
 	private String juisteAntwoord = null;
 	private int maxAantalPogingen = 1;
 	private List<String> antwoordHints = new ArrayList<String>();
 	private int maxAntwoordTijd = 10000;
-	private int hintNummer = 0;
 	private OpdrachtCategorie opdrachtCategorie;
 	private Datum initalisatieDatum = new Datum();
 	
@@ -32,18 +30,6 @@ public class Opdracht {
 		this.opdrachtCategorie = null;
 	}
 	
-	public void setHint(String hint){
-		try{
-		String[] splitHint = hint.split("(/)|(-)|(;)");
-		while(hintNummer <= splitHint.length){
-		this.antwoordHints.add(splitHint[hintNummer]);
-		hintNummer++;
-		 }
-		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
-		}
-	}
-		
-		
 	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
 		this.setVraag(vraag);
 		this.setJuisteAntwoord(juisteAntwoord);
@@ -51,7 +37,6 @@ public class Opdracht {
 		this.setHint(hint);
 		this.setMaxAntwoordTijd(maxAntwoordTijd);
 		this.setOpdrachtCategorie(categorie);
-
 	}
 	
 	public void setVraag(String vraag){
@@ -99,15 +84,20 @@ public class Opdracht {
 		return opdrachtCategorie;
 	}
 	
-	/*public void setHint(String hint){
+	public void setHint(String hint){
 		
-		String[] splitHint = hint.split("(/)|(-)|(;)");
-		
-		for (int i = 0; i <= splitHint.length; i++) {
-			antwoordHints.add(splitHint[i]);
+		try {
+			String[] splitHint = hint.split("(/)|(-)|(;)");
+			
+			for (int i = 0; i <= splitHint.length; i++) {
+				antwoordHints.add(splitHint[i]);
+			}
+		} 
+		catch (Exception e) {
+			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
-	*/
+	
 	public String getHint(){
 		int hintNummer = 0;
 		
@@ -137,6 +127,7 @@ public class Opdracht {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 
+	@Override
 	public boolean equals(Object object){
 		if(object instanceof Opdracht && object == this) {
 			return true;
@@ -155,10 +146,11 @@ public class Opdracht {
 		return String.format("%S ( %S )", this.vraag, this.juisteAntwoord);
 	}
 // Wat moet er vergeleken worden zodat er bepaald wordt of het 0 / 1 of -1 is ? 
-
-	public int compareTo(Object object) {
-		if(object instanceof Opdracht){
-			Opdracht input = (Opdracht)object;
+	
+	@Override
+	public int compareTo(Opdracht opdracht) {
+		if(opdracht instanceof Opdracht){
+			Opdracht input = (Opdracht)opdracht;
 			if(this.vraag == input.vraag && this.juisteAntwoord == input.juisteAntwoord){
 				if(this.maxAantalPogingen < input.maxAantalPogingen || this.maxAntwoordTijd < input.maxAntwoordTijd){
 					return -1;
@@ -170,5 +162,4 @@ public class Opdracht {
 			
 		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
 	}
-
 }
