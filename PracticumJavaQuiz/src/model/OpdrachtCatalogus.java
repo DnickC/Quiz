@@ -27,9 +27,7 @@ public class OpdrachtCatalogus {
 	 * returns the wanted assignement based on a text input
 	 * @param String opdracht
 	 */
-	
-		
-	public Opdracht getOpdracht(String opdracht){
+		public Opdracht getOpdracht(String opdracht){
 		for(Opdracht p: opdrachten){
 			if(p.getVraag() == opdracht){
 				return p;

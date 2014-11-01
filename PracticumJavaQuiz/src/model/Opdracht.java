@@ -74,7 +74,6 @@ public class Opdracht {
 	 * @param String vraag
 	 */
 	
-	
 	public void setVraag(String vraag){
 		this.vraag = vraag;
 	}
@@ -226,7 +225,6 @@ public class Opdracht {
 	 * @param Object object
 	 * return boolean
 	 */
-	
 	
 	public boolean equals(Object object){
 		if(object instanceof Opdracht && object == this) {

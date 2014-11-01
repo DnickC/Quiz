@@ -4,10 +4,12 @@ import java.util.List;
 
 public class QuizOpdracht {
 	private String onderwerp;
+	private int maximumScore;
 	private List <QuizOpdracht> quizOpdrachten;
 	
-	public QuizOpdracht (String onderwerp){
+	public QuizOpdracht (String onderwerp, int maximumScore){
 		this.onderwerp = onderwerp;
+		this.maximumScore = maximumScore;
 		quizOpdrachten = new ArrayList<QuizOpdracht>();
 	}
 	
@@ -23,7 +25,7 @@ public class QuizOpdracht {
 		ArrayList <Opdracht> opdrachten = new ArrayList <Opdracht>();
 		int volgnummer = 0;
 		for (QuizOpdracht quizOpdracht :quizOpdrachten){
-			opdrachten.add(quizOpdracht.getOpdracht(volgnummer));
+			opdrachten.add(quizOpdracht.getOpdracht());
 			volgnummer ++;
 		}
 		return opdrachten;
