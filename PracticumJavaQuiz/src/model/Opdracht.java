@@ -32,6 +32,12 @@ public class Opdracht {
 		this.opdrachtCategorie = null;
 	}
 	
+	/**
+	 * Add's a Hint to the hintlist  
+	 * @param String hint
+	 * @throws IllegalArgumentException
+	 */
+	
 	public void setHint(String hint){
 		try{
 		String[] splitHint = hint.split("(/)|(-)|(;)");
@@ -42,7 +48,16 @@ public class Opdracht {
 		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
 		}
 	}
-		
+	
+	/**
+	 * Assignement constructor 
+	 * @param String vraag
+	 * @param String juisteAntwoord
+	 * @param int maxAantalPogingen
+	 * @param int maxAntwoordTijd
+	 * @param String hint
+	 * @param OpdrachtCategorie categorie
+	 */
 		
 	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
 		this.setVraag(vraag);
@@ -54,21 +69,48 @@ public class Opdracht {
 
 	}
 	
+	/**
+	 * Sets the question
+	 * @param String vraag
+	 */
+	
+	
 	public void setVraag(String vraag){
 		this.vraag = vraag;
 	}
+	
+	/**
+	 * returns the question 
+	 * @return String
+	 */
 	
 	public String getVraag(){
 		return vraag;
 	}
 	
+	/**
+	 * Sets the answer to the question
+	 * @param String antwoord
+	 */
+	
 	public void setJuisteAntwoord(String antwoord){
 		this.juisteAntwoord = antwoord;
 	}
 	
+	/**
+	 * returns the answer to the question 
+	 * @return String
+	 */
+	
 	public String getJuisteAntwoord(){
 		return juisteAntwoord;
 	}
+	
+	/**
+	 * Sets maximum amount of attempts to answer the question 
+	 * @param int aantal
+	 * @throws NumberFormatException
+	 */
 	
 	public void setMaxAantalPogingen(int aantal){
 		if(aantal >= 1 && aantal <= 10) {
@@ -79,21 +121,46 @@ public class Opdracht {
 		}
 	}
 	
+	/**
+	 * returns the maximum amount of attempts  
+	 * @return int
+	 */
+	
 	public int getMaxAantalPogingen(){
 		return maxAantalPogingen;
 	}
+	
+	/**
+	 * Sets the max amount of time to answer the question  
+	 * @param int aantalTijd
+	 */
 	
 	public void setMaxAntwoordTijd(int aantalTijd){
 		this.maxAntwoordTijd = aantalTijd;
 	}
 	
+	/**
+	 * returns the maximum time to answer the question 
+	 * @return int
+	 */
+	
 	public int getMaxAntwoordTijd(){
 		return maxAntwoordTijd;
 	}
 	
+	/**
+	 * Sets the categorie of the question 
+	 * @param OpdrachtCategorie opdrachtCate
+	 */
+	
 	public void setOpdrachtCategorie(OpdrachtCategorie opdrachtCate){
 		this.opdrachtCategorie = opdrachtCate;
 	}
+	
+	/**
+	 * returns the categorie of the question  
+	 * @return OpdrachtCategorie
+	 */
 	
 	public OpdrachtCategorie getOpdrachtCategorie(){
 		return opdrachtCategorie;
@@ -108,6 +175,12 @@ public class Opdracht {
 		}
 	}
 	*/
+	
+	/**
+	 * gets a hint from the list. Each time a different one.
+	 * @return String
+	 */
+	
 	public String getHint(){
 		int hintNummer = 0;
 		
@@ -119,6 +192,12 @@ public class Opdracht {
 			return "Geen hints meer beschikbaar";
 		}
 	}
+	
+	/**
+	 * Checks if the answer is correct
+	 * @param String antwoord
+	 * @return Boolean  
+	 */
 
 	public Boolean isJuisteAntwoord(String antwoord) {
 		if (this.juisteAntwoord == antwoord) {
@@ -129,6 +208,11 @@ public class Opdracht {
 		}
 	}
 	
+	/**
+	 * Update's the assignemnt list. This attaches the Opdracht to Quiz. 
+	 * @param QuizOpdracht quizOpdracht
+	 */
+	
     protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
@@ -137,6 +221,13 @@ public class Opdracht {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 
+	/**
+	 * Checks if the given object equals the opdracht
+	 * @param Object object
+	 * return boolean
+	 */
+	
+	
 	public boolean equals(Object object){
 		if(object instanceof Opdracht && object == this) {
 			return true;
@@ -150,12 +241,23 @@ public class Opdracht {
 		return 0;
 	}
 	
-	@Override
+	/**
+	 * returns the question and answer in text format 
+	 * @return String
+	 */
+	
 	public String toString() {
 		return String.format("%S ( %S )", this.vraag, this.juisteAntwoord);
 	}
 // Wat moet er vergeleken worden zodat er bepaald wordt of het 0 / 1 of -1 is ? 
-
+	
+	/**
+	 * Checks if the given Object (Assignment) has a better result then this one.  Returns -1 if the given object has better result. 1 if they are equals. 0 if it's worse. 
+	 * @param Object
+	 * @return int
+	 * @throws IllegalArgumentException
+	 */
+	
 	public int compareTo(Object object) {
 		if(object instanceof Opdracht){
 			Opdracht input = (Opdracht)object;
