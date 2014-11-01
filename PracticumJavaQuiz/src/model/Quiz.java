@@ -16,21 +16,21 @@ public class Quiz {
 	private boolean isTest = false;
 	private boolean isUniekeDeelname = false;
 	private QuizStatus quizStatus = null;
-<<<<<<< HEAD
-	//private QuizCatalogus quizCatalog;
+	
+	private QuizCatalogus quizCatalog;
 	private Leraar auteur;
 	
-	public Quiz() // deze constructor kan ook default leeg zijn nee? dubbele code or my bad
-=======
+	
 	
 	public Quiz()
->>>>>>> origin/master
-	{
+
+	{/*dubbele code?
 		this.onderwerp = null;
 		this.leerjaar = 0;
 		this.isTest = false;
 		this.isUniekeDeelname = false;
 		this.quizStatus = null;
+		*/
 	}
 	
 	public Quiz(String onderwerp, int leerjaar, boolean isTest) throws Exception
@@ -38,6 +38,7 @@ public class Quiz {
 		this.setOnderwerp(onderwerp);
 		this.setLeerjaar(leerjaar);
 		this.setIsTest(isTest);
+		
 	}
 	
 	public void setOnderwerp(String onderwerp) throws Exception
@@ -85,9 +86,6 @@ public class Quiz {
 		return isTest;
 	}
 	
-<<<<<<< HEAD
-	
-=======
 	public boolean testOnderwerp(String onderwerp)
 	{
 		int telGelijkeWoorden = 0;
@@ -116,6 +114,9 @@ public class Quiz {
 			return true;
 		}
 	}
->>>>>>> origin/master
+	
+	
+	
+
 	
 }
