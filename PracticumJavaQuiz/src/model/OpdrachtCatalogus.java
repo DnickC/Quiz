@@ -3,30 +3,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OpdrachtCatalogus 
-{
+public class OpdrachtCatalogus {
 	private List<Opdracht> opdrachten = new ArrayList<>();
 	private String catalogusNaam = null;
 	
 	
 	
-	public OpdrachtCatalogus(String catalogusnaam)
-	{
+	public OpdrachtCatalogus(String catalogusnaam){
 		this.catalogusNaam = catalogusnaam;
 	}
 	
-	public void addOpdracht(Opdracht opdracht)
-	{
-		if(opdracht.getVraag() != null) {
-			opdrachten.add(opdracht);
-		}
-		else {
-			throw new NullPointerException("Geen vraag");
-		}
+	public void addOpdracht(Opdracht opdracht){
+		if(opdracht.getVraag() != null){
+		opdrachten.add(opdracht);
+		}else{throw new NullPointerException("Geen vraag");}
 	}
 	
-	public Opdracht getOpdracht(String opdracht)
-	{
+		
+	public Opdracht getOpdracht(String opdracht){
 		for(Opdracht p: opdrachten){
 			if(p.getVraag() == opdracht){
 				return p;
@@ -35,8 +29,7 @@ public class OpdrachtCatalogus
 		throw new IllegalArgumentException("Opdracht niet gevonden");
 	}
 	
-	public Opdracht getOpdracht(Opdracht opdracht)
-	{
+	public Opdracht getOpdracht(Opdracht opdracht){
 		for(Opdracht p: opdrachten){
 			if(p == opdracht){
 				return p;
@@ -45,18 +38,15 @@ public class OpdrachtCatalogus
 		throw new IllegalArgumentException("Opdracht niet gevonden");
 	}
 	
-	public void deleteOpdracht(Opdracht opdracht)
-	{
+	public void deleteOpdracht(Opdracht opdracht){
 		opdrachten.remove(opdracht);
 	}
 
-	public List<Opdracht> getCatalogus()
-	{
+	public List<Opdracht> getCatalogus(){
 		return opdrachten;
 	}
 	
-	public String getCatalogusToString()
-	{
+	public String getCatalogusToString(){
 		String uitput= null;
 		for(Opdracht o : opdrachten){
 			uitput += o.toString() + "\n";
@@ -64,8 +54,7 @@ public class OpdrachtCatalogus
 		return uitput;
 	}
 	
-	public String toString()
-	{
+	public String toString(){
 		return catalogusNaam;
 	}
 	
