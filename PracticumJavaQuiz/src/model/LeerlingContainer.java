@@ -1,16 +1,40 @@
 package model;
 
-import java.util.Arraylist;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LeerlingContainer {
 	
-	protected List<Leerling> leerlingen;
+	private List<Leerling> leerlingen;
+	
 	
 	public LeerlingContainer(){
 		
-		leerlingen = new Arraylist<Leerling>();
+		leerlingen = new ArrayList<Leerling>();
 	}
+	
+	public void toevoegenLeerling(Leerling leerling){
+		if(leerling != null){
+			leerlingen.add(leerling);
+		}
+		else
+		{
+			throw new NullPointerException("fout");
+		}
+		
+	}
+	
+	public void verwijderLeerling(Leerling leerling){
+		if ( leerling != null){
+			leerlingen.remove(leerling);
+		}
+		else
+		{
+			throw new NullPointerException("fout");
+		}
+	}
+	
+	
 	
 
 }

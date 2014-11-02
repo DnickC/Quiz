@@ -13,7 +13,7 @@ public class QuizCatalogus {
 	 */
 	
 	public QuizCatalogus(String naam){
-		this.catalogusNaam = naam;
+		this.setCatalogusNaam(naam);
 	}
 
 	/** 

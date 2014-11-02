@@ -2,30 +2,28 @@ package model;
 
 public enum Leraar {
 	
-	LeraarA("Michal","Mytkowski"),
-	LeraarB("Andy","Poron"),
-	LeraarC("Jens","Van Kets"),
-	LeraarD("Dominique","Calcoen"),
-	LeraarE("Tom","");
 	
-	private final String voornaam;
+	LeraarA("Michal Mytkowski"),
+	LeraarB("Andy Poron"),
+	LeraarC("Jens Van Kets"),
+	LeraarD("Dominique Calcoen"),
+	LeraarE("Tom");
+	
 	private final String naam;
 	
-	Leraar(String vn, String n){
-		voornaam = vn;
-		naam = n;
-	}
 	
-	public String getVoornaam(){
-		return voornaam;
+	private Leraar(String naam){
+		this.naam = naam;
 	}
 	
 	public String getNaam(){
 		return naam;
 	}
-	
+
 	public String toString(){
-		return this.voornaam + " " + this.naam;
+		return this.naam;
 	}
 
 }
+
+

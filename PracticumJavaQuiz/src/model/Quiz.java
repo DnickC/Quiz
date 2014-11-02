@@ -16,7 +16,7 @@ public class Quiz {
 	private boolean isTest = false;
 	private boolean isUniekeDeelname = false;
 	private QuizStatus quizStatus = null;
-	
+	private QuizDeelname quizDeelname;
 	private QuizCatalogus quizCatalog;
 	private Leraar auteur;
 	
@@ -33,15 +33,38 @@ public class Quiz {
 		*/
 	}
 	
-	public Quiz(String onderwerp, int leerjaar, boolean isTest) throws Exception
+	public Quiz(String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
 		this.setOnderwerp(onderwerp);
 		this.setLeerjaar(leerjaar);
 		this.setIsTest(isTest);
+		this.setIsUniekeDeelname(uniekeDeelname);
+		this.setAuteur(leraar);
+		this.setQuizStatus(status);
 		
 	}
 	
-	public void setOnderwerp(String onderwerp) throws Exception
+
+	private void setQuizStatus(QuizStatus status) {
+		if(status.equals(QuizStatus.values())){
+			this.quizStatus = status;
+		}
+		
+		
+	}
+
+	private void setAuteur(Leraar leraar) {
+		
+		this.auteur = leraar;
+		
+	}
+
+	private void setIsUniekeDeelname(boolean uniekeDeelname) {
+		
+		this.isUniekeDeelname = uniekeDeelname;
+	}
+
+	public void setOnderwerp(String onderwerp)
 	{
 		if (testOnderwerp(onderwerp) == true)
 		{
@@ -49,7 +72,7 @@ public class Quiz {
 		}
 		else
 		{
-			throw new Exception("Ingegeven onderwerp is niet geldig!");
+			throw new IllegalArgumentException("Ingegeven onderwerp is niet geldig!");
 		}
 		// check onderwerp toevoegen
 	}
@@ -78,6 +101,10 @@ public class Quiz {
 	
 	public void setIsTest(boolean isTest)
 	{
+		if(isTest)
+		{
+			quizDeelname.getUniekeDeelname(); //dit moet nog gebrainstormd worden.
+		}
 		this.isTest = isTest;
 	}
 	
