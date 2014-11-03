@@ -129,6 +129,7 @@ public class Quiz {
 	
 	public boolean testOnderwerp(String onderwerp)
 	{
+		
 		int telGelijkeWoorden = 0;
 		String []ondArray = onderwerp.split(" ");
 		for(int i = 0; i<ondArray.length; i++)
@@ -143,19 +144,28 @@ public class Quiz {
 				}
 			}
 		}
-		/* kleine testing 
-		 * String [] bestaandeOnderwerpen = {"Hoofdsteden","Amerika","europa","Azie"};
+		/* String[] bestaandePerIndex = null;
+		String [] bestaandeOnderwerpen = {"Hoofdsteden","Hoofdsteden van Amerika","Amerika","europa hoofdsteden","Azie"};
+		String [] lidwoorden ={"de","het","een","in","met","van"};
 		
-		
-		 String Str = new String("Hoofdsteden van Europa");
+		 String Str = new String("Hoofdsteden");
 
+		 
 		 String [] nieuwOnderwerp = Str.split(" ", 0);
+		 
 		 for(int i = 0; i < bestaandeOnderwerpen.length; i++){
-			 for(int j = 0; j< nieuwOnderwerp.length; j++){
-				 if(bestaandeOnderwerpen[i].equals(nieuwOnderwerp[j])){
-					 System.out.println("Trefwoorden gevonden: " + nieuwOnderwerp[j]);
+			 bestaandePerIndex = bestaandeOnderwerpen[i].split(" ", 0);
+			 
+			 for(int k = 0; k < bestaandePerIndex.length; k++){
+				 for(int j = 0; j< nieuwOnderwerp.length; j++){
+					 if(bestaandePerIndex[k].toLowerCase().equals(nieuwOnderwerp[j].toLowerCase())){
+						 System.out.println("Trefwoorden gevonden: " + nieuwOnderwerp[j]);
+						 
+					 }
+					 
 				 }
 			 }
+			 
 		 }
 		 */
 		//klopt iets niet om item met index "j" uit bestaandOndArray te halen
