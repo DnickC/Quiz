@@ -143,6 +143,21 @@ public class Quiz {
 				}
 			}
 		}
+		/* kleine testing 
+		 * String [] bestaandeOnderwerpen = {"Hoofdsteden","Amerika","europa","Azie"};
+		
+		
+		 String Str = new String("Hoofdsteden van Europa");
+
+		 String [] nieuwOnderwerp = Str.split(" ", 0);
+		 for(int i = 0; i < bestaandeOnderwerpen.length; i++){
+			 for(int j = 0; j< nieuwOnderwerp.length; j++){
+				 if(bestaandeOnderwerpen[i].equals(nieuwOnderwerp[j])){
+					 System.out.println("Trefwoorden gevonden: " + nieuwOnderwerp[j]);
+				 }
+			 }
+		 }
+		 */
 		//klopt iets niet om item met index "j" uit bestaandOndArray te halen
 		
 		//hoeveel woorden gelijk geeft ongeldig?
