@@ -33,6 +33,8 @@ public class Quiz {
 		*/
 	}
 	
+	// Wat als quizstatus of leraar als tekst word ingegeven? 
+	
 	public Quiz(String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
 		this.setOnderwerp(onderwerp);
@@ -45,7 +47,7 @@ public class Quiz {
 	}
 	
 
-	private void setQuizStatus(QuizStatus status) {
+	public void setQuizStatus(QuizStatus status) {
 		if(status.equals(QuizStatus.values())){
 			this.quizStatus = status;
 		}
@@ -53,13 +55,13 @@ public class Quiz {
 		
 	}
 
-	private void setAuteur(Leraar leraar) {
+	public void setAuteur(Leraar leraar) {
 		
 		this.auteur = leraar;
 		
 	}
 
-	private void setIsUniekeDeelname(boolean uniekeDeelname) {
+	public void setIsUniekeDeelname(boolean uniekeDeelname) {
 		
 		this.isUniekeDeelname = uniekeDeelname;
 	}
@@ -77,9 +79,21 @@ public class Quiz {
 		// check onderwerp toevoegen
 	}
 	
+	public boolean getIsUniekeDeelname(){
+		return this.isUniekeDeelname;
+	}
+	
 	public String getOnderwerp()
 	{
 		return onderwerp;
+	}
+	
+	public Leraar getLeraar(){
+		return this.auteur;
+	}
+	
+	public QuizStatus getQuizStatus(){
+		return this.quizStatus;
 	}
 	
 	public void setLeerjaar(int leerjaar)
