@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Quiz.QuizStatus;
+
 public class QuizCatalogus {
 	private String catalogusNaam = null;
 	private ArrayList<Quiz> quizzes = new ArrayList<>();
@@ -74,6 +76,26 @@ public class QuizCatalogus {
 			if(q == quiz){
 				quizzes.remove(quiz);
 			}else{
+				throw new NullPointerException("Quiz niet gevonden");
+			}
+		}
+	}
+	/**
+	 * Alters a quiz from the QuizCatalogue based on a given Quiz
+	 * @param Quiz quiz
+	 * @throw NullPointerException
+	 */
+	
+	public void alterQuiz(Quiz quiz)
+	{
+		for(Quiz q : quizzes)
+		{
+			if(q == quiz && q.getQuizStatus() == QuizStatus.inConstructie)
+			{
+				
+			}
+			else
+			{
 				throw new NullPointerException("Quiz niet gevonden");
 			}
 		}
