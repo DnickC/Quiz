@@ -11,6 +11,7 @@ public class Opdracht {
 	
 	public enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
 	
+	private int opdrachtID = 0;
 	private String vraag = null;
 	private String juisteAntwoord = null;
 	private int maxAantalPogingen = 1;
@@ -32,22 +33,6 @@ public class Opdracht {
 		this.opdrachtCategorie = null;
 	}
 	
-	/**
-	 * Add's a Hint to the hintlist  
-	 * @param String hint
-	 * @throws IllegalArgumentException
-	 */
-	
-	public void setHint(String hint){
-		try{
-		String[] splitHint = hint.split("(/)|(-)|(;)");
-		while(hintNummer <= splitHint.length){
-		this.antwoordHints.add(splitHint[hintNummer]);
-		hintNummer++;
-		 }
-		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
-		}
-	}
 	
 	/**
 	 * Assignement constructor 
@@ -67,6 +52,41 @@ public class Opdracht {
 		this.setMaxAntwoordTijd(maxAntwoordTijd);
 		this.setOpdrachtCategorie(categorie);
 
+	}
+	
+	/**
+	 * Add's a Hint to the hintlist  
+	 * @param String hint
+	 * @throws IllegalArgumentException
+	 */
+	
+	public void setHint(String hint){
+		try{
+		String[] splitHint = hint.split("(/)|(-)|(;)");
+		while(hintNummer <= splitHint.length){
+		this.antwoordHints.add(splitHint[hintNummer]);
+		hintNummer++;
+		 }
+		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Sets the ID of the opdracht
+	 * @param int id
+	 */
+	
+	public void setID(int id){
+		this.opdrachtID = id;
+	}
+	
+	/**
+	 * Returns the ID of the opdracht
+	 * @return int opdrachtID
+	 */
+	
+	public int getID(){
+		return this.opdrachtID;
 	}
 	
 	/**
@@ -154,6 +174,22 @@ public class Opdracht {
 	
 	public void setOpdrachtCategorie(OpdrachtCategorie opdrachtCate){
 		this.opdrachtCategorie = opdrachtCate;
+	}
+	
+	/**
+	 * Sets the categorie of the question 
+	 * @param String opdrachtCate
+	 * @throws IllegalArgumentException("Categorie niet gevonden");
+	 */
+	
+	public void setOpdrachtCategorie(String opdrachtCate){
+		for(OpdrachtCategorie u: OpdrachtCategorie.values()){
+			if(opdrachtCate == u.toString()){
+				this.opdrachtCategorie = u;
+				return;
+			}
+		}
+		throw new IllegalArgumentException("Categorie niet gevonden");
 	}
 	
 	/**
