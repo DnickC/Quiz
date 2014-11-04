@@ -182,6 +182,8 @@ public class Quiz {
 	}
 	
 	
+	// CompareTO - EqualTo - HashCode (-> moet ik ook nog hebben ) 
+	
 	
 
 	

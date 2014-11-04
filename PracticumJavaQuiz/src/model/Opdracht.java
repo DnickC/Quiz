@@ -3,17 +3,17 @@ package model;
 //import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
+
 import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
-public class Opdracht {
+abstract class Opdracht implements Comparable, Cloneable {
 	
 	public enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
 	
 	private int opdrachtID = 0;
 	private String vraag = null;
-	private String juisteAntwoord = null;
 	private int maxAantalPogingen = 1;
 	private List<String> antwoordHints = new ArrayList<String>();
 	private int maxAntwoordTijd = 10000;
@@ -26,7 +26,6 @@ public class Opdracht {
 	
 	public Opdracht(){
 		this.vraag = null;
-		this.juisteAntwoord = null;
 		this.maxAantalPogingen = 0;
 		this.antwoordHints = null;
 		this.maxAntwoordTijd = 0;
@@ -37,16 +36,14 @@ public class Opdracht {
 	/**
 	 * Assignement constructor 
 	 * @param String vraag
-	 * @param String juisteAntwoord
 	 * @param int maxAantalPogingen
 	 * @param int maxAntwoordTijd
 	 * @param String hint
 	 * @param OpdrachtCategorie categorie
 	 */
 		
-	public Opdracht(String vraag, String juisteAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
+	public Opdracht(String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
 		this.setVraag(vraag);
-		this.setJuisteAntwoord(juisteAntwoord);
 		this.setMaxAantalPogingen(maxAantalPogingen);
 		this.setHint(hint);
 		this.setMaxAntwoordTijd(maxAntwoordTijd);
@@ -54,22 +51,6 @@ public class Opdracht {
 
 	}
 	
-	/**
-	 * Add's a Hint to the hintlist  
-	 * @param String hint
-	 * @throws IllegalArgumentException
-	 */
-	
-	public void setHint(String hint){
-		try{
-		String[] splitHint = hint.split("(/)|(-)|(;)");
-		while(hintNummer <= splitHint.length){
-		this.antwoordHints.add(splitHint[hintNummer]);
-		hintNummer++;
-		 }
-		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
-		}
-	}
 	
 	/**
 	 * Sets the ID of the opdracht
@@ -107,23 +88,6 @@ public class Opdracht {
 		return vraag;
 	}
 	
-	/**
-	 * Sets the answer to the question
-	 * @param String antwoord
-	 */
-	
-	public void setJuisteAntwoord(String antwoord){
-		this.juisteAntwoord = antwoord;
-	}
-	
-	/**
-	 * returns the answer to the question 
-	 * @return String
-	 */
-	
-	public String getJuisteAntwoord(){
-		return juisteAntwoord;
-	}
 	
 	/**
 	 * Sets maximum amount of attempts to answer the question 
@@ -212,6 +176,23 @@ public class Opdracht {
 	*/
 	
 	/**
+	 * Add's a Hint to the hintlist  
+	 * @param String hint
+	 * @throws IllegalArgumentException
+	 */
+
+	public void setHint(String hint){
+		try{
+		String[] splitHint = hint.split("(/)|(-)|(;)");
+		while(hintNummer <= splitHint.length){
+		this.antwoordHints.add(splitHint[hintNummer]);
+		hintNummer++;
+		 }
+		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+	
+	/**
 	 * gets a hint from the list. Each time a different one.
 	 * @return String
 	 */
@@ -228,20 +209,6 @@ public class Opdracht {
 		}
 	}
 	
-	/**
-	 * Checks if the answer is correct
-	 * @param String antwoord
-	 * @return Boolean  
-	 */
-
-	public Boolean isJuisteAntwoord(String antwoord) {
-		if (this.juisteAntwoord == antwoord) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 	
 	/**
 	 * Update's the assignemnt list. This attaches the Opdracht to Quiz. 
@@ -256,6 +223,9 @@ public class Opdracht {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 
+	abstract boolean isJuisteAntwoord(String antwoord);
+	
+	
 	/**
 	 * Checks if the given object equals the opdracht
 	 * @param Object object
@@ -270,20 +240,6 @@ public class Opdracht {
 		}	
 	}
 	
-	@Override
-	public int hashCode() {
-		return 0;
-	}
-	
-	/**
-	 * returns the question and answer in text format 
-	 * @return String
-	 */
-	
-	public String toString() {
-		return String.format("%S ( %S )", this.vraag, this.juisteAntwoord);
-	}
-// Wat moet er vergeleken worden zodat er bepaald wordt of het 0 / 1 of -1 is ? 
 	
 	/**
 	 * Checks if the given Object (Assignment) has a better result then this one.  Returns -1 if the given object has better result. 1 if they are equals. 0 if it's worse. 
@@ -295,7 +251,7 @@ public class Opdracht {
 	public int compareTo(Object object) {
 		if(object instanceof Opdracht){
 			Opdracht input = (Opdracht)object;
-			if(this.vraag == input.vraag && this.juisteAntwoord == input.juisteAntwoord){
+			if(this.vraag == input.vraag ){
 				if(this.maxAantalPogingen < input.maxAantalPogingen || this.maxAntwoordTijd < input.maxAntwoordTijd){
 					return -1;
 				}
@@ -307,4 +263,12 @@ public class Opdracht {
 		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
 	}
 
+	
+	/**
+	 * returns the ID of opdracht
+	 */
+	
+	public int hashCode(){
+		return this.opdrachtID;
+	}
 }
