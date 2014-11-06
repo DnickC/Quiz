@@ -10,8 +10,6 @@ import utils.FromScratch.*;
 
 abstract class Opdracht implements Comparable, Cloneable {
 	
-	public enum OpdrachtCategorie { Aardrijkskunde, Nederlands, Wetenschappen , Wiskunde };
-	
 	private int opdrachtID = 0;
 	private String vraag = null;
 	private int maxAantalPogingen = 1;

@@ -1,6 +1,6 @@
 package model;
 
-import model.Opdracht.OpdrachtCategorie;
+import model.OpdrachtCategorie;
 
 public class Standaard_Vraag extends Opdracht {
 	private String juistAntwoord = null;

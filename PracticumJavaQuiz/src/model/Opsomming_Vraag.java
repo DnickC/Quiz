@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import model.Opdracht.OpdrachtCategorie;
+import model.OpdrachtCategorie;
 
 public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 	

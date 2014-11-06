@@ -5,7 +5,7 @@ package model.test;
 import java.util.List;
 
 import model.Opdracht;
-import model.Opdracht.OpdrachtCategorie;
+import model.OpdrachtCategorie;
 
 import org.junit.Test;
 import org.junit.Before;
