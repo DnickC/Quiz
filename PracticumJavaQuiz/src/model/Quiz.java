@@ -9,7 +9,6 @@ public class Quiz {
 	{
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
-	//extra info meegeven met enum voor af te toetsen later?
 	
 	private String onderwerp = null;
 	private List<String> onderwerpen = new ArrayList<>();
@@ -176,8 +175,62 @@ public class Quiz {
 		return this.getOnderwerp().compareTo(quiz.getOnderwerp());
 	}
 	
+	public boolean equalTo(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quiz nieuw = (Quiz) obj;
+		if (auteur != nieuw.auteur)
+			return false;
+		if (isTest != nieuw.isTest)
+			return false;
+		if (isUniekeDeelname != nieuw.isUniekeDeelname)
+			return false;
+		if (leerjaar != nieuw.leerjaar)
+			return false;
+		if (onderwerp == null)
+		{
+			if(nieuw.onderwerp != null)
+				return false;
+		}
+		else if (!onderwerp.equals(nieuw.onderwerp))
+			return false;
+
+		if (quizOpdrachten == null)
+		{
+			if (nieuw.quizOpdrachten != null)
+				return false;
+		}
+		else if (!quizOpdrachten.equals(nieuw.quizOpdrachten))
+				return false;
+		
+		if (quizStatus == null)
+		{
+			if (nieuw.quizStatus != null)
+				return false;
+		}
+		else if (!quizStatus.equals(nieuw.quizStatus))
+			return false;
+		return true;
+	}
 	
-	
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isTest ? 1231 : 1237);
+		result = prime * result + (isUniekeDeelname ? 1231 : 1237);
+		result = prime * result + ((leerjaar == 0) ? 0 : leerjaar);
+		result = prime * result + ((auteur == null) ? 0 : auteur.hashCode());
+		result = prime * result + ((onderwerp == null) ? 0 : onderwerp.hashCode());
+		result = prime * result + ((quizOpdrachten == null) ? 0 : quizOpdrachten.hashCode());
+		result = prime * result + ((quizStatus == null) ? 0 : quizStatus.hashCode());		
+		return result;
+	}
 	
 	// CompareTO - EqualTo - HashCode (-> moet ik ook nog hebben ) 
 	
