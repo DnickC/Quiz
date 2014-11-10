@@ -179,6 +179,24 @@ public class Quiz {
 		{
 			return true;
 		}
+		
+		onderwerp = onderwerp.toLowerCase();
+		onderwerp = onderwerp.replaceAll("de|een|het|met|van|in", "");
+		String[] woorden = onderwerp.split(" ");
+		boolean check = true;
+		for (String thema : onderwerpen){
+			check = true;
+			for (int i=0;i<woorden.length;i++) {
+				if (!thema.toLowerCase().contains(woorden[i].trim())){
+					check = false;
+					break;
+				}
+			}
+			if (check) {
+				return check;
+			}
+		}
+		return false;
 	}
 	
 	
