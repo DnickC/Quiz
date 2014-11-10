@@ -1,6 +1,7 @@
 package model;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Quiz {
 	
@@ -19,6 +20,7 @@ public class Quiz {
 	private QuizDeelname quizDeelname;
 	private QuizCatalogus quizCatalog;
 	private Leraar auteur;
+	private Set<QuizOpdracht> quizOpdrachten;
 	
 	
 	
@@ -37,22 +39,30 @@ public class Quiz {
 	
 	public Quiz(String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
-		this.setOnderwerp(onderwerp);
-		this.setLeerjaar(leerjaar);
-		this.setIsTest(isTest);
-		this.setIsUniekeDeelname(uniekeDeelname);
-		this.setAuteur(leraar);
-		this.setQuizStatus(status);
-		
+		try
+		{
+			this.setOnderwerp(onderwerp);
+			this.setLeerjaar(leerjaar);
+			this.setIsTest(isTest);
+			this.setIsUniekeDeelname(uniekeDeelname);
+			this.setAuteur(leraar);
+			this.setQuizStatus(status);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Aanmaken quiz niet gelukt.");
+		}
 	}
 	
-
-	public void setQuizStatus(QuizStatus status) {
+	public void setQuizStatus(QuizStatus status) throws NullPointerException
+	{
+		if (status == null)
+		{
+			throw new NullPointerException("Status mag niet null zijn");
+		}
 		if(status.equals(QuizStatus.values())){
 			this.quizStatus = status;
-		}
-		
-		
+		}		
 	}
 
 	public void setAuteur(Leraar leraar) {
@@ -66,9 +76,9 @@ public class Quiz {
 		this.isUniekeDeelname = uniekeDeelname;
 	}
 
-	public void setOnderwerp(String onderwerp)
+	public void setOnderwerp(String onderwerp) throws IllegalArgumentException
 	{
-		if (testOnderwerp(onderwerp) == true)
+		if (onderwerp!= null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
 		{
 			this.onderwerp = onderwerp;
 		}
@@ -129,57 +139,6 @@ public class Quiz {
 	
 	public boolean testOnderwerp(String onderwerp)
 	{
-		
-		int telGelijkeWoorden = 0;
-		String []ondArray = onderwerp.split(" ");
-		for(int i = 0; i<ondArray.length; i++)
-		{
-			String bestaandOnderwerp = onderwerpen.get(i);
-			String []bestaandOndArray = bestaandOnderwerp.split(" ");
-			for(int j = 0; j<bestaandOndArray.length; j++);
-			{
-				if (bestaandOndArray[j].toString() == ondArray[i].toString())
-				{
-					telGelijkeWoorden++;
-				}
-			}
-		}
-		/* String[] bestaandePerIndex = null;
-		String [] bestaandeOnderwerpen = {"Hoofdsteden","Hoofdsteden van Amerika","Amerika","europa hoofdsteden","Azie"};
-		String [] lidwoorden ={"de","het","een","in","met","van"};
-		
-		 String Str = new String("Hoofdsteden");
-
-		 
-		 String [] nieuwOnderwerp = Str.split(" ", 0);
-		 
-		 for(int i = 0; i < bestaandeOnderwerpen.length; i++){
-			 bestaandePerIndex = bestaandeOnderwerpen[i].split(" ", 0);
-			 
-			 for(int k = 0; k < bestaandePerIndex.length; k++){
-				 for(int j = 0; j< nieuwOnderwerp.length; j++){
-					 if(bestaandePerIndex[k].toLowerCase().equals(nieuwOnderwerp[j].toLowerCase())){
-						 System.out.println("Trefwoorden gevonden: " + nieuwOnderwerp[j]);
-						 
-					 }
-					 
-				 }
-			 }
-			 
-		 }
-		 */
-		//klopt iets niet om item met index "j" uit bestaandOndArray te halen
-		
-		//hoeveel woorden gelijk geeft ongeldig?
-		if (telGelijkeWoorden > 2)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-		
 		onderwerp = onderwerp.toLowerCase();
 		onderwerp = onderwerp.replaceAll("de|een|het|met|van|in", "");
 		String[] woorden = onderwerp.split(" ");
@@ -198,6 +157,26 @@ public class Quiz {
 		}
 		return false;
 	}
+	
+	public String toString()
+	{
+		String quizOpdrachtenString = "";
+		for (QuizOpdracht qo : quizOpdrachten)
+		{
+			quizOpdrachtenString = quizOpdrachtenString + qo.toString();
+		}
+		
+		return "Quiz [Onderwerp= " + onderwerp + ", leerjaren= " + leerjaar + 
+				", isTest= " + isTest + ", isUniekeDeelnamen" + isUniekeDeelname + 
+				", auteur= " + auteur + ", quizStatus= " + getQuizStatus() + ", quizOpdrachten=" + quizOpdrachtenString + "]";
+	}
+	
+	public int compareTo(Quiz quiz)
+	{
+		return this.getOnderwerp().compareTo(quiz.getOnderwerp());
+	}
+	
+	
 	
 	
 	// CompareTO - EqualTo - HashCode (-> moet ik ook nog hebben ) 
