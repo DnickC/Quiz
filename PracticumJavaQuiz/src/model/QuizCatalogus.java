@@ -5,9 +5,18 @@ import java.util.List;
 
 import model.Quiz.QuizStatus;
 
-public class QuizCatalogus {
+public class QuizCatalogus implements Cloneable, Iterable<Quiz> {
+	
 	private String catalogusNaam = null;
-	private ArrayList<Quiz> quizzes = new ArrayList<>();
+	private ArrayList<Quiz> quizzes;
+	
+	/**
+	 * QuizCatalogus Constructor 
+	 * zonder parameter
+	 */
+	public QuizCatalogus(){
+		quizzes = new ArrayList<Quiz>();
+	}
 	
 	/**
 	 * Quizcatalogue Constructor
@@ -16,6 +25,7 @@ public class QuizCatalogus {
 	
 	public QuizCatalogus(String naam){
 		this.setCatalogusNaam(naam);
+		quizzes = new ArrayList<Quiz>();
 	}
 
 	/** 
@@ -59,9 +69,30 @@ public class QuizCatalogus {
 	 */
 	
 	public void addQuiz(Quiz quiz){
-		if(quiz.getOnderwerp() != null){
+			
+		if(quiz.getLeraar() == null ){ //hier moet ook nog controle worden uitgevoerd op datum !
+			throw new IllegalArgumentException("De leraar is niet gekozen");
+				}
+		
+		boolean nieuw = true;
+		for(Quiz q : quizzes){
+		if(q.testOnderwerp(quiz.getOnderwerp())){
+			nieuw = false;
+						
+		}
+		}
+		
+		if(nieuw){
 			quizzes.add(quiz);
-		}else{ throw new NullPointerException("Opgegeven quiz is leeg"); }
+		}
+		else{
+			throw new IllegalArgumentException("Onderwerp bestaat al!");
+		}
+			
+		 
+		
+		
+		
 	}
 	
 	/**
@@ -72,12 +103,12 @@ public class QuizCatalogus {
 	
 	public void deleteQuiz(Quiz quiz)
 	{
-		for(Quiz q : quizzes){
-			if(q == quiz){
+		if(quiz.getQuizStatus() == QuizStatus.afgewerkt || quiz.getQuizStatus() == QuizStatus.inConstructie){
 				quizzes.remove(quiz);
-			}else{
-				throw new NullPointerException("Quiz niet gevonden");
-			}
+		}
+		else
+		{
+			throw new IllegalArgumentException(String.format("Quiz kan niet verwijderd worden. De huidige status is: ´%s", quiz.getQuizStatus()));
 		}
 	}
 	/**
@@ -100,5 +131,27 @@ public class QuizCatalogus {
 			}
 		}
 	}
+	
+	public boolean equals(Object object){
+		if(this == object){
+			return true;
+		
+		}
+		if(object == null){
+			return false;
+		}
+		if(!(object instanceof QuizCatalogus)){
+			return false;
+		}
+		
+		return true;
+		
+		//nog bijschrijven
+	
+	}
+	
+	
+	
+	
 	
 }

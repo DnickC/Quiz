@@ -20,6 +20,7 @@ public enum Leraar {
 		return naam;
 	}
 
+	@Override
 	public String toString(){
 		return this.naam;
 	}
