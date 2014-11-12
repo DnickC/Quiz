@@ -8,7 +8,7 @@ import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
-abstract class Opdracht implements Comparable, Cloneable {
+public abstract class Opdracht implements Comparable, Cloneable {
 	
 	private int opdrachtID = 0;
 	private String vraag = null;
