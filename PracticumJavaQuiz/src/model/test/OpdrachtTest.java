@@ -77,13 +77,21 @@ public class OpdrachtTest {
 		assertEquals("Wiskunde", constrTest.getOpdrachtCategorie());
 	}
 	
+	@Test (expected = IllegalArgumentException.class)
+	public void test_setOpdrachtCategorie_String_NOK() {
+		constrTest.setOpdrachtCategorie("Programmeren");
+	}
+	
 	@Test
 	public void test_setHint() {
 		constrTest.setHint("Eiffeltoren");
 		assertEquals("Eiffeltoren", constrTest.getHint());
 	}
 	
-	
+	@Test (expected = NumberFormatException.class)
+	public void test_setMaxAantalPogingen_NOK() {
+		constrTest.setMaxAantalPogingen(15);
+	}
 	
 	@Test
 	public void test_Constructor_Object_Wordt_Aangemaakt() {
