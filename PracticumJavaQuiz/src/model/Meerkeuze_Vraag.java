@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	
-	
+	private int juisteAntwoord1 = -1;
+	private int juisteAntwoord2 = -1;
 	
 	/**
 	 * Meerkeuze constructor. Passes vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie to Opdracht constructor
@@ -15,9 +16,11 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	 * @param hint
 	 * @param categorie
 	 */
-	public Meerkeuze_Vraag(String vraag,String antwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
+	public Meerkeuze_Vraag(String vraag,String antwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
 		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
 		setAntwoorden(antwoorden);
+		this.juisteAntwoord1 = juisteAntwoord/10;
+		this.juisteAntwoord2 = juisteAntwoord%10;
 	}
 	/**
 	 * sets the different answers from 1 string to an Arraylist<String>
@@ -29,7 +32,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 			int count = 1;
 			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
 				while(count <= splitAntwoorden.length){
-					this.juisteAntwoorden.add(splitAntwoorden[count].toLowerCase());
+					this.antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;
 				}
 			}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
@@ -41,7 +44,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	 */
 	
 	public ArrayList<String> getAntwoordenToList(){
-		return juisteAntwoorden; 
+		return antwoordenLijst; 
 	}
 	
 	/**
@@ -51,7 +54,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	
 	public String getAntwoordenToString(){
 		String antwoorden = null;
-		for(String antw : juisteAntwoorden){
+		for(String antw : antwoordenLijst){
 			antwoorden += antw +"\n";
 		}
 		return antwoorden;
@@ -63,12 +66,14 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	 */
 	
 	public boolean isJuisteAntwoord(String antwoord){
-		for(String antw : juisteAntwoorden){
-			if(antw == antwoord.toLowerCase()){
+		try{		
+			int intAntwoord = Integer.parseInt(antwoord);
+			if( intAntwoord == this.juisteAntwoord1 || intAntwoord == this.juisteAntwoord2){
 				return true;
+			}else{
+				return false;
 			}
-		}
-		return false; 
+		}catch(Exception e){throw new IllegalArgumentException("Ongelide invoer");}
 	}
 	
 	/**
@@ -115,7 +120,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 
 	public boolean isValide(String antwoord){
 		try{
-			if(Integer.parseInt(antwoord) > 0 && Integer.parseInt(antwoord)<= juisteAntwoorden.size()){
+			if(Integer.parseInt(antwoord) > 0 && Integer.parseInt(antwoord)<= antwoordenLijst.size()){
 				return true;
 			}else{
 				return false;
@@ -131,4 +136,5 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	public String getValideTekst(){
 		return "Gebruik het nummer voor de keuze als antwoord op de vraag";
 	}
+
 }

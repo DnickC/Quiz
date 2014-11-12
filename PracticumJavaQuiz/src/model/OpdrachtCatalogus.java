@@ -1,16 +1,27 @@
 package model;
 import java.util.ArrayList;
+import utils.FromScratch.*;
 import java.util.List;
 
 
 public class OpdrachtCatalogus {
 	private List<Opdracht> opdrachten = new ArrayList<>();
 	private String catalogusNaam = null;
+	private Datum registratieDatum;
 	
 	
 	
 	public OpdrachtCatalogus(String catalogusnaam){
 		this.catalogusNaam = catalogusnaam;
+	}
+	
+	/**
+	 * sets the registration date for a catalogus. 
+	 * @param Datum registratiedatum
+	 */
+	
+	public void setDatum(Datum registratiedatum){
+		this.registratieDatum = registratiedatum;
 	}
 	
 	/**

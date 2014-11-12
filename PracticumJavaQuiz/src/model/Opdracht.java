@@ -24,7 +24,7 @@ abstract class Opdracht implements Comparable, Cloneable {
 	
 	public Opdracht(){
 		this.vraag = null;
-		this.maxAantalPogingen = 0;
+		this.maxAantalPogingen = 1;
 		this.antwoordHints = null;
 		this.maxAntwoordTijd = 0;
 		this.opdrachtCategorie = null;
@@ -221,7 +221,7 @@ abstract class Opdracht implements Comparable, Cloneable {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 
-	abstract boolean isJuisteAntwoord(String antwoord);
+	abstract boolean isJuisteAntwoord(String juisteAntwoord);
 	
 	
 	/**

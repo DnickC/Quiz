@@ -21,7 +21,7 @@ public class Quiz {
 	private Leraar auteur;
 	private Set<QuizOpdracht> quizOpdrachten;
 	
-	
+	///// Verwijder quiz toevoegen
 	
 	public Quiz()
 

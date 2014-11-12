@@ -21,7 +21,7 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 	public boolean isJuisteAntwoord(String antwoord){
 		String[] splits = antwoord.split(";");
 		int count = 0;
-		for(String ant : juisteAntwoorden){
+		for(String ant : antwoordenLijst){
 			if(ant != splits[count]){ return false;}
 			count++;
 		}
@@ -36,7 +36,7 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 	public boolean isValide(String antwoord){
 		if(antwoord.contains(";")){
 			String[] splitHetAntwoord = antwoord.split("(;)");
-			if(splitHetAntwoord.length == juisteAntwoorden.size()){
+			if(splitHetAntwoord.length == antwoordenLijst.size()){
 				return true;
 			}else{
 				return false;
@@ -64,14 +64,14 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 			int count = 0;
 			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
 				while(count <= splitAntwoorden.length){
-					juisteAntwoorden.add(splitAntwoorden[count].toLowerCase());
+					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;
 				}
 			}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
 	}
 	
 	public ArrayList<String> getAntwoordenToList(){
-		return juisteAntwoorden; 
+		return antwoordenLijst; 
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 	
 	public String getAntwoordenToString(){
 		String antwoorden = null;
-		for(String antw : juisteAntwoorden){
+		for(String antw : antwoordenLijst){
 			antwoorden += antw +"\n";
 		}
 		return antwoorden;
