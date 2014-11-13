@@ -32,7 +32,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 			int count = 1;
 			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
 				while(count <= splitAntwoorden.length){
-					this.antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
+					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;
 				}
 			}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}

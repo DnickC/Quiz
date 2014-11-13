@@ -21,11 +21,11 @@ public class QuizOpdracht {
 		quizOpdrachten.remove(quizOpdracht);
 	}
 	
-	public ArrayList <Opdracht> getOpdrachten(){
-		ArrayList <Opdracht> opdrachten = new ArrayList <Opdracht>();
+	public ArrayList <QuizOpdracht> getOpdrachten(){
+		ArrayList <QuizOpdracht> opdrachten = new ArrayList <QuizOpdracht>();
 		int volgnummer = 0;
 		for (QuizOpdracht quizOpdracht :quizOpdrachten){
-			opdrachten.add(quizOpdracht.getOpdracht());
+			opdrachten.add(quizOpdracht.getOpdracht(volgnummer));
 			volgnummer ++;
 		}
 		return opdrachten;
