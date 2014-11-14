@@ -13,7 +13,14 @@ public class Standaard_Vraag extends Opdracht {
 		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
 		this.juistAntwoord = juistAntwoord;
 	}
-		
+	
+	@Override
+	public Standaard_Vraag clone() throws CloneNotSupportedException{
+		Standaard_Vraag clon = new Standaard_Vraag(this.getVraag(),this.juistAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		return clon;
+	}
+	
+	
 	/**
 	 * Sets the answer to the question
 	 * @param String antwoord

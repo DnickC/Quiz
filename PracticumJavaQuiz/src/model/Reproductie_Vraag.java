@@ -32,6 +32,13 @@ public class Reproductie_Vraag extends Opdracht {
 		this.minAantalTrefwoorden = minAantalTrefwoorden;
 	}
 	
+	@Override
+	public Reproductie_Vraag clone() throws CloneNotSupportedException{
+		Reproductie_Vraag clon = new Reproductie_Vraag(this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		return clon;
+	}
+	
+	
 	/**
 	 * sets the must-write words of the question
 	 * @param string trefwoorden
@@ -70,7 +77,7 @@ public class Reproductie_Vraag extends Opdracht {
 	
 	/**
 	 * returns the keywords 
-	 * @return String trefwooord
+	 * @return String trefwoord
 	 */
 	
 	public String getTrefwoorden(){
@@ -79,6 +86,16 @@ public class Reproductie_Vraag extends Opdracht {
 			trefwoord += antw +"\n";
 		}
 		return trefwoord;
+	}
+	
+	/**
+	 * Return the whole list of keywords
+	 * @return ArrayList<String> trefwoorden
+	 */
+	
+	
+	public ArrayList<String> getTrefwoordenLijst(){
+		return this.trefwoorden;
 	}
 	
 	/**

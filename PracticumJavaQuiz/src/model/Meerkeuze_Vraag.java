@@ -22,6 +22,24 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 		this.juisteAntwoord1 = juisteAntwoord/10;
 		this.juisteAntwoord2 = juisteAntwoord%10;
 	}
+	
+	/**
+	 * Clones this Object
+	 * @param vraag
+	 * @param antwoorden
+	 * @param maxAantalPogingen
+	 * @param maxAntwoordTijd
+	 * @param hint
+	 * @param categorie
+	 * @return Meerkeuze_Vraag
+	 */
+	
+	@Override
+	public Meerkeuze_Vraag clone() throws CloneNotSupportedException{
+		Meerkeuze_Vraag clon = new Meerkeuze_Vraag(this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord1,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		return clon;
+	}
+	
 	/**
 	 * sets the different answers from 1 string to an Arraylist<String>
 	 * @param antwoorden

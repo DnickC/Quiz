@@ -12,6 +12,13 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 		setAntwoorden(antwoorden);
 	}
 	
+	// getAntwoordenToString() - zal deze wel juist opgedeeld worden door de setAntwoordenLijst ? 
+	
+	@Override
+	public Opsomming_Vraag clone() throws CloneNotSupportedException{
+		Opsomming_Vraag clon = new Opsomming_Vraag(this.getVraag(),this.getAntwoordenToString(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		return clon;
+	}
 	
 	/**
 	 * checks if the answers are in the right sequel
@@ -62,7 +69,7 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 	public void setAntwoorden(String antwoorden){
 		try{
 			int count = 0;
-			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
+			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)|( )");
 				while(count <= splitAntwoorden.length){
 					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;

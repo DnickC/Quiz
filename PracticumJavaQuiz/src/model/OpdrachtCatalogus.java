@@ -1,10 +1,13 @@
 package model;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import utils.FromScratch.*;
+
 import java.util.List;
 
 
-public class OpdrachtCatalogus {
+public class OpdrachtCatalogus implements Iterable {
 	private List<Opdracht> opdrachten = new ArrayList<>();
 	private String catalogusNaam = null;
 	private Datum registratieDatum;
@@ -13,6 +16,14 @@ public class OpdrachtCatalogus {
 	
 	public OpdrachtCatalogus(String catalogusnaam){
 		this.catalogusNaam = catalogusnaam;
+	}
+	
+	//Moet er geen constructor zijn waarin meteen alle opdrachten kan meegegeven worden ? 
+	
+	@Override
+	public OpdrachtCatalogus clone() throws CloneNotSupportedException{
+		OpdrachtCatalogus clone = new OpdrachtCatalogus(this.catalogusNaam);
+		return clone;
 	}
 	
 	/**
@@ -98,5 +109,7 @@ public class OpdrachtCatalogus {
 	public String toString(){
 		return catalogusNaam;
 	}
+
+
 	
 }
