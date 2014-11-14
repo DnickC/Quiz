@@ -1,25 +1,29 @@
 package persistentie;
 
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class DBHandler {
 	
-	private DBStrategy dBStrat;
+	private DBStrategy dBStrategy;
 	private static String initPath = "PracticumJavaQuiz//src//persistentie//init.txt";
-	
-	private void setdBStrategy (DBStrategy dBS) {
-		this.dBStrat = dBS;
-	}
-	
-	public DBStrategy getdBStrategy () {
-		return this.dBStrat;
-	}
-	
+
 	public DBHandler() {
-		
+		this.readInit();
+	}
+	
+	public void vulCatalogi() {
+		dBStrategy.vulCatalogi();
+	}
+	
+	public void saveCatalogi() {
+		dBStrategy.saveCatalogi();
+	}
+	
+	private void readInit() {
 		Scanner input = null;
 		String strategy = null;
 		
@@ -36,38 +40,27 @@ public class DBHandler {
 				input.close();
 			}
 			
-			switch (strategy) {
-			case "TXTTemplate":
-				this.dBStrat = new TXTTemplate();
-				break;
-				
-			case "SQLTemplate":
-				//this.dBStrat = new SQLTemplate();
-				break;
-				
-			default:
-				break;
-			}
+			dBStrategy.setStrategy(strategy);
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		} catch (IOException iOE) {
+			throw iOE;
+		} catch (InvalidPathException iPE) {
+			throw iPE;
+		} catch (IllegalStateException iSE) {
+			throw iSE;
+		} catch (Exception e) {
+			throw e;
 		}
-
-		this.setdBStrategy(dBStrat);
 	}
 	
-	public void vulCatalogi() {
-		dBStrat.vulCatalogi();
-	}
-	
-	public void saveCatalogi() {
-		dBStrat.saveCatalogi();
+	private void writeInit() {
+		// TODO wegschrijven naar init.txt
 	}
 	
 	public static void main(String [] args){
 		DBHandler dBH = new DBHandler();
-		System.out.println(dBH.getdBStrategy());
+		dBH.vulCatalogi();
 	}
 }
 

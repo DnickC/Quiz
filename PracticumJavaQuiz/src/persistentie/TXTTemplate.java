@@ -1,5 +1,12 @@
 package persistentie;
 
-class TXTTemplate extends TXTStrategy {
-
+public class TXTTemplate {
+	
+	final void vulCatalogi() {
+		
+	}
+	
+	final void saveCatalogi() {
+		
+	}
 }
