@@ -10,6 +10,7 @@ public class Quiz {
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
 	
+	private int quizID = 0;
 	private String onderwerp = null;
 	private List<String> onderwerpen = new ArrayList<>();
 	private int leerjaar = 0;
@@ -22,20 +23,7 @@ public class Quiz {
 	private Set<QuizOpdracht> quizOpdrachten;
 	
 	///// Verwijder quiz toevoegen
-	
-	public Quiz()
-
-	{/*dubbele code?
-		this.onderwerp = null;
-		this.leerjaar = 0;
-		this.isTest = false;
-		this.isUniekeDeelname = false;
-		this.quizStatus = null;
-		*/
-	}
-	
-	// Wat als quizstatus of leraar als tekst word ingegeven? 
-	
+		
 	public Quiz(String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
 		try
@@ -53,6 +41,16 @@ public class Quiz {
 		}
 	}
 	
+	public void setQuizID(int id)
+	{
+		this.quizID = id;
+	}
+	
+	public int getQuizID()
+	{
+		return this.quizID;
+	}
+	
 	public void setQuizStatus(QuizStatus status) throws NullPointerException
 	{
 		if (status == null)
@@ -64,10 +62,9 @@ public class Quiz {
 		}		
 	}
 
-	public void setAuteur(Leraar leraar) {
-		
-		this.auteur = leraar;
-		
+	public void setAuteur(Leraar leraar)
+	{		
+		this.auteur = leraar;	
 	}
 
 	public void setIsUniekeDeelname(boolean uniekeDeelname) {
@@ -85,7 +82,6 @@ public class Quiz {
 		{
 			throw new IllegalArgumentException("Ingegeven onderwerp is niet geldig!");
 		}
-		// check onderwerp toevoegen
 	}
 	
 	public boolean getIsUniekeDeelname(){
@@ -94,7 +90,7 @@ public class Quiz {
 	
 	public String getOnderwerp()
 	{
-		return onderwerp;
+		return this.onderwerp;
 	}
 	
 	public Leraar getLeraar(){
@@ -119,7 +115,7 @@ public class Quiz {
 	
 	public int getLeerjaar()
 	{
-		return leerjaar;
+		return this.leerjaar;
 	}
 	
 	public void setIsTest(boolean isTest)
@@ -133,7 +129,7 @@ public class Quiz {
 	
 	public boolean getIsTest()
 	{
-		return isTest;
+		return this.isTest;
 	}
 	
 	public boolean testOnderwerp(String onderwerp)
@@ -231,10 +227,4 @@ public class Quiz {
 		result = prime * result + ((quizStatus == null) ? 0 : quizStatus.hashCode());		
 		return result;
 	}
-	
-	// CompareTO - EqualTo - HashCode (-> moet ik ook nog hebben ) 
-	
-	
-
-	
 }
