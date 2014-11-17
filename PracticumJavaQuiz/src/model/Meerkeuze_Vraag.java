@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	
+	/**
+	 * Authors:
+	 * Version:
+	 */
+	
 	private int juisteAntwoord1 = -1;
 	private int juisteAntwoord2 = -1;
 	

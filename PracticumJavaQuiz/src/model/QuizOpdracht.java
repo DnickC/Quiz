@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizOpdracht {
+	/**
+	 * authors :
+	 * version 1.0
+	 */
+	
 	private String onderwerp;
 	private int maximumScore;
 	private List <QuizOpdracht> quizOpdrachten;

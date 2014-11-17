@@ -8,6 +8,13 @@ import java.util.List;
 
 
 public class OpdrachtCatalogus implements Iterable {
+	
+	/**
+	 * Authors:
+	 * Version:
+	 * 
+	 */
+	
 	private List<Opdracht> opdrachten = new ArrayList<>();
 	private String catalogusNaam = null;
 	private Datum registratieDatum;

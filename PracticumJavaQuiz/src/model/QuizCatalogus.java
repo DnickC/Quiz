@@ -1,11 +1,16 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import model.Quiz.QuizStatus;
 
-public class QuizCatalogus implements Cloneable, Iterable<Quiz> {
+public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
+	/**
+	 * Authors: Jens van Kets, Michal Mytkowski
+	 * Version : 1.0
+	 */
 	
 	private String catalogusNaam = null;
 	private ArrayList<Quiz> quizzes;
@@ -43,6 +48,7 @@ public class QuizCatalogus implements Cloneable, Iterable<Quiz> {
 	 */
 	
 	public void setCatalogusNaam(String naam){
+		if(catalogusNaam != null)
 		this.catalogusNaam = naam;
 	}
 	
@@ -60,7 +66,13 @@ public class QuizCatalogus implements Cloneable, Iterable<Quiz> {
 			}
 		}
 		throw new IllegalArgumentException("Onderwerp niet gevonden");
+		
+		
+		
 	}
+	
+	
+	
 	
 	/**
 	 * Add's a quiz to the QuizCatalogue
@@ -78,6 +90,7 @@ public class QuizCatalogus implements Cloneable, Iterable<Quiz> {
 		for(Quiz q : quizzes){
 		if(q.testOnderwerp(quiz.getOnderwerp())){
 			nieuw = false;
+			
 						
 		}
 		}
@@ -149,8 +162,28 @@ public class QuizCatalogus implements Cloneable, Iterable<Quiz> {
 		//nog bijschrijven
 	
 	}
+
+	@Override
+	public Iterator<Quiz> iterator() {
+		
+		return this.quizzes.iterator();
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		
+		return 0;
+	}
 	
-	
+	@Override
+	public int hashCode(){
+		final int prime = 31;
+		int result=1;
+		
+		result = prime * result + ((quizzes == null) ? 0 : quizzes.hashCode());
+		return result;
+		
+	}
 	
 	
 	

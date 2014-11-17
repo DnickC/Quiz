@@ -10,6 +10,12 @@ import utils.FromScratch.*;
 
 public abstract class Opdracht implements Comparable, Cloneable {
 	
+	/**
+	 * Authors:
+	 * Version:
+	 * 
+	 */
+	
 	private int opdrachtID = 0;
 	private String vraag = null;
 	private int maxAantalPogingen = 1;

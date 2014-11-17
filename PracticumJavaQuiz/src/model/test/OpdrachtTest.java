@@ -1,6 +1,7 @@
 package model.test;
 
-//import static org.junit.Assert.assertEquals;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert;
 import java.util.List;
 import model.Opdracht;
@@ -9,7 +10,7 @@ import model.OpdrachtCategorie;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
-//import org.junit.Assert;
+import org.junit.Assert;
 
 public class OpdrachtTest {
 	

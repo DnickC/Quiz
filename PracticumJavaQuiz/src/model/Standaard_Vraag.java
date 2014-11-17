@@ -3,6 +3,12 @@ package model;
 import model.OpdrachtCategorie;
 
 public class Standaard_Vraag extends Opdracht {
+	
+	/**
+	 * Authors: 
+	 * Version:
+	 */
+	
 	private String juistAntwoord = null;
 	
 	public Standaard_Vraag(){

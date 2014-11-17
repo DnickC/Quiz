@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Reproductie_Vraag extends Opdracht {
 	
+	/**
+	 * Authors: 
+	 * Version:
+	 */
+	
 	private ArrayList<String> trefwoorden;
 	private int minAantalTrefwoorden;
 	

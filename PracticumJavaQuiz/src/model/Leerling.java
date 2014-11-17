@@ -2,6 +2,11 @@ package model;
 
 public class Leerling {
 	
+	/**
+	 * Authors : @author MichalMytek
+	 * Version: 1.0
+	 */
+	
 	private String leerlingNaam;
 	private int leerjaar;
 	protected LeerlingContainer lijst;

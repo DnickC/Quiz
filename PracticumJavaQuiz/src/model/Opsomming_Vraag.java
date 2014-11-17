@@ -6,6 +6,23 @@ import model.OpdrachtCategorie;
 
 public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 	
+	/**
+	 * Authors:
+	 * Version:
+	 * 
+	 */
+	
+	
+	/**
+	 * 
+	 * @param vraag
+	 * @param antwoorden
+	 * @param maxAantalPogingen
+	 * @param maxAntwoordTijd
+	 * @param hint
+	 * @param categorie
+	 */
+	
 	
 	public Opsomming_Vraag(String vraag,String antwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
 		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);

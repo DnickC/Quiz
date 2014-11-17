@@ -2,6 +2,11 @@ package model;
 
 public enum Leraar {
 	
+	/**
+	 * Authors:
+	 * Version:
+	 * 
+	 */
 	
 	LeraarA("Michal Mytkowski"),
 	LeraarB("Andy Poron"),

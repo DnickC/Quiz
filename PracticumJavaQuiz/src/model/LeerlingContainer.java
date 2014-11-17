@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeerlingContainer {
+	/**
+	 * Authors:
+	 * Version:
+	 */
 	
 	private List<Leerling> leerlingen;
 	

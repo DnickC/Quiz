@@ -1,9 +1,15 @@
 package model;
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 
 public class Quiz {
+	
+	/**
+	 * 
+	 * @author MichalMytek, Jens Van Kets
+	 * Versie : 
+	 */
 	
 	public enum QuizStatus
 	{
@@ -12,7 +18,7 @@ public class Quiz {
 	
 	private int quizID = 0;
 	private String onderwerp = null;
-	private List<String> onderwerpen = new ArrayList<>();
+	private ArrayList<String> onderwerpen = new ArrayList<String>();
 	private int leerjaar = 0;
 	private boolean isTest = false;
 	private boolean isUniekeDeelname = false;
