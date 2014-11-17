@@ -24,6 +24,7 @@ public class BestandLezenMetScanner {
 	public void leesPersonenVanBestand() {
 		
 		try {
+			// Moet dit geen "Path" type worden? 
 			File file = new File("PracticumJavaQuiz//src//bestanden//personen.txt");
 			scanner = new Scanner(file);
 			ongeldigeDatums.append("Ongeldige datums uit het inputbestand: ");
