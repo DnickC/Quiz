@@ -8,30 +8,48 @@ import java.util.Scanner;
 
 public class DBHandler {
 	
-	private DBStrategy dBStrategy;
+	private iDBStrategy dBStrategy;
 	private static String initPath = "PracticumJavaQuiz//src//persistentie//init.txt";
-	private static Formatter output;
-	private static Scanner input;
 
+	
+	private void setStrategy() {
+		// TODO wegschrijven naar init.txt
+	}
+	
+	private void getStrategy() {
+		
+	}
+	
 	public DBHandler() {
 		this.getStrategy();
 	}
 	
-	public void vulCatalogi() {
-		dBStrategy.vulCatalogi();
+	public void leesOpdrachten() {
+		dBStrategy.leesOpdrachten();
 	}
 	
-	public void saveCatalogi() {
-		dBStrategy.saveCatalogi();
+	public void schrijfOpdrachten() {
+		dBStrategy.schrijfOpdrachten();
 	}
 	
-<<<<<<< HEAD
-	private void getStrategy() {
-		Scanner input = null;
-=======
+	public void leesQuizzen() {
+		dBStrategy.leesQuizzen();
+	}
+	
+	public void schrijfQuizzen() {
+		dBStrategy.schrijfQuizzen();
+	}
+	
+	public void leesQuizOpdrachten() {
+		dBStrategy.leesQuizOpdrachten();
+	}
+	
+	public void schrijfQuizOpdrachten() {
+		dBStrategy.schrijfQuizOpdrachten();
+	}
+	
 	private void readInit() {
 		input = null;
->>>>>>> origin/master
 		String strategy = null;
 		
 		try {
@@ -60,36 +78,7 @@ public class DBHandler {
 			throw e;
 		}
 	}
-	
-	private void setStrategy() {
-		// TODO wegschrijven naar init.txt
-		/*
-		 * openFile(file);
-		 * addRecords(file);
-		 * closeFile(file);
-		 */
-	}
-	
-	public static void openFile(String initPath) throws FileNotFoundException,SecurityException{
-			output = new Formatter(initPath);
-	}
-	
-	public static void addRecords(String initPath,String Format)throws FormatterClosedException,NoSuchElementException{
-			input = new Scanner(initPath);
-			
-			while(input.hasNext()){
-					//Hoe moet dit geformat worden? Afhankelijk van de list dat er gevuld moet worden? 
-					//output.format()
-			}
-	}
-	
-	public static void closeFile(){
-		if(output != null){
-			output.close();
-		}
-	}
-	
-	
+
 	public static void main(String [] args){
 		DBHandler dBH = new DBHandler();
 		dBH.vulCatalogi();
