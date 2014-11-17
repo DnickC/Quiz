@@ -64,12 +64,11 @@ public class DBHandler {
 	private void setStrategy() {
 		// TODO wegschrijven naar init.txt
 		/*
-		 * openFile(file);
-		 * addRecords(file);
-		 * closeFile(file);
+		 * 
 		 */
 	}
-	
+	/* dit wordt specifiek opgeroepen bij de juiste template klasse : TXT of SQL
+	 * 
 	public static void openFile(String initPath) throws FileNotFoundException,SecurityException{
 			output = new Formatter(initPath);
 	}
@@ -88,7 +87,7 @@ public class DBHandler {
 			output.close();
 		}
 	}
-	
+	*/
 	
 	public static void main(String [] args){
 		DBHandler dBH = new DBHandler();
