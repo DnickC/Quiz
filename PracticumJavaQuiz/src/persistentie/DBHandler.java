@@ -1,6 +1,6 @@
 package persistentie;
-
-import java.io.IOException;
+import java.util.*;
+import java.io.*;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +10,8 @@ public class DBHandler {
 	
 	private DBStrategy dBStrategy;
 	private static String initPath = "PracticumJavaQuiz//src//persistentie//init.txt";
+	private static Formatter output;
+	private static Scanner input;
 
 	public DBHandler() {
 		this.readInit();
@@ -24,7 +26,7 @@ public class DBHandler {
 	}
 	
 	private void readInit() {
-		Scanner input = null;
+		input = null;
 		String strategy = null;
 		
 		try {
@@ -56,7 +58,32 @@ public class DBHandler {
 	
 	private void writeInit() {
 		// TODO wegschrijven naar init.txt
+		/*
+		 * openFile(file);
+		 * addRecords(file);
+		 * closeFile(file);
+		 */
 	}
+	
+	public static void openFile(String initPath) throws FileNotFoundException,SecurityException{
+			output = new Formatter(initPath);
+	}
+	
+	public static void addRecords(String initPath,String Format)throws FormatterClosedException,NoSuchElementException{
+			input = new Scanner(initPath);
+			
+			while(input.hasNext()){
+					//Hoe moet dit geformat worden? Afhankelijk van de list dat er gevuld moet worden? 
+					//output.format()
+			}
+	}
+	
+	public static void closeFile(){
+		if(output != null){
+			output.close();
+		}
+	}
+	
 	
 	public static void main(String [] args){
 		DBHandler dBH = new DBHandler();
