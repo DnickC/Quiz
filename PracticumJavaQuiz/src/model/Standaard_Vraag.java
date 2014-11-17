@@ -52,7 +52,7 @@ public class Standaard_Vraag extends Opdracht {
 	 */
 	
 	public boolean isJuisteAntwoord(String antwoord) {
-		if (this.juistAntwoord == antwoord) {
+		if (this.juistAntwoord.toLowerCase() == antwoord.toLowerCase()) {
 			return true;
 		}
 		else {
