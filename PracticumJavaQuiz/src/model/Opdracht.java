@@ -13,9 +13,10 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	private int opdrachtID = 0;
 	private String vraag = null;
 	private int maxAantalPogingen = 1;
-	private List<String> antwoordHints = new ArrayList<String>();
+	//private List<String> antwoordHints = new ArrayList<String>();
+	private String hint;
 	private int maxAntwoordTijd = 10000;
-	private int hintNummer = 0;
+	//private int hintNummer = 0;
 	private OpdrachtCategorie opdrachtCategorie;
 	private Datum initalisatieDatum = new Datum();
 	
@@ -25,7 +26,8 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	public Opdracht(){
 		this.vraag = null;
 		this.maxAantalPogingen = 1;
-		this.antwoordHints = null;
+		//this.antwoordHints = null;
+		this.hint = null;
 		this.maxAntwoordTijd = 0;
 		this.opdrachtCategorie = null;
 	}
@@ -163,49 +165,72 @@ public abstract class Opdracht implements Comparable, Cloneable {
 		return opdrachtCategorie;
 	}
 	
-	/*public void setHint(String hint){
-		
-		String[] splitHint = hint.split("(/)|(-)|(;)");
-		
-		for (int i = 0; i <= splitHint.length; i++) {
-			antwoordHints.add(splitHint[i]);
-		}
-	}
-	*/
-	
 	/**
 	 * Add's a Hint to the hintlist  
 	 * @param String hint
 	 * @throws IllegalArgumentException
 	 */
 
+//	public void setHint(String hint){
+//		try{
+//		String[] splitHint = hint.split("(/)|(-)|(;)");
+//		while(hintNummer <= splitHint.length){
+//		this.antwoordHints.add(splitHint[hintNummer]);
+//		hintNummer++;
+//		 }
+//		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
+//		}
+//	}
+	
+
+	
 	public void setHint(String hint){
-		try{
-		String[] splitHint = hint.split("(/)|(-)|(;)");
-		while(hintNummer <= splitHint.length){
-		this.antwoordHints.add(splitHint[hintNummer]);
-		hintNummer++;
-		 }
-		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
-		}
+		this.hint = hint;
 	}
 	
 	/**
 	 * gets a hint from the list. Each time a different one.
 	 * @return String
 	 */
+	//funtie veranderd om een string hint te hebben als parameter, geen list
 	
 	public String getHint(){
-		int hintNummer = 0;
 		
-		if(hintNummer <= antwoordHints.size()) {
-			hintNummer++;
-			return antwoordHints.get(hintNummer-1).toString();
+		List<String> antwoordHints = new ArrayList<String>();
+		int hintNummer;
+		
+		String[] splitHint = this.hint.split("(/)|(-)|(;)");
+		for (int i = 0; i <= splitHint.length; i++) {
+			antwoordHints.add(splitHint[i]);
 		}
+			
+		if (antwoordHints.size() == 1) {
+			return this.hint;
+		}
+		
 		else {
-			return "Geen hints meer beschikbaar";
+			
+			if(hintNummer <= antwoordHints.size()) {
+				hintNummer++;
+				return antwoordHints.get(hintNummer-1).toString();
+			}
+			else {
+				return "Geen hints meer beschikbaar";
+			}
 		}
 	}
+	
+//	public String getHint(){
+//		int hintNummer = 0;
+//		
+//		if(hintNummer <= antwoordHints.size()) {
+//			hintNummer++;
+//			return antwoordHints.get(hintNummer-1).toString();
+//		}
+//		else {
+//			return "Geen hints meer beschikbaar";
+//		}
+//	}
 	
 	
 	/**
@@ -224,6 +249,13 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	abstract boolean isJuisteAntwoord(String juisteAntwoord);
 	
 	
+	@Override
+	public String toString() {
+		return "Opdracht [opdrachtID=" + opdrachtID + ", vraag=" + vraag + ", maxAantalPogingen=" + maxAantalPogingen
+				+ ", hint=" + hint + ", maxAntwoordTijd=" + maxAntwoordTijd + ", opdrachtCategorie="
+				+ opdrachtCategorie + ", initalisatieDatum=" + initalisatieDatum +"]";
+	}
+
 	/**
 	 * Checks if the given object equals the opdracht
 	 * @param Object object

@@ -12,7 +12,7 @@ public class DBHandler {
 	private static String initPath = "PracticumJavaQuiz//src//persistentie//init.txt";
 
 	public DBHandler() {
-		this.readInit();
+		this.getStrategy();
 	}
 	
 	public void vulCatalogi() {
@@ -23,7 +23,7 @@ public class DBHandler {
 		dBStrategy.saveCatalogi();
 	}
 	
-	private void readInit() {
+	private void getStrategy() {
 		Scanner input = null;
 		String strategy = null;
 		
@@ -54,7 +54,7 @@ public class DBHandler {
 		}
 	}
 	
-	private void writeInit() {
+	private void setStrategy() {
 		// TODO wegschrijven naar init.txt
 	}
 	
