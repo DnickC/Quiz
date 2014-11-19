@@ -2,14 +2,11 @@ package model.test;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import model.OpdrachtCategorie;
 import model.Standaard_Vraag;
 
 import org.junit.Test;
 import org.junit.Before;
-import org.junit.After;
 
 public class Standaard_VraagTest {
 
@@ -38,7 +35,6 @@ public class Standaard_VraagTest {
 	
 	@Test
 	public void test_isJuisteAntwoord() {
-		constrTest.setJuisteAntwoord("Parijs");
 		assertTrue(constrTest.isJuisteAntwoord("Parijs"));
 	}
 	

@@ -45,6 +45,15 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 		return clon;
 	}
 	
+	public void setJuisteAntwoord(int juisteAntwoord) {
+		this.juisteAntwoord1 = juisteAntwoord/10;
+		this.juisteAntwoord2 = juisteAntwoord%10;
+	}
+	
+	public int getJuisteAntwoord() {
+		return juisteAntwoord1;
+	}
+	
 	/**
 	 * sets the different answers from 1 string to an Arraylist<String>
 	 * @param antwoorden
@@ -78,7 +87,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	public String getAntwoordenToString(){
 		String antwoorden = null;
 		for(String antw : antwoordenLijst){
-			antwoorden += antw +"\n";
+			antwoorden += antw + ", ";
 		}
 		return antwoorden;
 	}
