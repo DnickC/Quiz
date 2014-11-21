@@ -101,11 +101,6 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 		else{
 			throw new IllegalArgumentException("Onderwerp bestaat al!");
 		}
-			
-		 
-		
-		
-		
 	}
 	
 	/**

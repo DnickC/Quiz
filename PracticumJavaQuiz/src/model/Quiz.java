@@ -57,6 +57,8 @@ public class Quiz {
 		return this.quizID;
 	}
 	
+	// Quizstatus wordt niet geset. if(status.equals()) werkt niet correct. = altijd null
+	
 	public void setQuizStatus(QuizStatus status) throws NullPointerException
 	{
 		if (status == null)
@@ -77,7 +79,11 @@ public class Quiz {
 		
 		this.isUniekeDeelname = uniekeDeelname;
 	}
-
+	
+	// Moet hier uw kleine woorden al niet uit gefilterd worden? 
+	// Waar wordt de lijst met onderwerpen gemaakt of aangevuld? Moet er geen setOnderwerpList zijn fzo? 
+	// Combi van de 2 IllegelArgumentExceptions nodig/nuttig ? 
+	
 	public void setOnderwerp(String onderwerp) throws IllegalArgumentException
 	{
 		if (onderwerp!= null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)

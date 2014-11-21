@@ -1,4 +1,4 @@
-package utils.test;
+package model.test;
 
 import static org.junit.Assert.*;
 import model.Leraar;
@@ -20,7 +20,7 @@ public class QuizTest {
 		constrTest = new Quiz("onderwerp",1, true,true,Leraar.LeraarA,QuizStatus.afgesloten);
 		
 	}
-
+	
 	@Test
 	public void test_constructor_OK() {
 		assertEquals("onderwerp",constrTest.getOnderwerp());
@@ -48,11 +48,16 @@ public class QuizTest {
 		constrTest.setAuteur(Leraar.LeraarB);
 		assertEquals(Leraar.LeraarB,constrTest.getLeraar());
 	}
-	
+		
 	@Test
 	public void test_setOnderwerp_OK(){
-		constrTest.setOnderwerp("rekenen");
+		constrTest.setOnderwerp("Rekenen");
 		assertEquals("rekenen",constrTest.getOnderwerp());
+	}
+	
+	@Test
+	public void test_setOnderwerp_NOK(){
+		assertFalse(constrTest.testOnderwerp("PauwChiPauw"));
 	}
 	
 	@Test
