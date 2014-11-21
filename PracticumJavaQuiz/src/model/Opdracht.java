@@ -203,7 +203,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	public String getHint(){
 		
 		List<String> antwoordHints = new ArrayList<String>();
-		int hintNummer;
+		int hintNummer=0;
 		
 		String[] splitHint = this.hint.split("(/)|(-)|(;)");
 		for (int i = 0; i <= splitHint.length; i++) {
