@@ -1,0 +1,2 @@
+String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie
+

@@ -6,6 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import model.OpdrachtCatalogus;
+import model.QuizCatalogus;
+import model.QuizOpdracht;
+
 public class DBHandler {
 	
 	private iDBStrategy dBStrategy;
@@ -17,39 +21,27 @@ public class DBHandler {
 	}
 	
 	private void getStrategy() {
-		
+		this.readInit();
 	}
 	
 	public DBHandler() {
 		this.getStrategy();
 	}
 	
-	public void leesOpdrachten() {
+	public void leesCatalogi() {
 		dBStrategy.leesOpdrachten();
-	}
-	
-	public void schrijfOpdrachten() {
-		dBStrategy.schrijfOpdrachten();
-	}
-	
-	public void leesQuizzen() {
 		dBStrategy.leesQuizzen();
-	}
-	
-	public void schrijfQuizzen() {
-		dBStrategy.schrijfQuizzen();
-	}
-	
-	public void leesQuizOpdrachten() {
 		dBStrategy.leesQuizOpdrachten();
 	}
 	
-	public void schrijfQuizOpdrachten() {
-		dBStrategy.schrijfQuizOpdrachten();
+	public void schrijfCatalogi(OpdrachtCatalogus oC, QuizCatalogus qC, QuizOpdracht qO) {
+		dBStrategy.schrijfOpdrachten(oC);
+		dBStrategy.schrijfQuizzen(qC);
+		dBStrategy.schrijfQuizOpdrachten(qO);		
 	}
 	
 	private void readInit() {
-		input = null;
+		Scanner input = null;
 		String strategy = null;
 		
 		try {
@@ -77,11 +69,6 @@ public class DBHandler {
 		} catch (Exception e) {
 			throw e;
 		}
-	}
-
-	public static void main(String [] args){
-		DBHandler dBH = new DBHandler();
-		dBH.vulCatalogi();
 	}
 }
 

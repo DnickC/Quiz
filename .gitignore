@@ -4,3 +4,14 @@
 *.classpath
 PracticumJavaQuiz/src/persistenty/BestandLezenMetScanner.java
 PracticumJavaQuiz/src/persistenty/BestandLezenMetScanner.java
+build.xml
+manifest.mf
+nbproject/build-impl.xml
+nbproject/configs/BestandLezenMetScanner.properties
+nbproject/configs/Datum.properties
+nbproject/genfiles.properties
+nbproject/private/config.properties
+nbproject/private/private.properties
+nbproject/private/private.xml
+nbproject/project.properties
+nbproject/project.xml

@@ -181,6 +181,10 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 		return result;
 		
 	}
+
+	public List<Quiz> getCatalogus() {
+		return quizzes;
+	}
 	
 	
 	
