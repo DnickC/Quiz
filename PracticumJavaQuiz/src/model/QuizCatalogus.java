@@ -158,6 +158,8 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 	
 	}
 
+	// moeten wij de hasNext() & Next() niet override van de Iterator interface? 
+	
 	@Override
 	public Iterator<Quiz> iterator() {
 		
