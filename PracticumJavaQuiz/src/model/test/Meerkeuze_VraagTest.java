@@ -14,7 +14,7 @@ public class Meerkeuze_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Meerkeuze_Vraag(null, null, 0, 0, 0, null, null);
+		constrTest = new Meerkeuze_Vraag(null, null, 0, 0, 0, null, OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test
@@ -25,7 +25,7 @@ public class Meerkeuze_VraagTest {
 		assertEquals(0, constrTest.getMaxAantalPogingen());
 		assertEquals(0, constrTest.getMaxAntwoordTijd());
 		assertEquals(null, constrTest.getHint());
-		assertEquals(null, constrTest.getOpdrachtCategorie());
+		assertEquals(OpdrachtCategorie.Aardrijkskunde, constrTest.getOpdrachtCategorie());
 	}
 	
 	@Test

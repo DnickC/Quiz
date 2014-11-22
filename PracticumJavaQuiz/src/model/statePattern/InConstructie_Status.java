@@ -21,7 +21,7 @@ public class InConstructie_Status implements StatusInterface {
 		
 	}
 	
-	public void addQuiz(){
+	public void voegQuizToe(){
 		
 	}
 }

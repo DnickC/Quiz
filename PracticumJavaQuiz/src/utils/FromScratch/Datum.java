@@ -41,8 +41,11 @@ public class Datum {
 		boolean resultEqualFalse = geldigeDatum.equals(smaller);
 		System.out.println(resultEqualFalse);
 		int resultCompareEQ = geldigeDatum.compareTo(geldigeDatum);
+		System.out.println(resultCompareEQ);
 		int resultCompareS = geldigeDatum.compareTo(smaller);
+		System.out.println(resultCompareS);
 		int resultCompareL = geldigeDatum.compareTo(bigger);
+		System.out.println(resultCompareL);
 		int verschilInDagen = geldigeDatum.verschilInDagen(bigger);
 		System.out.println(verschilInDagen);
 		int verschilInMaanden = geldigeDatum.verschilInMaanden(bigger);

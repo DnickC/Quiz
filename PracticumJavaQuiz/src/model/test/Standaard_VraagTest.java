@@ -14,7 +14,7 @@ public class Standaard_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Standaard_Vraag("vraag", "juisteAntwoord", 4, 20, null, OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Standaard_Vraag("vraag", "juisteAntwoord", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test
@@ -23,7 +23,7 @@ public class Standaard_VraagTest {
 		assertEquals("juisteAntwoord", constrTest.getJuisteAntwoord());
 		assertEquals(4, constrTest.getMaxAantalPogingen());
 		assertEquals(20, constrTest.getMaxAntwoordTijd());
-		assertEquals(null, constrTest.getHint());
+		assertEquals("hint", constrTest.getHint());
 		assertEquals(OpdrachtCategorie.Aardrijkskunde, constrTest.getOpdrachtCategorie());
 	}
 

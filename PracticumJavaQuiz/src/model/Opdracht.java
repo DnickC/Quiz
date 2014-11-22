@@ -8,7 +8,7 @@ import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
-public abstract class Opdracht implements Comparable, Cloneable {
+public abstract class Opdracht implements Comparable<Opdracht>, Cloneable {
 	
 	/**
 	 * Authors:
@@ -213,7 +213,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 		if (antwoordHints.size() == 1) {
 			return this.hint;
 		}
-		
+			
 		else {
 			
 			if(hintNummer <= antwoordHints.size()) {

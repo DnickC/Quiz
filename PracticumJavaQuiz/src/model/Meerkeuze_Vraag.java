@@ -117,6 +117,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 		}	
 	}
 	
+	@Override
 	public int compareTo(Object object) {
 		if(object instanceof Meerkeuze_Vraag){
 			Meerkeuze_Vraag input = (Meerkeuze_Vraag)object;
@@ -164,5 +165,6 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	public String getValideTekst(){
 		return "Gebruik het nummer voor de keuze als antwoord op de vraag";
 	}
+
 
 }

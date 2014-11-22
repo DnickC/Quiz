@@ -24,7 +24,7 @@ public class Quiz {
 	private boolean isUniekeDeelname = false;
 	private QuizStatus quizStatus = null;
 	private QuizDeelname quizDeelname;
-	private QuizCatalogus quizCatalog;
+	private QuizCatalogus quizCatalogus;
 	private Leraar auteur;
 	private Set<QuizOpdracht> quizOpdrachten;
 	

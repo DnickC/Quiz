@@ -6,6 +6,7 @@ public class QuizOpdracht {
 	/**
 	 * authors :
 	 * version 1.0
+	 * version 1.1, 22/11/2014; author Jens Van Kets; setters en getters onderwerp en maximumScore toegevoegd
 	 */
 	
 	private String onderwerp;
@@ -16,6 +17,22 @@ public class QuizOpdracht {
 		this.onderwerp = onderwerp;
 		this.maximumScore = maximumScore;
 		quizOpdrachten = new ArrayList<QuizOpdracht>();
+	}
+	
+	public void setOnderwerp(String onderwerp) {
+		this.onderwerp = onderwerp;
+	}
+	
+	public String getOnderwerp() {
+		return this.onderwerp;
+	}
+	
+	public void setMaximumScore(int maximumScore) {
+		this.maximumScore = maximumScore;
+	}
+	
+	public int getMaximumScore() {
+		return this.maximumScore;
 	}
 	
 	protected void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht){

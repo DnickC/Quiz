@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 import model.Leraar;
 import model.Quiz;
 import model.Quiz.QuizStatus;
-import model.QuizCatalogus;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

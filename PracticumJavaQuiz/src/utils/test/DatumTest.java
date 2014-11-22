@@ -53,7 +53,7 @@ public class DatumTest {
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void test_OngeldigeSchrikkelDatum() throws Exception{
-		ongeldigeDatum = new Datum("32/12/2014");
+		ongeldigeDatum = new Datum("29/02/2014");
 	}
 	
 	@Test  (expected = IllegalArgumentException.class)
