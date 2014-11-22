@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList;
 
 import java.util.Set;
-
+import model.statePattern.*;
 public class Quiz {
 	
 	/**
@@ -16,6 +16,14 @@ public class Quiz {
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
 	
+	Status Afgesloten_Status;
+	Status Afgewerkt_Status;
+	Status InConstructie_Status;
+	Status LaatsteKans_Status;
+	Status Opengesteld_Status;
+	
+	Status quizStat = InConstructie_Status;
+	
 	private int quizID = 0;
 	private String onderwerp = null;
 	private ArrayList<String> onderwerpen = new ArrayList<String>();
@@ -28,7 +36,6 @@ public class Quiz {
 	private Leraar auteur;
 	private Set<QuizOpdracht> quizOpdrachten;
 	
-	///// Verwijder quiz toevoegen
 		
 	public Quiz(String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
