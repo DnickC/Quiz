@@ -30,14 +30,14 @@ public class Meerkeuze_VraagTest {
 	
 	@Test
 	public void test_setJuisteAntwoord() {
-		constrTest.setJuisteAntwoord(5);
-		assertEquals(5, constrTest.getJuisteAntwoord());
+		constrTest.setJuisteAntwoord(3);
+		assertEquals(3, constrTest.getJuisteAntwoord());
 	}
 	
 	@Test
 	public void test_setAntwoorden() {
-		constrTest.setAntwoorden("Parijs, Madrid, Londen, Brussel");
-		assertEquals("Parijs, Madrid, Londen, Brussel", constrTest.getAntwoordenToString()());
+		constrTest.setAntwoorden("Parijs Madrid Londen Brussel");
+		assertEquals("Parijs, Madrid, Londen, Brussel", constrTest.getAntwoordenToString());
 	}
 	
 	@Test

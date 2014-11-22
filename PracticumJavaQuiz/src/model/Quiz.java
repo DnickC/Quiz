@@ -61,13 +61,12 @@ public class Quiz {
 	
 	public void setQuizStatus(QuizStatus status) throws NullPointerException
 	{
-		if (status == null)
-		{
-			throw new NullPointerException("Status mag niet null zijn");
-		}
-		if(status.equals(QuizStatus.values())){
+		if (status.equals(QuizStatus.values())) {
 			this.quizStatus = status;
-		}		
+		}
+		else {
+			throw new IllegalArgumentException("Quizstatus niet correct ingegeven.");
+		}
 	}
 
 	public void setAuteur(Leraar leraar)
@@ -89,6 +88,7 @@ public class Quiz {
 		if (onderwerp!= null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
 		{
 			this.onderwerp = onderwerp;
+			onderwerpen.add(onderwerp);
 		}
 		else
 		{

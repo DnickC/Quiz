@@ -9,8 +9,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	 * Version:
 	 */
 	
-	private int juisteAntwoord1 = -1;
-	private int juisteAntwoord2 = -1;
+	private int juisteAntwoord = -1;
 	
 	/**
 	 * Meerkeuze constructor. Passes vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie to Opdracht constructor
@@ -24,8 +23,6 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	public Meerkeuze_Vraag(String vraag,String antwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
 		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
 		setAntwoorden(antwoorden);
-		this.juisteAntwoord1 = juisteAntwoord/10;
-		this.juisteAntwoord2 = juisteAntwoord%10;
 	}
 	
 	/**
@@ -41,17 +38,16 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	
 	@Override
 	public Meerkeuze_Vraag clone() throws CloneNotSupportedException{
-		Meerkeuze_Vraag clon = new Meerkeuze_Vraag(this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord1,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Meerkeuze_Vraag clon = new Meerkeuze_Vraag(this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	
 	public void setJuisteAntwoord(int juisteAntwoord) {
-		this.juisteAntwoord1 = juisteAntwoord/10;
-		this.juisteAntwoord2 = juisteAntwoord%10;
+		this.juisteAntwoord = juisteAntwoord;
 	}
 	
 	public int getJuisteAntwoord() {
-		return juisteAntwoord1;
+		return juisteAntwoord;
 	}
 	
 	/**
@@ -100,12 +96,12 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 	public boolean isJuisteAntwoord(String antwoord){
 		try{		
 			int intAntwoord = Integer.parseInt(antwoord);
-			if( intAntwoord == this.juisteAntwoord1 || intAntwoord == this.juisteAntwoord2){
+			if( intAntwoord == this.juisteAntwoord){
 				return true;
 			}else{
 				return false;
 			}
-		}catch(Exception e){throw new IllegalArgumentException("Ongelide invoer");}
+		}catch(Exception e){throw new IllegalArgumentException("Ongeldide invoer");}
 	}
 	
 	/**
