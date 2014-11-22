@@ -1,16 +1,15 @@
 package model;
 import java.util.*;
-import java.util.Iterator;
 
 import utils.FromScratch.*;
 
 import java.util.List;
 
 
-public class OpdrachtCatalogus implements Iterable<Opdracht> {
+public class OpdrachtCatalogus implements Iterable<Quiz> {
 	
 	/**
-	 * Authors:
+	 * Authors: Andy Poron
 	 * Version:
 	 * 
 	 */
@@ -18,11 +17,16 @@ public class OpdrachtCatalogus implements Iterable<Opdracht> {
 	private List<Opdracht> opdrachten = new ArrayList<>();
 	private String catalogusNaam = null;
 	private Datum registratieDatum;
+	private final int begin = 0;
+	private int maxIndex = 0;
+	private int currentIndex = 0;
 	
 	
 	
 	public OpdrachtCatalogus(String catalogusnaam){
 		this.catalogusNaam = catalogusnaam;
+		this.maxIndex = 0;
+		
 	}
 	
 	//Moet er geen constructor zijn waarin meteen alle opdrachten kan meegegeven worden ? 
@@ -49,7 +53,10 @@ public class OpdrachtCatalogus implements Iterable<Opdracht> {
 	
 	public void addOpdracht(Opdracht opdracht){
 		if(opdracht.getVraag() != null){
+			this.maxIndex++;
+			opdracht.setID(this.maxIndex);
 		opdrachten.add(opdracht);
+		this.currentIndex = opdracht.getID();
 		}else{throw new NullPointerException("Geen vraag");}
 	}
 	/**
@@ -59,6 +66,7 @@ public class OpdrachtCatalogus implements Iterable<Opdracht> {
 		public Opdracht getOpdracht(String opdracht){
 		for(Opdracht p: opdrachten){
 			if(p.getVraag() == opdracht){
+				this.currentIndex = p.getID();
 				return p;
 			}
 		}
@@ -73,6 +81,7 @@ public class OpdrachtCatalogus implements Iterable<Opdracht> {
 	public Opdracht getOpdracht(Opdracht opdracht){
 		for(Opdracht p: opdrachten){
 			if(p == opdracht){
+				this.currentIndex = p.getID();
 				return p;
 			}
 		}
@@ -120,20 +129,28 @@ public class OpdrachtCatalogus implements Iterable<Opdracht> {
 	
 	// equals - compareTo - HashCode
 	
+	@Override 
+	public Iterable<Opdracht> iterator(){
+		hasNext();
+		next();
+	}
+	
 	@Override
 	public boolean hasNext(){
-		if()
+		if(this.currentIndex < this.maxIndex){ 
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	@Override
 	public Object next(){
-		return this.opdrachten.iterator().next();
+		if(currentIndex < maxIndex){
+			currentIndex++;
+		}
+		return opdrachten.get(currentIndex);
 	}
 	
-	@Override 
-	public void remove(){
-		
-	}
-
 	
 }

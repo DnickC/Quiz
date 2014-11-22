@@ -57,6 +57,8 @@ public abstract class Opdracht implements Comparable, Cloneable {
 
 	}
 	
+	// Constructor met ID erbij
+	
 	
 	/**
 	 * Sets the ID of the opdracht
