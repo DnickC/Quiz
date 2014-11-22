@@ -1,5 +1,5 @@
 package model;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Iterator;
 
 import utils.FromScratch.*;
@@ -7,7 +7,7 @@ import utils.FromScratch.*;
 import java.util.List;
 
 
-public class OpdrachtCatalogus implements Iterable {
+public class OpdrachtCatalogus implements Iterable<Opdracht> {
 	
 	/**
 	 * Authors:
@@ -117,6 +117,23 @@ public class OpdrachtCatalogus implements Iterable {
 		return catalogusNaam;
 	}
 
+	
+	// equals - compareTo - HashCode
+	
+	@Override
+	public boolean hasNext(){
+		if()
+	}
+	
+	@Override
+	public Object next(){
+		return this.opdrachten.iterator().next();
+	}
+	
+	@Override 
+	public void remove(){
+		
+	}
 
 	
 }
