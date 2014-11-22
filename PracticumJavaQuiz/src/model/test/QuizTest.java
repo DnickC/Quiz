@@ -52,7 +52,7 @@ public class QuizTest {
 	@Test
 	public void test_setOnderwerp_OK(){
 		constrTest.setOnderwerp("Rekenen");
-		assertEquals("rekenen",constrTest.getOnderwerp());
+		assertEquals("Rekenen",constrTest.getOnderwerp());
 	}
 	
 	@Test
