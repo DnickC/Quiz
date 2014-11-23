@@ -10,65 +10,62 @@ import model.OpdrachtCatalogus;
 import model.QuizCatalogus;
 import model.QuizOpdracht;
 
+/**
+ * @Authors: Dominique
+ * Version: 1.0
+ * 
+ */
+
 public class DBHandler {
 	
 	private iDBStrategy dBStrategy;
-	private static String initPath = "PracticumJavaQuiz//src//persistentie//init.txt";
 
-	
-	private void setStrategy() {
-		// TODO wegschrijven naar init.txt
+	/**
+	 * Sets the strategy to be used for persistency
+	 */
+	public void setStrategy(iDBStrategy strategy) {
+		this.dBStrategy = strategy;
 	}
 	
-	private void getStrategy() {
-		this.readInit();
+	/**
+	 * Gets the strategy used for persistency
+	 * @return iDBStrategy
+	 */
+	public iDBStrategy getStrategy() {
+		return this.dBStrategy;
 	}
 	
-	public DBHandler() {
-		this.getStrategy();
+	/**
+	 * Assignement constructor
+	 * @param iDBStrategy
+	 */
+	public DBHandler(iDBStrategy strategy) {
+		this.setStrategy(strategy);
 	}
 	
+	/**
+	 * Delegates the correct strategy to fill the containers with 
+	 * opdrachten, quizzen and quizopdrachten
+	 */
 	public void leesCatalogi() {
-		dBStrategy.leesOpdrachten();
-		dBStrategy.leesQuizzen();
-		dBStrategy.leesQuizOpdrachten();
+//		dBStrategy.leesOpdrachten();
+//		dBStrategy.leesQuizzen();
+//		dBStrategy.leesQuizOpdrachten();
+		dBStrategy.leesCatalogi();
 	}
 	
+	/**
+	 * Delegates the correct strategy to save the data in the
+	 * opdrachten, quizzen and quizopdrachten containers
+	 * @param OpdrachtCatalogus oC
+	 * @param QuizCatalogus
+	 * @param QuizOpdracht
+	 */
 	public void schrijfCatalogi(OpdrachtCatalogus oC, QuizCatalogus qC, QuizOpdracht qO) {
-		dBStrategy.schrijfOpdrachten(oC);
-		dBStrategy.schrijfQuizzen(qC);
-		dBStrategy.schrijfQuizOpdrachten(qO);		
-	}
-	
-	private void readInit() {
-		Scanner input = null;
-		String strategy = null;
-		
-		try {
-			
-			Path path = Paths.get(initPath);
-			input = new Scanner(path);
-			
-			while (input.hasNext()) {
-				strategy = (String) input.next();
-			}
-
-			if (input != null) {
-				input.close();
-			}
-			
-			dBStrategy.setStrategy(strategy);
-
-
-		} catch (IOException iOE) {
-			throw iOE;
-		} catch (InvalidPathException iPE) {
-			throw iPE;
-		} catch (IllegalStateException iSE) {
-			throw iSE;
-		} catch (Exception e) {
-			throw e;
-		}
+//		dBStrategy.schrijfOpdrachten(oC);
+//		dBStrategy.schrijfQuizzen(qC);
+//		dBStrategy.schrijfQuizOpdrachten(qO);
+		dBStrategy.schrijfCatalogi(oC, qC, qO);
 	}
 }
 
