@@ -2,7 +2,7 @@ package model.statePattern;
 import model.Quiz;
 import model.QuizCatalogus;
 
-public class InConstructie_Status implements StatusInterface {
+public class InConstructie_Status implements Status {
 	
 	Quiz quiz;
 	QuizCatalogus catalogus;
@@ -13,15 +13,15 @@ public class InConstructie_Status implements StatusInterface {
 		this.catalogus = catalogus;
 	}
 	
-	public void verwijderQuiz(){
+	public void verwijderQuiz(Quiz quiz){
 		catalogus.deleteQuiz(quiz);
 	}
 	
-	public void editQuiz(){
+	public void editQuiz(Quiz quiz){
 		
 	}
 	
-	public void voegQuizToe(){
+	public void voegQuizToe(Quiz quiz){
 		
 	}
 }
