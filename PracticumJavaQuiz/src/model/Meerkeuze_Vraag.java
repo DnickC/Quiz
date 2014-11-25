@@ -154,7 +154,7 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 			}else{
 				return false;
 			}
-		}catch (Exception e){ return false; }
+		} catch(Exception e) {throw new IllegalArgumentException("Geen geldig antwoord");}
 	}
 
 	/**
@@ -166,5 +166,14 @@ public class Meerkeuze_Vraag extends Opdracht implements Valideerbaar {
 		return "Gebruik het nummer voor de keuze als antwoord op de vraag";
 	}
 
+	@Override
+	public int hashCode(){
+		final int prime = 31;
+		int result=1;
+		
+		result = prime * result + ((juisteAntwoord == 0) ? 0 : juisteAntwoord);
+		return result;
+		
+	}
 
 }

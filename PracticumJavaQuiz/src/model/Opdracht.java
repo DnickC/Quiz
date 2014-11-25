@@ -8,7 +8,7 @@ import utils.FromScratch.*;
 
 //import utils.FromScratch.Datum;
 
-public abstract class Opdracht implements Comparable<Opdracht>, Cloneable {
+public abstract class Opdracht implements Comparable, Cloneable {
 	
 	/**
 	 * Authors:
@@ -307,6 +307,16 @@ public abstract class Opdracht implements Comparable<Opdracht>, Cloneable {
 	 */
 	
 	public int hashCode(){
-		return this.opdrachtID;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (((maxAantalPogingen == 0) ? 0 : maxAantalPogingen));
+		result = prime * result + (((vraag == null)? 0 : vraag.hashCode()));
+		result = prime * result + (((hint == null)? 0 : hint.hashCode()));
+		result = prime * result + (((maxAntwoordTijd == 0)? 0 : maxAntwoordTijd));
+		result = prime * result + (((opdrachtCategorie == null)? 0 : opdrachtCategorie.hashCode()));
+		result = prime * result + (((initalisatieDatum == null)? 0 : initalisatieDatum.hashCode()));
+		result = prime * result + (((quizOpdrachten == null)? 0 : quizOpdrachten.hashCode()));
+
+		return result;
 	}
 }

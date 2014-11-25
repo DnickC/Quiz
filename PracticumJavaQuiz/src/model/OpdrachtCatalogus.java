@@ -6,7 +6,7 @@ import utils.FromScratch.*;
 import java.util.List;
 
 
-public class OpdrachtCatalogus implements Iterable<Quiz> {
+public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 	
 	/**
 	 * Authors: Andy Poron
@@ -130,27 +130,23 @@ public class OpdrachtCatalogus implements Iterable<Quiz> {
 	// equals - compareTo - HashCode
 	
 	@Override 
-	public Iterable<Opdracht> iterator(){
-		hasNext();
-		next();
+	public Iterator<Opdracht> iterator(){
+		return opdrachten.iterator();
 	}
 	
+
 	@Override
-	public boolean hasNext(){
-		if(this.currentIndex < this.maxIndex){ 
-			return true;
-		}else{
-			return false;
-		}
+	public int hashCode(){
+		final int prime = 31;
+		int result=1;
+		result = prime * result + ((catalogusNaam == null) ? 0 : catalogusNaam.hashCode());
+		result = prime * result + ((registratieDatum == null) ? 0 : registratieDatum.hashCode());
+		result = prime * result + ((begin == 0) ? 0 : begin);
+		result = prime * result + ((maxIndex == 0) ? 0 : maxIndex);
+		result = prime * result + ((currentIndex == 0) ? 0 : currentIndex);
+		result = prime * result + ((opdrachten == null) ? 0 : opdrachten.hashCode());
+		return result;
+		
 	}
-	
-	@Override
-	public Object next(){
-		if(currentIndex < maxIndex){
-			currentIndex++;
-		}
-		return opdrachten.get(currentIndex);
-	}
-	
 	
 }
