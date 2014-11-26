@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Reproductie_Vraag extends Opdracht {
+public class Reproductie_Vraag extends Opdracht implements Comparable {
 	
 	/**
 	 * Authors: 
@@ -147,7 +147,7 @@ public class Reproductie_Vraag extends Opdracht {
 	 * @param Object object 
 	 * @return int 
 	 */
-	
+	@Override
 	public int compareTo(Object object) {
 		if(object instanceof Reproductie_Vraag){
 			Reproductie_Vraag input = (Reproductie_Vraag)object;
@@ -169,6 +169,18 @@ public class Reproductie_Vraag extends Opdracht {
 
 	public String toString(){
 		return "Vraag: " + this.getVraag() + " Antwoorden: \n" + this.getTrefwoorden();
+	}
+	
+	@Override
+	public int hashCode(){
+		final int prime = 31;
+		int result=1;
+		
+		result = prime * result + ((trefwoorden == null) ? 0 : trefwoorden.hashCode());
+		result = prime * result + ((minAantalTrefwoorden == 0) ? 0 : minAantalTrefwoorden);
+
+		return result;
+		
 	}
 	
 	

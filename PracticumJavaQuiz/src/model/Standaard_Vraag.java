@@ -2,7 +2,7 @@ package model;
 
 import model.OpdrachtCategorie;
 
-public class Standaard_Vraag extends Opdracht {
+public class Standaard_Vraag  extends Opdracht {
 	
 	/**
 	 * Authors: 
@@ -67,6 +67,21 @@ public class Standaard_Vraag extends Opdracht {
 	
 	public String toString() {
 		return String.format("%S ( %S )", this.getVraag(), this.juistAntwoord); 
+	}
+
+	@Override
+	public int compareTo(Opdracht o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int hashCode(){
+		final int prime = 31;
+		int result=1;
+		result = prime * result + ((juistAntwoord == null) ? 0 : juistAntwoord.hashCode());
+		return result;
+		
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import model.OpdrachtCategorie;
 
-public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
+public class Opsomming_Vraag extends Opdracht implements Valideerbaar, Comparable {
 	
 	/**
 	 * Authors:
@@ -123,7 +123,7 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 			return false;
 		}	
 	}
-
+	@Override
 	public int compareTo(Object object) {
 		if(object instanceof Opsomming_Vraag){
 			Opsomming_Vraag input = (Opsomming_Vraag)object;
@@ -148,7 +148,17 @@ public class Opsomming_Vraag extends Opdracht implements Valideerbaar {
 		return "Vraag: " + this.getVraag() + " Antwoorden: \n" + getAntwoordenToString();
 	}
 
+	@Override
+	public int hashCode(){
+		final int prime = 31;
+		int result=1;
+		
+		result = prime * result + ((antwoordenLijst == null) ? 0 : antwoordenLijst.hashCode());
 
+		return result;
+		
+	}
+	
 }
 
 
