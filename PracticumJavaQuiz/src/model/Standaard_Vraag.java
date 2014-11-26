@@ -70,9 +70,19 @@ public class Standaard_Vraag  extends Opdracht {
 	}
 
 	@Override
-	public int compareTo(Opdracht o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Object object) {
+		if(object instanceof Standaard_Vraag){
+			Standaard_Vraag input = (Standaard_Vraag)object;
+			if(this.getVraag() == input.getVraag() && this.getJuisteAntwoord() == input.getJuisteAntwoord() ){
+				if(this.getMaxAantalPogingen() < input.getMaxAantalPogingen() || this.getMaxAntwoordTijd() < input.getMaxAntwoordTijd()){
+					return -1;
+				}
+				return 0;
+			}else{
+				return 1;
+			}
+			
+		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
 	}
 	
 	@Override

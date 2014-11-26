@@ -6,7 +6,7 @@ import utils.FromScratch.*;
 import java.util.List;
 
 
-public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
+public class OpdrachtCatalogus implements Iterable,Cloneable {
 	
 	/**
 	 * Authors: Andy Poron
@@ -14,7 +14,8 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 	 * 
 	 */
 	
-	private List<Opdracht> opdrachten = new ArrayList<>();
+	//private List<Opdracht> opdrachten = new ArrayList<>();
+	private HashMap<Integer,Opdracht> opdrachten;
 	private String catalogusNaam = null;
 	private Datum registratieDatum;
 	private final int begin = 0;
@@ -55,30 +56,26 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 		if(opdracht.getVraag() != null){
 			this.maxIndex++;
 			opdracht.setID(this.maxIndex);
-		opdrachten.add(opdracht);
+		opdrachten.put(this.maxIndex, opdracht);
 		this.currentIndex = opdracht.getID();
 		}else{throw new NullPointerException("Geen vraag");}
-	}
-	/**
-	 * returns the wanted assignement based on a text input
-	 * @param String opdracht
-	 */
-		public Opdracht getOpdracht(String opdracht){
-		for(Opdracht p: opdrachten){
-			if(p.getVraag() == opdracht){
-				this.currentIndex = p.getID();
-				return p;
-			}
-		}
-		throw new IllegalArgumentException("Opdracht niet gevonden");
 	}
 	
 	/**
 	 * returns the wanted assignement based on a Opdracht. 
 	 * @param Opdracht opdracht
 	 */
-	
-	public Opdracht getOpdracht(Opdracht opdracht){
+		public Opdracht getOpdracht(Opdracht opdracht){
+			while(iterator().hasNext()){
+				int key = iterator().next();
+				if(key == opdracht.getID()){
+					return (Opdracht)opdrachten.get(key);
+				}
+			}
+			throw new IllegalArgumentException("Opdracht niet gevonden");
+		}
+		
+	/*public Opdracht getOpdracht(Opdracht opdracht){
 		for(Opdracht p: opdrachten){
 			if(p == opdracht){
 				this.currentIndex = p.getID();
@@ -86,7 +83,7 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 			}
 		}
 		throw new IllegalArgumentException("Opdracht niet gevonden");
-	}
+	}*/
 	
 	/**
 	 * remove's an assignement from the catalogue  
@@ -94,7 +91,7 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 	 */
 	
 	public void deleteOpdracht(Opdracht opdracht){
-		opdrachten.remove(opdracht);
+		opdrachten.remove(opdracht.getID());
 	}
 	
 	/**
@@ -102,7 +99,7 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 	 * 
 	 */
 	
-	public List<Opdracht> getCatalogus(){
+	public HashMap<Integer,Opdracht> getCatalogus(){
 		return opdrachten;
 	}
 	
@@ -111,11 +108,12 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 	 */
 	
 	public String getCatalogusToString(){
-		String uitput= null;
-		for(Opdracht o : opdrachten){
-			uitput += o.toString() + "\n";
+		String output= null;
+		while(iterator().hasNext()){
+			int key = iterator().next();
+			output = output + "ID: " + key + "Vraag: " + opdrachten.get(key).getVraag() + "\n"; 
 		}
-		return uitput;
+		return output;
 	}
 	
 	/**
@@ -130,8 +128,9 @@ public class OpdrachtCatalogus implements Iterable<Opdracht>,Cloneable {
 	// equals - compareTo - HashCode
 	
 	@Override 
-	public Iterator<Opdracht> iterator(){
-		return opdrachten.iterator();
+	public Iterator<Integer> iterator(){
+		Iterator<Integer> iterator = opdrachten.keySet().iterator();
+		return iterator;
 	}
 	
 
