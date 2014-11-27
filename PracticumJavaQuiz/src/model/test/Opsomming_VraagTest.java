@@ -3,18 +3,18 @@ package model.test;
 import static org.junit.Assert.*;
 
 import model.OpdrachtCategorie;
-import model.Vraag_Opsomming;
+import model.Opsomming_Vraag;
 
 import org.junit.Test;
 import org.junit.Before;
 
 public class Opsomming_VraagTest {
 
-	private Vraag_Opsomming constrTest;
+	private Opsomming_Vraag constrTest;
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Opsomming("vraag", "antwoorden", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Opsomming_Vraag("vraag", "antwoorden", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

@@ -3,18 +3,18 @@ package model.test;
 import static org.junit.Assert.*;
 
 import model.OpdrachtCategorie;
-import model.Vraag_Meerkeuze;
+import model.Meerkeuze_Vraag;
 
 import org.junit.Test;
 import org.junit.Before;
 
 public class Meerkeuze_VraagTest {
 
-	private Vraag_Meerkeuze constrTest;
+	private Meerkeuze_Vraag constrTest;
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Meerkeuze(null, null, 0, 0, 0, null, OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Meerkeuze_Vraag(null, null, 0, 0, 0, null, OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

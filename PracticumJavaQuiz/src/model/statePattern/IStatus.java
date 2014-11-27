@@ -1,10 +1,9 @@
 package model.statePattern;
 
+import model.Quiz;
+
 public interface IStatus {
 
-	/**
-	 * @author Andy Poron
-	 */
 	public boolean verwijderQuiz();
 	
 	public boolean editQuizEigenschappen();
