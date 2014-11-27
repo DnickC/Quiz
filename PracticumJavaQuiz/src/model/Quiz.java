@@ -16,13 +16,13 @@ public class Quiz {
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
 	
-	Status Afgesloten_Status;
-	Status Afgewerkt_Status;
-	Status InConstructie_Status;
-	Status LaatsteKans_Status;
-	Status Opengesteld_Status;
+	IStatus Afgesloten_Status;
+	IStatus Afgewerkt_Status;
+	IStatus InConstructie_Status;
+	IStatus LaatsteKans_Status;
+	IStatus Opengesteld_Status;
 	
-	Status quizStat = InConstructie_Status;
+	IStatus quizStat = InConstructie_Status;
 	
 	private int quizID = 0;
 	private String onderwerp = null;
@@ -75,15 +75,24 @@ public class Quiz {
 			throw new IllegalArgumentException("Quizstatus niet correct ingegeven.");
 		}
 	}
+	
+	
 
 	public void setAuteur(Leraar leraar)
 	{		
-		this.auteur = leraar;	
+		if(this.quizStat.editQuizEigenschappen() == true){
+					this.auteur = leraar;	
+		}else{
+			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
+		}
 	}
 
 	public void setIsUniekeDeelname(boolean uniekeDeelname) {
-		
-		this.isUniekeDeelname = uniekeDeelname;
+		if(this.quizStat.editIsUniekeDeelname() == true){
+			this.isUniekeDeelname = uniekeDeelname;
+		}else{
+			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
+		}
 	}
 	
 	// Moet hier uw kleine woorden al niet uit gefilterd worden? 
@@ -92,14 +101,18 @@ public class Quiz {
 	
 	public void setOnderwerp(String onderwerp) throws IllegalArgumentException
 	{
-		if (onderwerp!= null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
-		{
-			this.onderwerp = onderwerp;
-			onderwerpen.add(onderwerp);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Ingegeven onderwerp is niet geldig!");
+		if(this.quizStat.editQuizEigenschappen() == true){
+			if (onderwerp!= null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
+			{
+				this.onderwerp = onderwerp;
+				onderwerpen.add(onderwerp);
+			}
+			else
+			{
+				throw new IllegalArgumentException("Ingegeven onderwerp is niet geldig!");
+			}
+		}else{
+			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
 	}
 	
@@ -122,13 +135,18 @@ public class Quiz {
 	
 	public void setLeerjaar(int leerjaar)
 	{
-		if (leerjaar > 0 && leerjaar <= 6)
-		{
-			this.leerjaar = leerjaar;
-		}
-		else
-		{
-			throw new NumberFormatException("Leerjaar niet geldig!");
+		if(this.quizStat.editQuizEigenschappen() == true){
+
+			if (leerjaar > 0 && leerjaar <= 6)
+			{
+				this.leerjaar = leerjaar;
+			}
+			else
+			{
+				throw new NumberFormatException("Leerjaar niet geldig!");
+			}
+		}else{
+			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
 	}
 	
@@ -139,11 +157,16 @@ public class Quiz {
 	
 	public void setIsTest(boolean isTest)
 	{
-		if(isTest)
-		{
-			quizDeelname.getUniekeDeelname(); //dit moet nog gebrainstormd worden.
+		if(this.quizStat.editQuizEigenschappen() == true){
+
+			if(isTest)
+			{
+				quizDeelname.getUniekeDeelname(); //dit moet nog gebrainstormd worden.
+			}
+			this.isTest = isTest;
+		}else{
+			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
-		this.isTest = isTest;
 	}
 	
 	public boolean getIsTest()
