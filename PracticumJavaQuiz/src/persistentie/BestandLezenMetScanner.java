@@ -19,7 +19,9 @@ public class BestandLezenMetScanner {
 	Persoon jongste = null;
 	Persoon oudste = null;
 
-	
+	/**
+	 * Converts a text file to a string array. 
+	 */
 	
 	public void leesPersonenVanBestand() {
 		
@@ -62,6 +64,10 @@ public class BestandLezenMetScanner {
 		}
 	}
 	
+	/**
+	 * Receive the oldest person of the list 
+	 */
+	
 	private void getOudste() {
 		if (personenLijst.get(0) != null) {
 			oudste = personenLijst.get(0);
@@ -73,7 +79,12 @@ public class BestandLezenMetScanner {
 				oudste = personenLijst.get(i);
 			}
 		}
-	}
+	
+		/**
+		 * Receive the youngest person of the list 
+		 */
+		}
+	
 	
 	private void getJongste() {
 		if (personenLijst.get(0) != null) {
@@ -86,31 +97,59 @@ public class BestandLezenMetScanner {
 		}
 	}
 	
+	/**
+	 * print the oldest person of the list 
+	 */
+	
+	
 	private void printOudste(){
 		this.getOudste();
 		System.out.println("De oudste persoon is " + oudste.getNaam() + " en is geboren op " + oudste.getGeboorteDatum().toString());
 	}
+	/**
+	 * Print the youngest person of the list 
+	 */
 	
 	private void printJongste(){
 		this.getJongste();
 		System.out.println("De jongste persoon is " + jongste.getNaam() + " en is geboren op " + jongste.getGeboorteDatum().toString());
 	}
 	
+	/**
+	 * Get difference in days between oldest and youngest 
+	 */
+	
+	
 	private int getVerschilInDagen(){
 		return oudste.getGeboorteDatum().verschilInDagen(jongste.getGeboorteDatum());
 	}
+	/**
+	 * Get difference in years between oldest and youngest 
+	 */
 	
 	private int getVerschilInJaren(){
 		return oudste.getGeboorteDatum().verschilInJaren(jongste.getGeboorteDatum());
 	}
 	
+	/**
+	 * Print the difference in days between oldest and youngest 
+	 */
+	
 	private void printVerschilInDagen(){
 		System.out.println("Het verschil in dagen tussen de oudste en jongste persoon is " + this.getVerschilInDagen());
 	}
 	
+	/**
+	 * Print the difference in years between oldest and youngest 
+	 */
+	
 	private void printVerschilInJaren(){
 		System.out.println("Het verschil in jaren is " + this.getVerschilInJaren());
 	}
+	
+	/**
+	 * Print overview 
+	 */
 	
 	public void printOutput(){
 		this.printOudste();
