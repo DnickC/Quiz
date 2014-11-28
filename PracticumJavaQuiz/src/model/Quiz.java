@@ -1,8 +1,9 @@
 package model;
-import java.util.ArrayList;
-
+import java.util.List;
 import java.util.Set;
+
 import model.statePattern.*;
+
 public class Quiz {
 	
 	/**
@@ -16,28 +17,30 @@ public class Quiz {
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
 	
-	IStatus Afgesloten_Status;
-	IStatus Afgewerkt_Status;
-	IStatus InConstructie_Status;
-	IStatus LaatsteKans_Status;
-	IStatus Opengesteld_Status;
+	IStatus Status_Afgesloten;
+	IStatus Status_Afgewerkt;
+	IStatus Status_InConstructie;
+	IStatus Status_LaatsteKans;
+	IStatus Status_Opengesteld;
 	
-	IStatus quizStat = InConstructie_Status;
+	IStatus quizState = new Status_InConstructie();
 	
-	private int quizID = 0;
-	private String onderwerp = null;
-	private ArrayList<String> onderwerpen = new ArrayList<String>();
-	private int leerjaar = 0;
-	private boolean isTest = false;
-	private boolean isUniekeDeelname = false;
-	private QuizStatus quizStatus = null;
+	private int quizID;
+	private String onderwerp;
+	private int leerjaar;
+	private boolean isTest;
+	private boolean isUniekeDeelname;
+	private QuizStatus quizStatus;
+	
 	private QuizDeelname quizDeelname;
+	
 	private QuizCatalogus quizCatalogus;
 	private Leraar auteur;
+	
 	private Set<QuizOpdracht> quizOpdrachten;
 	
 		
-	public Quiz(String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
+	public Quiz (String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status) throws Exception
 	{
 		try
 		{
@@ -50,7 +53,8 @@ public class Quiz {
 		}
 		catch (Exception e)
 		{
-			System.out.println("Aanmaken quiz niet gelukt.");
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
 		}
 	}
 	
@@ -64,11 +68,9 @@ public class Quiz {
 		return this.quizID;
 	}
 	
-	// Quizstatus wordt niet geset. if(status.equals()) werkt niet correct. = altijd null
-	
 	public void setQuizStatus(QuizStatus status) throws NullPointerException
 	{
-		if (status.equals(QuizStatus.values())) {
+		if (status instanceof QuizStatus) {
 			this.quizStatus = status;
 		}
 		else {
@@ -76,19 +78,18 @@ public class Quiz {
 		}
 	}
 	
-	
-
 	public void setAuteur(Leraar leraar)
 	{		
-		if(this.quizStat.editQuizEigenschappen() == true){
-					this.auteur = leraar;	
-		}else{
+		if (this.quizState.editQuizEigenschappen() == true) {
+			this.auteur = leraar;	
+		}
+		else {
 			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
 	}
 
 	public void setIsUniekeDeelname(boolean uniekeDeelname) {
-		if(this.quizStat.editIsUniekeDeelname() == true){
+		if(this.quizState.editIsUniekeDeelname() == true){
 			this.isUniekeDeelname = uniekeDeelname;
 		}else{
 			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
@@ -101,17 +102,18 @@ public class Quiz {
 	
 	public void setOnderwerp(String onderwerp) throws IllegalArgumentException
 	{
-		if(this.quizStat.editQuizEigenschappen() == true){
-			if (onderwerp!= null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
+		if (this.quizState.editQuizEigenschappen() == true) {
+			//if (onderwerp != null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
+			if (onderwerp != null && onderwerp.isEmpty() == false)
 			{
 				this.onderwerp = onderwerp;
-				onderwerpen.add(onderwerp);
 			}
 			else
 			{
 				throw new IllegalArgumentException("Ingegeven onderwerp is niet geldig!");
 			}
-		}else{
+		}
+		else {
 			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
 	}
@@ -135,7 +137,7 @@ public class Quiz {
 	
 	public void setLeerjaar(int leerjaar)
 	{
-		if(this.quizStat.editQuizEigenschappen() == true){
+		if(this.quizState.editQuizEigenschappen() == true){
 
 			if (leerjaar > 0 && leerjaar <= 6)
 			{
@@ -155,16 +157,18 @@ public class Quiz {
 		return this.leerjaar;
 	}
 	
-	public void setIsTest(boolean isTest)
+	public void setIsTest (boolean isTest)
 	{
-		if(this.quizStat.editQuizEigenschappen() == true){
+		if (this.quizState.editQuizEigenschappen() == true) {
 
-			if(isTest)
+			if (isTest)
 			{
-				quizDeelname.getUniekeDeelname(); //dit moet nog gebrainstormd worden.
+				//quizDeelname.getUniekeDeelname(); //dit moet nog gebrainstormd worden.
 			}
+			
 			this.isTest = isTest;
-		}else{
+		}
+		else {
 			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
 	}
@@ -176,11 +180,15 @@ public class Quiz {
 	
 	public boolean testOnderwerp(String onderwerp)
 	{
+		List<String> onderwerpen = quizCatalogus.getOnderwerpen();
+		
 		onderwerp = onderwerp.toLowerCase();
-		onderwerp = onderwerp.replaceAll("de|een|het|met|van|in", "");
+		onderwerp = onderwerp.replaceAll(" de | een | het | met | van | in ", "");
 		String[] woorden = onderwerp.split(" ");
+		
 		boolean check = true;
-		for (String thema : onderwerpen){
+		
+		for (String thema : onderwerpen) {
 			check = true;
 			for (int i=0;i<woorden.length;i++) {
 				if (!thema.toLowerCase().contains(woorden[i].trim())){

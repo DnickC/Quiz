@@ -66,13 +66,7 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 			}
 		}
 		throw new IllegalArgumentException("Onderwerp niet gevonden");
-		
-		
-		
 	}
-	
-	
-	
 	
 	/**
 	 * Add's a quiz to the QuizCatalogue
@@ -82,17 +76,15 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 	
 	public void addQuiz(Quiz quiz){
 			
-		if(quiz.getLeraar() == null ){ //hier moet ook nog controle worden uitgevoerd op datum !
+		if(quiz.getLeraar() == null ) { //hier moet ook nog controle worden uitgevoerd op datum !
 			throw new IllegalArgumentException("De leraar is niet gekozen");
-				}
+		}
 		
 		boolean nieuw = true;
 		for(Quiz q : quizzes){
-		if(q.testOnderwerp(quiz.getOnderwerp())){
-			nieuw = false;
-			
-						
-		}
+			if(q.testOnderwerp(quiz.getOnderwerp())){
+				nieuw = false;
+			}
 		}
 		
 		if(nieuw){
@@ -185,7 +177,15 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 	public List<Quiz> getCatalogus() {
 		return quizzes;
 	}
-	
-	
-	
+
+	public List<String> getOnderwerpen() {
+		
+		List<String> onderwerpen = new ArrayList<String>(); 
+		
+		for (Quiz q : quizzes) {
+			onderwerpen.add(q.getOnderwerp());
+		}
+		
+		return onderwerpen;
+	}
 }
