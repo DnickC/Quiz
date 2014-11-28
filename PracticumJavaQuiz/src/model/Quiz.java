@@ -76,14 +76,19 @@ public class Quiz {
 			switch (status) { 
 			case inConstructie:
 				this.quizState = new Status_InConstructie();
+				break;
 			case afgewerkt:
 				this.quizState = new Status_Afgewerkt();
+				break;
 			case opengesteld:
 				this.quizState = new Status_Opengesteld();
+				break;
 			case laatsteKans:
 				this.quizState = new Status_LaatsteKans();
+				break;
 			case afgesloten:
 				this.quizState = new Status_Afgesloten();
+				break;
 
 			default:
 				break;
