@@ -72,6 +72,22 @@ public class Quiz {
 	{
 		if (status instanceof QuizStatus) {
 			this.quizStatus = status;
+			
+			switch (status) { 
+			case inConstructie:
+				this.quizState = new Status_InConstructie();
+			case afgewerkt:
+				this.quizState = new Status_Afgewerkt();
+			case opengesteld:
+				this.quizState = new Status_Opengesteld();
+			case laatsteKans:
+				this.quizState = new Status_LaatsteKans();
+			case afgesloten:
+				this.quizState = new Status_Afgesloten();
+
+			default:
+				break;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("Quizstatus niet correct ingegeven.");
@@ -147,7 +163,7 @@ public class Quiz {
 			{
 				throw new NumberFormatException("Leerjaar niet geldig!");
 			}
-		}else{
+		}else {
 			throw new IllegalThreadStateException("Door de huidige status van de quiz, kan u dit niet aanpassen");
 		}
 	}
