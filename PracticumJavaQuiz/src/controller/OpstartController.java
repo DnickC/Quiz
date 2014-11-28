@@ -1,51 +1,57 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
+import java.util.Properties;
+
 
 import persistentie.DBHandler;
-import persistentie.iDBStrategy;
+import persistentie.IDBStrategy;
 
 public class OpstartController {
 	
-	private static String initPath = "PracticumJavaQuiz//src//persistentie//init.txt";
-	private DBHandler dBH;
+	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		
+		DBHandler dBH = new DBHandler();
+		Properties table = new Properties();
+		
+		table.setProperty("IDBStrategy", "TXTTemplate" );
+		saveProperties(table);
+		
+		loadProperties(table);
+//		IDBStrategy strategy = (IDBStrategy)table.getProperty("iDBStrategy");
+//		dBH.setStrategy(strategy);
 		
 	}
 	
-	private void readInit() {
-		Scanner input = null;
-		iDBStrategy strategy = null;
-		
+	/**
+	 * Deze functie schrijft een set van properties naar het bestand "start.ini"
+	 */
+	private static void saveProperties(Properties props) throws IOException {
 		try {
+			FileOutputStream output = new FileOutputStream(initPath);
+			props.store(output, "Start Properties");
+			output.close();
 			
-			Path path = Paths.get(initPath);
-			input = new Scanner(path);
+		} catch (IOException ioException) {
+			throw new IOException();
+		}
+	}
+	
+	/**
+	 * Deze functie leest een set van properties uit het bestand "start.ini"
+	 */
+	private static void loadProperties(Properties props) throws IOException {
+		try {
+			FileInputStream input = new FileInputStream(initPath);
+			props.load(input);
+			input.close();
 			
-			while (input.hasNext()) {
-				strategy = input.next();
-			}
-
-			if (input != null) {
-				input.close();
-			}
-			
-			dBH.setStrategy(strategy);
-
-
-		} catch (IOException iOE) {
-			throw iOE;
-		} catch (InvalidPathException iPE) {
-			throw iPE;
-		} catch (IllegalStateException iSE) {
-			throw iSE;
 		} catch (Exception e) {
-			throw e;
+			throw new IOException();
 		}
 	}
 }
