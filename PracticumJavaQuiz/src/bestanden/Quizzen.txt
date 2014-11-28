@@ -1,2 +1,6 @@
-String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status
+onderwerp1	1	true	true	LeraarA		inConstructie
+onderwerp2	2	true	false	LeraarB		afgewerkt
+onderwerp3	3	false	true	LeraarC		opengesteld
+onderwerp4	4	false	true	LeraarD		laatsteKans
+onderwerp5	5	true	false	LeraarE		afgesloten
 

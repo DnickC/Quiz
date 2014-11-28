@@ -1,10 +1,4 @@
 package persistentie;
-import java.util.*;
-import java.io.*;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
 
 import model.OpdrachtCatalogus;
 import model.QuizCatalogus;
@@ -18,12 +12,12 @@ import model.QuizOpdracht;
 
 public class DBHandler {
 	
-	private iDBStrategy dBStrategy;
+	private IDBStrategy dBStrategy;
 
 	/**
 	 * Sets the strategy to be used for persistency
 	 */
-	public void setStrategy(iDBStrategy strategy) {
+	public void setStrategy(IDBStrategy strategy) {
 		this.dBStrategy = strategy;
 	}
 	
@@ -31,15 +25,19 @@ public class DBHandler {
 	 * Gets the strategy used for persistency
 	 * @return iDBStrategy
 	 */
-	public iDBStrategy getStrategy() {
+	public IDBStrategy getStrategy() {
 		return this.dBStrategy;
+	}
+	
+	public DBHandler() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	/**
 	 * Assignement constructor
-	 * @param iDBStrategy
+	 * @param IDBStrategy
 	 */
-	public DBHandler(iDBStrategy strategy) {
+	public DBHandler(IDBStrategy strategy) {
 		this.setStrategy(strategy);
 	}
 	
@@ -48,9 +46,6 @@ public class DBHandler {
 	 * opdrachten, quizzen and quizopdrachten
 	 */
 	public void leesCatalogi() {
-//		dBStrategy.leesOpdrachten();
-//		dBStrategy.leesQuizzen();
-//		dBStrategy.leesQuizOpdrachten();
 		dBStrategy.leesCatalogi();
 	}
 	
@@ -62,9 +57,6 @@ public class DBHandler {
 	 * @param QuizOpdracht
 	 */
 	public void schrijfCatalogi(OpdrachtCatalogus oC, QuizCatalogus qC, QuizOpdracht qO) {
-//		dBStrategy.schrijfOpdrachten(oC);
-//		dBStrategy.schrijfQuizzen(qC);
-//		dBStrategy.schrijfQuizOpdrachten(qO);
 		dBStrategy.schrijfCatalogi(oC, qC, qO);
 	}
 }

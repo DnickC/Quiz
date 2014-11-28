@@ -18,12 +18,15 @@ public class OpstartController {
 		DBHandler dBH = new DBHandler();
 		Properties table = new Properties();
 		
-		table.setProperty("IDBStrategy", "TXTTemplate" );
-		saveProperties(table);
+//		table.setProperty("IDBStrategy", "TXTTemplate" );
+//		saveProperties(table);
 		
 		loadProperties(table);
+		
 //		IDBStrategy strategy = (IDBStrategy)table.getProperty("iDBStrategy");
 //		dBH.setStrategy(strategy);
+		
+		dBH.leesCatalogi();
 		
 	}
 	

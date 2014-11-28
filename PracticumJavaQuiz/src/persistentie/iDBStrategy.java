@@ -1,5 +1,7 @@
 package persistentie;
 
+import java.io.FileNotFoundException;
+
 import model.OpdrachtCatalogus;
 import model.QuizCatalogus;
 import model.QuizOpdracht;
@@ -10,23 +12,9 @@ import model.QuizOpdracht;
  * 
  */
 
-public interface iDBStrategy {
+public interface IDBStrategy {
 
-//	void leesOpdrachten();
-//
-//	void schrijfOpdrachten(OpdrachtCatalogus oC);
-//
-//	void leesQuizzen();
-//
-//	void schrijfQuizzen(QuizCatalogus qC);
-//
-//	void leesQuizOpdrachten();
-//
-//	void schrijfQuizOpdrachten(QuizOpdracht qO);
-//	
-//	void setStrategy(String strategy);
-	
-	void leesCatalogi();
+	void leesCatalogi() throws FileNotFoundException;
 	
 	void schrijfCatalogi(OpdrachtCatalogus oC, QuizCatalogus qC, QuizOpdracht qO);
 }

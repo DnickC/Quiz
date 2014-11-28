@@ -2,6 +2,7 @@ package persistentie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,72 +10,79 @@ import model.OpdrachtCatalogus;
 import model.QuizCatalogus;
 import model.QuizOpdracht;
 
-public abstract class TXTTemplate implements iDBStrategy {
+/**
+ * @Authors: Dominique
+ * Version: 1.0
+ * 
+ */
+
+public abstract class TXTTemplate implements IDBStrategy {
 	
-	static File opdrachtTxt = new File("PracticumJavaQuiz//src//bestanden//Opdrachten.txt");
-	static File quizTxt = new File("PracticumJavaQuiz//src//bestanden//Quizzen.txt");
-	static File quizOpdrachtTxt = new File("PracticumJavaQuiz//src//bestanden//QuizOpdrachten.txt");
-
 	List<String[]> objectenUitFile;
-
-	public final void leesCatalogi() {
+	
+	public final void leesCatalogi() throws FileNotFoundException {
 		this.leesOpdrachten();
 		this.leesQuizzen();
 		this.leesQuizOpdrachten();
 	}
 
-	private final void leesOpdrachten() {
-		this.objectenUitFile = this.leesFile(opdrachtTxt);
+	private final void leesOpdrachten() throws Exception {
+		this.objectenUitFile = this.leesFile(getFile());
 		this.constructObjecten(objectenUitFile);
 	}
 
-	private final void leesQuizzen() {
-		this.objectenUitFile = this.leesFile(quizTxt);
-		this.constructObjecten(objectenUitFile);
-	}
-
-	private final void leesQuizOpdrachten() {
-		this.objectenUitFile = this.leesFile(quizOpdrachtTxt);
-		this.constructObjecten(objectenUitFile);
-	}
-
-	public List<String[]> leesFile(File file) {
+	private final void leesQuizzen() throws FileNotFoundException {
+		this.objectenUitFile = this.leesFile(getFile());
 		
-		List<String[]> objecten = null;
+		if (objectenUitFile != null) {
+			constructObjecten(objectenUitFile);
+		}
+	}
+
+	private final void leesQuizOpdrachten() throws FileNotFoundException {
+		this.objectenUitFile = this.leesFile(getFile());
+		this.constructObjecten(objectenUitFile);
+	}
+
+	/**
+	 * Methode that reads a given txt file containing saved objects,
+	 * using a scanner it returns a list containing string arrays.
+	 * Each of these arrays represents the parameters of a single object.  
+	 * @param File
+	 * @throws FileNotFoundException
+	 * @return List<String[]>
+	 */
+	public List<String[]> leesFile(File file) throws FileNotFoundException {
 		
-		try{
-			Scanner scanner = new Scanner(file);
+		List<String[]> objecten = new ArrayList<String[]>();
+		
+		try {
 			
+			Scanner scanner = new Scanner(file);
 			
 			while (scanner.hasNext()) {
 				String lijn = scanner.nextLine();
 				String [] velden = lijn.split("\\t+");
 				objecten.add(velden);
-				
 			}
 			
 			if (scanner!=null){
 			  scanner.close();
 			}
-		
 		}
 		  	
-		catch(FileNotFoundException ex){
-			System.out.println("bestand niet gevonden");
+		catch(FileNotFoundException ex) {
+			throw new FileNotFoundException("bestand niet gevonden");
 		}
-		catch(Exception ex){
+		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
-		finally {
-			return objecten;
-		}
+		
+		return objecten;
 	}
 
-	abstract void constructObjecten(List<String[]> list);
-	
-	
-	
-	
+	abstract void constructObjecten(List<String[]> list) throws Exception;
+	abstract File getFile();
 	
 	@Override
 	public final void schrijfCatalogi(OpdrachtCatalogus oC, QuizCatalogus qC,

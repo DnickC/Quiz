@@ -4,14 +4,14 @@
   <class id="1" language="java" name="persistentie.DBHandler" project="PracticumJavaQuiz" 
     file="/PracticumJavaQuiz/PracticumJavaQuiz/src/persistentie/DBHandler.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="188" y="-38"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="2" language="java" name="persistentie.iDBStrategy" project="PracticumJavaQuiz" 
-    file="/PracticumJavaQuiz/PracticumJavaQuiz/src/persistentie/iDBStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="2" language="java" name="persistentie.IDBStrategy" project="PracticumJavaQuiz" 
+    file="/PracticumJavaQuiz/PracticumJavaQuiz/src/persistentie/IDBStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="622" y="-64"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="persistentie.QuizzenTXT" project="PracticumJavaQuiz" 
     file="/PracticumJavaQuiz/PracticumJavaQuiz/src/persistentie/QuizzenTXT.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1107" y="435"/>    
+    <position height="-1" width="-1" x="1074" y="427"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="persistentie.OpdrachtenTXT" project="PracticumJavaQuiz" 
     file="/PracticumJavaQuiz/PracticumJavaQuiz/src/persistentie/OpdrachtenTXT.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="663" y="472"/>    
+    <position height="-1" width="-1" x="616" y="428"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +49,7 @@
   <class id="6" language="java" name="persistentie.QuizOpdrachtenTXT" project="PracticumJavaQuiz" 
     file="/PracticumJavaQuiz/PracticumJavaQuiz/src/persistentie/QuizOpdrachtenTXT.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="885" y="408"/>    
+    <position height="-1" width="-1" x="845" y="409"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
