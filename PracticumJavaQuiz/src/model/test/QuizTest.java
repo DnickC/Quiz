@@ -56,10 +56,10 @@ public class QuizTest {
 		assertEquals("Rekenen",constrTest.getOnderwerp());
 	}
 	
-	@Test
-	public void test_setOnderwerp_NOK(){
-		//assertFalse(constrTest.testOnderwerp("PauwChiPauw"));
-	}
+//	@Test
+//	public void test_setOnderwerp_NOK(){
+//		assertFalse(constrTest.testOnderwerp("PauwChiPauw"));
+//	}
 	
 	@Test
 	public void test_setIstest_Ok(){

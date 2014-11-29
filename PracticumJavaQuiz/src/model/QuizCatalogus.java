@@ -74,7 +74,7 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 	 * @throws NullPointerException
 	 */
 	
-	public void addQuiz(Quiz quiz){
+	public void addQuiz (Quiz quiz){
 			
 		if(quiz.getLeraar() == null ) { //hier moet ook nog controle worden uitgevoerd op datum !
 			throw new IllegalArgumentException("De leraar is niet gekozen");
@@ -82,7 +82,7 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 		
 		boolean nieuw = true;
 		for(Quiz q : quizzes){
-			if(q.testOnderwerp(quiz.getOnderwerp())){
+			if(this.testOnderwerp(quiz.getOnderwerp())){
 				nieuw = false;
 			}
 		}
@@ -187,5 +187,30 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 		}
 		
 		return onderwerpen;
+	}
+	
+	public boolean testOnderwerp(String onderwerp)
+	{
+		List<String> onderwerpen = this.getOnderwerpen();
+		
+		onderwerp = onderwerp.toLowerCase();
+		onderwerp = onderwerp.replaceAll(" de | een | het | met | van | in ", "");
+		String[] woorden = onderwerp.split(" ");
+		
+		boolean check = true;
+		
+		for (String thema : onderwerpen) {
+			check = true;
+			for (int i=0;i<woorden.length;i++) {
+				if (!thema.toLowerCase().contains(woorden[i].trim())){
+					check = false;
+					break;
+				}
+			}
+			if (check) {
+				return check;
+			}
+		}
+		return false;
 	}
 }

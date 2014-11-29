@@ -87,7 +87,7 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 		try{
 			int count = 0;
 			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)|( )");
-				while(count <= splitAntwoorden.length){
+				while(count < splitAntwoorden.length){
 					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;
 				}

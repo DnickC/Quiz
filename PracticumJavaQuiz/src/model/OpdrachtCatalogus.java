@@ -6,7 +6,7 @@ import utils.FromScratch.*;
 import java.util.List;
 
 
-public class OpdrachtCatalogus implements Iterable,Cloneable {
+public class OpdrachtCatalogus implements Iterable, Cloneable {
 	
 	/**
 	 * Authors: Andy Poron
@@ -17,7 +17,7 @@ public class OpdrachtCatalogus implements Iterable,Cloneable {
 	//private List<Opdracht> opdrachten = new ArrayList<>();
 	private HashMap<Integer,Opdracht> opdrachten;
 	private String catalogusNaam = null;
-	private Datum registratieDatum;
+	//private Datum registratieDatum;
 	private final int begin = 0;
 	private int maxIndex = 0;
 	private int currentIndex = 0;
@@ -37,16 +37,16 @@ public class OpdrachtCatalogus implements Iterable,Cloneable {
 		OpdrachtCatalogus clone = new OpdrachtCatalogus(this.catalogusNaam);
 		return clone;
 	}
-	
-	/**
-	 * sets the registration date for a catalogus. 
-	 * @param Datum registratiedatum
-	 */
-	
-	public void setDatum(Datum registratiedatum){
-		this.registratieDatum = registratiedatum;
-	}
-	
+//	
+//	/**
+//	 * sets the registration date for a catalogus. 
+//	 * @param Datum registratiedatum
+//	 */
+//	
+//	public void setDatum(Datum registratiedatum){
+//		this.registratieDatum = registratiedatum;
+//	}
+//	
 	/**
 	 * Add's an assignement to the assignementcatalogue 
 	 * @param Opdracht opdracht
@@ -139,7 +139,7 @@ public class OpdrachtCatalogus implements Iterable,Cloneable {
 		final int prime = 31;
 		int result=1;
 		result = prime * result + ((catalogusNaam == null) ? 0 : catalogusNaam.hashCode());
-		result = prime * result + ((registratieDatum == null) ? 0 : registratieDatum.hashCode());
+		//result = prime * result + ((registratieDatum == null) ? 0 : registratieDatum.hashCode());
 		result = prime * result + ((begin == 0) ? 0 : begin);
 		result = prime * result + ((maxIndex == 0) ? 0 : maxIndex);
 		result = prime * result + ((currentIndex == 0) ? 0 : currentIndex);
@@ -147,5 +147,4 @@ public class OpdrachtCatalogus implements Iterable,Cloneable {
 		return result;
 		
 	}
-	
 }

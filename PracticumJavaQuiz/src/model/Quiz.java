@@ -34,7 +34,6 @@ public class Quiz {
 	
 	private QuizDeelname quizDeelname;
 	
-	private QuizCatalogus quizCatalogus;
 	private Leraar auteur;
 	
 	private Set<QuizOpdracht> quizOpdrachten;
@@ -121,10 +120,12 @@ public class Quiz {
 	// Waar wordt de lijst met onderwerpen gemaakt of aangevuld? Moet er geen setOnderwerpList zijn fzo? 
 	// Combi van de 2 IllegelArgumentExceptions nodig/nuttig ? 
 	
+	// heb de methode testOnderwerp naar quizcatalogus verplaatst, test moet uitgevoerd worden in addQuiz methode, een quiz tenslotte geen
+	// heeft geen idee van de onderwerpen van andere quizzen
+	
 	public void setOnderwerp(String onderwerp) throws IllegalArgumentException
 	{
 		if (this.quizState.editQuizEigenschappen() == true) {
-			//if (onderwerp != null && onderwerp.isEmpty() == false && testOnderwerp(onderwerp) == true)
 			if (onderwerp != null && onderwerp.isEmpty() == false)
 			{
 				this.onderwerp = onderwerp;
@@ -197,31 +198,6 @@ public class Quiz {
 	public boolean getIsTest()
 	{
 		return this.isTest;
-	}
-	
-	public boolean testOnderwerp(String onderwerp)
-	{
-		List<String> onderwerpen = quizCatalogus.getOnderwerpen();
-		
-		onderwerp = onderwerp.toLowerCase();
-		onderwerp = onderwerp.replaceAll(" de | een | het | met | van | in ", "");
-		String[] woorden = onderwerp.split(" ");
-		
-		boolean check = true;
-		
-		for (String thema : onderwerpen) {
-			check = true;
-			for (int i=0;i<woorden.length;i++) {
-				if (!thema.toLowerCase().contains(woorden[i].trim())){
-					check = false;
-					break;
-				}
-			}
-			if (check) {
-				return check;
-			}
-		}
-		return false;
 	}
 	
 	public String toString()
@@ -297,5 +273,13 @@ public class Quiz {
 		result = prime * result + ((quizOpdrachten == null) ? 0 : quizOpdrachten.hashCode());
 		result = prime * result + ((quizStatus == null) ? 0 : quizStatus.hashCode());		
 		return result;
+	}
+
+	public void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
+		this.quizOpdrachten.add(quizOpdracht);
+	}
+
+	public void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
+		quizOpdrachten.remove(quizOpdracht);
 	}
 }

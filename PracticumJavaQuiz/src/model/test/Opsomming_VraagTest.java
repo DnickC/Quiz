@@ -42,7 +42,4 @@ public class Opsomming_VraagTest {
 		constrTest.setAntwoorden("londen parijs madrid brussel");
 		assertEquals("londen\nparijs\nmadrid\nbrussel", constrTest.getAntwoordenToString());
 	}
-	
-	
-
 }

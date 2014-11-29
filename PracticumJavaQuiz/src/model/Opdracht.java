@@ -1,12 +1,9 @@
 package model;
 
-//import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 
 import utils.FromScratch.*;
-
-//import utils.FromScratch.Datum;
 
 public abstract class Opdracht implements Comparable, Cloneable {
 	
@@ -19,10 +16,8 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	private int opdrachtID = 0;
 	private String vraag = null;
 	private int maxAantalPogingen = 1;
-	//private List<String> antwoordHints = new ArrayList<String>();
 	private String hint;
 	private int maxAntwoordTijd = 10000;
-	//private int hintNummer = 0;
 	private OpdrachtCategorie opdrachtCategorie;
 	private Datum initalisatieDatum = new Datum();
 	
@@ -30,12 +25,13 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	
 	
 	public Opdracht(){
-		this.vraag = null;
-		this.maxAantalPogingen = 1;
-		//this.antwoordHints = null;
-		this.hint = null;
-		this.maxAntwoordTijd = 0;
-		this.opdrachtCategorie = null;
+		this(null, 1, 0 , null, null); //constructor met parameters gebruiken om default te setten
+//		
+//		this.vraag = null;
+//		this.maxAantalPogingen = 1;
+//		this.hint = null;
+//		this.maxAntwoordTijd = 0;
+//		this.opdrachtCategorie = null;
 	}
 	
 	
@@ -96,7 +92,6 @@ public abstract class Opdracht implements Comparable, Cloneable {
 		return vraag;
 	}
 	
-	
 	/**
 	 * Sets maximum amount of attempts to answer the question 
 	 * @param int aantal
@@ -104,8 +99,8 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	 */
 	
 	public void setMaxAantalPogingen(int aantal){
-		if(aantal >= 1 && aantal <= 10) {
-		this.maxAantalPogingen = aantal;
+		if (aantal >= 1 && aantal <= 10) {
+			this.maxAantalPogingen = aantal;
 		}
 		else {
 			throw new NumberFormatException("Aantal pogingen niet geldig");
@@ -121,6 +116,57 @@ public abstract class Opdracht implements Comparable, Cloneable {
 		return maxAantalPogingen;
 	}
 	
+	/**
+//	 * Sets the hint, can be more than one, seperated by a semicolon
+	 * @param String hint
+	 */
+
+	public void setHint(String hint){
+		this.hint = hint;
+	}
+	
+	/**
+	 * Gets a hint, in case there's more than one, the first one is returned
+	 * gets a hint from the list. Each time a different one.
+	 * @return String
+	 */
+	//funtie veranderd om een string hint te hebben als parameter, geen list
+	
+	public String getHint(){
+		
+		List<String> antwoordHints = new ArrayList<String>();
+		int hintNummer=0;
+		
+		String[] splitHint = this.hint.split("(/)|(-)|(;)");
+		for (int i = 0; i <= splitHint.length; i++) {
+			antwoordHints.add(splitHint[i]);
+		}
+			
+		if (antwoordHints.size() == 1) {
+			return this.hint;
+		}
+			
+		else {
+			
+			if(hintNummer <= antwoordHints.size()) {
+				hintNummer++;
+				return antwoordHints.get(hintNummer-1).toString();
+			}
+			else {
+				return "Geen hints meer beschikbaar";
+			}
+		}
+	}
+//	public void setHint(String hint){
+//	try{
+//	String[] splitHint = hint.split("(/)|(-)|(;)");
+//	while(hintNummer <= splitHint.length){
+//	this.antwoordHints.add(splitHint[hintNummer]);
+//	hintNummer++;
+//	 }
+//	}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
+//	}
+//}
 	/**
 	 * Sets the max amount of time to answer the question  
 	 * @param int aantalTijd
@@ -172,75 +218,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	public OpdrachtCategorie getOpdrachtCategorie(){
 		return opdrachtCategorie;
 	}
-	
-	/**
-	 * Add's a Hint to the hintlist  
-	 * @param String hint
-	 * @throws IllegalArgumentException
-	 */
 
-//	public void setHint(String hint){
-//		try{
-//		String[] splitHint = hint.split("(/)|(-)|(;)");
-//		while(hintNummer <= splitHint.length){
-//		this.antwoordHints.add(splitHint[hintNummer]);
-//		hintNummer++;
-//		 }
-//		}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
-//		}
-//	}
-	
-
-	
-	public void setHint(String hint){
-		this.hint = hint;
-	}
-	
-	/**
-	 * gets a hint from the list. Each time a different one.
-	 * @return String
-	 */
-	//funtie veranderd om een string hint te hebben als parameter, geen list
-	
-	public String getHint(){
-		
-		List<String> antwoordHints = new ArrayList<String>();
-		int hintNummer=0;
-		
-		String[] splitHint = this.hint.split("(/)|(-)|(;)");
-		for (int i = 0; i <= splitHint.length; i++) {
-			antwoordHints.add(splitHint[i]);
-		}
-			
-		if (antwoordHints.size() == 1) {
-			return this.hint;
-		}
-			
-		else {
-			
-			if(hintNummer <= antwoordHints.size()) {
-				hintNummer++;
-				return antwoordHints.get(hintNummer-1).toString();
-			}
-			else {
-				return "Geen hints meer beschikbaar";
-			}
-		}
-	}
-	
-//	public String getHint(){
-//		int hintNummer = 0;
-//		
-//		if(hintNummer <= antwoordHints.size()) {
-//			hintNummer++;
-//			return antwoordHints.get(hintNummer-1).toString();
-//		}
-//		else {
-//			return "Geen hints meer beschikbaar";
-//		}
-//	}
-	
-	
 	/**
 	 * Update's the assignemnt list. This attaches the Opdracht to Quiz. 
 	 * @param QuizOpdracht quizOpdracht
