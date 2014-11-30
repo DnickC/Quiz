@@ -9,7 +9,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * Version:
 	 */
 	
-	private int juisteAntwoord = -1;
+	private int juisteAntwoord;
 	
 	/**
 	 * Meerkeuze constructor. Passes vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie to Opdracht constructor
@@ -63,7 +63,8 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;
 				}
-			}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+			}
+		catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
 	}
 	
 	/**
@@ -92,7 +93,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * Checks if the given answer exists in the answerlist
 	 * @return Boolean 
 	 */
-	
+	@Override
 	public boolean isJuisteAntwoord(String antwoord){
 		try{		
 			int intAntwoord = Integer.parseInt(antwoord);
@@ -101,7 +102,32 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 			}else{
 				return false;
 			}
-		}catch(Exception e){throw new IllegalArgumentException("Ongeldide invoer");}
+		}catch(Exception e){throw new IllegalArgumentException("Ongeldige invoer");}
+	}
+	
+	/**
+	 * Checks if the given answer is of the right type. (integer)
+	 * @return Boolean
+	 */
+	@Override
+	public boolean isValide(String antwoord){
+		try{
+			if(Integer.parseInt(antwoord) > 0 && Integer.parseInt(antwoord)<= antwoordenLijst.size()){
+				return true;
+			}
+			else{
+				return false;
+			}
+		} catch(Exception e) {throw new IllegalArgumentException("Geen geldig antwoord");}
+	}
+
+	/**
+	 * Shows the user the way he should answer
+	 * @return
+	 */
+	@Override
+	public String getValideerTekst(){
+		return "Gebruik het nummer voor de keuze als antwoord op de vraag";
 	}
 	
 	/**
@@ -109,6 +135,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @return Boolean
 	 */
 	
+	@Override
 	public boolean equals(Object object){
 		if(object instanceof Vraag_Meerkeuze && (Vraag_Meerkeuze)object == this) {
 			return true;
@@ -138,34 +165,11 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @return String 
 	 */
 	
+	@Override
 	public String toString(){
 		return "Vraag: " + this.getVraag() + " Antwoorden: \n" + getAntwoordenToString();
 	}
 	
-	/**
-	 * Checks if the given answer is of the right type. (integer)
-	 * @return Boolean
-	 */
-
-	public boolean isValide(String antwoord){
-		try{
-			if(Integer.parseInt(antwoord) > 0 && Integer.parseInt(antwoord)<= antwoordenLijst.size()){
-				return true;
-			}else{
-				return false;
-			}
-		} catch(Exception e) {throw new IllegalArgumentException("Geen geldig antwoord");}
-	}
-
-	/**
-	 * Shows the user the way he should answer
-	 * @return
-	 */
-	
-	public String getValideTekst(){
-		return "Gebruik het nummer voor de keuze als antwoord op de vraag";
-	}
-
 	@Override
 	public int hashCode(){
 		final int prime = 31;
@@ -175,5 +179,4 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 		return result;
 		
 	}
-
 }

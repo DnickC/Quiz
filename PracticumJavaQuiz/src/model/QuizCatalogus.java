@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.Quiz.QuizStatus;
 
-public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
+public class QuizCatalogus implements Comparable<QuizCatalogus>, Cloneable, Iterable<Quiz> {
 	/**
 	 * Authors: Jens van Kets, Michal Mytkowski
 	 * Version : 1.0
@@ -159,7 +159,7 @@ public class QuizCatalogus implements Comparable, Cloneable, Iterable<Quiz> {
 	}
 
 	@Override
-	public int compareTo(Object arg0) {
+	public int compareTo(QuizCatalogus qC) {
 		
 		return 0;
 	}

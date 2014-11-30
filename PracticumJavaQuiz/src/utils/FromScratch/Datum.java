@@ -1,8 +1,6 @@
 package utils.FromScratch;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
-import java.util.StringTokenizer;
-import java.util.regex.PatternSyntaxException;
 
 @SuppressWarnings("deprecation")
 
@@ -14,54 +12,6 @@ import java.util.regex.PatternSyntaxException;
  */
 
 public class Datum {
-	
-	public static void main(String [] args) throws Exception{
-		
-		Datum legeDatum = new Datum();
-		System.out.println(legeDatum.toString());
-		Datum schrikkelDatum = new Datum("29/02/2016");
-		System.out.println(schrikkelDatum.toString());
-		Datum geldigeDatum = new Datum("12/05/2014");
-		System.out.println(geldigeDatum.toString());
-		Datum dateInput = new Datum(new Date(2014,06,13)); // wat gebeurd er ? 
-		System.out.println(dateInput.toString());
-		Datum intInput = new Datum(12,05,2014);
-		System.out.println(intInput.toString());
-		Datum smaller = new Datum("12/05/2013");
-		System.out.println(smaller.toString());
-		Datum bigger = new Datum("12/05/2015");
-		String americaan = geldigeDatum.getDatumInAmerikaansFormaat();
-		System.out.println(americaan);
-		String euro = geldigeDatum.getDatumInEuropeesFormaat();
-		System.out.println(euro);
-		boolean resultEqualTrue = geldigeDatum.equals(geldigeDatum);
-		System.out.println(resultEqualTrue);
-		boolean resultEqualTrue2 = geldigeDatum.equals(intInput);
-		System.out.println(resultEqualTrue2);
-		boolean resultEqualFalse = geldigeDatum.equals(smaller);
-		System.out.println(resultEqualFalse);
-		int resultCompareEQ = geldigeDatum.compareTo(geldigeDatum);
-		System.out.println(resultCompareEQ);
-		int resultCompareS = geldigeDatum.compareTo(smaller);
-		System.out.println(resultCompareS);
-		int resultCompareL = geldigeDatum.compareTo(bigger);
-		System.out.println(resultCompareL);
-		int verschilInDagen = geldigeDatum.verschilInDagen(bigger);
-		System.out.println(verschilInDagen);
-		int verschilInMaanden = geldigeDatum.verschilInMaanden(bigger);
-		System.out.println(verschilInMaanden);
-		int verschilInJaren = geldigeDatum.verschilInJaren(bigger);
-		System.out.println(verschilInJaren);
-		Boolean resultSchrikkelFalse = geldigeDatum.isLeapYear(geldigeDatum);
-		System.out.println(resultSchrikkelFalse);
-		Boolean resultSchrikkelTrue = geldigeDatum.isLeapYear(schrikkelDatum);
-		System.out.println(resultSchrikkelTrue);
-		Datum geldigeDatumUp = geldigeDatum.veranderDatum(geldigeDatum ,10, true);
-		System.out.println(geldigeDatumUp.toString());
-		Datum geldigeDatumDown = geldigeDatum.veranderDatum(geldigeDatum,20,false);
-		System.out.println(geldigeDatumDown.toString());
-		}
-	
 	
 	private int dag;
 	private int maand;
@@ -80,36 +30,19 @@ public class Datum {
 	public int getDag(){
 		return dag;
 	}
+	
 	public int getMaand(){
 		return maand;
 	}
+	
 	public int getJaar(){
 		return jaar;
 	}
+	
 	/**
 	 * Checks & Sets input data
 	 * 
 	 */
-	private void setJaar (int jaar)
-	{
-		if (jaar >= 0) {
-			this.jaar = jaar;
-		} 
-		else {
-			throw new IllegalArgumentException("ongeldig jaartal");
-		}
-	}
-	
-	private void setMaand (int maand)
-	{
-		if (maand > 0 && maand <= 12 ) {
-			this.maand = maand;
-		} 
-		else {
-			throw new IllegalArgumentException("ongeldige maand");
-		}
-	}
-	
 	private void setDag (int dag)
 	{
 		if(this.maand == 2){
@@ -124,13 +57,26 @@ public class Datum {
 		else {
 			throw new IllegalArgumentException("ongeldige dag");
 		}
-	}	
+	}
 	
-	public void setDatum (int dag, int maand, int jaar)
+	private void setMaand (int maand)
 	{
-		this.setJaar(jaar);
-		this.setMaand(maand);
-		this.setDag(dag);		
+		if (maand > 0 && maand <= 12 ) {
+			this.maand = maand;
+		} 
+		else {
+			throw new IllegalArgumentException("ongeldige maand");
+		}
+	}
+
+	private void setJaar (int jaar)
+	{
+		if (jaar >= 0) {
+			this.jaar = jaar;
+		} 
+		else {
+			throw new IllegalArgumentException("ongeldig jaartal");
+		}
 	}
 	
 	/**
@@ -141,11 +87,11 @@ public class Datum {
 	 */
 	
 	public Datum(){
-		final Date datumVandaag = new Date(); 
-		jaar = datumVandaag.getYear();
-		maand = datumVandaag.getMonth();
-		dag = datumVandaag.getDay();
-		
+		final Date datumVandaag = new Date();
+
+		this.setJaar(datumVandaag.getYear() + 1900);
+		this.setMaand(datumVandaag.getMonth() + 1);
+		this.setDag(datumVandaag.getDate());
 	}
 	
 	/**
@@ -153,10 +99,9 @@ public class Datum {
 	 * @param Date datum
 	 */
 	public Datum(Date datum){
-		this.setJaar(datum.getYear()); 
-		this.setMaand(datum.getMonth()-1);
-		this.setDag(datum.getDay());;
-						
+		this.setJaar(datum.getYear() + 1900);
+		this.setMaand(datum.getMonth() + 1);
+		this.setDag(datum.getDate());
 	}
 	
 	/**
@@ -177,24 +122,31 @@ public class Datum {
 	 */
 	
 	public Datum(String datum) throws Exception{
-		
-		 	try {
-				String[] splitdate = datum.split("(/)|(-)|(\\.)");
-				this.setJaar( Integer.parseInt(splitdate[2]));
-				this.setMaand(Integer.parseInt(splitdate[1]));
-				this.setDag(Integer.parseInt(splitdate[0]));
-			} 
-		 	catch (ArrayIndexOutOfBoundsException a){
-		 		throw new ArrayIndexOutOfBoundsException("Ongeldig formaat van datum, geldige tekens zijn: '-' en '/' en '.' ");
-		 	}
-		 	
-		 	catch (Exception e) {
-				throw new Exception(e.getMessage());
-			}
-				
-			//throw new Exception("datum in verkeerd formaat");
-		
-	}	
+	 	try {
+			String[] splitdate = datum.split("(/)|(-)|(\\.)");
+			this.setJaar( Integer.parseInt(splitdate[2]));
+			this.setMaand(Integer.parseInt(splitdate[1]));
+			this.setDag(Integer.parseInt(splitdate[0]));
+		} 
+	 	catch (ArrayIndexOutOfBoundsException a){
+	 		throw new ArrayIndexOutOfBoundsException("Ongeldig formaat van datum, geldige tekens zijn: '-' en '/' en '.' ");
+	 	}
+	 	
+	 	catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+			
+		//throw new Exception("datum in verkeerd formaat");
+	}
+
+	public void setDatum (int dag, int maand, int jaar)
+	{
+		this.setJaar(jaar);
+		this.setMaand(maand);
+		this.setDag(dag);		
+	}
+	
+	
 	/**
 	 * Checks if the given year is a leapyear
 	 * @param int jaar

@@ -35,6 +35,7 @@ public class Standaard_VraagTest {
 	
 	@Test
 	public void test_isJuisteAntwoord() {
+		constrTest.setJuisteAntwoord("Parijs");
 		assertTrue(constrTest.isJuisteAntwoord("Parijs"));
 	}
 	
@@ -47,7 +48,7 @@ public class Standaard_VraagTest {
 	@Test
 	public void test_setVraag() {
 		constrTest.setVraag("Wat is de hoofdstad van België?");
-		assertEquals("Wat is de hoofdstad van Spanje?", constrTest.getVraag());
+		assertEquals("Wat is de hoofdstad van België?", constrTest.getVraag());
 	}
 	
 	@Test
@@ -82,6 +83,10 @@ public class Standaard_VraagTest {
 	public void test_setHint() {
 		constrTest.setHint("Atomium");
 		assertEquals("Atomium", constrTest.getHint());
+		constrTest.setHint("hint1, hint2");
+		assertEquals("hint1", constrTest.getHint());
+		assertEquals("hint2", constrTest.getHint());
+		assertTrue(constrTest.getHint().equals("hint1") || constrTest.getHint().equals("hint2"));
 	}
 	
 	@Test (expected = NumberFormatException.class)

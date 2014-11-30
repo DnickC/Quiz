@@ -11,6 +11,6 @@ public interface IValideerbaar {
 	
 	public ArrayList<String> antwoordenLijst = new ArrayList<String>();
 	public boolean isValide(String antwoord);
-	public String getValideTekst();
+	public String getValideerTekst();
 	
 }

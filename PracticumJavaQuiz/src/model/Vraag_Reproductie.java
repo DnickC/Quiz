@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Vraag_Reproductie extends Opdracht implements Comparable {
+public class Vraag_Reproductie extends Opdracht {
 	
 	/**
 	 * Authors: 
@@ -108,7 +108,7 @@ public class Vraag_Reproductie extends Opdracht implements Comparable {
 	 * @param String antwoord
 	 * @return boolean
 	 */
-	
+	@Override
 	public boolean isJuisteAntwoord(String antwoord){
 		try{
 			antwoord = antwoord.toLowerCase();
@@ -132,7 +132,7 @@ public class Vraag_Reproductie extends Opdracht implements Comparable {
 	 * Checks if the given object equals this Reproductie_Vraag
 	 * @return Boolean
 	 */
-	
+	@Override
 	public boolean equals(Object object){
 		if(object instanceof Vraag_Reproductie && (Vraag_Reproductie)object == this) {
 			return true;
@@ -166,7 +166,7 @@ public class Vraag_Reproductie extends Opdracht implements Comparable {
 	/**
 	 * toString method
 	 */
-
+	@Override
 	public String toString(){
 		return "Vraag: " + this.getVraag() + " Antwoorden: \n" + this.getTrefwoorden();
 	}
@@ -181,7 +181,4 @@ public class Vraag_Reproductie extends Opdracht implements Comparable {
 		return result;
 		
 	}
-	
-	
-
 }

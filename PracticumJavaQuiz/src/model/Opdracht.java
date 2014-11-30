@@ -3,9 +3,10 @@ package model;
 import java.util.List;
 import java.util.ArrayList;
 
-import utils.FromScratch.*;
+import utils.FromScratch.Datum;
+//import utils.Gregorian.Datum;
 
-public abstract class Opdracht implements Comparable, Cloneable {
+public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	
 	/**
 	 * Authors:
@@ -13,13 +14,15 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	 * 
 	 */
 	
-	private int opdrachtID = 0;
-	private String vraag = null;
-	private int maxAantalPogingen = 1;
+	private int opdrachtID ;
+	private String vraag;
+	private int maxAantalPogingen;
 	private String hint;
-	private int maxAntwoordTijd = 10000;
+	private int maxAntwoordTijd;
 	private OpdrachtCategorie opdrachtCategorie;
-	private Datum initalisatieDatum = new Datum();
+	
+	private Leraar auteur;
+	private Datum datumRegistratie;
 	
 	private List<QuizOpdracht>quizOpdrachten;
 	
@@ -132,13 +135,15 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	 */
 	//funtie veranderd om een string hint te hebben als parameter, geen list
 	
-	public String getHint(){
+	public String getHint() {
 		
 		List<String> antwoordHints = new ArrayList<String>();
-		int hintNummer=0;
 		
-		String[] splitHint = this.hint.split("(/)|(-)|(;)");
-		for (int i = 0; i <= splitHint.length; i++) {
+		String cleanHint = hint.replaceAll("\\s", ""); //neem spaties weg
+		
+		String[] splitHint = cleanHint.split("(/)|(-)|(;)|(,)");
+		
+		for (int i = 0; i < splitHint.length; i++) {
 			antwoordHints.add(splitHint[i]);
 		}
 			
@@ -148,25 +153,18 @@ public abstract class Opdracht implements Comparable, Cloneable {
 			
 		else {
 			
-			if(hintNummer <= antwoordHints.size()) {
-				hintNummer++;
-				return antwoordHints.get(hintNummer-1).toString();
-			}
-			else {
-				return "Geen hints meer beschikbaar";
-			}
+//			int indexOfFirstHint = antwoordHints.indexOf<String>());
+			int indexOfFirstHint = 0;
+			String returnValue = antwoordHints.get(indexOfFirstHint);
+			antwoordHints.remove(indexOfFirstHint);
+			return returnValue;
+			
+//			else {
+//				return "Geen hints meer beschikbaar";
+//			}
 		}
 	}
-//	public void setHint(String hint){
-//	try{
-//	String[] splitHint = hint.split("(/)|(-)|(;)");
-//	while(hintNummer <= splitHint.length){
-//	this.antwoordHints.add(splitHint[hintNummer]);
-//	hintNummer++;
-//	 }
-//	}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());
-//	}
-//}
+
 	/**
 	 * Sets the max amount of time to answer the question  
 	 * @param int aantalTijd
@@ -239,7 +237,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	public String toString() {
 		return "Opdracht [opdrachtID=" + opdrachtID + ", vraag=" + vraag + ", maxAantalPogingen=" + maxAantalPogingen
 				+ ", hint=" + hint + ", maxAntwoordTijd=" + maxAntwoordTijd + ", opdrachtCategorie="
-				+ opdrachtCategorie + ", initalisatieDatum=" + initalisatieDatum +"]";
+				+ opdrachtCategorie + ", initalisatieDatum=" + datumRegistratie +"]";
 	}
 
 	/**
@@ -248,6 +246,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	 * return boolean
 	 */
 	
+	@Override
 	public boolean equals(Object object){
 		if(object instanceof Opdracht && object == this) {
 			return true;
@@ -264,6 +263,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	 * @throws IllegalArgumentException
 	 */
 	
+	@Override
 	public int compareTo(Object object) {
 		if(object instanceof Opdracht){
 			Opdracht input = (Opdracht)object;
@@ -284,6 +284,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 	 * returns the ID of opdracht
 	 */
 	
+	@Override
 	public int hashCode(){
 		final int prime = 31;
 		int result = 1;
@@ -292,7 +293,7 @@ public abstract class Opdracht implements Comparable, Cloneable {
 		result = prime * result + (((hint == null)? 0 : hint.hashCode()));
 		result = prime * result + (((maxAntwoordTijd == 0)? 0 : maxAntwoordTijd));
 		result = prime * result + (((opdrachtCategorie == null)? 0 : opdrachtCategorie.hashCode()));
-		result = prime * result + (((initalisatieDatum == null)? 0 : initalisatieDatum.hashCode()));
+		result = prime * result + (((datumRegistratie == null)? 0 : datumRegistratie.hashCode()));
 		result = prime * result + (((quizOpdrachten == null)? 0 : quizOpdrachten.hashCode()));
 
 		return result;

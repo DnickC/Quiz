@@ -2,9 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import model.OpdrachtCategorie;
-
-public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparable {
+public class Vraag_Opsomming extends Opdracht implements IValideerbaar {
 	
 	/**
 	 * Authors: Andy Poron
@@ -41,7 +39,7 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 	 * checks if the answers are in the right sequel
 	 * @return boolean
 	 */
-	
+	@Override
 	public boolean isJuisteAntwoord(String antwoord){
 		String[] splits = antwoord.split(";");
 		int count = 0;
@@ -56,13 +54,14 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 	 * Checks if the answer is split by ";" and that the amount of answers are correct
 	 * @return boolean
 	 */
-	
+	@Override
 	public boolean isValide(String antwoord){
 		if(antwoord.contains(";")){
 			String[] splitHetAntwoord = antwoord.split("(;)");
 			if(splitHetAntwoord.length == antwoordenLijst.size()){
 				return true;
-			}else{
+			}
+			else{
 				return false;
 			}
 		}
@@ -73,8 +72,8 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 	 * Shows the user the syntax of how they should answer
 	 * @return String
 	 */
-	
-	public String getValideTekst(){
+	@Override
+	public String getValideerTekst(){
 		return "Typ je antwoorden achter elkaar gescheiden door een ';'."; 
 	}
 	
@@ -86,12 +85,13 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 	public void setAntwoorden(String antwoorden){
 		try{
 			int count = 0;
-			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)|( )");
+			String[] splitAntwoorden = antwoorden.split(";");
 				while(count < splitAntwoorden.length){
 					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
 					count++;
 				}
-			}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+			}
+		catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
 	}
 	
 	public ArrayList<String> getAntwoordenToList(){
@@ -116,6 +116,7 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 	 * @return Boolean
 	 */
 	
+	@Override
 	public boolean equals(Object object){
 		if(object instanceof Vraag_Opsomming && (Vraag_Opsomming)object == this) {
 			return true;
@@ -144,6 +145,7 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar, Comparab
 	 * @return String 
 	 */
 	
+	@Override
 	public String toString(){
 		return "Vraag: " + this.getVraag() + " Antwoorden: \n" + getAntwoordenToString();
 	}

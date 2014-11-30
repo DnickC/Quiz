@@ -1,10 +1,11 @@
 package model;
-import java.util.List;
-import java.util.Set;
+import java.util.ArrayList;
 
+import utils.FromScratch.Datum;
+//import utils.Gregorian.Datum;
 import model.statePattern.*;
 
-public class Quiz {
+public class Quiz implements Comparable<Quiz>, Cloneable {
 	
 	/**
 	 * 
@@ -32,11 +33,12 @@ public class Quiz {
 	private boolean isUniekeDeelname;
 	private QuizStatus quizStatus;
 	
-	private QuizDeelname quizDeelname;
+	//private QuizDeelname quizDeelname;
 	
 	private Leraar auteur;
+	private Datum datumRegistratie;
 	
-	private Set<QuizOpdracht> quizOpdrachten;
+	private ArrayList<QuizOpdracht> quizOpdrachten;
 	
 		
 	public Quiz (String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status) throws Exception
@@ -200,6 +202,27 @@ public class Quiz {
 		return this.isTest;
 	}
 	
+	public ArrayList <Opdracht> getOpdrachten(){
+		ArrayList <Opdracht> opdrachten = new ArrayList <Opdracht>();
+		for (QuizOpdracht quizOpdracht :quizOpdrachten){
+			opdrachten.add(quizOpdracht.getOpdracht());
+		}
+		return opdrachten;
+	}
+
+	public QuizOpdracht getOpdracht(int volgnr){
+		return quizOpdrachten.get(volgnr-1);
+	}
+
+	public void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
+		this.quizOpdrachten.add(quizOpdracht);
+	}
+
+	public void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
+		quizOpdrachten.remove(quizOpdracht);
+	}
+	
+	@Override
 	public String toString()
 	{
 		String quizOpdrachtenString = "";
@@ -213,12 +236,14 @@ public class Quiz {
 				", auteur= " + auteur + ", quizStatus= " + getQuizStatus() + ", quizOpdrachten=" + quizOpdrachtenString + "]";
 	}
 	
+	@Override
 	public int compareTo(Quiz quiz)
 	{
 		return this.getOnderwerp().compareTo(quiz.getOnderwerp());
 	}
 	
-	public boolean equalTo(Object obj)
+	@Override
+	public boolean equals(Object obj)
 	{
 		if (this == obj)
 			return true;
@@ -261,6 +286,7 @@ public class Quiz {
 		return true;
 	}
 	
+	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
@@ -273,13 +299,5 @@ public class Quiz {
 		result = prime * result + ((quizOpdrachten == null) ? 0 : quizOpdrachten.hashCode());
 		result = prime * result + ((quizStatus == null) ? 0 : quizStatus.hashCode());		
 		return result;
-	}
-
-	public void voegQuizOpdrachtToe(QuizOpdracht quizOpdracht) {
-		this.quizOpdrachten.add(quizOpdracht);
-	}
-
-	public void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
-		quizOpdrachten.remove(quizOpdracht);
 	}
 }

@@ -1,11 +1,6 @@
 package model;
 import java.util.*;
 
-import utils.FromScratch.*;
-
-import java.util.List;
-
-
 public class OpdrachtCatalogus implements Iterable, Cloneable {
 	
 	/**

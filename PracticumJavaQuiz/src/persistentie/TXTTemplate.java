@@ -23,7 +23,6 @@ public abstract class TXTTemplate implements IDBStrategy {
 	public final void leesCatalogi() throws FileNotFoundException {
 		this.leesOpdrachten();
 		this.leesQuizzen();
-		this.leesQuizOpdrachten();
 	}
 
 	private final void leesOpdrachten() throws Exception {
@@ -37,11 +36,6 @@ public abstract class TXTTemplate implements IDBStrategy {
 		if (objectenUitFile != null) {
 			constructObjecten(objectenUitFile);
 		}
-	}
-
-	private final void leesQuizOpdrachten() throws FileNotFoundException {
-		this.objectenUitFile = this.leesFile(getFile());
-		this.constructObjecten(objectenUitFile);
 	}
 
 	/**

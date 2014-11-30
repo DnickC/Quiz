@@ -14,7 +14,7 @@ public class Opsomming_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Opsomming("vraag", "antwoorden", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Opsomming("vraag", "antwoord1;antwoord2", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test
@@ -35,6 +35,7 @@ public class Opsomming_VraagTest {
 	@Test
 	public void test_isValide() {
 		assertFalse(constrTest.isValide("antwoorden"));
+		assertTrue(constrTest.isValide("antwoord1;antwoord2"));
 	}
 	
 	@Test

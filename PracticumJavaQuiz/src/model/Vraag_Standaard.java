@@ -2,14 +2,14 @@ package model;
 
 import model.OpdrachtCategorie;
 
-public class Vraag_Standaard  extends Opdracht {
+public class Vraag_Standaard  extends Opdracht implements IValideerbaar {
 	
 	/**
 	 * Authors: 
 	 * Version:
 	 */
 	
-	private String juistAntwoord = null;
+	private String juisteAntwoord;
 	
 	public Vraag_Standaard(){
 		super();
@@ -17,12 +17,12 @@ public class Vraag_Standaard  extends Opdracht {
 	
 	public Vraag_Standaard(String vraag,String juistAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie){
 		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
-		this.juistAntwoord = juistAntwoord;
+		this.setJuisteAntwoord(juistAntwoord);
 	}
 	
 	@Override
 	public Vraag_Standaard clone() throws CloneNotSupportedException{
-		Vraag_Standaard clon = new Vraag_Standaard(this.getVraag(),this.juistAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Vraag_Standaard clon = new Vraag_Standaard(this.getVraag(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	
@@ -33,7 +33,9 @@ public class Vraag_Standaard  extends Opdracht {
 	 */
 	
 	public void setJuisteAntwoord(String antwoord){
-		this.juistAntwoord = antwoord;
+		if (antwoord != null) {
+			this.juisteAntwoord = antwoord;
+		}
 	}
 	
 	/**
@@ -42,7 +44,7 @@ public class Vraag_Standaard  extends Opdracht {
 	 */
 	
 	public String getJuisteAntwoord(){
-		return juistAntwoord;
+		return juisteAntwoord;
 	}
 	
 	/**
@@ -51,8 +53,10 @@ public class Vraag_Standaard  extends Opdracht {
 	 * @return Boolean  
 	 */
 	
+	@Override
 	public boolean isJuisteAntwoord(String antwoord) {
-		if (this.juistAntwoord.toLowerCase() == antwoord.toLowerCase()) {
+
+		if (this.juisteAntwoord.toLowerCase().equals(antwoord.toLowerCase())) {
 			return true;
 		}
 		else {
@@ -60,13 +64,26 @@ public class Vraag_Standaard  extends Opdracht {
 		}
 	}
 	
+	@Override
+	public boolean isValide(String antwoord) {
+		// TODO Auto-generated method stub
+			return false;
+	}
+
+	@Override
+	public String getValideerTekst() {
+		return "Geef het correcte antwoord";
+		
+	}
+	
 	/**
 	 * returns the question and answer in text format 
 	 * @return String
 	 */
 	
+	@Override
 	public String toString() {
-		return String.format("%S ( %S )", this.getVraag(), this.juistAntwoord); 
+		return String.format("%S ( %S )", this.getVraag(), this.getJuisteAntwoord()); 
 	}
 
 	@Override
@@ -78,21 +95,21 @@ public class Vraag_Standaard  extends Opdracht {
 					return -1;
 				}
 				return 0;
-			}else{
+			}
+			else{
 				return 1;
 			}
 			
-		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
+		}
+		else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
 	}
 	
 	@Override
 	public int hashCode(){
 		final int prime = 31;
 		int result=1;
-		result = prime * result + ((juistAntwoord == null) ? 0 : juistAntwoord.hashCode());
+		result = prime * result + ((juisteAntwoord == null) ? 0 : juisteAntwoord.hashCode());
 		result = result + super.hashCode();
 		return result;
-		
 	}
-
 }
