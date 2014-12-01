@@ -1,11 +1,13 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-
+import view.MainMenu;
 import persistentie.DBHandler;
 import persistentie.IDBStrategy;
 
@@ -21,14 +23,45 @@ public class OpstartController {
 //		table.setProperty("IDBStrategy", "TXTTemplate" );
 //		saveProperties(table);
 		
-		loadProperties(table);
+		//loadProperties(table);
 		
 //		IDBStrategy strategy = (IDBStrategy)table.getProperty("iDBStrategy");
 //		dBH.setStrategy(strategy);
 		
-		dBH.leesCatalogi();
+		//dBH.leesCatalogi();
+		
+		OpstartController opstart = new OpstartController();
 		
 	}
+	
+	public OpstartController(){
+		MainMenu menu = new MainMenu();
+		menu.addknopNieuweQuizActionListener(new NieuweQuizListener());
+		menu.addKnopVerwijderQuizActionListener(new VerwijderQuizListener());
+		menu.addKnopWijzigQuizActionListener(new WijzigQuizListener());
+	}
+	
+	//inner class
+	
+	class NieuweQuizListener implements ActionListener{
+		public void actionPerformed(ActionEvent event){
+			// nieuweQuiz = new NieuweQuiz();
+		}
+	}
+	
+	class VerwijderQuizListener implements ActionListener{
+		public void actionPerformed(ActionEvent event){
+			// verwijderQuiz = new VerwijderQuiz();
+		}
+	}
+	
+	class WijzigQuizListener implements ActionListener{
+		public void actionPerformed(ActionEvent event){
+			// wijzigQuiz = new WijzigQuiz;
+		}
+	}
+	
+	
 	
 	/**
 	 * Deze functie schrijft een set van properties naar het bestand "start.ini"

@@ -7,7 +7,11 @@ import java.awt.event.ActionListener;
 
 public class MainMenu extends JFrame{
 
-	private JLabel titel = new JLabel("Hoofd Menu");
+	/**
+	 * @author Andy Poron
+	 */
+	
+	private JLabel titel = new JLabel("HoofdMenu");
 	private JButton knopNieuweQuiz = new JButton("1. Maak nieuwe quizzen");
 	private JButton knopVerwijderQuiz = new JButton("2. Verwijderen van quizzen");
 	private JButton knopWijzigQuiz = new JButton("3. Wijzigen van quizzen");
@@ -16,25 +20,50 @@ public class MainMenu extends JFrame{
 	private JButton knopStop = new JButton("0. Stop de applicatie");
 	private	JPanel mainMenu = new JPanel();
 	
-	private GridBagLayout layout = new GridBagLayout();
 	
-	MainMenu(){
+	private GridBagLayout layout = new GridBagLayout();
+	private GridBagConstraints gridConstraint = new GridBagConstraints();
+	
+	public MainMenu(){
 		super("HoofdMenu");
 		mainMenu.setLayout(layout);
+		gridConstraint.fill = gridConstraint.HORIZONTAL;
 		
+		gridConstraint.insets = new Insets(0,60,0,0);
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 0;
+		titel.setFont(new Font("Serif",Font.BOLD,25));
+		mainMenu.add(titel,gridConstraint);
+		gridConstraint.insets = new Insets(0,0,0,0);
 		
-		mainMenu.add(titel);
-		mainMenu.add(knopNieuweQuiz);
-		mainMenu.add(knopVerwijderQuiz);
-		mainMenu.add(knopWijzigQuiz);
-		mainMenu.add(knopLijsten);
-		mainMenu.add(knopInstellingen);
-		mainMenu.add(knopStop);
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 1;
+		mainMenu.add(knopNieuweQuiz,gridConstraint);
+		
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 2;
+		mainMenu.add(knopVerwijderQuiz,gridConstraint);
+		
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 3;
+		mainMenu.add(knopWijzigQuiz,gridConstraint);
+		
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 4;
+		mainMenu.add(knopLijsten,gridConstraint);
+		
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 5;
+		mainMenu.add(knopInstellingen,gridConstraint);
+		
+		gridConstraint.gridx = 0;
+		gridConstraint.gridy = 6;
+		mainMenu.add(knopStop,gridConstraint);
 		
 		this.add(mainMenu);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // In controller wrs? 
-		this.setSize(800,300);
+		this.setSize(300,300);
 		this.setVisible(true);
 	}
 	
