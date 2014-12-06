@@ -41,22 +41,19 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	private ArrayList<QuizOpdracht> quizOpdrachten;
 	
 		
-	public Quiz (String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status) throws Exception
+	public Quiz (String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
-		try
-		{
 			this.setOnderwerp(onderwerp);
 			this.setLeerjaar(leerjaar);
 			this.setIsTest(isTest);
 			this.setIsUniekeDeelname(uniekeDeelname);
 			this.setAuteur(leraar);
 			this.setQuizStatus(status);
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.getMessage());
-			throw new Exception(e.getMessage());
-		}
+	}
+	
+	public Object clone() throws CloneNotSupportedException{
+		Quiz objClone = new Quiz(this.getOnderwerp(), this.getLeerjaar(), this.getIsTest(), this.getIsUniekeDeelname(), this.getLeraar(), this.getQuizStatus());;
+		return objClone;
 	}
 	
 	public void setQuizID(int id)
