@@ -7,12 +7,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import view.MainMenuNew;
 import view.MainMenu;
 import persistentie.DBHandler;
 import persistentie.IDBStrategy;
 
 public class OpstartController {
 	
+	
+
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
 	
 	public static void main(String[] args) throws IOException {
@@ -35,10 +38,30 @@ public class OpstartController {
 	}
 	
 	public OpstartController(){
-		MainMenu menu = new MainMenu();
+		
+		MainMenuNew menu = new MainMenuNew();
+		menu.addKnopBeheerQuizzenActionListener(new BeheerQuizzenListener());
+		
+		
+		/*MainMenu menu = new MainMenu();
 		menu.addknopNieuweQuizActionListener(new NieuweQuizListener());
 		menu.addKnopVerwijderQuizActionListener(new VerwijderQuizListener());
 		menu.addKnopWijzigQuizActionListener(new WijzigQuizListener());
+		*/
+	}
+	/**
+	 * Inner class
+	 * @author MichalMytek
+	 *
+	 */
+	public class BeheerQuizzenListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			//open beheerQuizzenView
+
+		}
+
 	}
 	
 	//inner class
