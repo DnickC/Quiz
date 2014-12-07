@@ -7,12 +7,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import view.BeheerQuizzen;
+import view.MainMenuNew;
 import view.MainMenu;
 import persistentie.DBHandler;
 import persistentie.IDBStrategy;
 
 public class OpstartController {
 	
+	
+
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
 	
 	public static void main(String[] args) throws IOException {
@@ -35,11 +39,96 @@ public class OpstartController {
 	}
 	
 	public OpstartController(){
-		MainMenu menu = new MainMenu();
+		
+		MainMenuNew menu = new MainMenuNew();
+		menu.addKnopBeheerQuizzenActionListener(new BeheerQuizzenListener());
+		menu.addKnopDeelnemenQuizActionListener(new DeelnemenQuizActionListener());
+		menu.addKnopInstellingenQuizActionListener(new InstellingenQuizListener());
+		menu.addKnopOverzichtScoresActionListener(new OverzichtScoresListener());
+		menu.addKnopQuizRapportActionListener(new QuizRapportActionListener());
+		menu.addKnopStopActionListener(new StopActionListener());
+		
+		/*MainMenu menu = new MainMenu();
 		menu.addknopNieuweQuizActionListener(new NieuweQuizListener());
 		menu.addKnopVerwijderQuizActionListener(new VerwijderQuizListener());
 		menu.addKnopWijzigQuizActionListener(new WijzigQuizListener());
+		*/
 	}
+	/**
+	 * Inner class
+	 * @author MichalMytek
+	 *
+	 */
+	
+	public class StopActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+
+		}
+
+	}
+
+
+
+	public class QuizRapportActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+
+
+	public class OverzichtScoresListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+
+
+	public class InstellingenQuizListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+
+
+	public class DeelnemenQuizActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+	public class BeheerQuizzenListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			BeheerQuizzen beheerQuizzen = new BeheerQuizzen();
+			
+			
+		}
+
+	}
+	
+	
 	
 	//inner class
 	
