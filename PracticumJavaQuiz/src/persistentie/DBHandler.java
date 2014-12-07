@@ -1,24 +1,20 @@
 package persistentie;
 
-import model.OpdrachtCatalogus;
-import model.QuizCatalogus;
-import model.QuizOpdracht;
-
 /**
  * @Authors: Dominique
  * Version: 1.0
  * 
  */
 
-public class DBHandler {
+public class DbHandler {
 	
-	private IDBStrategy dBStrategy;
-
+	TxtRW dbRW = new TxtRW();
+	
 	/**
 	 * Sets the strategy to be used for persistency
 	 */
-	public void setStrategy(IDBStrategy strategy) {
-		this.dBStrategy = strategy;
+	public void setStrategy(IDBStrategy dbStrategy) {
+		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -26,10 +22,11 @@ public class DBHandler {
 	 * @return iDBStrategy
 	 */
 	public IDBStrategy getStrategy() {
-		return this.dBStrategy;
+		// TODO Auto-generated constructor stub
+		return null;
 	}
 	
-	public DBHandler() {
+	public DbHandler() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -37,16 +34,17 @@ public class DBHandler {
 	 * Assignement constructor
 	 * @param IDBStrategy
 	 */
-	public DBHandler(IDBStrategy strategy) {
+	public DbHandler(IDBStrategy strategy) {
 		this.setStrategy(strategy);
 	}
 	
 	/**
 	 * Delegates the correct strategy to fill the containers with 
 	 * opdrachten, quizzen and quizopdrachten
+	 * @throws FileNotFoundException 
 	 */
 	public void leesCatalogi() {
-		dBStrategy.leesCatalogi();
+		dbRW.leesCatalogi();
 	}
 	
 	/**
@@ -56,8 +54,8 @@ public class DBHandler {
 	 * @param QuizCatalogus
 	 * @param QuizOpdracht
 	 */
-	public void schrijfCatalogi(OpdrachtCatalogus oC, QuizCatalogus qC, QuizOpdracht qO) {
-		dBStrategy.schrijfCatalogi(oC, qC, qO);
+	public void schrijfCatalogi() {
+		dbRW.schrijfCatalogi();
 	}
 }
 
