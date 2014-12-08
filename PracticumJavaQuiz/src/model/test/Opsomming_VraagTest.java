@@ -40,7 +40,7 @@ public class Opsomming_VraagTest {
 	
 	@Test
 	public void test_setAntwoorden() {
-		constrTest.setAntwoorden("londen parijs madrid brussel");
+		constrTest.setAntwoorden("londen;parijs;madrid;brussel");
 		assertEquals("londen\nparijs\nmadrid\nbrussel", constrTest.getAntwoordenToString());
 	}
 }
