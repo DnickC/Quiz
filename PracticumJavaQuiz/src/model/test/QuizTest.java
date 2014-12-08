@@ -11,6 +11,7 @@ import org.junit.Test;
 public class QuizTest {
 	
 	private Quiz constrTest;
+	private Quiz constrTestEquals;
 	private Quiz constrTest2;
 	
 	
@@ -18,8 +19,8 @@ public class QuizTest {
 	public void setUp() throws Exception {
 		
 		constrTest = new Quiz("onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
+		constrTestEquals = new Quiz("onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
 		constrTest2 = new Quiz("onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.opengesteld);
-		
 	}
 	
 	@Test
@@ -82,6 +83,22 @@ public class QuizTest {
 	public void test_setLeraar_NOK() {
 		constrTest.setQuizStatus(QuizStatus.opengesteld);
 		constrTest.setAuteur(Leraar.LeraarD);
+	}
+	
+	@Test
+	public void test_equals_false() {
+		assertFalse(constrTest.equals(constrTest2));
+	}
+	
+	@Test
+	public void test_equals_true() {
+		assertTrue(constrTest.equals(constrTestEquals));
+	}
+	
+	@Test
+	public void test_clone() throws CloneNotSupportedException {
+		constrTestClone = constrTest.clone();
+		assertTrue(constrTest.equals(constrTestClone));
 	}
 }
 

@@ -17,12 +17,13 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	{
 		inConstructie, afgewerkt, opengesteld, laatsteKans, afgesloten
 	}
-	
+	/*
 	IStatus Status_Afgesloten;
 	IStatus Status_Afgewerkt;
 	IStatus Status_InConstructie;
 	IStatus Status_LaatsteKans;
 	IStatus Status_Opengesteld;
+	*/
 	
 	IStatus quizState = new Status_InConstructie();
 	
@@ -51,7 +52,7 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 			this.setQuizStatus(status);
 	}
 	
-	public Object clone() throws CloneNotSupportedException{
+	public Quiz clone() throws CloneNotSupportedException{
 		Quiz objClone = new Quiz(this.getOnderwerp(), this.getLeerjaar(), this.getIsTest(), this.getIsUniekeDeelname(), this.getLeraar(), this.getQuizStatus());;
 		return objClone;
 	}
