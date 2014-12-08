@@ -77,6 +77,12 @@ public class QuizTest {
 	public void test_setLeerjaar_NOK(){
 		constrTest.setLeerjaar(8);
 	}
+	
+	@Test (expected = IllegalThreadStateException.class)
+	public void test_setLeraar_NOK() {
+		constrTest.setQuizStatus(QuizStatus.opengesteld);
+		constrTest.setAuteur(Leraar.LeraarD);
+	}
 }
 
 
