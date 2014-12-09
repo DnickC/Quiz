@@ -81,10 +81,9 @@ public class QuizCatalogus implements Comparable<QuizCatalogus>, Cloneable, Iter
 		}
 		
 		boolean nieuw = true;
-		for(Quiz q : quizzes){
-			if(this.testOnderwerp(quiz.getOnderwerp())){
-				nieuw = false;
-			}
+		
+		if(this.testOnderwerp(quiz.getOnderwerp())){
+			nieuw = false;
 		}
 		
 		if(nieuw){

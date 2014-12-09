@@ -10,7 +10,7 @@ import java.util.Properties;
 import view.BeheerQuizzen;
 import view.MainMenuNew;
 import view.MainMenu;
-import persistentie.DBHandler;
+import persistentie.DbHandler;
 import persistentie.IDBStrategy;
 
 public class OpstartController {
@@ -21,7 +21,7 @@ public class OpstartController {
 	
 	public static void main(String[] args) throws IOException {
 		
-		DBHandler dBH = new DBHandler();
+		DbHandler dBH = new DbHandler();
 		Properties table = new Properties();
 		
 //		table.setProperty("IDBStrategy", "TXTTemplate" );
