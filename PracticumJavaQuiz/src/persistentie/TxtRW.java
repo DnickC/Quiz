@@ -2,6 +2,7 @@ package persistentie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +17,9 @@ import java.util.Scanner;
 class TxtRW extends DbRW implements IDBStrategy {
 	
 	List<File> files;
+	
+	static File opdrachtTxt = new File("PracticumJavaQuiz//src//bestanden//Opdrachten.txt");
+	static File quizTxt = new File("PracticumJavaQuiz//src//bestanden//Quizzen.txt");
 	
 	public TxtRW() {
 		files = new ArrayList<File>();
@@ -37,10 +41,10 @@ class TxtRW extends DbRW implements IDBStrategy {
 	
 	@Override
 	public final void schrijfCatalogi() {
-		// TODO Auto-generated method stub
+		//this.schrijfFile(file, inhoud);
+		
+
 	}
-	
-	
 	
 	private void leesTxt(List<File> files) throws FileNotFoundException {
 		
@@ -96,4 +100,25 @@ class TxtRW extends DbRW implements IDBStrategy {
 		}
 		return lijn;
 	}
+	
+	private void schrijfFile(File file, String inhoud) throws Exception {
+		
+		PrintWriter writer;
+		
+		try{
+			writer = new PrintWriter(file);
+			String[] stuks = inhoud.split(System.getProperty("line.separator"));
+			for (String s : stuks) {
+				writer.println(s);
+			}
+							
+			if (writer !=null)
+				writer.close();
+			}
+		catch(Exception ex){
+			throw new Exception(ex.getMessage());
+		}
+	}
 }
+
+
