@@ -13,6 +13,7 @@ public class QuizTest {
 	private Quiz constrTest;
 	private Quiz constrTestEquals;
 	private Quiz constrTest2;
+	private Quiz constrTestClone;
 	
 	
 	@Before

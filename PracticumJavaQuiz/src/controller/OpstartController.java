@@ -11,30 +11,20 @@ import view.BeheerQuizzen;
 import view.MainMenuNew;
 import view.MainMenu;
 import persistentie.DbHandler;
-import persistentie.IDBStrategy;
 
 public class OpstartController {
-	
-	
 
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
 	
 	public static void main(String[] args) throws IOException {
 		
-		DbHandler dBH = new DbHandler();
 		Properties table = new Properties();
+		loadProperties(table);
 		
-//		table.setProperty("IDBStrategy", "TXTTemplate" );
-//		saveProperties(table);
-		
-		//loadProperties(table);
-		
-//		IDBStrategy strategy = (IDBStrategy)table.getProperty("iDBStrategy");
-//		dBH.setStrategy(strategy);
-		
-		//dBH.leesCatalogi();
-		
+		DbHandler dBH = new DbHandler(table.getProperty("DBStrategy"));
 		OpstartController opstart = new OpstartController();
+	
+		dBH.leesCatalogi();
 		
 	}
 	
@@ -160,8 +150,8 @@ public class OpstartController {
 			FileOutputStream output = new FileOutputStream(initPath);
 			props.store(output, "Start Properties");
 			output.close();
-			
-		} catch (IOException ioException) {
+		} 
+		catch (IOException ioException) {
 			throw new IOException();
 		}
 	}
@@ -174,8 +164,8 @@ public class OpstartController {
 			FileInputStream input = new FileInputStream(initPath);
 			props.load(input);
 			input.close();
-			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			throw new IOException();
 		}
 	}

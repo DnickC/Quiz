@@ -16,7 +16,7 @@ public class Oef6a {
 			if (map.containsKey(opdracht.getOpdrachtCategorie())){
 				aantal = map.get(opdracht.getOpdrachtCategorie())+1;
 			}
-			map.put(opdracht.getOpdrachtCategorie(), aantal);
+			map.put(opdracht.getOpdrachtCategorie().toString(), aantal);
 		}
 		Set <Map.Entry<String, Integer>> set = map.entrySet();
 		for (Map.Entry<String,Integer> entry:set){

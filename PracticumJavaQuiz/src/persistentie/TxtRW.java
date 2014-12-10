@@ -13,18 +13,36 @@ import java.util.Scanner;
  * 
  */
 
-public class TxtRW extends DbRW {
+class TxtRW extends DbRW implements IDBStrategy {
 	
-	List<File> files = new ArrayList<File>();
+	List<File> files;
 	
 	public TxtRW() {
-		
+		files = new ArrayList<File>();
 		files.add(quizTxt);
 		files.add(opdrachtTxt);
 	}
 	
+	@Override
+	public void leesCatalogi() {
+		
+		try {
+			leesTxt(files);
+		} 
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
-	public void leesCatalogi(List<File> files) throws FileNotFoundException {
+	@Override
+	public final void schrijfCatalogi() {
+		// TODO Auto-generated method stub
+	}
+	
+	
+	
+	private void leesTxt(List<File> files) throws FileNotFoundException {
 		
 		stringFromDb = new ArrayList<String>();
 	
@@ -37,11 +55,11 @@ public class TxtRW extends DbRW {
 
 	/**
 	 * Methode that reads a given txt file containing saved objects,
-	 * using a scanner it returns a list containing string arrays.
-	 * Each of these arrays represents the parameters of a single object.  
+	 * using a scanner it returns a string
+	 * This string represents the parameters of a single object.  
 	 * @param File
 	 * @throws FileNotFoundException
-	 * @return List<String[]>
+	 * @return String
 	 */
 	private String leesFile(File file) throws FileNotFoundException {
 
@@ -77,22 +95,5 @@ public class TxtRW extends DbRW {
 			System.out.println(ex.getMessage());
 		}
 		return lijn;
-	}
-
-	public final void schrijfCatalogi() {
-		// TODO Auto-generated method stub
-	}
-
-
-	@Override
-	public void leesCatalogi() {
-		
-		try {
-			leesCatalogi(files);
-		} 
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

@@ -8,13 +8,23 @@ package persistentie;
 
 public class DbHandler {
 	
-	TxtRW dbRW = new TxtRW();
+	IDBStrategy dbStrategy;
 	
 	/**
 	 * Sets the strategy to be used for persistency
 	 */
-	public void setStrategy(IDBStrategy dbStrategy) {
-		// TODO Auto-generated constructor stub
+	public void setStrategy(String strategy) {
+		
+		switch (strategy) {
+			case "TXTStrategy":
+				dbStrategy = new TxtRW();
+				break;
+			case "SQLStrategy":
+				dbStrategy = new SqlRW();
+				break;
+			default:
+				break;
+		}
 	}
 	
 	/**
@@ -22,19 +32,18 @@ public class DbHandler {
 	 * @return iDBStrategy
 	 */
 	public IDBStrategy getStrategy() {
-		// TODO Auto-generated constructor stub
-		return null;
+		return this.dbStrategy;
 	}
 	
 	public DbHandler() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**
 	 * Assignement constructor
 	 * @param IDBStrategy
 	 */
-	public DbHandler(IDBStrategy strategy) {
+	public DbHandler(String strategy) {
 		this.setStrategy(strategy);
 	}
 	
@@ -44,7 +53,7 @@ public class DbHandler {
 	 * @throws FileNotFoundException 
 	 */
 	public void leesCatalogi() {
-		dbRW.leesCatalogi();
+		dbStrategy.leesCatalogi();
 	}
 	
 	/**
@@ -55,7 +64,7 @@ public class DbHandler {
 	 * @param QuizOpdracht
 	 */
 	public void schrijfCatalogi() {
-		dbRW.schrijfCatalogi();
+		dbStrategy.schrijfCatalogi();
 	}
 }
 

@@ -1,12 +1,18 @@
 package persistentie;
 
-public abstract class SqlRW extends DbRW {
-
+class SqlRW extends DbRW implements IDBStrategy {
+	
+	public SqlRW() {
+		
+	}
+	
+	@Override
 	public void leesCatalogi() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
 	public void schrijfCatalogi() {
 		// TODO Auto-generated method stub
 		
