@@ -37,6 +37,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 //		this.opdrachtCategorie = null;
 	}
 	
+
 	
 	/**
 	 * Assignement constructor 

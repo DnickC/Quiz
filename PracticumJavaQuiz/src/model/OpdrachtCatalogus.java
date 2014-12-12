@@ -18,7 +18,7 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 	private int currentIndex = 0;
 	
 	
-	
+	// Hoe wilt ge dit binnen laten komen? 
 	public OpdrachtCatalogus(String catalogusnaam){
 		this.catalogusNaam = catalogusnaam;
 		this.maxIndex = 0;
@@ -29,8 +29,8 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 	
 	@Override
 	public OpdrachtCatalogus clone() throws CloneNotSupportedException{
-		OpdrachtCatalogus clone = new OpdrachtCatalogus(this.catalogusNaam);
-		return clone;
+		cataClone = new OpdrachtCatalogus(this);
+		return cataClone;
 	}
 //	
 //	/**
