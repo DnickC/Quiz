@@ -9,8 +9,7 @@ import org.junit.Before;
 
 @SuppressWarnings("deprecation")
 public class DatumTest {
-	
-	test
+
 	
 	private Datum geldigeDatum;
 	private Datum schrikkelDatum;
