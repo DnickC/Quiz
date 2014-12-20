@@ -7,28 +7,38 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import sun.security.pkcs11.Secmod.DbMode;
 import view.BeheerQuizzen;
 import view.MainMenuNew;
 import view.MainMenu;
-import persistentie.DbHandler;
+import persistentie_Dominique.DbHandler;
+import persistentie_andy.QuizDB; // persistentie_andy
+import persistentie_andy.QuizDBFactory; // persistentie_andy
 
 public class OpstartController {
-
+	// 	Static
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
-	
+
 	public static void main(String[] args) throws IOException {
 		
 		Properties table = new Properties();
-		loadProperties(table);
+		try{
+			loadProperties(table);
+		}catch(java.io.IOException e){
+			// TODO MSGBox
+		}
 		
 		DbHandler dBH = new DbHandler(table.getProperty("DBStrategy"));
-		OpstartController opstart = new OpstartController();
-	
-		dBH.leesCatalogi();
-		
+		//QuizDB db = QuizDBFactory.getInstance().MaakDB(table.getProperty("Database"));  // persistentie_andy
+		OpstartController opstart = new OpstartController(/*db  // persistentie_andy*/);
 	}
+
 	
-	public OpstartController(){
+	// Class
+	//private QuizDB databank = null; // persistentie_andy
+	
+	public OpstartController(/*QuizDB db  // persistentie_andy*/){
+		//databank = db; // persistentie_andy
 		
 		MainMenuNew menu = new MainMenuNew();
 		menu.addKnopBeheerQuizzenActionListener(new BeheerQuizzenListener());

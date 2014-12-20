@@ -1,5 +1,6 @@
 package oefeningen;
 
+/*
 import database.OpdrachtenDatabase;
 import model.Opdracht;
 import java.util.*;
@@ -24,4 +25,4 @@ public class Oef6a {
 			System.out.println(output);
 		}
 	}
-}
+}*/

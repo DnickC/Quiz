@@ -1,4 +1,6 @@
 package oefeningen;
+/*
+
 import view.IO;
 import database.QuizDatabase;
 import model.*;
@@ -10,7 +12,7 @@ public class Oef6b {
 
 	/**
 	 * @param args
-	 */
+	 *//*
 	public static void main(String[] args) {
 		QuizDatabase quizDB = new QuizDatabase("quizen.txt");
 		Quiz quiz = selecteerQuiz(quizDB);
@@ -54,4 +56,4 @@ public class Oef6b {
 		}
 		IO.toonStringMetVenster(tmp);
 	}	
-}
+}*/

@@ -10,6 +10,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 */
 	
 	private int juisteAntwoord;
+	public ArrayList<String> antwoordenLijst = new ArrayList<String>();
 	
 	/**
 	 * Meerkeuze constructor. Passes vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie to Opdracht constructor
@@ -175,6 +176,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 		final int prime = 31;
 		int result=1;
 		
+		result = super.hashCode();
 		result = prime * result + ((juisteAntwoord == 0) ? 0 : juisteAntwoord);
 		return result;
 		

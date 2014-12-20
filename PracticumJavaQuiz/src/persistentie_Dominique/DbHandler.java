@@ -1,4 +1,4 @@
-package persistentie;
+package persistentie_Dominique;
 
 /**
  * @Authors: Dominique
@@ -15,14 +15,13 @@ public class DbHandler {
 	 */
 	public void setStrategy(String strategy) {
 		
-		switch (strategy) {
-			case "TXTStrategy":
-				dbStrategy = new TxtRW();
-				break;
+		switch ((strategy != null)? strategy : "") {
 			case "SQLStrategy":
 				dbStrategy = new SqlRW();
 				break;
+			case "TXTStrategy":
 			default:
+				dbStrategy = new TxtRW();
 				break;
 		}
 	}

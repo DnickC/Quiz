@@ -1,9 +1,7 @@
 package model.statePattern;
 
+public class QuizState_Afgewerkt implements IQuizState {
 
-public class Status_InConstructie implements IStatus {
-	
-	
 	/**
 	 * @author Andy Poron
 	 */
@@ -13,12 +11,11 @@ public class Status_InConstructie implements IStatus {
 	}
 	
 	public boolean editQuizEigenschappen(){
-		return true;
+		return false;
 	}
 	
 	public boolean editIsUniekeDeelname(){
-		return true;
+		return false;
 	}
-	
 	
 }

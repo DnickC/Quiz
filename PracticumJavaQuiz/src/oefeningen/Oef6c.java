@@ -1,4 +1,5 @@
 package oefeningen;
+/*
 import view.IO;
 import database.QuizDatabase;
 import model.*;
@@ -33,4 +34,4 @@ public class Oef6c {
 		IO.toonStringMetVenster(output);
 	}
 
-}
+}*/

@@ -1,4 +1,4 @@
-package persistentie;
+package persistentie_Dominique;
 
 import java.io.File;
 import java.io.FileNotFoundException;

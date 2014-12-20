@@ -1,6 +1,6 @@
 package model.statePattern;
 
-public class Status_Opengesteld implements IStatus {
+public class QuizState_Opengesteld implements IQuizState {
 	/**
 	 * @author Andy Poron
 	 */

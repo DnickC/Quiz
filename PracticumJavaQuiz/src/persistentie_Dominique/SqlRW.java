@@ -1,4 +1,4 @@
-package persistentie;
+package persistentie_Dominique;
 
 class SqlRW extends DbRW implements IDBStrategy {
 	

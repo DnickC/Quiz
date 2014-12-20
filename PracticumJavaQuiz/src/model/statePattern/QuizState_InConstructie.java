@@ -1,20 +1,24 @@
 package model.statePattern;
 
-public class Status_LaatsteKans implements IStatus {
+
+public class QuizState_InConstructie implements IQuizState {
+	
+	
 	/**
 	 * @author Andy Poron
 	 */
+	
 	public boolean verwijderQuiz(){
-		return false;
+		return true;
 	}
 	
 	public boolean editQuizEigenschappen(){
-		return false;
+		return true;
 	}
 	
 	public boolean editIsUniekeDeelname(){
-		return false;
+		return true;
 	}
 	
-
+	
 }

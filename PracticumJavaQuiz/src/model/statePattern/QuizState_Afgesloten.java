@@ -1,7 +1,7 @@
 package model.statePattern;
 
-public class Status_Afgewerkt implements IStatus {
-
+public class QuizState_Afgesloten implements IQuizState {
+	
 	/**
 	 * @author Andy Poron
 	 */
@@ -18,4 +18,5 @@ public class Status_Afgewerkt implements IStatus {
 		return false;
 	}
 	
+
 }

@@ -1,13 +1,11 @@
 package model.statePattern;
 
-public class Status_Afgesloten implements IStatus {
-	
+public class QuizState_LaatsteKans implements IQuizState {
 	/**
 	 * @author Andy Poron
 	 */
-	
 	public boolean verwijderQuiz(){
-		return true;
+		return false;
 	}
 	
 	public boolean editQuizEigenschappen(){

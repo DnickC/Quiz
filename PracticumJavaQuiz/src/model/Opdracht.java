@@ -14,7 +14,8 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	 * 
 	 */
 	
-	private int opdrachtID ;
+	private int opdrachtID = -1;
+	
 	private String vraag;
 	private int maxAantalPogingen;
 	private String hint;
@@ -266,18 +267,22 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	
 	@Override
 	public int compareTo(Object object) {
-		if(object instanceof Opdracht){
-			Opdracht input = (Opdracht)object;
-			if(this.vraag == input.vraag ){
-				if(this.maxAantalPogingen < input.maxAantalPogingen || this.maxAntwoordTijd < input.maxAntwoordTijd){
-					return -1;
+		if(object != null){
+			if(object instanceof Opdracht){
+				Opdracht input = (Opdracht)object;
+				if(this.vraag == input.vraag ){
+					if(this.maxAantalPogingen < input.maxAantalPogingen || this.maxAntwoordTijd < input.maxAntwoordTijd){
+						return -1;
+					}
+					return 0;
+				}else{
+					return 1;
 				}
-				return 0;
-			}else{
-				return 1;
-			}
-			
-		}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
+				
+			}else{ throw new IllegalArgumentException("Niet van hetzelfde type");}
+		}else{
+			throw new IllegalArgumentException("Mag niet null zijn.");
+		}
 	}
 
 	
@@ -289,10 +294,11 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	public int hashCode(){
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (((maxAantalPogingen == 0) ? 0 : maxAantalPogingen));
+		result = prime * result + opdrachtID;
+		result = prime * result + maxAantalPogingen;
 		result = prime * result + (((vraag == null)? 0 : vraag.hashCode()));
 		result = prime * result + (((hint == null)? 0 : hint.hashCode()));
-		result = prime * result + (((maxAntwoordTijd == 0)? 0 : maxAntwoordTijd));
+		result = prime * result + maxAntwoordTijd;
 		result = prime * result + (((opdrachtCategorie == null)? 0 : opdrachtCategorie.hashCode()));
 		result = prime * result + (((datumRegistratie == null)? 0 : datumRegistratie.hashCode()));
 		result = prime * result + (((quizOpdrachten == null)? 0 : quizOpdrachten.hashCode()));

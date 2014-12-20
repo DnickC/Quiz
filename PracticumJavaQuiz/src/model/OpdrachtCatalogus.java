@@ -13,22 +13,22 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 	private HashMap<Integer,Opdracht> opdrachten;
 	private String catalogusNaam = null;
 	//private Datum registratieDatum;
-	private final int begin = 0;
-	private int maxIndex = 0;
-	private int currentIndex = 0;
+	private int currentIndex = 1;
 	
 	
 	// Hoe wilt ge dit binnen laten komen? 
 	public OpdrachtCatalogus(String catalogusnaam){
 		this.catalogusNaam = catalogusnaam;
-		this.maxIndex = 0;
-		
+	}
+	public OpdrachtCatalogus(OpdrachtCatalogus oC){
+		this.catalogusNaam = oC.catalogusNaam;
 	}
 	
 	//Moet er geen constructor zijn waarin meteen alle opdrachten kan meegegeven worden ? 
 	
 	@Override
 	public OpdrachtCatalogus clone() throws CloneNotSupportedException{
+		OpdrachtCatalogus cataClone;
 		cataClone = new OpdrachtCatalogus(this);
 		return cataClone;
 	}
@@ -49,10 +49,12 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 	
 	public void addOpdracht(Opdracht opdracht){
 		if(opdracht.getVraag() != null){
-			this.maxIndex++;
-			opdracht.setID(this.maxIndex);
-		opdrachten.put(this.maxIndex, opdracht);
-		this.currentIndex = opdracht.getID();
+			if(opdracht.getID() <= 0){
+				opdracht.setID(this.currentIndex++);
+			}else{
+				this.currentIndex = (this.currentIndex > opdracht.getID())? this.currentIndex : opdracht.getID()+1;
+			}
+			opdrachten.put(opdracht.getID(), opdracht);
 		}else{throw new NullPointerException("Geen vraag");}
 	}
 	
@@ -60,15 +62,13 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 	 * returns the wanted assignement based on a Opdracht. 
 	 * @param Opdracht opdracht
 	 */
-		public Opdracht getOpdracht(Opdracht opdracht){
-			while(iterator().hasNext()){
-				int key = iterator().next();
-				if(key == opdracht.getID()){
-					return (Opdracht)opdrachten.get(key);
-				}
-			}
+	public Opdracht getOpdracht(int opdrachtID){
+		if(opdrachten.containsKey(opdrachtID)){
+			return opdrachten.get(opdrachtID);
+		}else{
 			throw new IllegalArgumentException("Opdracht niet gevonden");
 		}
+	}
 		
 	/*public Opdracht getOpdracht(Opdracht opdracht){
 		for(Opdracht p: opdrachten){
@@ -135,8 +135,6 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 		int result=1;
 		result = prime * result + ((catalogusNaam == null) ? 0 : catalogusNaam.hashCode());
 		//result = prime * result + ((registratieDatum == null) ? 0 : registratieDatum.hashCode());
-		result = prime * result + ((begin == 0) ? 0 : begin);
-		result = prime * result + ((maxIndex == 0) ? 0 : maxIndex);
 		result = prime * result + ((currentIndex == 0) ? 0 : currentIndex);
 		result = prime * result + ((opdrachten == null) ? 0 : opdrachten.hashCode());
 		return result;

@@ -21,6 +21,7 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar {
 	 * @param categorie
 	 */
 	
+	public ArrayList<String> antwoordenLijst = new ArrayList<String>();
 	
 	public Vraag_Opsomming(String vraag,String antwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
 		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);

@@ -1,4 +1,5 @@
 package oefeningen;
+/*
 import model.Quiz;
 import java.util.Comparator;
 
@@ -13,3 +14,4 @@ public class Oef6cQuizComparator implements Comparator<Quiz>{
 		return terug;
 	}
 }
+*/

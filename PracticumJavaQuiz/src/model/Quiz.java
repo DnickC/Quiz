@@ -25,7 +25,7 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	IStatus Status_Opengesteld;
 	*/
 	
-	IStatus quizState = new Status_InConstructie();
+	IQuizState quizState = new QuizState_InConstructie();
 	
 	private int quizID;
 	private String onderwerp;
@@ -74,19 +74,19 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 			
 			switch (status) { 
 			case inConstructie:
-				this.quizState = new Status_InConstructie();
+				this.quizState = new QuizState_InConstructie();
 				break;
 			case afgewerkt:
-				this.quizState = new Status_Afgewerkt();
+				this.quizState = new QuizState_Afgewerkt();
 				break;
 			case opengesteld:
-				this.quizState = new Status_Opengesteld();
+				this.quizState = new QuizState_Opengesteld();
 				break;
 			case laatsteKans:
-				this.quizState = new Status_LaatsteKans();
+				this.quizState = new QuizState_LaatsteKans();
 				break;
 			case afgesloten:
-				this.quizState = new Status_Afgesloten();
+				this.quizState = new QuizState_Afgesloten();
 				break;
 
 			default:
