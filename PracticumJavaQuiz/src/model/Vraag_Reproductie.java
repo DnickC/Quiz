@@ -11,7 +11,8 @@ public class Vraag_Reproductie extends Opdracht {
 	
 	private ArrayList<String> trefwoorden;
 	private int minAantalTrefwoorden;
-	
+	final VraagType type = VraagType.reproductie;
+
 	/**
 	 * blank constructor. 
 	 */
@@ -31,15 +32,15 @@ public class Vraag_Reproductie extends Opdracht {
 	 * @param OpdrachtCategorie categorie
 	 */
 	
-	public Vraag_Reproductie(String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
-		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
+	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
 		setTrefwoorden(trefwoorden);
 		this.minAantalTrefwoorden = minAantalTrefwoorden;
 	}
 	
 	@Override
 	public Vraag_Reproductie clone() throws CloneNotSupportedException{
-		Vraag_Reproductie clon = new Vraag_Reproductie(this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	

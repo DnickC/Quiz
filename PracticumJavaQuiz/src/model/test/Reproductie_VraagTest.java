@@ -14,7 +14,7 @@ public class Reproductie_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Reproductie("vraag", "trefwoorden", 1, 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Reproductie(-1,"vraag", "trefwoorden", 1, 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

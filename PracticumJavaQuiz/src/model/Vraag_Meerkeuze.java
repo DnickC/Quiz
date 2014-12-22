@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import model.VraagType;;
 
 public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	
@@ -8,7 +9,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * Authors:
 	 * Version:
 	 */
-	
+	final VraagType type = VraagType.meerkeuze;
 	private int juisteAntwoord;
 	public ArrayList<String> antwoordenLijst = new ArrayList<String>();
 	
@@ -21,9 +22,9 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @param hint
 	 * @param categorie
 	 */
-	public Vraag_Meerkeuze(String vraag,String antwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
-		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
-		setAntwoorden(antwoorden);
+	public Vraag_Meerkeuze(int id,String vraag,String mogelijkeAntwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
+		setAntwoorden(mogelijkeAntwoorden);
 	}
 	
 	/**
@@ -31,7 +32,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @param vraag
 	 * @param antwoorden
 	 * @param maxAantalPogingen
-	 * @param maxAntwoordTijd
+	 * @param maxAntwoordTijds
 	 * @param hint
 	 * @param categorie
 	 * @return Meerkeuze_Vraag
@@ -39,7 +40,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	
 	@Override
 	public Vraag_Meerkeuze clone() throws CloneNotSupportedException{
-		Vraag_Meerkeuze clon = new Vraag_Meerkeuze(this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Vraag_Meerkeuze clon = new Vraag_Meerkeuze(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	

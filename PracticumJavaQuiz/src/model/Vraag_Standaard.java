@@ -10,19 +10,21 @@ public class Vraag_Standaard  extends Opdracht implements IValideerbaar {
 	 */
 	
 	private String juisteAntwoord;
+	final VraagType type = VraagType.standaard;
+
 	
 	public Vraag_Standaard(){
 		super();
 	}
 	
-	public Vraag_Standaard(String vraag,String juistAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie){
-		super(vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
+	public Vraag_Standaard(int id,String vraag,String juistAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
 		this.setJuisteAntwoord(juistAntwoord);
 	}
 	
 	@Override
 	public Vraag_Standaard clone() throws CloneNotSupportedException{
-		Vraag_Standaard clon = new Vraag_Standaard(this.getVraag(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Vraag_Standaard clon = new Vraag_Standaard(this.getID(),this.getVraag(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	

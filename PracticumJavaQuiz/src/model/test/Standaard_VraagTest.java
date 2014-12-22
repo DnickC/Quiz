@@ -14,7 +14,7 @@ public class Standaard_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Standaard("vraag", "juisteAntwoord", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

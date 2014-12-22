@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.DriverManager;
 import java.util.Properties;
 
 import sun.security.pkcs11.Secmod.DbMode;
@@ -15,17 +16,33 @@ import persistentie_Dominique.DbHandler;
 import persistentie_andy.QuizDB; // persistentie_andy
 import persistentie_andy.QuizDBFactory; // persistentie_andy
 
+import java.sql.*;
+
+import javax.swing.JOptionPane;
+
 public class OpstartController {
 	// 	Static
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
+	
+	static final String jdbc_Driver = "com.mysql.jdbc.Driver";
+	static final String connection_URL = "jdbc:derby:QuizDB";
 
 	public static void main(String[] args) throws IOException {
+		Connection conn = null;
+		Statement stmt = null;
 		
 		Properties table = new Properties();
 		try{
 			loadProperties(table);
 		}catch(java.io.IOException e){
 			// TODO MSGBox
+		}
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(connection_URL);
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null,"Database connectie mislukt");
 		}
 		
 		DbHandler dBH = new DbHandler(table.getProperty("DBStrategy"));

@@ -14,7 +14,7 @@ public class Opsomming_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Opsomming("vraag", "antwoord1;antwoord2", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Opsomming(-1,"vraag", "antwoord1;antwoord2", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

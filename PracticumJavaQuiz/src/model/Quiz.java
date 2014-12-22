@@ -27,7 +27,7 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	
 	IQuizState quizState = new QuizState_InConstructie();
 	
-	private int quizID;
+	private int quizID = -1;
 	private String onderwerp;
 	private int leerjaar;
 	private boolean isTest;
@@ -42,8 +42,9 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	private ArrayList<QuizOpdracht> quizOpdrachten;
 	
 		
-	public Quiz (String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
+	public Quiz (int id, String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
 	{
+			this.setQuizID(id);
 			this.setOnderwerp(onderwerp);
 			this.setLeerjaar(leerjaar);
 			this.setIsTest(isTest);
@@ -53,7 +54,7 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	}
 	
 	public Quiz clone() throws CloneNotSupportedException{
-		Quiz objClone = new Quiz(this.getOnderwerp(), this.getLeerjaar(), this.getIsTest(), this.getIsUniekeDeelname(), this.getLeraar(), this.getQuizStatus());;
+		Quiz objClone = new Quiz(this.getQuizID(),this.getOnderwerp(), this.getLeerjaar(), this.getIsTest(), this.getIsUniekeDeelname(), this.getLeraar(), this.getQuizStatus());;
 		return objClone;
 	}
 	

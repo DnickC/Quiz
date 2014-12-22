@@ -29,7 +29,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	
 	
 	public Opdracht(){
-		this(null, 1, 0 , null, null); //constructor met parameters gebruiken om default te setten
+		this(-1,null, 1, 0 , null, null); //constructor met parameters gebruiken om default te setten
 //		
 //		this.vraag = null;
 //		this.maxAantalPogingen = 1;
@@ -49,7 +49,8 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	 * @param OpdrachtCategorie categorie
 	 */
 		
-	public Opdracht(String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
+	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
+		this.setID(id);
 		this.setVraag(vraag);
 		this.setMaxAantalPogingen(maxAantalPogingen);
 		this.setHint(hint);
