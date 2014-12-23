@@ -15,8 +15,16 @@ public class QuizFactory{
 	 * Dit eventueel doen met een tussenklasse die dat doet voor zowel Quiz als Opdracht?
 	 */
 	
-	public Quiz getQuiz(int id,String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status) {
+	public Quiz getQuiz(String[] array) {
 		
-		return new Quiz(id,onderwerp, leerjaar, isTest, uniekeDeelname, leraar, status);
+		int id = Integer.parseInt(array[0]);
+		String onderwerp = array[1];
+		int leerjaar = Integer.parseInt(array[2]);
+		boolean isTest = Boolean.parseBoolean(array[3]);
+		boolean uniekeDeelname = Boolean.parseBoolean(array[4]);
+		String leraar = array[5];
+		String status = array[6];
+		
+		return new Quiz(id,onderwerp, leerjaar, isTest, uniekeDeelname, Leraar.valueOf(leraar), QuizStatus.valueOf(status));
 	}
 }
