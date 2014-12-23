@@ -8,6 +8,7 @@ import model.Opdracht;
 import model.OpdrachtCatalogus;
 import model.Quiz;
 import model.QuizCatalogus;
+import model.QuizOpdracht;
 
 // Template
 public abstract class QuizDB {
@@ -16,6 +17,7 @@ public abstract class QuizDB {
     
     protected OpdrachtCatalogus opdrachtenCatagolus = null;
     protected QuizCatalogus quizCatagolus = null;
+    protected QuizOpdracht quizOpdrachten = null;
     protected LeerlingContainer leerlingen = null;
     
     protected QuizDB(){

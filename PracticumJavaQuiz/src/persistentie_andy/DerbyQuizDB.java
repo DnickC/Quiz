@@ -1,12 +1,8 @@
 package persistentie_andy;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.swing.JOptionPane;
 
 import model.Leraar;
 import model.Opdracht;
@@ -35,21 +31,81 @@ public class DerbyQuizDB extends QuizDB {
     }
     
     public boolean Opslaan(HashMap<Integer,Opdracht> opdrachten, ArrayList<Quiz> quizzen) throws Exception {
-    	// TODO
+    	this.OpslaanOpdrachten(opdrachten);
+    	this.OpslaanQuizzen(quizzen);
     	return true;
     }
     public boolean Laden() throws Exception{
-    	// TODO
+    	this.LaadOpdrachten();
+    	this.LaadQuizzen();
     	return true;
     
     }
     
-    public boolean LaadOpdrachten(){
+    public void LaadQuizzen() throws Exception{
+    	stmt = conn.createStatement();
+    	ResultSet input = stmt.executeQuery("SELECT * FROM TBLQuiz");
+    	
+    	if(input != null){
+    		while(input.next()){
+    			this.quizCatagolus.addQuiz(new Quiz(Integer.parseInt(input.getString("QuizID")),input.getString("Onderwerp"),Integer.parseInt(input.getString("leerjaar")),
+    					Boolean.parseBoolean(input.getString("IsTest")),Boolean.parseBoolean(input.getString("UniekeDeelname")),Leraar.valueOf(input.getString("Auteur"))
+    					,QuizStatus.valueOf(input.getString("status"))));
+    		}
+    	}
+    }
+	
+    /*public void LaadQuizOpdrachten()throws Exception{
+    	stmt = conn.createStatement();
+    	ResultSet input = stmt.executeQuery("SELECT * FROM TBLQuizOpdracht");
+    	
+    	if(input!= null){
+    		while(input.next()){
+    			this.quizOpdrachten
+    		}
+    	}
+    	
+    }*/
+    
+    public void LaadOpdrachten() throws Exception{
+    	stmt = conn.createStatement();
+    	ResultSet input = stmt.executeQuery("SELECT * FROM TBLOpdracht");
+    	
+    	if(input != null){
+	    	while(input.next()){
+	    		switch (input.getString("Vraagtype")){
+	    		case "standaard":
+	    			this.opdrachtenCatagolus.addOpdracht(new Vraag_Standaard(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("JuisteAntwoord"),
+	    					Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),VraagType.valueOf(input.getString("Vraagtype")),
+	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie"))));
+	    			break;
+	    		case "meerkeuze":
+	    			this.opdrachtenCatagolus.addOpdracht(new Vraag_Meerkeuze(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("Antwoorden"),
+	    					Integer.parseInt(input.getString("JuisteAntwoord")),Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),
+	    					input.getString("AntwoordHints"),VraagType.valueOf(input.getString("Vraagtype")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie"))));
+	    			break;
+	    		case "opsomming":
+	    			this.opdrachtenCatagolus.addOpdracht(new Vraag_Opsomming(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("Antwoorden"),
+	    					Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
+	    					VraagType.valueOf(input.getString("Vraagtype")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie"))));
+	    			break;
+	    		case "reproductie":
+	    			this.opdrachtenCatagolus.addOpdracht(new Vraag_Reproductie(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),
+	    					input.getString("Trefwoorden"),Integer.parseInt(input.getString("MinAantalTrefwoorden")),Integer.parseInt(input.getString("MaxAantalPogingen")),
+	    					Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),VraagType.valueOf(input.getString("Vraagtype")),
+	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie"))));
+	    			break;
+	    		}
+	    	}	
+    	}
     	
     }
     
     
     public boolean OpslaanQuizzen(ArrayList<Quiz> quizzen) throws Exception{
+    	if(quizzen != null){
+    		stmt.execute("DELETE * FROM TBLQuiz");
+    	}
     	for(Quiz q : quizzen){
     		stmt = conn.createStatement();
     		String query = "INSERT INTO TBLQuiz("+q.getQuizID()+","+q.getOnderwerp() +",'" +q.getLeerjaar()+","+ String.valueOf(q.getIsTest())+","+
@@ -65,6 +121,9 @@ public class DerbyQuizDB extends QuizDB {
     
     
     public boolean OpslaanOpdrachten(HashMap<Integer,Opdracht> opdrachten)throws Exception{
+    	if(opdrachten!= null){
+    		stmt.execute("DELETE * FROM TBLOpdracht");
+    	}
     	for(Opdracht o : opdrachten.values()){
     		stmt = conn.createStatement();
     		String query = null;

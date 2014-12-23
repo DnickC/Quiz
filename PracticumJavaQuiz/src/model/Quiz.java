@@ -208,6 +208,13 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 		}
 		return opdrachten;
 	}
+	
+	public String getOpdrachtenToString(){
+		string output = null;
+		for(QuizOpdracht quizOpdracht:quizOpdrachten){
+			output += quizOpdracht.
+		}
+	}
 
 	public QuizOpdracht getOpdracht(int volgnr){
 		return quizOpdrachten.get(volgnr-1);
