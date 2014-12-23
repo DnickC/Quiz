@@ -24,13 +24,10 @@ public class OpstartController {
 	// 	Static
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
 	
-	static final String jdbc_Driver = "com.mysql.jdbc.Driver";
-	static final String connection_URL = "jdbc:derby:QuizDB";
+	
 
 	public static void main(String[] args) throws IOException {
-		Connection conn = null;
-		Statement stmt = null;
-		
+				
 		Properties table = new Properties();
 		try{
 			loadProperties(table);
@@ -38,12 +35,7 @@ public class OpstartController {
 			// TODO MSGBox
 		}
 		
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(connection_URL);
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(null,"Database connectie mislukt");
-		}
+	
 		
 		DbHandler dBH = new DbHandler(table.getProperty("DBStrategy"));
 		//QuizDB db = QuizDBFactory.getInstance().MaakDB(table.getProperty("Database"));  // persistentie_andy
