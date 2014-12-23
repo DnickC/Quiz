@@ -1,13 +1,18 @@
 package persistentie_andy;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import model.LeerlingContainer;
+import model.Opdracht;
 import model.OpdrachtCatalogus;
+import model.Quiz;
 import model.QuizCatalogus;
 
 // Template
 public abstract class QuizDB {
-    public abstract boolean Opslaan();
-    public abstract boolean Laden();
+    public abstract boolean Opslaan(HashMap<Integer,Opdracht> opdrachten, ArrayList<Quiz> quizzen) throws Exception;
+    public abstract boolean Laden() throws Exception;
     
     protected OpdrachtCatalogus opdrachtenCatagolus = null;
     protected QuizCatalogus quizCatagolus = null;
@@ -29,5 +34,12 @@ public abstract class QuizDB {
     	return quizCatagolus;
     }
     
+    public void addQuiz(Quiz quiz){
+    	this.quizCatagolus.addQuiz(quiz);
+    }
+    
+    public void addOpdracht(Opdracht opdracht){
+    	this.opdrachtenCatagolus.addOpdracht(opdracht);
+    }
     
 }

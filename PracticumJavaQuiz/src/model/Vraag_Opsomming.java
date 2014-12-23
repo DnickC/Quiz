@@ -24,8 +24,8 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar {
 	public ArrayList<String> antwoordenLijst = new ArrayList<String>();
 	final VraagType type = VraagType.opsomming;
 
-	public Vraag_Opsomming(int id,String vraag,String antwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
-		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
+	public Vraag_Opsomming(int id,String vraag,String antwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType type,Leraar auteur,OpdrachtCategorie categorie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie);
 		setAntwoorden(antwoorden);
 	}
 	
@@ -33,7 +33,7 @@ public class Vraag_Opsomming extends Opdracht implements IValideerbaar {
 	
 	@Override
 	public Vraag_Opsomming clone() throws CloneNotSupportedException{
-		Vraag_Opsomming clon = new Vraag_Opsomming(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Vraag_Opsomming clon = new Vraag_Opsomming(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	

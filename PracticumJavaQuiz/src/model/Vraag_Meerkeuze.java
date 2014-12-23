@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+
 import model.VraagType;;
 
 public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
@@ -22,8 +23,8 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @param hint
 	 * @param categorie
 	 */
-	public Vraag_Meerkeuze(int id,String vraag,String mogelijkeAntwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,OpdrachtCategorie categorie){
-		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,categorie);
+	public Vraag_Meerkeuze(int id,String vraag,String mogelijkeAntwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType type,Leraar auteur,OpdrachtCategorie categorie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie);
 		setAntwoorden(mogelijkeAntwoorden);
 	}
 	
@@ -40,7 +41,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	
 	@Override
 	public Vraag_Meerkeuze clone() throws CloneNotSupportedException{
-		Vraag_Meerkeuze clon = new Vraag_Meerkeuze(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getOpdrachtCategorie());
+		Vraag_Meerkeuze clon = new Vraag_Meerkeuze(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie());
 		return clon;
 	}
 	

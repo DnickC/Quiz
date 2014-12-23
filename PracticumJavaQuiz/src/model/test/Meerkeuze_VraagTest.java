@@ -1,8 +1,9 @@
 package model.test;
 
 import static org.junit.Assert.*;
-
+import model.Leraar;
 import model.OpdrachtCategorie;
+import model.VraagType;
 import model.Vraag_Meerkeuze;
 
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class Meerkeuze_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Meerkeuze(-1,null, null, 0, 0, 0, null, OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Meerkeuze(-1,null, null, 0, 0, 0, null,VraagType.meerkeuze,Leraar.LeraarA, OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

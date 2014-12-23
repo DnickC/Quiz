@@ -16,7 +16,7 @@ public class QuizDBFactory {
 		
 	}
 	
-	public QuizDB MaakDB( String type ){
+	public QuizDB MaakDB( String type ) throws Exception{
 		switch(
 				(type == null)? "" : type.toUpperCase()
 				){

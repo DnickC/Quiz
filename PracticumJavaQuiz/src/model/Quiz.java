@@ -42,14 +42,14 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	private ArrayList<QuizOpdracht> quizOpdrachten;
 	
 		
-	public Quiz (int id, String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar leraar, QuizStatus status)
+	public Quiz (int id, String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar auteur, QuizStatus status)
 	{
 			this.setQuizID(id);
 			this.setOnderwerp(onderwerp);
 			this.setLeerjaar(leerjaar);
 			this.setIsTest(isTest);
 			this.setIsUniekeDeelname(uniekeDeelname);
-			this.setAuteur(leraar);
+			this.setAuteur(auteur);
 			this.setQuizStatus(status);
 	}
 	

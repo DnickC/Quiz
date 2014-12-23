@@ -21,7 +21,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	private String hint;
 	private int maxAntwoordTijd;
 	private OpdrachtCategorie opdrachtCategorie;
-	
+	private VraagType vraagType = VraagType.standaard;
 	private Leraar auteur;
 	private Datum datumRegistratie;
 	
@@ -29,7 +29,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	
 	
 	public Opdracht(){
-		this(-1,null, 1, 0 , null, null); //constructor met parameters gebruiken om default te setten
+		this(-1,null, 1, 0 , null,null,null, null); //constructor met parameters gebruiken om default te setten
 //		
 //		this.vraag = null;
 //		this.maxAantalPogingen = 1;
@@ -49,17 +49,17 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	 * @param OpdrachtCategorie categorie
 	 */
 		
-	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint, OpdrachtCategorie categorie) {
+	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType vraagtType,Leraar auteur, OpdrachtCategorie categorie) {
 		this.setID(id);
 		this.setVraag(vraag);
 		this.setMaxAantalPogingen(maxAantalPogingen);
 		this.setHint(hint);
 		this.setMaxAntwoordTijd(maxAntwoordTijd);
+		this.setVraagType(vraagType);
+		this.setAuteur(auteur);
 		this.setOpdrachtCategorie(categorie);
 
 	}
-	
-	// Constructor met ID erbij
 	
 	
 	/**
@@ -79,6 +79,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	public int getID(){
 		return this.opdrachtID;
 	}
+	
 	
 	/**
 	 * Sets the question
@@ -212,6 +213,24 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	}
 	
 	/**
+	 * Sets the type of question
+	 * @param VraagType type
+	 */
+	
+	public void setVraagType(VraagType type){
+		this.vraagType = type;
+	}
+	
+	/**
+	 * Returns the type of question
+	 * @return VraagType
+	 */
+	
+	public VraagType getVraagType(){
+		return this.vraagType;
+	}
+	
+	/**
 	 * returns the categorie of the question  
 	 * @return OpdrachtCategorie
 	 */
@@ -220,6 +239,31 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 		return opdrachtCategorie;
 	}
 
+	/**
+	 * Set's the categorie of the assignment
+	 * @param OpdrachtCategorie categorie
+	 */
+	
+	public void SetOpdrachtCategorie(OpdrachtCategorie categorie){
+		this.opdrachtCategorie = categorie;
+	}
+
+	/**
+	 * Set's the auteur
+	 * @param Leraar auteur
+	 */
+	public void setAuteur(Leraar auteur){
+		this.auteur = auteur;
+	}
+	
+	/**
+	 * Get's the auteur of the assignement
+	 */
+	
+	public Leraar getAuteur(){
+		return this.auteur;
+	}
+	
 	/**
 	 * Update's the assignemnt list. This attaches the Opdracht to Quiz. 
 	 * @param QuizOpdracht quizOpdracht

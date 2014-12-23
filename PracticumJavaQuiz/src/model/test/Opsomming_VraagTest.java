@@ -1,8 +1,9 @@
 package model.test;
 
 import static org.junit.Assert.*;
-
+import model.Leraar;
 import model.OpdrachtCategorie;
+import model.VraagType;
 import model.Vraag_Opsomming;
 
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class Opsomming_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Opsomming(-1,"vraag", "antwoord1;antwoord2", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Opsomming(-1,"vraag", "antwoord1;antwoord2", 4, 20, "hint",VraagType.opsomming,Leraar.LeraarB, OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

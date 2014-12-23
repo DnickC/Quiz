@@ -1,8 +1,9 @@
 package model.test;
 
 import static org.junit.Assert.*;
-
+import model.Leraar;
 import model.OpdrachtCategorie;
+import model.VraagType;
 import model.Vraag_Standaard;
 
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class Standaard_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",VraagType.standaard,Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test

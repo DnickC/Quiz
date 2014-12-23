@@ -1,3 +1,9 @@
+DROP TABLE TBLOpdrachten
+DROP TABLE TBLQuiz
+DROP TABLE QuizOpdracht
+
+
+
 CREATE TABLE TBLOpdrachten(
 	OpdrachtID int NOT NULL,
 	Vraag varchar(50) NOT NULL,
@@ -8,10 +14,31 @@ CREATE TABLE TBLOpdrachten(
 	AntwoordHints varchar(150) NOT NULL,
 	Trefwoorden varchar(150),
 	MinAantalTrefwoorden int,
-	Categorie varchar(25) NOT NULL,
 	Vraagtype varchar(20) NOT NULL,
 	Auteur int NOT NULL,
-	AanmaakDatum DATE NOT NULL,
+	Categorie varchar(25) NOT NULL,
+	AanmaakDatum DATE,
 primary key (OpdrachtID)
+)
+
+
+CREATE TABLE TBLQuiz(
+	QuizID int NOT NULL,
+	Onderwerp varchar(50) NOT NULL,
+	leerjaar int NOT NULL,
+	IsTest boolean NOT NULL,
+	UniekeDeelname boolean NOT NULL,
+	Auteur varchar(50) NOT NULL,
+	status varchar(25) NOT NULL,
+primary key(QuizID)
+)
+
+
+CREATE TABLE TBLQuizOpdracht(
+	QuizID int NOT NULL, 
+	OpdrachtID int NOT NULL, 
+	MaxScore int NOT NULL, 
+foreign key (QuizID) references TBLQuiz (QuizID),
+foreign key (OpdrachtID) references TBLOpdrachten(OpdrachtID)
 )
 

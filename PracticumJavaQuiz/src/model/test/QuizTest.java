@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import model.Leraar;
 import model.Quiz;
 import model.Quiz.QuizStatus;
+import model.VraagType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +20,9 @@ public class QuizTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		constrTest = new Quiz("onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
-		constrTestEquals = new Quiz("onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
-		constrTest2 = new Quiz("onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.opengesteld);
+		constrTest = new Quiz(-1,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
+		constrTestEquals = new Quiz(-1,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
+		constrTest2 = new Quiz(3,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.opengesteld);
 	}
 	
 	@Test

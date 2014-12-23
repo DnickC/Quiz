@@ -1,8 +1,9 @@
 package model.test;
 
 import static org.junit.Assert.*;
-
+import model.Leraar;
 import model.OpdrachtCategorie;
+import model.VraagType;
 import model.Vraag_Reproductie;
 
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class Reproductie_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Reproductie(-1,"vraag", "trefwoorden", 1, 4, 20, "hint", OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Reproductie(-1,"vraag", "trefwoorden", 1, 4, 20, "hint", VraagType.reproductie,Leraar.LeraarC,OpdrachtCategorie.Aardrijkskunde);
 	}
 	
 	@Test
