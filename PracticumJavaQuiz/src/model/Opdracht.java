@@ -29,7 +29,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	
 	
 	public Opdracht(){
-		this(-1,null, 1, 0 , null,null,null, null); //constructor met parameters gebruiken om default te setten
+		this(-1,null, 1, 0 , null,null,null, null,null); //constructor met parameters gebruiken om default te setten
 //		
 //		this.vraag = null;
 //		this.maxAantalPogingen = 1;
@@ -39,7 +39,6 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	}
 	
 
-	
 	/**
 	 * Assignement constructor 
 	 * @param String vraag
@@ -49,7 +48,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	 * @param OpdrachtCategorie categorie
 	 */
 		
-	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType vraagtType,Leraar auteur, OpdrachtCategorie categorie) {
+	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType vraagtType,Leraar auteur, OpdrachtCategorie categorie,Datum datum) {
 		this.setID(id);
 		this.setVraag(vraag);
 		this.setMaxAantalPogingen(maxAantalPogingen);
@@ -58,7 +57,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 		this.setVraagType(vraagType);
 		this.setAuteur(auteur);
 		this.setOpdrachtCategorie(categorie);
-
+		this.datumRegistratie.setDatum(datum.getDag(), datum.getMaand(), datum.getJaar());
 	}
 	
 	
@@ -265,6 +264,15 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	}
 	
 	/**
+	 * Returns the date that the assignment is made
+	 * @param Datum datumRegistratie
+	 */
+	
+	public Datum getDatumRegistratie(){
+		return this.datumRegistratie;
+	}
+	
+	/**
 	 * Update's the assignemnt list. This attaches the Opdracht to Quiz. 
 	 * @param QuizOpdracht quizOpdracht
 	 */
@@ -277,6 +285,22 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
 
+	public String getQuizIDsToString(){
+		String output = null;
+		for(QuizOpdracht quiz:quizOpdrachten){
+			output = quiz.getQuiz().getQuizID() + ";";
+		}
+		return output;
+	}
+	
+	public String getMaxScore(){
+		String output = null;
+		for(QuizOpdracht quiz:quizOpdrachten){
+			output = quiz.getMaximumScore() + ";";
+		}
+		return output;
+	}
+	
 	abstract boolean isJuisteAntwoord(String juisteAntwoord);
 	
 	

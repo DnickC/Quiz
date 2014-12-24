@@ -9,13 +9,15 @@ import model.Vraag_Reproductie;
 import org.junit.Test;
 import org.junit.Before;
 
+import utils.FromScratch.Datum;
+
 public class Reproductie_VraagTest {
 
 	private Vraag_Reproductie constrTest;
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Reproductie(-1,"vraag", "trefwoorden", 1, 4, 20, "hint", VraagType.reproductie,Leraar.LeraarC,OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Reproductie(-1,"vraag", "trefwoorden", 1, 4, 20, "hint", VraagType.reproductie,Leraar.LeraarC,OpdrachtCategorie.Aardrijkskunde,new Datum("22/10/1970"));
 	}
 	
 	@Test

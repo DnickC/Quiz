@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import utils.FromScratch.Datum;
+
 public class Vraag_Reproductie extends Opdracht {
 	
 	/**
@@ -32,15 +34,15 @@ public class Vraag_Reproductie extends Opdracht {
 	 * @param OpdrachtCategorie categorie
 	 */
 	
-	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType type,Leraar auteur,OpdrachtCategorie categorie){
-		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie);
+	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType type,Leraar auteur,OpdrachtCategorie categorie, Datum datumRegistratie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie,datumRegistratie);
 		setTrefwoorden(trefwoorden);
 		this.minAantalTrefwoorden = minAantalTrefwoorden;
 	}
 	
 	@Override
 	public Vraag_Reproductie clone() throws CloneNotSupportedException{
-		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie());
+		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie(), this.getDatumRegistratie());
 		return clon;
 	}
 	

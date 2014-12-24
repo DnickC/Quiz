@@ -9,13 +9,15 @@ import model.Vraag_Meerkeuze;
 import org.junit.Test;
 import org.junit.Before;
 
+import utils.FromScratch.Datum;
+
 public class Meerkeuze_VraagTest {
 
 	private Vraag_Meerkeuze constrTest;
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Meerkeuze(-1,null, null, 0, 0, 0, null,VraagType.meerkeuze,Leraar.LeraarA, OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Meerkeuze(-1,null, null, 0, 0, 0, null,VraagType.meerkeuze,Leraar.LeraarA, OpdrachtCategorie.Aardrijkskunde,new Datum("12/05/1982"));
 	}
 	
 	@Test

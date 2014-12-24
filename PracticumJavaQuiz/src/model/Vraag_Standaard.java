@@ -1,5 +1,6 @@
 package model;
 
+import utils.FromScratch.Datum;
 import model.OpdrachtCategorie;
 
 public class Vraag_Standaard  extends Opdracht implements IValideerbaar {
@@ -17,14 +18,14 @@ public class Vraag_Standaard  extends Opdracht implements IValideerbaar {
 		super();
 	}
 	
-	public Vraag_Standaard(int id,String vraag,String juistAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType type,Leraar auteur, OpdrachtCategorie categorie){
-		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie);
+	public Vraag_Standaard(int id,String vraag,String juistAntwoord, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType type,Leraar auteur, OpdrachtCategorie categorie, Datum datumRegistratie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie,datumRegistratie);
 		this.setJuisteAntwoord(juistAntwoord);
 	}
 	
 	@Override
 	public Vraag_Standaard clone() throws CloneNotSupportedException{
-		Vraag_Standaard clon = new Vraag_Standaard(this.getID(),this.getVraag(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie());
+		Vraag_Standaard clon = new Vraag_Standaard(this.getID(),this.getVraag(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie(),this.getDatumRegistratie());
 		return clon;
 	}
 	

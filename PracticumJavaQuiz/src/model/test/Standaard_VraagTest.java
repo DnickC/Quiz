@@ -9,13 +9,15 @@ import model.Vraag_Standaard;
 import org.junit.Test;
 import org.junit.Before;
 
+import utils.FromScratch.Datum;
+
 public class Standaard_VraagTest {
 
 	private Vraag_Standaard constrTest;
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",VraagType.standaard,Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde);
+		constrTest = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",VraagType.standaard,Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde,new Datum("02/09/2012"));
 	}
 	
 	@Test
