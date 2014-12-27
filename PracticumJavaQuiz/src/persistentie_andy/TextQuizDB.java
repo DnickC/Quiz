@@ -1,100 +1,136 @@
 package persistentie_andy;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+
+import javax.json.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 import utils.FromScratch.Datum;
-import model.Leraar;
-import model.Opdracht;
-import model.OpdrachtCategorie;
-import model.Quiz;
-import model.QuizOpdracht;
-import model.VraagType;
-import model.Vraag_Meerkeuze;
-import model.Vraag_Opsomming;
-import model.Vraag_Reproductie;
-import model.Vraag_Standaard;
+import model.*;
 import model.Quiz.QuizStatus;
+import model.test.Standaard_VraagTest;
 
 public class TextQuizDB extends QuizDB {
 	
-	static File opdrachtenTxt = new File("PracticumJavaQuiz//src//bestanden//OpdrachtenCatalogus.txt");
-	static File quizzenTxt = new File("PracticumJavaQuiz//src//bestanden//QuizCatalogus.txt");
-	static File quizOpdrachtTxt = new File("PracticumJavaQuiz//src//bestanden//QuizOpdrachten.txt");
-	
-	public Scanner scanner;
-	public PrintWriter writer;
-	
+	static String opdrachtenTxt = "C:\\Users\\Andy\\workspace\\Quiz\\Quiz\\PracticumJavaQuiz\\src\\bestanden\\OpdrachtenCatalogus.txt";
+	static String quizzenTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizCatalogus.txt";
+	static String quizOpdrachtTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizOpdrachten.txt";
 	       
     public TextQuizDB(){
     	
     }
     
-    public boolean Opslaan(HashMap<Integer,Opdracht> opdrachten, ArrayList<Quiz> quizzen)throws Exception{
+    public boolean Opslaan()throws Exception{
     	
-    		OpslaanOpdrachten(opdrachten);
-    		OpslaanQuizzen(quizzen);
+    		OpslaanOpdrachten(opdrachtenCatalogus);
+    		OpslaanQuizzen(quizCatalogus);
     		return true;
     	
     }
     public boolean Laden() throws Exception{
-	    	LaadQuizzen();
-	    	LaadOpdrachten();
-	    	return true;
+    	LaadOpdrachten();
+    	LaadQuizzen();
+    	return true;
     }
     
     
-    public boolean OpslaanOpdrachten(HashMap<Integer,Opdracht> opdrachten) throws Exception{
-    	writer = new PrintWriter(opdrachtenTxt);
-    	String output = null;
+    public boolean OpslaanOpdrachten(OpdrachtCatalogus opdrachten) throws Exception{
+    	OutputStream os = new FileOutputStream(opdrachtenTxt, false);
     	
-    	for(Opdracht o : opdrachten.values()){
-    		switch (o.getVraagType().toString()){
-    		case "standaard":
+    	JsonWriter jsonWriter = Json.createWriter(os);
+   	
+    	JsonArrayBuilder opdrachtenArray = Json.createArrayBuilder();
+    	
+    	for(Opdracht o : opdrachten.getCatalogus().values()){
+    		JsonObjectBuilder opdrachtBuilder = Json.createObjectBuilder();
+    		
+    		opdrachtBuilder.add("ID", o.getID());
+			opdrachtBuilder.add("Vraag", o.getVraag());
+			opdrachtBuilder.add("MaxAantalPogingen", o.getMaxAantalPogingen());
+			opdrachtBuilder.add("MaxAntwoordTijd", o.getMaxAntwoordTijd());
+			opdrachtBuilder.add("VraagType", o.getVraagType().toString());
+			opdrachtBuilder.add("Auteur", o.getAuteur().toString());
+			opdrachtBuilder.add("Categorie", o.getOpdrachtCategorie().toString());
+			opdrachtBuilder.add("DatumRegistratie", o.getDatumRegistratie().getDatumInEuropeesFormaat());
+			
+    		switch (o.getVraagType()){
+    		case standaard:
     			Vraag_Standaard standaard = (Vraag_Standaard)o;
-    			 output = standaard.getID() +";"+ standaard.getVraag() +";" + standaard.getJuisteAntwoord() +";"+ standaard.getMaxAantalPogingen()+";"+standaard.getMaxAntwoordTijd()+";"+standaard.getVraagType().toString()+";"+standaard.getAuteur().toString()+";"+ standaard.getOpdrachtCategorie().toString()+";"+";"+standaard.getQuizIDsToString();
+    			opdrachtBuilder.add("JuisteAntwoord", standaard.getJuisteAntwoord());
     			break;
-    		case "opsomming":
+    		case opsomming:
     			Vraag_Opsomming opsomming = (Vraag_Opsomming)o;
-    			 output = opsomming.getID()+";"+opsomming.getVraag()+";"+opsomming.getAntwoordenToString()+";"+opsomming.getMaxAantalPogingen()+";"+opsomming.getMaxAntwoordTijd()+";"+opsomming.getHint()+";"+opsomming.getVraagType().toString()+";"+opsomming.getAuteur().toString()+";"+opsomming.getOpdrachtCategorie().toString()+";"+";"+opsomming.getQuizIDsToString();
+    			opdrachtBuilder.add("JuisteAntwoord", opsomming.getAntwoordenToString());
     			break;
-    		case "reproductie":
+    		case reproductie:
     			Vraag_Reproductie reproductie = (Vraag_Reproductie)o;
-    			output = reproductie.getID() +";"+reproductie.getVraag()+";"+reproductie.getTrefwoorden()+";"+reproductie.getMinAantalTrefwoorden()+";"+reproductie.getMaxAantalPogingen()+";"+reproductie.getMaxAntwoordTijd()+";"+reproductie.getHint()+";"+reproductie.getVraagType().toString()+";"+reproductie.getAuteur().toString()+";"+reproductie.getOpdrachtCategorie().toString()+";"+","+reproductie.getQuizIDsToString();
+    			opdrachtBuilder.add("Trefwoorden", reproductie.getTrefwoorden());
+    			opdrachtBuilder.add("MinAantalTrefwoorden", reproductie.getMinAantalTrefwoorden());
     			break;
-    		case "meerkeuze":
+    		case meerkeuze:
     			Vraag_Meerkeuze meerkeuze = (Vraag_Meerkeuze)o;
-    			output = meerkeuze.getID() +";"+meerkeuze.getVraag()+";"+meerkeuze.getAntwoordenToString()+";"+meerkeuze.getJuisteAntwoord()+";"+meerkeuze.getMaxAantalPogingen()+";"+meerkeuze.getMaxAntwoordTijd()+";"+meerkeuze.getHint()+";"+meerkeuze.getVraagType().toString()+";"+meerkeuze.getAuteur().toString()+";"+meerkeuze.getOpdrachtCategorie().toString()+";"+","+meerkeuze.getQuizIDsToString();
+    			opdrachtBuilder.add("Antwoorden", meerkeuze.getAntwoordenToString());
+    			opdrachtBuilder.add("JuisteAntwoord", meerkeuze.getJuisteAntwoord());
     			break;
     		default:
     			return false;
     		}
-    		if(output!= null){
-				writer.println(output);
-			}			
+    		opdrachtenArray.add(opdrachtBuilder);
     	}
+    	JsonObjectBuilder catalogusBuilder = Json.createObjectBuilder();
+    	catalogusBuilder.add("Opdrachten", opdrachtenArray);
+    	jsonWriter.writeObject(catalogusBuilder.build());
+		jsonWriter.close();
+		os.close();
     	return true;
     }
     
-    public boolean OpslaanQuizzen(ArrayList<Quiz> quizzen) throws Exception{
-    	writer = new PrintWriter(quizzenTxt);
-    	for(Quiz q : quizzen){
-    		String output = q.getQuizID() + ";"+ q.getOnderwerp() + ";" + q.getLeerjaar() + ";" + String.valueOf(q.getIsTest()) 
-    				+ ";" + String.valueOf(q.getIsUniekeDeelname()) + ";" + q.getLeraar().toString() + ";" + q.getQuizStatus().toString();
-    		writer.println(output);
-    	}
-    	if (writer !=null){
-			writer.close();
-		}
-    	return true;
+    public boolean OpslaanQuizzen(QuizCatalogus quizzen) throws Exception{
+		OutputStream os = new FileOutputStream(quizzenTxt, false);
+    	JsonWriter jsonWriter = Json.createWriter(os);
+   	
+    	JsonArrayBuilder quizArray = Json.createArrayBuilder();
     	
+    	for(Quiz q : quizzen.getCatalogus()){
+    		JsonObjectBuilder quizBuilder = Json.createObjectBuilder();
+    		
+    		quizBuilder.add("ID", q.getQuizID());
+    		quizBuilder.add("Onderwerp", q.getOnderwerp());
+    		quizBuilder.add("IsTest", q.getIsTest());
+    		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
+    		quizBuilder.add("Leerjaar", q.getLeerjaar());
+    		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
+    		quizBuilder.add("Leraar", q.getLeraar().toString());
+    		
+    		JsonArrayBuilder quizOpdrachtenArray = Json.createArrayBuilder();
+    		for(QuizOpdracht qO : q.getQuizOpdrachten()){
+    			JsonObjectBuilder quizOpdrachtBuilder = Json.createObjectBuilder();
+    			quizOpdrachtBuilder.add("OpdrachtID", qO.getOpdracht().getID());
+    			quizOpdrachtBuilder.add("MaximumScore", qO.getMaximumScore());
+    			quizOpdrachtenArray.add(quizOpdrachtBuilder);
+    		}
+    		quizBuilder.add("QuizOpdrachten", quizOpdrachtenArray);
+    		
+    		quizArray.add(quizBuilder);
+    	}
+    	JsonObjectBuilder catalogusBuilder = Json.createObjectBuilder();
+    	catalogusBuilder.add("Quizzen", quizArray);
+    	jsonWriter.writeObject(catalogusBuilder.build());
+		jsonWriter.close();
+		os.close();
+    	return true;	
     }
-    
+    /*
     public void OpslaanQuizOpdracht(HashMap<Integer,Opdracht> opdrachten) throws Exception{
     	writer = new PrintWriter(quizOpdrachtTxt);
     	for(Opdracht o : opdrachten.values()){
@@ -102,18 +138,42 @@ public class TextQuizDB extends QuizDB {
         	int scoreTeller = 0;
         	
     		String[] quizIDs = o.getQuizIDsToString().split(";");
-    		String[] maxScore = o.getMaxScore().split(";");
+    		String[] maxScore = o.getMaxScoresToString().split(";");
     		
 	    		for(String id : quizIDs){
-	    			output = output + ";" +String.valueOf(o.getID())+ ";"+ String.valueOf(id)+";"+ maxScore[scoreTeller] + "\n";
+	    			output = output + ";" +o.getID()+ ";"+ id +";"+ maxScore[scoreTeller] + "\n";
 	    			scoreTeller++;
-	    			writer.println(output);
-	    		}  		
+	    		}  
+    			writer.println(output);
     	}
-    }
-    
+    	writer.close();
+    	
+    	PrintWriter writer = new PrintWriter(quizOpdrachtTxt);
+    	JsonWriter jsonWriter = Json.createWriter(writer);
+   	
+    	JsonArrayBuilder quizOpdractArray = Json.createArrayBuilder();
+    	
+    	for(Opdracht o : opdrachten.values()){
+    		JsonObjectBuilder quizBuilder = Json.createObjectBuilder();
+    		
+    		quizBuilder.add("ID", q.getQuizID());
+    		quizBuilder.add("Onderwerp", q.getOnderwerp());
+    		quizBuilder.add("IsTest", q.getIsTest());
+    		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
+    		quizBuilder.add("Leerjaar", q.getLeerjaar());
+    		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
+    		quizArray.add(quizBuilder);
+    	}
+    	JsonObjectBuilder catalogusBuilder = Json.createObjectBuilder();
+    	catalogusBuilder.add("Quizzen", quizArray);
+    	jsonWriter.writeObject(catalogusBuilder.build());
+		jsonWriter.close();
+		writer.close();
+    	return true;	
+    }*/
+    /*
     public void LaadQuizOpdracht() throws Exception{
-    	scanner = new Scanner(quizOpdrachtTxt);
+    	Scanner scanner = new Scanner(quizOpdrachtTxt);
     	
     	while(scanner.hasNext()){
     		String regel = scanner.nextLine();
@@ -123,18 +183,80 @@ public class TextQuizDB extends QuizDB {
     		int QuizID = Integer.parseInt(velden[1]);
     		int maxScore = Integer.parseInt(velden[2]);
     		
-    		for(Opdracht o: opdrachtenCatagolus.getCatalogus().values()){
-    			//FUCKING HEllllllll
-    			QuizOpdracht temp = new QuizOpdracht()
-    			
-    		}
+    		//We need the quiz object & the quiz
+    		//so we can link these together
+    		
     	}
-    }
+    }*/
     
     
     
     public void LaadQuizzen() throws Exception {
-    	scanner = new Scanner(quizzenTxt);
+		InputStream fis = new FileInputStream(quizzenTxt);
+		
+		//create JsonReader object
+		JsonReader jsonReader = Json.createReader(fis);
+		
+		//get JsonObject from JsonReader
+		JsonObject catalogus = jsonReader.readObject();
+		
+		//we can close IO resource and JsonReader now
+		jsonReader.close();
+		fis.close();
+		
+		JsonArray quizzen = catalogus.getJsonArray("Quizzen");
+		/*quizBuilder.add("ID", q.getQuizID());
+    		quizBuilder.add("Onderwerp", q.getOnderwerp());
+    		quizBuilder.add("IsTest", q.getIsTest());
+    		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
+    		quizBuilder.add("Leerjaar", q.getLeerjaar());
+    		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
+    		
+    		JsonArrayBuilder quizOpdrachtenArray = Json.createArrayBuilder();
+    		for(QuizOpdracht qO : q.getQuizOpdrachten()){
+    			JsonObjectBuilder quizOpdrachtBuilder = Json.createObjectBuilder();
+    			quizOpdrachtBuilder.add("OpdrachtID", qO.getOpdracht().getID());
+    			quizOpdrachtBuilder.add("MaximumScore", qO.getMaximumScore());
+    			quizOpdrachtenArray.add(quizOpdrachtBuilder);
+    		}
+    		quizBuilder.add("QuizOpdrachten", quizOpdrachtenArray);*/
+		
+		for(int i = 0; i < quizzen.size();++i){
+			JsonObject jO  = quizzen.getJsonObject(i);
+			// Opdracht
+			int ID = jO.getInt("ID");
+			String onderwerp = jO.getString("Onderwerp");
+			Boolean isTest = jO.getBoolean("IsTest");
+			Boolean isUniekeDeelname = jO.getBoolean("IsUniekeDeelname");
+			int leerjaar= jO.getInt("Leerjaar");
+			String quizStatus = jO.getString("QuizStatus");
+			String auteur = jO.getString("Leraar");
+			// Todo leraar
+			Leraar leraar = Leraar.LeraarA;
+			
+			QuizStatus status = QuizStatus.valueOf(quizStatus);
+			
+			Quiz q = null;
+			q = new Quiz(ID, onderwerp, leerjaar, isTest, isUniekeDeelname, leraar, status);
+			
+			if(q!=null)
+				quizCatalogus.addQuiz(q);
+			//Opdrachten
+			JsonArray quizOpdrachten;
+			quizOpdrachten = jO.getJsonArray("QuizOpdrachten");
+			for(int j = 0; j < quizOpdrachten.size(); ++j){
+				JsonObject jOQO = quizOpdrachten.getJsonObject(j);
+				int opdrachtID = jOQO.getInt("OpdrachtID");
+				int maxScore = jOQO.getInt("MaximumScore");
+				QuizOpdracht.koppelOpdrachtAanQuiz(q, opdrachtenCatalogus.getOpdracht(opdrachtID), maxScore);
+			}	
+		}
+    	
+    	
+    	
+    	/*scanner = new Scanner(quizzenTxt);
+    	
+    	
     	while(scanner.hasNext()){
     		String regel = scanner.nextLine();
     		String [] velden = regel.split(";");
@@ -149,17 +271,88 @@ public class TextQuizDB extends QuizDB {
     		
     		Quiz quiz = new Quiz(id,onderwerp, leerjaar,isTest, uniekeDeelname,Leraar.valueOf(leraar), QuizStatus.valueOf(status));
     		
-    		quizCatagolus.addQuiz(quiz);
+    		quizCatalogus.addQuiz(quiz);
     	}
     	if (scanner!=null){
     		  scanner.close();
-    	}
+    	}*/
     	
     }
 
     
     public void LaadOpdrachten()throws Exception {
+		InputStream fis = new FileInputStream(opdrachtenTxt);
+		
+		//create JsonReader object
+		JsonReader jsonReader = Json.createReader(fis);
+		
+		//get JsonObject from JsonReader
+		JsonObject catalogus = jsonReader.readObject();
+		
+		//we can close IO resource and JsonReader now
+		jsonReader.close();
+		fis.close();
+		
+		JsonArray opdrachten = catalogus.getJsonArray("Opdrachten");
+		
+		
+		for(int i = 0; i < opdrachten.size();++i){
+			JsonObject jO  = opdrachten.getJsonObject(i);
+			// Opdracht
+			int ID = jO.getInt("ID");
+			String vraag = jO.getString("Vraag");
+			int maxAantalPogingen = jO.getInt("MaxAantalPogingen");
+			int maxAntwoordTijd = jO.getInt("MaxAntwoordTijd");
+			String vraagType = jO.getString("VraagType");
+			String auteur = jO.getString("Auteur");
+			String categorie = jO.getString("Categorie");
+			String datumRegistratie = jO.getString("DatumRegistratie");
+			OpdrachtCategorie opdrachtCategorie = OpdrachtCategorie.valueOf(categorie);
+			Datum datum = new Datum(datumRegistratie);
+			
+			Leraar leraar = Leraar.LeraarA;
+			// Todo Hint & Leraar
+			String hint = "";
+			//Leraar.valueOf(auteur);
+			
+			Opdracht o = null;
+			switch(VraagType.valueOf(vraagType)){
+				case standaard:
+					o = new Vraag_Standaard(ID, vraag,
+							jO.getString("JuisteAntwoord"),
+							maxAantalPogingen, maxAntwoordTijd,
+							hint, leraar, opdrachtCategorie, datum
+							);
+					break;
+				case opsomming:
+					o = new Vraag_Opsomming(ID, vraag,
+							jO.getString("JuisteAntwoord"),
+							maxAantalPogingen, maxAntwoordTijd,
+							hint, leraar, opdrachtCategorie, datum
+							);
+					break;
+				case meerkeuze:
+					o = new Vraag_Meerkeuze(ID, vraag,
+							jO.getString("Antwoorden"),
+							jO.getInt("JuisteAntwoord"),
+							maxAantalPogingen, maxAntwoordTijd,
+							hint, leraar, opdrachtCategorie, datum
+							);
+					break;
+				case reproductie:
+					o = new Vraag_Reproductie(ID, vraag,
+							jO.getString("Trefwoorden"),
+							jO.getInt("MinAantalTrefwoorden"),
+							maxAantalPogingen, maxAntwoordTijd,
+							hint, leraar, opdrachtCategorie, datum
+							);
+					break;
+			}
+			if(o!=null)
+				opdrachtenCatalogus.addOpdracht(o);
+		}
     	
+    	/*
 	    	scanner = new Scanner(opdrachtenTxt);
 	    	while (scanner.hasNext()){
 	    		String regel = scanner.nextLine();
@@ -178,7 +371,7 @@ public class TextQuizDB extends QuizDB {
 	    		String auteur = velden[10];
 	    		String categorie = velden[11];
 	    		String type = velden[11];
-	    		Datum datumRegistratie = new Datum(velden[12]); // moet nog toegevoegd worden aan vraag constructoren
+	    		Datum datumRegistratie = new Datum(velden[12]); 
 	    		String QuizOpdrachten = velden[13];
 	    		
 	    		VraagType typevraag = VraagType.valueOf(type);
@@ -201,13 +394,14 @@ public class TextQuizDB extends QuizDB {
 	    			throw new Exception("Error bij vraagObject omzetting");
 	    		}
 	    		
-	    		opdrachtenCatagolus.addOpdracht(opdracht);
+	    		opdrachtenCatalogus.addOpdracht(opdracht);
 	    			    			
 	    	}
 	    	if (scanner!=null){
 	    		  scanner.close();
 	    	}
-	    		
+	    		*/
+    	
     }
 	    		
     

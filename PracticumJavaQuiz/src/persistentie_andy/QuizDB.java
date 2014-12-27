@@ -12,36 +12,38 @@ import model.QuizOpdracht;
 
 // Template
 public abstract class QuizDB {
-    public abstract boolean Opslaan(HashMap<Integer,Opdracht> opdrachten, ArrayList<Quiz> quizzen) throws Exception;
+    public abstract boolean Opslaan() throws Exception;
     public abstract boolean Laden() throws Exception;
     
-    protected OpdrachtCatalogus opdrachtenCatagolus = null;
-    protected QuizCatalogus quizCatagolus = null;
+    protected OpdrachtCatalogus opdrachtenCatalogus = null;
+    protected QuizCatalogus quizCatalogus = null;
     protected QuizOpdracht quizOpdrachten = null;
     protected LeerlingContainer leerlingen = null;
     
     protected QuizDB(){
-    	
+    	opdrachtenCatalogus = new OpdrachtCatalogus("QuizDB");
+    	quizCatalogus = new QuizCatalogus("QuizDB");
+    	leerlingen = new LeerlingContainer();
     }
     public QuizDB(QuizDB db){
-    	this.opdrachtenCatagolus = db.opdrachtenCatagolus;
-    	this.quizCatagolus = db.quizCatagolus;
+    	this.opdrachtenCatalogus = db.opdrachtenCatalogus;
+    	this.quizCatalogus = db.quizCatalogus;
     	this.leerlingen = db.leerlingen;
     }
    
     public OpdrachtCatalogus getOpdrachtenCatalogus(){
-    	return opdrachtenCatagolus;
+    	return opdrachtenCatalogus;
     }
     public QuizCatalogus getQuizCatalogus(){
-    	return quizCatagolus;
+    	return quizCatalogus;
     }
     
     public void addQuiz(Quiz quiz){
-    	this.quizCatagolus.addQuiz(quiz);
+    	this.quizCatalogus.addQuiz(quiz);
     }
     
     public void addOpdracht(Opdracht opdracht){
-    	this.opdrachtenCatagolus.addOpdracht(opdracht);
+    	this.opdrachtenCatalogus.addOpdracht(opdracht);
     }
     
 }

@@ -10,7 +10,7 @@ public class OpdrachtCatalogus implements Iterable, Cloneable {
 	 */
 	
 	//private List<Opdracht> opdrachten = new ArrayList<>();
-	private HashMap<Integer,Opdracht> opdrachten;
+	private HashMap<Integer,Opdracht> opdrachten = new HashMap<Integer, Opdracht>();
 	private String catalogusNaam = null;
 	//private Datum registratieDatum;
 	private int currentIndex = 1;

@@ -23,7 +23,6 @@ public class QuizOpdracht {
 		this.quiz = quiz;
 		this.opdracht = opdracht;
 		this.maximumScore = maxScore;
-		koppelOpdrachtAanQuiz(quiz,opdracht,maxScore);
 	}
 //	
 	public static void koppelOpdrachtAanQuiz(Quiz quiz, Opdracht opdracht, int maxScore) {

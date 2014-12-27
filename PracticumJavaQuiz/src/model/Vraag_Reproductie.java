@@ -13,7 +13,7 @@ public class Vraag_Reproductie extends Opdracht {
 	
 	private ArrayList<String> trefwoorden;
 	private int minAantalTrefwoorden;
-	final VraagType type = VraagType.reproductie;
+	static final VraagType type = VraagType.reproductie;
 
 	/**
 	 * blank constructor. 
@@ -34,7 +34,7 @@ public class Vraag_Reproductie extends Opdracht {
 	 * @param OpdrachtCategorie categorie
 	 */
 	
-	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType type,Leraar auteur,OpdrachtCategorie categorie, Datum datumRegistratie){
+	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,Leraar auteur,OpdrachtCategorie categorie, Datum datumRegistratie){
 		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie,datumRegistratie);
 		setTrefwoorden(trefwoorden);
 		this.minAantalTrefwoorden = minAantalTrefwoorden;
@@ -42,7 +42,7 @@ public class Vraag_Reproductie extends Opdracht {
 	
 	@Override
 	public Vraag_Reproductie clone() throws CloneNotSupportedException{
-		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie(), this.getDatumRegistratie());
+		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getAuteur(), this.getOpdrachtCategorie(), this.getDatumRegistratie());
 		return clon;
 	}
 	

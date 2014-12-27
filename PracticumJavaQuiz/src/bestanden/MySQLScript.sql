@@ -1,45 +1,51 @@
-DROP TABLE TBLOpdrachten
-DROP TABLE TBLQuiz
-DROP TABLE QuizOpdracht
-
-
-
+DROP TABLE TBLQuizOpdracht;
+DROP TABLE TBLOpdrachten;
+DROP TABLE TBLQuiz;
 
 CREATE TABLE TBLOpdrachten(
 	OpdrachtID int NOT NULL,
-	Vraag varchar(50) NOT NULL,
-	Antwoorden varchar(50),
-	JuisteAntwoord varchar(50) NOT NULL,
-	MaxAantalPogingen int NOT NULL,
-	MaxAntwoordTijd int NOT NULL,
-	AntwoordHints varchar(150) NOT NULL,
+	Vraag varchar(500) NOT NULL,
+	Antwoorden varchar(500),
+	JuisteAntwoord varchar(250) NOT NULL,
+	MaxAantalPogingen int,
+	MaxAntwoordTijd int,
+	AntwoordHints varchar(250),
 	Trefwoorden varchar(150),
 	MinAantalTrefwoorden int,
 	Vraagtype varchar(20) NOT NULL,
-	Auteur int NOT NULL,
-	Categorie varchar(25) NOT NULL,
+	Auteur varchar(50) NOT NULL,
+	Categorie varchar(50) NOT NULL,
 	AanmaakDatum DATE,
-	QuizOpdracht varchar(),
 primary key (OpdrachtID)
-)
+);
 
 
 CREATE TABLE TBLQuiz(
-	QuizID int NOT NULL,
+	QuizID int,
 	Onderwerp varchar(50) NOT NULL,
-	leerjaar int NOT NULL,
-	IsTest boolean NOT NULL,
-	UniekeDeelname boolean NOT NULL,
+	Leerjaar int,
+	IsTest boolean,
+	UniekeDeelname boolean,
 	Auteur varchar(50) NOT NULL,
-	status varchar(25) NOT NULL,
+	Status varchar(25) NOT NULL,
 primary key(QuizID)
-)
+);
 
 
 CREATE TABLE TBLQuizOpdracht( 
-	OpdrachtID int NOT NULL, 
-	QuizID varchar() NOT NULL,
-	MaxScore int NOT NULL, 
-primary key (OpdrachtID)
-)
+	OpdrachtID int, 
+	QuizID int,
+	MaxScore int, 
+primary key (OpdrachtID, QuizID)
+);
+
+ALTER TABLE TBLQuizOpdracht
+ADD FOREIGN KEY (OpdrachtID) 
+REFERENCES TBLOpdrachten(OpdrachtID);
+
+
+ALTER TABLE TBLQuizOpdracht
+ADD FOREIGN KEY (QuizID) 
+REFERENCES TBLQuiz(QuizID);
+
 

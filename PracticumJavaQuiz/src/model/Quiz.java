@@ -39,7 +39,7 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	private Leraar auteur;
 	private Datum datumRegistratie;
 	
-	private ArrayList<QuizOpdracht> quizOpdrachten;
+	private ArrayList<QuizOpdracht> quizOpdrachten = new ArrayList<QuizOpdracht>();
 	
 		
 	public Quiz (int id, String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar auteur, QuizStatus status)
@@ -207,6 +207,9 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 			opdrachten.add(quizOpdracht.getOpdracht());
 		}
 		return opdrachten;
+	}
+	public ArrayList<QuizOpdracht> getQuizOpdrachten(){
+		return quizOpdrachten;
 	}
 	
 	public String getOpdrachtenIDsToString(){

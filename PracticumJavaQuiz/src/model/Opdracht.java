@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	private Leraar auteur;
 	private Datum datumRegistratie;
 	
-	private List<QuizOpdracht>quizOpdrachten;
+	private LinkedList<QuizOpdracht> quizOpdrachten = new LinkedList<QuizOpdracht>();
 	
 	
 	public Opdracht(){
@@ -57,6 +58,8 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 		this.setVraagType(vraagType);
 		this.setAuteur(auteur);
 		this.setOpdrachtCategorie(categorie);
+		
+		this.datumRegistratie = new Datum();
 		this.datumRegistratie.setDatum(datum.getDag(), datum.getMaand(), datum.getJaar());
 	}
 	
@@ -284,7 +287,21 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	protected void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
 		this.quizOpdrachten.add(quizOpdracht);
 	}
+	
+	/**
+	 * Returns the list of QuizOpdrachten
+	 * Return: Quizopdrachten quizopdrachtenlijst
+	 */
+	
+	public List<QuizOpdracht> getQuizOpdrachtenLijst(){
+		return this.quizOpdrachten;
+	}
 
+	/**
+	 * Returns all Quiz id's where this assignment is assigned to. 
+	 * @return String output;
+	 */
+	
 	public String getQuizIDsToString(){
 		String output = null;
 		for(QuizOpdracht quiz:quizOpdrachten){
@@ -293,7 +310,12 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 		return output;
 	}
 	
-	public String getMaxScore(){
+	/**
+	 * Returns all maximum scores in a string object. 
+	 * @return String output
+	 */
+	
+	public String getMaxScoresToString(){
 		String output = null;
 		for(QuizOpdracht quiz:quizOpdrachten){
 			output = quiz.getMaximumScore() + ";";

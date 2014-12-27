@@ -19,8 +19,8 @@ public class OpdrachtFactory {
 		String type = array[12];
 		
 		VraagType typeVraag = VraagType.valueOf(type);
-		Opdracht opdracht;
-		
+		Opdracht opdracht = null;
+		/*
 		switch(typeVraag) {
 		case reproductie:
 			opdracht = new Vraag_Reproductie(id,vraag,trefwoorden,minAantalTrefwoorden,maxAantalPogingen,maxAntwoordTijd,antwoordHint,VraagType.valueOf(vraagType),Leraar.valueOf(auteur),OpdrachtCategorie.valueOf(categorie));
@@ -36,7 +36,7 @@ public class OpdrachtFactory {
 			break;
 		default:
 			throw new Exception("Error bij vraagObject omzetting");
-		}
+		}*/
 		
 		return opdracht;		
 	}
