@@ -68,6 +68,15 @@ public class QuizCatalogus implements Comparable<QuizCatalogus>, Cloneable, Iter
 		throw new IllegalArgumentException("Onderwerp niet gevonden");
 	}
 	
+	public Quiz getQuiz(int id){
+		for(Quiz q : quizzes){
+			if(q.getQuizID() == id){
+				return q;
+			}
+		}
+		throw new IllegalArgumentException("ID niet gevonden");
+	}
+	
 	/**
 	 * Add's a quiz to the QuizCatalogue
 	 * @param Quiz quiz

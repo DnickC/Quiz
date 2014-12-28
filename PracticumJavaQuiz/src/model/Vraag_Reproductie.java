@@ -52,14 +52,16 @@ public class Vraag_Reproductie extends Opdracht {
 	 * @param string trefwoorden
 	 */
 	public void setTrefwoorden(String trefwoorden){
-		try{
-			int count = 0;
-			String[] splitAntwoorden = trefwoorden.split("(/)|(;)|(,)|( )");
-				while(count <= splitAntwoorden.length){
-					this.trefwoorden.add(splitAntwoorden[count].toLowerCase());
-					count++;
-				}
-			}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+		if(trefwoorden!= null){
+			try{
+				int count = 1;
+				String[] splitAntwoorden = trefwoorden.split("(/)|(;)|(,)");
+					while(count < splitAntwoorden.length){
+						this.trefwoorden.add(splitAntwoorden[count].toLowerCase());
+						count++;
+					}
+				}catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+		}
 	}
 	
 	/**

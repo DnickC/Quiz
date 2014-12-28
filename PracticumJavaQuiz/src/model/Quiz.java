@@ -42,7 +42,7 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	private ArrayList<QuizOpdracht> quizOpdrachten = new ArrayList<QuizOpdracht>();
 	
 		
-	public Quiz (int id, String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar auteur, QuizStatus status)
+	public Quiz (int id, String onderwerp, int leerjaar, boolean isTest,boolean uniekeDeelname,Leraar auteur, QuizStatus status, Datum registratieDatum)
 	{
 			this.setQuizID(id);
 			this.setOnderwerp(onderwerp);
@@ -51,10 +51,11 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 			this.setIsUniekeDeelname(uniekeDeelname);
 			this.setAuteur(auteur);
 			this.setQuizStatus(status);
+			this.setRegistratieDatum(registratieDatum);
 	}
 	
 	public Quiz clone() throws CloneNotSupportedException{
-		Quiz objClone = new Quiz(this.getQuizID(),this.getOnderwerp(), this.getLeerjaar(), this.getIsTest(), this.getIsUniekeDeelname(), this.getLeraar(), this.getQuizStatus());;
+		Quiz objClone = new Quiz(this.getQuizID(),this.getOnderwerp(), this.getLeerjaar(), this.getIsTest(), this.getIsUniekeDeelname(), this.getLeraar(), this.getQuizStatus(),this.getRegistratieDatum());
 		return objClone;
 	}
 	
@@ -117,12 +118,6 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 		}
 	}
 	
-	// Moet hier uw kleine woorden al niet uit gefilterd worden? 
-	// Waar wordt de lijst met onderwerpen gemaakt of aangevuld? Moet er geen setOnderwerpList zijn fzo? 
-	// Combi van de 2 IllegelArgumentExceptions nodig/nuttig ? 
-	
-	// heb de methode testOnderwerp naar quizcatalogus verplaatst, test moet uitgevoerd worden in addQuiz methode, een quiz tenslotte geen
-	// heeft geen idee van de onderwerpen van andere quizzen
 	
 	public void setOnderwerp(String onderwerp) throws IllegalArgumentException
 	{
@@ -201,6 +196,15 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 		return this.isTest;
 	}
 	
+	
+	public void setRegistratieDatum(Datum registratieDatum){
+		this.datumRegistratie = registratieDatum;
+	}
+	
+	public Datum getRegistratieDatum(){
+		return this.datumRegistratie;
+	}
+	
 	public ArrayList <Opdracht> getOpdrachten(){
 		ArrayList <Opdracht> opdrachten = new ArrayList <Opdracht>();
 		for (QuizOpdracht quizOpdracht :quizOpdrachten){
@@ -231,6 +235,8 @@ public class Quiz implements Comparable<Quiz>, Cloneable {
 	public void verwijderQuizOpdracht(QuizOpdracht quizOpdracht) {
 		quizOpdrachten.remove(quizOpdracht);
 	}
+	
+	
 	
 	@Override
 	public String toString()

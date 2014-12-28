@@ -18,13 +18,12 @@ import java.util.Scanner;
 import utils.FromScratch.Datum;
 import model.*;
 import model.Quiz.QuizStatus;
-import model.test.Standaard_VraagTest;
 
 public class TextQuizDB extends QuizDB {
 	
-	static String opdrachtenTxt = "C:\\Users\\Andy\\workspace\\Quiz\\Quiz\\PracticumJavaQuiz\\src\\bestanden\\OpdrachtenCatalogus.txt";
-	static String quizzenTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizCatalogus.txt";
-	static String quizOpdrachtTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizOpdrachten.txt";
+	static String opdrachtenTxt = "Quiz\\PracticumJavaQuiz\\src\\bestanden\\OpdrachtenCatalogus.txt";
+	static String quizzenTxt = "Quiz\\PracticumJavaQuiz\\src\\bestanden\\QuizCatalogus.txt";
+	static String quizOpdrachtTxt = "Quiz\\PracticumJavaQuiz\\src\\bestanden\\QuizOpdrachten.txt";
 	       
     public TextQuizDB(){
     	
@@ -111,7 +110,10 @@ public class TextQuizDB extends QuizDB {
     		quizBuilder.add("Leerjaar", q.getLeerjaar());
     		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
     		quizBuilder.add("Leraar", q.getLeraar().toString());
+    		quizBuilder.add("DatumRegistratie", q.getRegistratieDatum().getDatumInEuropeesFormaat());
     		
+    		
+    		// QuizOpdrachten per Quiz inladen
     		JsonArrayBuilder quizOpdrachtenArray = Json.createArrayBuilder();
     		for(QuizOpdracht qO : q.getQuizOpdrachten()){
     			JsonObjectBuilder quizOpdrachtBuilder = Json.createObjectBuilder();
@@ -130,66 +132,7 @@ public class TextQuizDB extends QuizDB {
 		os.close();
     	return true;	
     }
-    /*
-    public void OpslaanQuizOpdracht(HashMap<Integer,Opdracht> opdrachten) throws Exception{
-    	writer = new PrintWriter(quizOpdrachtTxt);
-    	for(Opdracht o : opdrachten.values()){
-        	String output = null;
-        	int scoreTeller = 0;
-        	
-    		String[] quizIDs = o.getQuizIDsToString().split(";");
-    		String[] maxScore = o.getMaxScoresToString().split(";");
-    		
-	    		for(String id : quizIDs){
-	    			output = output + ";" +o.getID()+ ";"+ id +";"+ maxScore[scoreTeller] + "\n";
-	    			scoreTeller++;
-	    		}  
-    			writer.println(output);
-    	}
-    	writer.close();
-    	
-    	PrintWriter writer = new PrintWriter(quizOpdrachtTxt);
-    	JsonWriter jsonWriter = Json.createWriter(writer);
-   	
-    	JsonArrayBuilder quizOpdractArray = Json.createArrayBuilder();
-    	
-    	for(Opdracht o : opdrachten.values()){
-    		JsonObjectBuilder quizBuilder = Json.createObjectBuilder();
-    		
-    		quizBuilder.add("ID", q.getQuizID());
-    		quizBuilder.add("Onderwerp", q.getOnderwerp());
-    		quizBuilder.add("IsTest", q.getIsTest());
-    		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
-    		quizBuilder.add("Leerjaar", q.getLeerjaar());
-    		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
-    		quizArray.add(quizBuilder);
-    	}
-    	JsonObjectBuilder catalogusBuilder = Json.createObjectBuilder();
-    	catalogusBuilder.add("Quizzen", quizArray);
-    	jsonWriter.writeObject(catalogusBuilder.build());
-		jsonWriter.close();
-		writer.close();
-    	return true;	
-    }*/
-    /*
-    public void LaadQuizOpdracht() throws Exception{
-    	Scanner scanner = new Scanner(quizOpdrachtTxt);
-    	
-    	while(scanner.hasNext()){
-    		String regel = scanner.nextLine();
-    		String [] velden = regel.split(";");
-    		
-    		int opdrachtID = Integer.parseInt(velden[0]);
-    		int QuizID = Integer.parseInt(velden[1]);
-    		int maxScore = Integer.parseInt(velden[2]);
-    		
-    		//We need the quiz object & the quiz
-    		//so we can link these together
-    		
-    	}
-    }*/
-    
-    
+   
     
     public void LaadQuizzen() throws Exception {
 		InputStream fis = new FileInputStream(quizzenTxt);
@@ -205,24 +148,11 @@ public class TextQuizDB extends QuizDB {
 		fis.close();
 		
 		JsonArray quizzen = catalogus.getJsonArray("Quizzen");
-		/*quizBuilder.add("ID", q.getQuizID());
-    		quizBuilder.add("Onderwerp", q.getOnderwerp());
-    		quizBuilder.add("IsTest", q.getIsTest());
-    		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
-    		quizBuilder.add("Leerjaar", q.getLeerjaar());
-    		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
-    		
-    		JsonArrayBuilder quizOpdrachtenArray = Json.createArrayBuilder();
-    		for(QuizOpdracht qO : q.getQuizOpdrachten()){
-    			JsonObjectBuilder quizOpdrachtBuilder = Json.createObjectBuilder();
-    			quizOpdrachtBuilder.add("OpdrachtID", qO.getOpdracht().getID());
-    			quizOpdrachtBuilder.add("MaximumScore", qO.getMaximumScore());
-    			quizOpdrachtenArray.add(quizOpdrachtBuilder);
-    		}
-    		quizBuilder.add("QuizOpdrachten", quizOpdrachtenArray);*/
+		
 		
 		for(int i = 0; i < quizzen.size();++i){
 			JsonObject jO  = quizzen.getJsonObject(i);
+			
 			// Opdracht
 			int ID = jO.getInt("ID");
 			String onderwerp = jO.getString("Onderwerp");
@@ -231,13 +161,14 @@ public class TextQuizDB extends QuizDB {
 			int leerjaar= jO.getInt("Leerjaar");
 			String quizStatus = jO.getString("QuizStatus");
 			String auteur = jO.getString("Leraar");
-			// Todo leraar
-			Leraar leraar = Leraar.LeraarA;
+			String datum = jO.getString("DatumRegistratie"); 
 			
+			Datum registratieDatum = new Datum(datum);
+			Leraar leraar = Leraar.valueOf(auteur);
 			QuizStatus status = QuizStatus.valueOf(quizStatus);
 			
 			Quiz q = null;
-			q = new Quiz(ID, onderwerp, leerjaar, isTest, isUniekeDeelname, leraar, status);
+			q = new Quiz(ID, onderwerp, leerjaar, isTest, isUniekeDeelname, leraar, status,registratieDatum);
 			
 			if(q!=null)
 				quizCatalogus.addQuiz(q);
@@ -251,31 +182,6 @@ public class TextQuizDB extends QuizDB {
 				QuizOpdracht.koppelOpdrachtAanQuiz(q, opdrachtenCatalogus.getOpdracht(opdrachtID), maxScore);
 			}	
 		}
-    	
-    	
-    	
-    	/*scanner = new Scanner(quizzenTxt);
-    	
-    	
-    	while(scanner.hasNext()){
-    		String regel = scanner.nextLine();
-    		String [] velden = regel.split(";");
-    		
-    		int id = Integer.parseInt(velden[0]);
-    		String onderwerp = velden[1];
-    		int leerjaar = Integer.parseInt(velden[2]);
-    		boolean isTest = Boolean.parseBoolean(velden[3]);
-    		boolean uniekeDeelname = Boolean.parseBoolean(velden[4]);
-    		String leraar = velden[5];
-    		String status = velden[6];
-    		
-    		Quiz quiz = new Quiz(id,onderwerp, leerjaar,isTest, uniekeDeelname,Leraar.valueOf(leraar), QuizStatus.valueOf(status));
-    		
-    		quizCatalogus.addQuiz(quiz);
-    	}
-    	if (scanner!=null){
-    		  scanner.close();
-    	}*/
     	
     }
 
@@ -352,7 +258,116 @@ public class TextQuizDB extends QuizDB {
 				opdrachtenCatalogus.addOpdracht(o);
 		}
     	
-    	/*
+    }
+	    		
+    
+}
+
+
+/*
+ * /*1ste poging Json 
+		 * 
+		 * quizBuilder.add("ID", q.getQuizID());
+		quizBuilder.add("Onderwerp", q.getOnderwerp());
+		quizBuilder.add("IsTest", q.getIsTest());
+		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
+		quizBuilder.add("Leerjaar", q.getLeerjaar());
+		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
+		
+		JsonArrayBuilder quizOpdrachtenArray = Json.createArrayBuilder();
+		for(QuizOpdracht qO : q.getQuizOpdrachten()){
+			JsonObjectBuilder quizOpdrachtBuilder = Json.createObjectBuilder();
+			quizOpdrachtBuilder.add("OpdrachtID", qO.getOpdracht().getID());
+			quizOpdrachtBuilder.add("MaximumScore", qO.getMaximumScore());
+			quizOpdrachtenArray.add(quizOpdrachtBuilder);
+		}
+		quizBuilder.add("QuizOpdrachten", quizOpdrachtenArray);*/
+    	
+    	/*Met tekst 
+    	 * 
+    	 * scanner = new Scanner(quizzenTxt);
+    	
+    	
+    	while(scanner.hasNext()){
+    		String regel = scanner.nextLine();
+    		String [] velden = regel.split(";");
+    		
+    		int id = Integer.parseInt(velden[0]);
+    		String onderwerp = velden[1];
+    		int leerjaar = Integer.parseInt(velden[2]);
+    		boolean isTest = Boolean.parseBoolean(velden[3]);
+    		boolean uniekeDeelname = Boolean.parseBoolean(velden[4]);
+    		String leraar = velden[5];
+    		String status = velden[6];
+    		
+    		Quiz quiz = new Quiz(id,onderwerp, leerjaar,isTest, uniekeDeelname,Leraar.valueOf(leraar), QuizStatus.valueOf(status));
+    		
+    		quizCatalogus.addQuiz(quiz);
+    	}
+    	if (scanner!=null){
+    		  scanner.close();
+    	}*/
+    	
+/* 
+ *  Met tekst maar wordt nu gedaan binnen OpslaanOpdrachten/quizzen 
+public void OpslaanQuizOpdracht(HashMap<Integer,Opdracht> opdrachten) throws Exception{
+	writer = new PrintWriter(quizOpdrachtTxt);
+	for(Opdracht o : opdrachten.values()){
+    	String output = null;
+    	int scoreTeller = 0;
+    	
+		String[] quizIDs = o.getQuizIDsToString().split(";");
+		String[] maxScore = o.getMaxScoresToString().split(";");
+		
+    		for(String id : quizIDs){
+    			output = output + ";" +o.getID()+ ";"+ id +";"+ maxScore[scoreTeller] + "\n";
+    			scoreTeller++;
+    		}  
+			writer.println(output);
+	}
+	writer.close();
+	
+	PrintWriter writer = new PrintWriter(quizOpdrachtTxt);
+	JsonWriter jsonWriter = Json.createWriter(writer);
+	
+	JsonArrayBuilder quizOpdractArray = Json.createArrayBuilder();
+	
+	for(Opdracht o : opdrachten.values()){
+		JsonObjectBuilder quizBuilder = Json.createObjectBuilder();
+		
+		quizBuilder.add("ID", q.getQuizID());
+		quizBuilder.add("Onderwerp", q.getOnderwerp());
+		quizBuilder.add("IsTest", q.getIsTest());
+		quizBuilder.add("IsUniekeDeelname", q.getIsUniekeDeelname());
+		quizBuilder.add("Leerjaar", q.getLeerjaar());
+		quizBuilder.add("QuizStatus", q.getQuizStatus().toString());
+		quizArray.add(quizBuilder);
+	}
+	JsonObjectBuilder catalogusBuilder = Json.createObjectBuilder();
+	catalogusBuilder.add("Quizzen", quizArray);
+	jsonWriter.writeObject(catalogusBuilder.build());
+	jsonWriter.close();
+	writer.close();
+	return true;	
+}*/
+/* 
+public void LaadQuizOpdracht() throws Exception{
+	Scanner scanner = new Scanner(quizOpdrachtTxt);
+	
+	while(scanner.hasNext()){
+		String regel = scanner.nextLine();
+		String [] velden = regel.split(";");
+		
+		int opdrachtID = Integer.parseInt(velden[0]);
+		int QuizID = Integer.parseInt(velden[1]);
+		int maxScore = Integer.parseInt(velden[2]);
+		
+		//We need the quiz object & the quiz
+		//so we can link these together
+		
+	}
+}*/
+/*   Laad opdrachten ()
 	    	scanner = new Scanner(opdrachtenTxt);
 	    	while (scanner.hasNext()){
 	    		String regel = scanner.nextLine();
@@ -400,9 +415,6 @@ public class TextQuizDB extends QuizDB {
 	    	if (scanner!=null){
 	    		  scanner.close();
 	    	}
+	    	
+	    
 	    		*/
-    	
-    }
-	    		
-    
-}

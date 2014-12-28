@@ -60,15 +60,17 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @throws IllegalArgumentException
 	 */
 	public void setAntwoorden(String antwoorden){
-		try{
-			int count = 1;
-			String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
-				while(count <= splitAntwoorden.length){
-					antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
-					count++;
+		if(antwoorden !=  null){
+			try{
+				int count = 1;
+				String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
+					while(count == splitAntwoorden.length){
+						antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
+						count++;
+					}
 				}
-			}
-		catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+			catch(Exception e){ throw new IllegalArgumentException(e.getMessage());}
+		}
 	}
 	
 	/**

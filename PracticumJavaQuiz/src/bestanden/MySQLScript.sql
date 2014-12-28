@@ -15,7 +15,7 @@ CREATE TABLE TBLOpdrachten(
 	Vraagtype varchar(20) NOT NULL,
 	Auteur varchar(50) NOT NULL,
 	Categorie varchar(50) NOT NULL,
-	AanmaakDatum DATE,
+	AanmaakDatum varchar(12),
 primary key (OpdrachtID)
 );
 
@@ -28,6 +28,7 @@ CREATE TABLE TBLQuiz(
 	UniekeDeelname boolean,
 	Auteur varchar(50) NOT NULL,
 	Status varchar(25) NOT NULL,
+	registratieDatum varchar(12),
 primary key(QuizID)
 );
 

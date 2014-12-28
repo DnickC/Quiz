@@ -9,6 +9,9 @@ import model.VraagType;
 import org.junit.Before;
 import org.junit.Test;
 
+import utils.FromScratch.Datum;
+
+
 public class QuizTest {
 	
 	private Quiz constrTest;
@@ -20,9 +23,9 @@ public class QuizTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		constrTest = new Quiz(-1,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
-		constrTestEquals = new Quiz(-1,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie);
-		constrTest2 = new Quiz(3,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.opengesteld);
+		constrTest = new Quiz(-1,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie,new Datum("12/05/1992"));
+		constrTestEquals = new Quiz(-1,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.inConstructie,new Datum("12/05/1992"));
+		constrTest2 = new Quiz(3,"onderwerp", 1, true, true, Leraar.LeraarA, QuizStatus.opengesteld,new Datum("12/05/1992"));
 	}
 	
 	@Test

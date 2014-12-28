@@ -13,9 +13,12 @@ public class QuizFactory{
 	 * De QuizFactory zou ipv alle argumenten gewoon 1 array van strings moeten meekrijgen.
 	 * Vanuit deze array kan hij dan de argumenten halen om de Quiz aan te maken?
 	 * Dit eventueel doen met een tussenklasse die dat doet voor zowel Quiz als Opdracht?
+	 * 
+	 * 
+	 * Dit is in principe nutteloos. Er is maar 1 soort Quiz.. En voor opdrachten wordt dit bij het laden rechtstreeks gecontroleerd. 
 	 */
 	
-	public Quiz getQuiz(String[] array) {
+/*	public Quiz getQuiz(String[] array) {
 		
 		int id = Integer.parseInt(array[0]);
 		String onderwerp = array[1];
@@ -26,5 +29,5 @@ public class QuizFactory{
 		String status = array[6];
 		
 		return new Quiz(id,onderwerp, leerjaar, isTest, uniekeDeelname, Leraar.valueOf(leraar), QuizStatus.valueOf(status));
-	}
+	}*/
 }

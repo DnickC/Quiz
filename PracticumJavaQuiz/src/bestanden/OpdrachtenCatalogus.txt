@@ -1,1 +1,0 @@
-{"Opdrachten":[{"ID":1,"Vraag":"vraag","MaxAantalPogingen":4,"MaxAntwoordTijd":20,"VraagType":"standaard","Auteur":"Dominique Calcoen","Categorie":"Aardrijkskunde","DatumRegistratie":"02/09/2012","JuisteAntwoord":"juisteAntwoord"}]}
