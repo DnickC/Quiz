@@ -74,7 +74,7 @@ public class OpstartController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			System.exit(0);
 
 		}
 
@@ -131,7 +131,9 @@ public class OpstartController {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			BeheerQuizzen beheerQuizzen = new BeheerQuizzen();
+			
+			BeheerQuizzen bq = new BeheerQuizzen();
+		
 			
 			
 		}

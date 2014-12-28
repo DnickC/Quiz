@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class MainMenuNew extends JFrame {
 
 	private JLabel titel = new JLabel("Hoofdmenu");
+	private JPanel panelConstant = new JPanel();
 	private JPanel panelLeraarOpties = new JPanel();
 	private JButton knopBeheerQuizzen = new JButton("1. Beheer quizzen/opdrachten");
 	private JButton knopOverzichtScores = new JButton("2. Overzicht scores");
@@ -18,13 +19,17 @@ public class MainMenuNew extends JFrame {
 	
 	private JButton knopStop = new JButton ("Stop applicatie");
 	
-	private JPanel mainMenu = new JPanel();
+	private JPanel panelMainMenu = new JPanel();
 	
+	private CardLayout cl = new CardLayout();
 	private GridBagLayout layout = new GridBagLayout();
 	private GridBagConstraints gridConstraint = new GridBagConstraints();
 	
 	public MainMenuNew(){
 		super("Hoofdmenu");
+		
+		panelConstant.setLayout(cl);
+		
 		panelLeraarOpties.setBorder(BorderFactory.createTitledBorder("Leraar"));
 
 		
@@ -39,35 +44,40 @@ public class MainMenuNew extends JFrame {
 		panelLeerlingOpties.add(knopQuizRapport);
 		
 		
-		mainMenu.setLayout(layout);
+		panelMainMenu.setLayout(layout);
 		gridConstraint.fill = gridConstraint.HORIZONTAL;
 		
 		gridConstraint.insets = new Insets(0,60,0,0);
 		gridConstraint.gridx = 0;
 		gridConstraint.gridy = 0;
 		titel.setFont(new Font("Serif",Font.BOLD,25));
-		mainMenu.add(titel,gridConstraint);
+		panelMainMenu.add(titel,gridConstraint);
 		
 		gridConstraint.insets = new Insets(0,0,0,0);
 		
 		gridConstraint.gridx = 0;
 		gridConstraint.gridy = 1;
 		
-		mainMenu.add(panelLeraarOpties,gridConstraint);
+		panelMainMenu.add(panelLeraarOpties,gridConstraint);
 		
 		gridConstraint.gridx = 0;
 		gridConstraint.gridy = 2;
 		
-		mainMenu.add(panelLeerlingOpties, gridConstraint);
+		panelMainMenu.add(panelLeerlingOpties, gridConstraint);
 		
 		gridConstraint.gridx = 0;
 		gridConstraint.gridy = 3;
-		mainMenu.add(knopStop,gridConstraint);
+		panelMainMenu.add(knopStop,gridConstraint);
 		
-		this.add(mainMenu);
+		panelConstant.add(panelMainMenu,"menu");
+		
+		cl.show(panelConstant, "menu");
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(750,400);
+		this.add(panelConstant);
+		
+		
+		this.setSize(600,600);
 		this.setVisible(true);
 		
 		

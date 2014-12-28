@@ -1,55 +1,28 @@
 package view;
 
 import javax.swing.*;
+import java.awt.*;
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 
 public class BeheerQuizzen extends JFrame{
 	
+	final static int extraWindowWidth = 100; 
 	
-	private JPanel overzichtQuizzen = new JPanel();
-	
-	private JTable quizzenTabel = new JTable();
-	private JScrollPane scrollPanel = new JScrollPane(quizzenTabel);
-	
-	private JLabel leerjaar = new JLabel("Leerjaar: ");
-	private JComboBox keuzeLeerjaar = new JComboBox();
-	
-	private JPanel overzichtOpdrachten = new JPanel();
-	private JTable opdrachtenTabel = new JTable();
-	
-	
-	
-	GridBagLayout layout = new GridBagLayout();
-	GridBagConstraints gridConstraint = new GridBagConstraints();
-	
-	CardLayout cl = new CardLayout();
-	
-	public BeheerQuizzen(){
+	public void addingTabbedPane(Container pane){
+		JTabbedPane tabb = new JTabbedPane();
 		
-		this.setLayout(cl);
-		this.add(overzichtQuizzen);
-		this.add(overzichtOpdrachten);
+		JPanel card1 = new JPanel(){
+			
+			public Dimension getPreferredSize(){
+				Dimension size = super.getPreferredSize();
+				size.width += extraWindowWidth;
+				return size;
+			}
+		};
 		
-		overzichtQuizzen.setLayout(layout);
-		gridConstraint.fill = gridConstraint.HORIZONTAL;
+		GridBagLayout gbl = new GridBagLayout();
 		
-		quizzenTabel.setFillsViewportHeight(true);
 		
-		gridConstraint.gridx = 0;
-		gridConstraint.gridy = 1;
-		
-		overzichtQuizzen.add(quizzenTabel);
-		
-		quizzenTabel.setPreferredScrollableViewportSize(new Dimension(500,70));
-		
-		this.add(overzichtQuizzen);
-		this.setVisible(true);
-		this.pack();
 	}
 	
 
