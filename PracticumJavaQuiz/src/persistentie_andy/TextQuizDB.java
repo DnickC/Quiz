@@ -21,9 +21,9 @@ import model.Quiz.QuizStatus;
 
 public class TextQuizDB extends QuizDB {
 	
-	static String opdrachtenTxt = "Quiz\\PracticumJavaQuiz\\src\\bestanden\\OpdrachtenCatalogus.txt";
-	static String quizzenTxt = "Quiz\\PracticumJavaQuiz\\src\\bestanden\\QuizCatalogus.txt";
-	static String quizOpdrachtTxt = "Quiz\\PracticumJavaQuiz\\src\\bestanden\\QuizOpdrachten.txt";
+	static String opdrachtenTxt = "Quiz//PracticumJavaQuiz//src//bestanden//OpdrachtenCatalogus.txt";
+	static String quizzenTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizCatalogus.txt";
+	static String quizOpdrachtTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizOpdrachten.txt";
 	       
     public TextQuizDB(){
     	
@@ -55,6 +55,7 @@ public class TextQuizDB extends QuizDB {
     		
     		opdrachtBuilder.add("ID", o.getID());
 			opdrachtBuilder.add("Vraag", o.getVraag());
+			opdrachtBuilder.add("Hint", o.getHint());
 			opdrachtBuilder.add("MaxAantalPogingen", o.getMaxAantalPogingen());
 			opdrachtBuilder.add("MaxAntwoordTijd", o.getMaxAntwoordTijd());
 			opdrachtBuilder.add("VraagType", o.getVraagType().toString());
@@ -65,7 +66,7 @@ public class TextQuizDB extends QuizDB {
     		switch (o.getVraagType()){
     		case standaard:
     			Vraag_Standaard standaard = (Vraag_Standaard)o;
-    			opdrachtBuilder.add("JuisteAntwoord", standaard.getJuisteAntwoord());
+    			opdrachtBuilder.add("JuisteAntwoord", standaard.getJuisteAntwoord().toString());
     			break;
     		case opsomming:
     			Vraag_Opsomming opsomming = (Vraag_Opsomming)o;
@@ -92,6 +93,7 @@ public class TextQuizDB extends QuizDB {
 		jsonWriter.close();
 		os.close();
     	return true;
+    	
     }
     
     public boolean OpslaanQuizzen(QuizCatalogus quizzen) throws Exception{
@@ -207,6 +209,7 @@ public class TextQuizDB extends QuizDB {
 			// Opdracht
 			int ID = jO.getInt("ID");
 			String vraag = jO.getString("Vraag");
+			String Hint = jO.getString("Hint");
 			int maxAantalPogingen = jO.getInt("MaxAantalPogingen");
 			int maxAntwoordTijd = jO.getInt("MaxAntwoordTijd");
 			String vraagType = jO.getString("VraagType");
@@ -216,10 +219,8 @@ public class TextQuizDB extends QuizDB {
 			OpdrachtCategorie opdrachtCategorie = OpdrachtCategorie.valueOf(categorie);
 			Datum datum = new Datum(datumRegistratie);
 			
-			Leraar leraar = Leraar.LeraarA;
-			// Todo Hint & Leraar
-			String hint = "";
-			//Leraar.valueOf(auteur);
+			Leraar leraar = Leraar.valueOf(auteur);
+
 			
 			Opdracht o = null;
 			switch(VraagType.valueOf(vraagType)){
@@ -227,14 +228,14 @@ public class TextQuizDB extends QuizDB {
 					o = new Vraag_Standaard(ID, vraag,
 							jO.getString("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							hint, leraar, opdrachtCategorie, datum
+							Hint, leraar, opdrachtCategorie, datum
 							);
 					break;
 				case opsomming:
 					o = new Vraag_Opsomming(ID, vraag,
 							jO.getString("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							hint, leraar, opdrachtCategorie, datum
+							Hint, leraar, opdrachtCategorie, datum
 							);
 					break;
 				case meerkeuze:
@@ -242,7 +243,7 @@ public class TextQuizDB extends QuizDB {
 							jO.getString("Antwoorden"),
 							jO.getInt("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							hint, leraar, opdrachtCategorie, datum
+							Hint, leraar, opdrachtCategorie, datum
 							);
 					break;
 				case reproductie:
@@ -250,7 +251,7 @@ public class TextQuizDB extends QuizDB {
 							jO.getString("Trefwoorden"),
 							jO.getInt("MinAantalTrefwoorden"),
 							maxAantalPogingen, maxAntwoordTijd,
-							hint, leraar, opdrachtCategorie, datum
+							Hint, leraar, opdrachtCategorie, datum
 							);
 					break;
 			}

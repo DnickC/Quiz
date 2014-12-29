@@ -1,5 +1,7 @@
 package controller;
 
+import static org.junit.Assert.assertEquals;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -9,17 +11,30 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 import sun.security.pkcs11.Secmod.DbMode;
+import utils.FromScratch.Datum;
 import view.BeheerQuizzen;
 import view.MainMenuNew;
 import view.MainMenu;
 import persistentie_Dominique.DbHandler;
 import persistentie_andy.QuizDB; // persistentie_andy
 import persistentie_andy.QuizDBFactory; // persistentie_andy
+import persistentie_andy.TextQuizDB;
 
 import java.sql.*;
 
 import javax.json.Json;
 import javax.swing.JOptionPane;
+
+import model.Leraar;
+import model.Opdracht;
+import model.OpdrachtCategorie;
+import model.Quiz;
+import model.QuizOpdracht;
+import model.Vraag_Meerkeuze;
+import model.Vraag_Opsomming;
+import model.Vraag_Reproductie;
+import model.Vraag_Standaard;
+import model.Quiz.QuizStatus;
 
 public class OpstartController {
 	// 	Static
@@ -27,8 +42,10 @@ public class OpstartController {
 	
 	
 
-	public static void main(String[] args) throws IOException {
-				
+	public static void main(String[] args) throws Exception {
+	
+		
+		
 		Properties table = new Properties();
 		try{
 			loadProperties(table);

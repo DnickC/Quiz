@@ -24,8 +24,8 @@ CREATE TABLE TBLQuiz(
 	QuizID int,
 	Onderwerp varchar(50) NOT NULL,
 	Leerjaar int,
-	IsTest boolean,
-	UniekeDeelname boolean,
+	IsTest varchar(6),
+	UniekeDeelname varchar(6),
 	Auteur varchar(50) NOT NULL,
 	Status varchar(25) NOT NULL,
 	registratieDatum varchar(12),
@@ -48,5 +48,9 @@ REFERENCES TBLOpdrachten(OpdrachtID);
 ALTER TABLE TBLQuizOpdracht
 ADD FOREIGN KEY (QuizID) 
 REFERENCES TBLQuiz(QuizID);
+
+
+Select * 
+From TBLOPDRACHTEN
 
 
