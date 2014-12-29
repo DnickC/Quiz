@@ -149,7 +149,7 @@ public class OpstartController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			
-			BeheerQuizzen bq = new BeheerQuizzen();
+			
 		
 			
 			
