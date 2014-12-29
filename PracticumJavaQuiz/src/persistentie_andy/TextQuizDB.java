@@ -21,7 +21,7 @@ import model.Quiz.QuizStatus;
 
 public class TextQuizDB extends QuizDB {
 	
-	static String opdrachtenTxt = "Quiz//PracticumJavaQuiz//src//bestanden//OpdrachtenCatalogus.txt";
+	static String opdrachtenTxt = "Quiz/PracticumJavaQuiz/src/bestanden/OpdrachtenCatalogus.txt";
 	static String quizzenTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizCatalogus.txt";
 	static String quizOpdrachtTxt = "Quiz//PracticumJavaQuiz//src//bestanden//QuizOpdrachten.txt";
 	       

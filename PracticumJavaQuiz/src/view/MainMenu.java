@@ -20,7 +20,6 @@ public class MainMenu extends JFrame{
 	private JButton knopStop = new JButton("0. Stop de applicatie");
 	private	JPanel mainMenu = new JPanel();
 	
-	
 	private GridBagLayout layout = new GridBagLayout();
 	private GridBagConstraints gridConstraint = new GridBagConstraints();
 	
