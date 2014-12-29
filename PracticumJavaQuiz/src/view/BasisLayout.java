@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+
 
 
 public class BasisLayout extends JFrame {
@@ -105,7 +107,9 @@ public class BasisLayout extends JFrame {
 		gridConstraint.gridy = 6;
 		hoofdMenuScherm.add(btnStop,gridConstraint);
 		
-		mainFrame.add(hoofdMenuScherm);
+				
+		mainFrame.add(hoofdMenuScherm,"HoofdMenu");
+		
 		
 	
 		// Alles van Quiz
@@ -152,8 +156,10 @@ public class BasisLayout extends JFrame {
 		gridConstraint.gridy = 1;
 		QuizPanel.add(btnRegistreerQuiz,gridConstraint);
 		
-		QuizScherm.add(QuizPanel);
-			// OpdrachtenPanel
+		//QuizScherm.add(QuizPanel);
+		mainFrame.add(QuizPanel,"QuizPanel");
+		
+		// OpdrachtenPanel
 		
 		JPanel OpdrachtPanel = new JPanel();
 		
@@ -170,6 +176,10 @@ public class BasisLayout extends JFrame {
 		
 		
 		
+	}
+	
+	public void addBtnBeheerQuizzenActionListener(ActionListener btnBeheerQuizzenListener){
+		btnBeheerQuizzen.addActionListener(btnBeheerQuizzenListener);
 	}
 	
 	

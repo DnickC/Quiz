@@ -15,6 +15,7 @@ import utils.FromScratch.Datum;
 import view.BeheerQuizzen;
 import view.MainMenuNew;
 import view.MainMenu;
+import view.BasisLayout; // alle klassen in 1
 import persistentie_Dominique.DbHandler;
 import persistentie_andy.QuizDB; // persistentie_andy
 import persistentie_andy.QuizDBFactory; // persistentie_andy
@@ -35,6 +36,8 @@ import model.Vraag_Opsomming;
 import model.Vraag_Reproductie;
 import model.Vraag_Standaard;
 import model.Quiz.QuizStatus;
+
+
 
 public class OpstartController {
 	// 	Static
@@ -67,19 +70,34 @@ public class OpstartController {
 	public OpstartController(/*QuizDB db  // persistentie_andy*/){
 		//databank = db; // persistentie_andy
 		
-		MainMenuNew menu = new MainMenuNew();
+		/**
+		 * Versie 2
+		 */
+		/*MainMenuNew menu = new MainMenuNew();
 		menu.addKnopBeheerQuizzenActionListener(new BeheerQuizzenListener());
 		menu.addKnopDeelnemenQuizActionListener(new DeelnemenQuizActionListener());
 		menu.addKnopInstellingenQuizActionListener(new InstellingenQuizListener());
 		menu.addKnopOverzichtScoresActionListener(new OverzichtScoresListener());
 		menu.addKnopQuizRapportActionListener(new QuizRapportActionListener());
 		menu.addKnopStopActionListener(new StopActionListener());
-		
+		*/
+		/**
+		 * versie 1
+		 */
 		/*MainMenu menu = new MainMenu();
 		menu.addknopNieuweQuizActionListener(new NieuweQuizListener());
 		menu.addKnopVerwijderQuizActionListener(new VerwijderQuizListener());
 		menu.addKnopWijzigQuizActionListener(new WijzigQuizListener());
 		*/
+		
+		/**
+		 * Versie 3
+		 * 
+		 */
+		BasisLayout bs = new BasisLayout();
+		bs.addBtnBeheerQuizzenActionListener(new BeheerQuizzenListener());
+		
+		
 	}
 	/**
 	 * Inner class
