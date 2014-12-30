@@ -35,6 +35,7 @@ public class BasisLayout extends JFrame {
 	private JButton btnVerwijderOpdracht;
 	
 	// Alles van de lege mainFrame
+	private JFrame frame;
 	private JPanel mainFrame;
 	private CardLayout cardLayout;
 	
@@ -51,7 +52,8 @@ public class BasisLayout extends JFrame {
 		private JButton btnQuizRapport;
 	
 	public BasisLayout(){
-		// Alles van lege Main Frame 
+		// Alles van lege Main Frame
+		frame = new JFrame("Quiz Applicatie 2014");
 		mainFrame = new JPanel();
 		mainFrame.setSize(600,600);
 		
@@ -168,14 +170,19 @@ public class BasisLayout extends JFrame {
 		
 		
 		
-		
-		mainFrame.setSize(300,300);
-		mainFrame.setVisible(true);
-		
-		
-		
+		frame.add(mainFrame);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(300,300);
+		frame.setVisible(true);
 		
 		
+		
+		
+		
+	}
+	
+	public Container getSchermBeheerQuiz(){
+		return mainFrame;
 	}
 	
 	public void addBtnBeheerQuizzenActionListener(ActionListener btnBeheerQuizzenListener){

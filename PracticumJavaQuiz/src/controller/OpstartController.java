@@ -2,6 +2,7 @@ package controller;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -43,7 +44,8 @@ public class OpstartController {
 	// 	Static
 	private static String initPath = "PracticumJavaQuiz//src//bestanden//start.ini";
 	
-	
+	private BasisLayout bl;
+	private CardLayout cl = new CardLayout();
 
 	public static void main(String[] args) throws Exception {
 	
@@ -94,8 +96,9 @@ public class OpstartController {
 		 * Versie 3
 		 * 
 		 */
-		BasisLayout bs = new BasisLayout();
-		bs.addBtnBeheerQuizzenActionListener(new BeheerQuizzenListener());
+		BasisLayout bl = new BasisLayout();
+		
+		bl.addBtnBeheerQuizzenActionListener(new BeheerQuizzenListener());
 		
 		
 	}
@@ -167,7 +170,7 @@ public class OpstartController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			
-			
+			cl.show(bl.getSchermBeheerQuiz(),"QuizPanel");
 		
 			
 			
