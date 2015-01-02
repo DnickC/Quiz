@@ -24,8 +24,8 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 * @param hint
 	 * @param categorie
 	 */
-	public Vraag_Meerkeuze(int id,String vraag,String mogelijkeAntwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,Leraar auteur,OpdrachtCategorie categorie,Datum datumRegistratie){
-		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie,datumRegistratie);
+	public Vraag_Meerkeuze(int id,String vraag,String mogelijkeAntwoorden,int juisteAntwoord,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType vraagType,Leraar auteur,OpdrachtCategorie categorie,Datum datumRegistratie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,vraagType,auteur,categorie,datumRegistratie);
 		setAntwoorden(mogelijkeAntwoorden);
 	}
 	
@@ -42,7 +42,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	
 	@Override
 	public Vraag_Meerkeuze clone() throws CloneNotSupportedException{
-		Vraag_Meerkeuze clon = new Vraag_Meerkeuze(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getAuteur(), this.getOpdrachtCategorie(),this.getDatumRegistratie());
+		Vraag_Meerkeuze clon = new Vraag_Meerkeuze(this.getID(),this.getVraag(),this.getAntwoordenToString(),this.juisteAntwoord,this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(), this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie(),this.getDatumRegistratie());
 		return clon;
 	}
 	
@@ -62,7 +62,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	public void setAntwoorden(String antwoorden){
 		if(antwoorden !=  null){
 			try{
-				int count = 1;
+				int count = 0;
 				String[] splitAntwoorden = antwoorden.split("(/)|(;)|(,)");
 					while(count == splitAntwoorden.length){
 						antwoordenLijst.add(splitAntwoorden[count].toLowerCase());
@@ -88,7 +88,7 @@ public class Vraag_Meerkeuze extends Opdracht implements IValideerbaar {
 	 */
 	
 	public String getAntwoordenToString(){
-		String antwoorden = null;
+		String antwoorden = "";
 		for(String antw : antwoordenLijst){
 			antwoorden += antw + ", ";
 		}

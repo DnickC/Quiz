@@ -92,23 +92,23 @@ public class DerbyQuizDB extends QuizDB {
 	    		case "standaard":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Standaard(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("JuisteAntwoord"),
 	    					Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
-	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					VraagType.valueOf(input.getString("vraagType")) ,Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
 	    			break;
 	    		case "meerkeuze":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Meerkeuze(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("Antwoorden"),
 	    					Integer.parseInt(input.getString("JuisteAntwoord")),Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),
-	    					input.getString("AntwoordHints"),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					input.getString("AntwoordHints"),VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
 	    			break;
 	    		case "opsomming":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Opsomming(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("Antwoorden"),
 	    					Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
-	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
 	    			break;
 	    		case "reproductie":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Reproductie(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),
 	    					input.getString("Trefwoorden"),Integer.parseInt(input.getString("MinAantalTrefwoorden")),Integer.parseInt(input.getString("MaxAantalPogingen")),
 	    					Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
-	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
 	    			break;
 	    		}
 	    	}	

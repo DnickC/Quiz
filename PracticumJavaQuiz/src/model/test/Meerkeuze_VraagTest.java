@@ -17,7 +17,7 @@ public class Meerkeuze_VraagTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		constrTest = new Vraag_Meerkeuze(-1,null, null, 0, 0, 0, null,Leraar.LeraarA, OpdrachtCategorie.Aardrijkskunde,new Datum("12/05/1982"));
+		constrTest = new Vraag_Meerkeuze(-1,null, null, 0, 0, 0, null,VraagType.meerkeuze,Leraar.LeraarA, OpdrachtCategorie.Aardrijkskunde,new Datum("12/05/1982"));
 	}
 	
 	@Test

@@ -11,7 +11,7 @@ public class Vraag_Reproductie extends Opdracht {
 	 * Version:
 	 */
 	
-	private ArrayList<String> trefwoorden;
+	private ArrayList<String> trefwoorden = new ArrayList<String>();
 	private int minAantalTrefwoorden;
 	static final VraagType type = VraagType.reproductie;
 
@@ -34,15 +34,15 @@ public class Vraag_Reproductie extends Opdracht {
 	 * @param OpdrachtCategorie categorie
 	 */
 	
-	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,Leraar auteur,OpdrachtCategorie categorie, Datum datumRegistratie){
-		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,type,auteur,categorie,datumRegistratie);
+	public Vraag_Reproductie(int id,String vraag,String trefwoorden,int minAantalTrefwoorden,int maxAantalPogingen,int maxAntwoordTijd,String hint,VraagType vraagType,Leraar auteur,OpdrachtCategorie categorie, Datum datumRegistratie){
+		super(id,vraag,maxAantalPogingen,maxAntwoordTijd,hint,vraagType,auteur,categorie,datumRegistratie);
 		setTrefwoorden(trefwoorden);
 		this.minAantalTrefwoorden = minAantalTrefwoorden;
 	}
 	
 	@Override
 	public Vraag_Reproductie clone() throws CloneNotSupportedException{
-		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getAuteur(), this.getOpdrachtCategorie(), this.getDatumRegistratie());
+		Vraag_Reproductie clon = new Vraag_Reproductie(this.getID(),this.getVraag(),this.getTrefwoorden(),this.getMinAantalTrefwoorden(),this.getMaxAantalPogingen(),this.getMaxAntwoordTijd(),this.getHint(),this.getVraagType(),this.getAuteur(), this.getOpdrachtCategorie(), this.getDatumRegistratie());
 		return clon;
 	}
 	
@@ -91,7 +91,7 @@ public class Vraag_Reproductie extends Opdracht {
 	 */
 	
 	public String getTrefwoorden(){
-		String trefwoord = null;
+		String trefwoord = "";
 		for(String antw : trefwoorden){
 			trefwoord += antw +"\n";
 		}

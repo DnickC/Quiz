@@ -1,1 +1,1 @@
-{"Quizzen":[{"ID":-1,"Onderwerp":"Onderwerp","IsTest":true,"IsUniekeDeelname":true,"Leerjaar":1,"QuizStatus":"opengesteld","Leraar":"Michal Mytkowski","QuizOpdrachten":[{"OpdrachtID":1,"MaximumScore":2}]}]}
+{"Quizzen":[{"ID":-1,"Onderwerp":"Onderwerp","IsTest":true,"IsUniekeDeelname":true,"Leerjaar":1,"QuizStatus":"opengesteld","Leraar":"LeraarA","DatumRegistratie":"28/12/2014","QuizOpdrachten":[{"OpdrachtID":1,"MaximumScore":2}]}]}

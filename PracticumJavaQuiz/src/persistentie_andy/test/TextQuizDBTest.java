@@ -27,19 +27,19 @@ public class TextQuizDBTest {
 		testDB = new TextQuizDB();
 		// Opdracht
 		Opdracht Vraag_Standaard;
-		Vraag_Standaard = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde,new Datum("02/09/2012"));
+		Vraag_Standaard = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",VraagType.standaard,Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde,new Datum("02/09/2012"));
 		testDB.addOpdracht(Vraag_Standaard);
 		
 		Opdracht Vraag_Meerkeuze;
-		Vraag_Meerkeuze = new Vraag_Meerkeuze(-1,"vraagMeerkeuze","Antwoord1/Antwoord2/Antwoord3", 2, 1,3, "hint",Leraar.LeraarA, OpdrachtCategorie.Nederlands,new Datum("05/10/2015"));
+		Vraag_Meerkeuze = new Vraag_Meerkeuze(-1,"vraagMeerkeuze","Antwoord1/Antwoord2/Antwoord3", 2, 1,3, "hint",VraagType.meerkeuze,Leraar.LeraarA, OpdrachtCategorie.Nederlands,new Datum("05/10/2015"));
 		testDB.addOpdracht(Vraag_Meerkeuze);
 		
 		Opdracht Vraag_Opsomming;
-		Vraag_Opsomming = new Vraag_Opsomming(-1,"VraagOpsomming", "Antwoorden", 2, 1, "hint",Leraar.LeraarB, OpdrachtCategorie.Wetenschappen,new Datum("10/12/2011"));
+		Vraag_Opsomming = new Vraag_Opsomming(-1,"VraagOpsomming", "Antwoorden", 2, 1, "hint",VraagType.opsomming,Leraar.LeraarB, OpdrachtCategorie.Wetenschappen,new Datum("10/12/2011"));
 		testDB.addOpdracht(Vraag_Opsomming);
 		
 		Opdracht Vraag_Reproductie;
-		Vraag_Reproductie = new Vraag_Reproductie(-1,"VraagReproductie", "Trefwoorden",2,2,4, "hint",Leraar.LeraarC, OpdrachtCategorie.Wiskunde,new Datum("02/12/2015"));
+		Vraag_Reproductie = new Vraag_Reproductie(-1,"VraagReproductie", "Trefwoorden",2,2,4, "hint",VraagType.reproductie,Leraar.LeraarC, OpdrachtCategorie.Wiskunde,new Datum("02/12/2015"));
 		testDB.addOpdracht(Vraag_Reproductie);
 		
 		// Quiz

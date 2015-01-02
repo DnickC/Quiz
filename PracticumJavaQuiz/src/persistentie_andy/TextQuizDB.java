@@ -228,14 +228,14 @@ public class TextQuizDB extends QuizDB {
 					o = new Vraag_Standaard(ID, vraag,
 							jO.getString("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							Hint, leraar, opdrachtCategorie, datum
+							Hint,VraagType.valueOf(vraagType), leraar, opdrachtCategorie, datum
 							);
 					break;
 				case opsomming:
 					o = new Vraag_Opsomming(ID, vraag,
 							jO.getString("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							Hint, leraar, opdrachtCategorie, datum
+							Hint,VraagType.valueOf(vraagType), leraar, opdrachtCategorie, datum
 							);
 					break;
 				case meerkeuze:
@@ -243,7 +243,7 @@ public class TextQuizDB extends QuizDB {
 							jO.getString("Antwoorden"),
 							jO.getInt("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							Hint, leraar, opdrachtCategorie, datum
+							Hint,VraagType.valueOf(vraagType), leraar, opdrachtCategorie, datum
 							);
 					break;
 				case reproductie:
@@ -251,7 +251,7 @@ public class TextQuizDB extends QuizDB {
 							jO.getString("Trefwoorden"),
 							jO.getInt("MinAantalTrefwoorden"),
 							maxAantalPogingen, maxAntwoordTijd,
-							Hint, leraar, opdrachtCategorie, datum
+							Hint,VraagType.valueOf(vraagType), leraar, opdrachtCategorie, datum
 							);
 					break;
 			}

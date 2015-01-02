@@ -1,6 +1,6 @@
 package model;
 
-public enum Leraar {
+public enum Leraar { LeraarA, LeraarB,LeraarC,LeraarD,LeraarE };
 	
 	/**
 	 * Authors:
@@ -8,7 +8,7 @@ public enum Leraar {
 	 * 
 	 */
 	
-	LeraarA("Michal Mytkowski"),
+	/*LeraarA("Michal Mytkowski"),
 	LeraarB("Andy Poron"),
 	LeraarC("Jens Van Kets"),
 	LeraarD("Dominique Calcoen"),
@@ -30,6 +30,6 @@ public enum Leraar {
 		return this.naam;
 	}
 
-}
+}*/
 
 

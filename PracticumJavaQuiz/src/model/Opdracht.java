@@ -22,7 +22,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	private String hint;
 	private int maxAntwoordTijd;
 	private OpdrachtCategorie opdrachtCategorie;
-	private VraagType vraagType = VraagType.standaard;
+	private VraagType vraagType;
 	private Leraar auteur;
 	private Datum datumRegistratie;
 	
@@ -49,7 +49,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	 * @param OpdrachtCategorie categorie
 	 */
 		
-	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType vraagtType,Leraar auteur, OpdrachtCategorie categorie,Datum datum) {
+	public Opdracht(int id,String vraag, int maxAantalPogingen, int maxAntwoordTijd, String hint,VraagType vraagType,Leraar auteur, OpdrachtCategorie categorie,Datum datum) {
 		this.setID(id);
 		this.setVraag(vraag);
 		this.setMaxAantalPogingen(maxAantalPogingen);
@@ -223,6 +223,7 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 		this.vraagType = type;
 	}
 	
+	
 	/**
 	 * Returns the type of question
 	 * @return VraagType
@@ -230,6 +231,16 @@ public abstract class Opdracht implements Comparable<Object>, Cloneable {
 	
 	public VraagType getVraagType(){
 		return this.vraagType;
+	}
+	
+	/**
+	 * Return the vraagType
+	 * @param String vraagType
+	 * @return Vraagtype
+	 */
+	
+	public VraagType getVraagType(String vraagType){
+		return VraagType.valueOf(vraagType);
 	}
 	
 	/**
