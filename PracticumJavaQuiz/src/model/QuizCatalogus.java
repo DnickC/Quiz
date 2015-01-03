@@ -11,7 +11,7 @@ public class QuizCatalogus implements Comparable<QuizCatalogus>, Cloneable, Iter
 	 * Authors: Jens van Kets, Michal Mytkowski
 	 * Version : 1.0
 	 */
-	
+	private int volgendeQuizID = 1;
 	private String catalogusNaam = null;
 	private ArrayList<Quiz> quizzes;
 	
@@ -84,7 +84,12 @@ public class QuizCatalogus implements Comparable<QuizCatalogus>, Cloneable, Iter
 	 */
 	
 	public void addQuiz (Quiz quiz){
-			
+		if(quiz.getQuizID() <= -1){
+			quiz.setQuizID(volgendeQuizID);
+		}
+		if(quiz.getQuizID() >= volgendeQuizID){
+			volgendeQuizID = quiz.getQuizID()+1;
+		}
 		if(quiz.getLeraar() == null ) { //hier moet ook nog controle worden uitgevoerd op datum !
 			throw new IllegalArgumentException("De leraar is niet gekozen");
 		}

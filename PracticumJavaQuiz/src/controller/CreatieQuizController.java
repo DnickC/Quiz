@@ -14,12 +14,12 @@ public class CreatieQuizController {
 	
 	private Quiz quiz;
 	private QuizCatalogus quizCatalogus;
-	private MainMenu viewMain;
+	private View_HoofdMenu viewMain;
 
-	private MainMenu mainView;
+	private View_HoofdMenu mainView;
 	private Quiz quizModel;
 	
-	public CreatieQuizController(MainMenu theview, Quiz theModel){
+	public CreatieQuizController(View_HoofdMenu theview, Quiz theModel){
 		this.mainView = theview;
 		this.quizModel = theModel;
 		

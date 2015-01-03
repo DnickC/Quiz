@@ -228,7 +228,7 @@ public class TextQuizDB extends QuizDB {
 					o = new Vraag_Standaard(ID, vraag,
 							jO.getString("JuisteAntwoord"),
 							maxAantalPogingen, maxAntwoordTijd,
-							Hint,VraagType.valueOf(vraagType), leraar, opdrachtCategorie, datum
+							Hint,leraar, opdrachtCategorie, datum
 							);
 					break;
 				case opsomming:

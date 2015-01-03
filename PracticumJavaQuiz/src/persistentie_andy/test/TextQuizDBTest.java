@@ -27,7 +27,7 @@ public class TextQuizDBTest {
 		testDB = new TextQuizDB();
 		// Opdracht
 		Opdracht Vraag_Standaard;
-		Vraag_Standaard = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",VraagType.standaard,Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde,new Datum("02/09/2012"));
+		Vraag_Standaard = new Vraag_Standaard(-1,"vraag", "juisteAntwoord", 4, 20, "hint",Leraar.LeraarD, OpdrachtCategorie.Aardrijkskunde,new Datum("02/09/2012"));
 		testDB.addOpdracht(Vraag_Standaard);
 		
 		Opdracht Vraag_Meerkeuze;
@@ -45,8 +45,8 @@ public class TextQuizDBTest {
 		// Quiz
 		Quiz quiz;
 		quiz = new Quiz(-1, "Onderwerp",  1, true, true, Leraar.LeraarA, QuizStatus.opengesteld,new Datum("28/12/2014") );
-		QuizOpdracht.koppelOpdrachtAanQuiz(quiz, Vraag_Standaard, 2);
 		testDB.addQuiz(quiz);
+		QuizOpdracht.koppelOpdrachtAanQuiz(quiz, Vraag_Standaard, 2);
 				
 		testDB.Opslaan();
 		assertEquals(true, true);

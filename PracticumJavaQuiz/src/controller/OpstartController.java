@@ -96,10 +96,10 @@ public class OpstartController {
 		 * Versie 3
 		 * 
 		 */
+		
 		BasisLayout bl = new BasisLayout();
-		
 		bl.addBtnBeheerQuizzenActionListener(new BeheerQuizzenListener());
-		
+		//MainMenu mn = new MainMenu();
 		
 	}
 	/**
