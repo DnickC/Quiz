@@ -20,15 +20,14 @@ public class View_WijzigOpdracht extends JPanel{
 
 	/**
 	 * @author Andy Poron
+	 * Dit zou het voorbeeld scherm moeten worden zoals opgegeven in het word.doc
 	 */
 	private GridBagConstraints gridConstraint;
 	private GridBagLayout gridBagLayout;
 	
 	
 	private Opdracht opdracht;
-	public void setOpdracht( Opdracht opdracht ){
-		this.opdracht = opdracht;
-	}
+
 	
 	
 	public View_WijzigOpdracht(){
@@ -79,6 +78,15 @@ public class View_WijzigOpdracht extends JPanel{
 		opdrachtPanel.add(btnRegistreeropdracht,gridConstraint);
 		
 		this.add(opdrachtPanel);
+	}
+	
+	/**
+	 * Sets de opdracht dat geselecteerd is ( Of dat nieuw is aangemaakt) 
+	 * @param Opdracht opdracht
+	 */
+	
+	public void setOpdracht( Opdracht opdracht ){
+		this.opdracht = opdracht;
 	}
 	
 }

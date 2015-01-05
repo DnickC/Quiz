@@ -51,6 +51,7 @@ public class OpdrachtController extends IPaginaController{
 	
 	
 	public void updateBeheerLijstView(IPaginaController.NavigatieListener vorigeListener){
+		// 1ste keer dat het scherm wordt opgeroepen
 		if(viewBeheerLijst == null){
 			ArrayList<String> catalogus = new ArrayList<String>();
 			for(Opdracht o : quizDB.getOpdrachtenCatalogus().getCatalogus().values()){
@@ -58,11 +59,12 @@ public class OpdrachtController extends IPaginaController{
 			}
 			viewBeheerLijst = new View_BeheerOpdrachtenLijst(catalogus);
 		}else{
-			// Listeners op navigatie knoppen verwijderen
+			// Listeners op navigatie knoppen verwijderen als view_BeheersLijsten als bestaat
 			viewBeheerLijst.verwijderknopNieuweOpdrachtActionListener(nieuweOpdrachtListener);
 		}
-		// Nieuw listeners op navigatie knoppen zetten (historiek van pages bijhouden)
+		// Vorige listener op terug knop zetten (historiek van pages bijhouden)
 		nieuweOpdrachtListener = new NieuweOpdrachtListener(vorigeListener);
+		// Nieuwe listener op de Nieuw-knop steken
 		viewBeheerLijst.addknopNieuweOpdrachtActionListener(nieuweOpdrachtListener);
 	}
 	

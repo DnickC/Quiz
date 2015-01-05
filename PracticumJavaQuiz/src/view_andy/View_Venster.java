@@ -13,8 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+/**
+ * 
+ * @author Andy Poron
+ * Lege CardFrame (HoofdPanel) met dynamische backknop & titel
+ */
+
 public class View_Venster extends JFrame {		
-	// Alles van de lege mainFrame
+
 	private JPanel hoofdPanel;
 	private BoxLayout hoofdLayout;
 	
@@ -26,6 +33,10 @@ public class View_Venster extends JFrame {
 	private BoxLayout navigatieLayout;
 	private JButton btnTerug;
 	private JLabel lblPaginaTitel;
+	
+	/*
+	 * View_Venster Constructor - 
+	 */
 	
 	public View_Venster(){
 		super("Quiz Applicatie 2014");
@@ -58,6 +69,10 @@ public class View_Venster extends JFrame {
 		this.setSize(600,600);
 	}
 	
+	/**
+	 * Sets de te weer te geven pagina
+	 * @param JPanel pagina, String Titel
+	 */
 	
 	public void setPagina( JPanel pagina, String titel){
 		JPanel prevPagina = this.pagina;
@@ -71,13 +86,29 @@ public class View_Venster extends JFrame {
 			cardPanel.remove(prevPagina);
 	}
 	
+	/**
+	 * Zet de terugknop inactief
+	 * @param Boolena enabled
+	 */
 	public void setTerugEnabled( boolean enabled ){
 		btnTerug.setVisible(enabled);
 	}
 	
+	/**
+	 * Koppeling van de terugknop met Event 
+	 * @param ActionListener terugKnopListener
+	 */
+	
 	public void addknopTerugActionListener(ActionListener terugKnopListener){
 		btnTerug.addActionListener(terugKnopListener);
 	}
+	
+	/**
+	 * Verwijder de actionListener 
+	 * @param ActionListener terugKnopListener
+	 */
+	// Dit is noodzakelijk omdat er telkens een andere Actionlistener zal gekoppeld worden
+	// aan de terugknop als er een andere pagina geladen wordt. ( De terug is altijd anders..) 
 	
 	public void verwijderKnopTerugActionListener(ActionListener terugKnopListener){
 		btnTerug.removeActionListener(terugKnopListener);

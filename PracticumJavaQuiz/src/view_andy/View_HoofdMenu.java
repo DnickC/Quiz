@@ -9,6 +9,7 @@ public class View_HoofdMenu extends JPanel{
 
 	/**
 	 * @author Andy Poron
+	 * 
 	 */
 	
 	private JButton knopOpdrachtenBeheren = new JButton("1. Beheren van opdrachten");
@@ -22,6 +23,10 @@ public class View_HoofdMenu extends JPanel{
 	
 	private GridBagLayout layout = new GridBagLayout();
 	private GridBagConstraints gridConstraint = new GridBagConstraints();
+	
+	/**
+	 * Constructor voor het hoofdmenu
+	 */
 	
 	public View_HoofdMenu(){
 		this.setLayout(layout);
@@ -62,7 +67,10 @@ public class View_HoofdMenu extends JPanel{
 		this.add(knopStop,gridConstraint);
 	}
 	
-	
+	/**
+	 * Alle Actionlisteners voor het hoofdmenu
+	 * @param Actionlistener 
+	 */
 		
 	public void addknopBeheerOpdrachtActionListener(ActionListener beheerOpdractKnopListener){
 		knopOpdrachtenBeheren.addActionListener(beheerOpdractKnopListener);
@@ -120,22 +128,5 @@ public class View_HoofdMenu extends JPanel{
 		knopInstellingen.removeActionListener(stopKnopListener);
 	}
 	
-	
-	
-	
-	// in de controller class
-	
-	/*
-	 * this.doorgegevenView.addKnopQuizzenActionListener(New knopQuizListener());
-	 * 
-	 * inner class in controller
-	 * knopQuizListener{
-	 * 		 public void actionPerformed(ActionEvent e){
-	 *    		Open gewesnt venster.. 
-	 *  	}
-	 *  }
-	 * 
-	 * 
-	 */
 	
 }

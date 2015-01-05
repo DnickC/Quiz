@@ -9,12 +9,18 @@ import view_andy.View_Venster;
 public abstract class IPaginaController {
 	View_Venster venster;
 	
-	public View_Venster getVenster(){return this.venster;}
+	// Get het huidige venster
+	public View_Venster getVenster(){
+		return this.venster;
+	}
 	
+	
+	// Laden van het lege hoofdFrame
 	public boolean Start(){
 		if(venster == null){
 			venster = new View_Venster();
 		}
+		// Venster actief zetten, maar er is geen voorgaande Listener
 		this.ZetActiefEnUpdateTerugknop(venster, null, null);
 		venster.setVisible(true);
 		
@@ -22,11 +28,14 @@ public abstract class IPaginaController {
 	}
 	
 	
+	
 	protected abstract boolean ZetActief(View_Venster venster, HashMap<String, Object> parameters, NavigatieListener historiek);
+	
 	protected boolean ZetActiefEnUpdateTerugknop(View_Venster venster, HashMap<String, Object> parameters, NavigatieListener vorige){
+		// Zet het venster actief - 
 		this.venster = venster;
 		this.ZetActief(venster, parameters, new NavigatieListener(this, parameters, venster, vorige));
-		
+		// Terug knop zichtbaar maken en vorige pagina aan koppelen
 		if(vorige != null){
 			venster.setTerugEnabled(true);
 			venster.addknopTerugActionListener(vorige);
@@ -35,6 +44,8 @@ public abstract class IPaginaController {
 		}
 		return true;
 	};
+	
+	
 	
 	private static ActionEvent lastFiredEvent = null;
 	

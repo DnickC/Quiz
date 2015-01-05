@@ -16,6 +16,8 @@ public class View_BeheerQuizLijst extends JPanel{
 
 	/**
 	 * @author Andy Poron
+	 * Een simpel lijstje met alle quizzen erin. Hier kies je je quiz en zal deze meegaan naar het detail scherm.
+	 * De lijst komt rechtstreeks uit QuizDB ( Niet de beste oplossing.. maar kom)  
 	 */
 	
 	private JList<String> quizLijst = new JList<String>();
@@ -52,9 +54,19 @@ public class View_BeheerQuizLijst extends JPanel{
 		this.add(knopVerwijder,gridConstraint);		
 	}
 	
+	/**
+	 * Voeg de String lijst toe aan de JList. 
+	 * @param List<String> quizzen
+	 */
+	
 	public void SetQuizLijst(List<String> quizzen){
 		this.quizLijst.setListData(quizzen.toArray(new String[0]));
 	}
+	
+	/**
+	 * Actionlistener toevoegen/verwijderen
+	 * @param Actionlisteners
+	 */
 	
 	public void addknopNieuweQuizActionListener(ActionListener nieuweQuizKnopListener){
 		knopNieuw.addActionListener(nieuweQuizKnopListener);

@@ -29,10 +29,13 @@ public class QuizController extends IPaginaController{
 	public boolean ZetActief(View_Venster venster, HashMap<String, Object> parameters, IPaginaController.NavigatieListener vorigeListener) {
 		Quiz actieveQuiz = null;
 		boolean isNieuw = false;
+		// De parameters en deze controle is zo louche vanwege de een gezamelijke controller voor 2 schermen. Is er ne selecteerde Quiz? Of is dat nen nieuwe? ->
 		if(parameters != null){
 			actieveQuiz = parameters.containsKey("actieveQuiz")? (Quiz)parameters.get("actieveQuiz") : null; 
 			isNieuw = parameters.containsKey("isNieuw")? (boolean)parameters.get("isNieuw") : false; 
 		}
+		// Dus als er geen Quiz in de parameter zit weet de controller dat hij een overzichtlijstje moet weergeven..
+		// WANT anders zou er quiz zijn geselecteerd die moet gewijzigd worden OF zou er vooraf al een nieuwe standaard quiz gemaakt en meegegeven worden. 
 		if(actieveQuiz == null){
 			updateBeheerLijstView(vorigeListener);
 			venster.setPagina(viewBeheerLijst, "Beheer Quizzen");
@@ -40,6 +43,7 @@ public class QuizController extends IPaginaController{
 			updateWijzigQuizView(vorigeListener, actieveQuiz);
 			venster.setPagina(wijzigQuiz, 
 					(isNieuw)? "Nieuwe Quiz":"Wijzig Quiz");
+			//Is het een nieuwe Quiz die net is aangemaakt ? Dan blijft het scherm hetzelfde maar veranderd de titel.. 
 		}
 		return true;
 	}
@@ -58,17 +62,6 @@ public class QuizController extends IPaginaController{
 		viewBeheerLijst.addknopNieuweQuizActionListener(nieuweQuizListener);
 	}
 	
-	
-	
-	class NieuweQuizListener implements ActionListener{
-		IPaginaController.NavigatieListener vorigeListener;
-		NieuweQuizListener(IPaginaController.NavigatieListener vorigeListener){
-			this.vorigeListener = vorigeListener;
-		}
-		public void actionPerformed(ActionEvent event){
-			NieuweQuiz(vorigeListener);
-		}
-	}
 
 	public void updateWijzigQuizView(IPaginaController.NavigatieListener vorigeListener, Quiz quiz){
 		if(wijzigQuiz == null){
@@ -90,4 +83,17 @@ public class QuizController extends IPaginaController{
 		parameters.put("isNieuw", true);
 		this.ZetActiefEnUpdateTerugknop(getVenster(), parameters, vorigeListener );
 	}
+	
+	
+	
+	class NieuweQuizListener implements ActionListener{
+		IPaginaController.NavigatieListener vorigeListener;
+		NieuweQuizListener(IPaginaController.NavigatieListener vorigeListener){
+			this.vorigeListener = vorigeListener;
+		}
+		public void actionPerformed(ActionEvent event){
+			NieuweQuiz(vorigeListener);
+		}
+	}
+	
 }

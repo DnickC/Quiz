@@ -16,6 +16,7 @@ public class View_BeheerOpdrachtenLijst extends JPanel{
 
 	/**
 	 * @author Andy Poron
+	 * Lijstje met opdrachten erin. Nieuwe maken of eentje aanpassen. 
 	 */
 	
 	private JList<String> opdrachtenLijst = new JList<String>();
