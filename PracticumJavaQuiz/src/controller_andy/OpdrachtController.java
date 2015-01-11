@@ -62,23 +62,12 @@ public class OpdrachtController extends IPaginaController{
 			// Listeners op navigatie knoppen verwijderen als view_BeheersLijsten als bestaat
 			viewBeheerLijst.verwijderknopNieuweOpdrachtActionListener(nieuweOpdrachtListener);
 		}
-		// Vorige listener op terug knop zetten (historiek van pages bijhouden)
+		
 		nieuweOpdrachtListener = new NieuweOpdrachtListener(vorigeListener);
-		// Nieuwe listener op de Nieuw-knop steken
 		viewBeheerLijst.addknopNieuweOpdrachtActionListener(nieuweOpdrachtListener);
 	}
 	
 	
-	
-	class NieuweOpdrachtListener implements ActionListener{
-		IPaginaController.NavigatieListener vorigeListener;
-		NieuweOpdrachtListener(IPaginaController.NavigatieListener vorigeListener){
-			this.vorigeListener = vorigeListener;
-		}
-		public void actionPerformed(ActionEvent event){
-			NieuweOpdracht(vorigeListener);
-		}
-	}
 
 	public void updateWijzigOpdrachtView(IPaginaController.NavigatieListener vorigeListener, Opdracht Opdracht){
 		if(wijzigOpdracht == null){
@@ -99,5 +88,15 @@ public class OpdrachtController extends IPaginaController{
 		parameters.put("actieveOpdracht", Opdracht);
 		parameters.put("isNieuw", true);
 		this.ZetActiefEnUpdateTerugknop(getVenster(), parameters, vorigeListener );
+	}
+	
+	class NieuweOpdrachtListener implements ActionListener{
+		IPaginaController.NavigatieListener vorigeListener;
+		NieuweOpdrachtListener(IPaginaController.NavigatieListener vorigeListener){
+			this.vorigeListener = vorigeListener;
+		}
+		public void actionPerformed(ActionEvent event){
+			NieuweOpdracht(vorigeListener);
+		}
 	}
 }

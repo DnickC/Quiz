@@ -21,17 +21,16 @@ import model.Quiz.QuizStatus;
 
 public class DerbyQuizDB extends QuizDB {
 	
-	static final String jdbc_Driver = "com.mysql.jdbc.Driver";
-	static final String connection_URL = "jdbc:derby:QuizDB";
+	static final String jdbc_Driver = "org.apache.derby.jdbc.EmbeddedDriver";
+	static final String connection_URL = "jdbc:derby:QuizDB;create=true";
 	Connection conn = null;
 	Statement stmt = null;
         
 	
-	//Kan er niet een heel deel code van opslaan/laden naar QuizDB met een template format waarbij enkel het wegschrijven hier gebeurd? 
 	
     public DerbyQuizDB() throws Exception{
     			
-    	Class.forName("com.mysql.jdbc.Driver");
+    	Class.forName(jdbc_Driver).newInstance();
 		conn = DriverManager.getConnection(connection_URL);
 		
 		// Opslaan() & Laden();
@@ -53,7 +52,7 @@ public class DerbyQuizDB extends QuizDB {
     
     public void LaadQuizzen() throws Exception{
     	stmt = conn.createStatement();
-    	ResultSet input = stmt.executeQuery("SELECT * FROM TBLQuiz");
+    	ResultSet input = stmt.executeQuery("SELECT * FROM TBLQUIZ");
     	
     	if(input != null){
     		while(input.next()){
@@ -63,28 +62,33 @@ public class DerbyQuizDB extends QuizDB {
     		}
     	}
     }
-	
+   	
     public boolean OpslaanQuizzen(QuizCatalogus quizzen) throws Exception{
+    		stmt = conn.createStatement();
     	if(quizzen != null){
-    		stmt.execute("DELETE * FROM TBLQuiz");
+    		String query = "DELETE FROM TBLQuizOpdracht"; 
+    		stmt.execute(query);
+    		
+    		query = "DELETE FROM TBLQuiz"; 
+    		stmt.execute(query);
     	}
     	for(Quiz q : quizzen.getCatalogus()){
-    		stmt = conn.createStatement();
-    		String query = "INSERT INTO TBLQuiz("+q.getQuizID()+","+q.getOnderwerp() +",'" +q.getLeerjaar()+","+ String.valueOf(q.getIsTest())+","+
-    		String.valueOf(q.getIsUniekeDeelname())+","+q.getLeraar().toString()+","+q.getQuizStatus().toString()+","+q.getRegistratieDatum().toString();
+    		String query = "INSERT INTO TBLQuiz (QuizID,Onderwerp,Leerjaar,IsTest,UniekeDeelname,Auteur,Status,registratieDatum)"
+    				+ "VALUES ("+q.getQuizID()+",'"+q.getOnderwerp() +"'," +q.getLeerjaar()+","+ String.valueOf(q.getIsTest())+","+
+    		String.valueOf(q.getIsUniekeDeelname())+",'"+q.getLeraar().toString()+"','"+q.getQuizStatus().toString()+"','"+q.getRegistratieDatum().getDatumInEuropeesFormaat()+"')";
     		
     		if(query!= null){
-    			stmt.executeQuery(query);
+    			stmt.execute(query);
     		}
-    		    		
     	}
     	return true;
     }
-
+  
     
     public void LaadOpdrachten() throws Exception{
     	stmt = conn.createStatement();
-    	ResultSet input = stmt.executeQuery("SELECT * FROM TBLOpdracht");
+    	String query = "SELECT * FROM TBLOPDRACHTEN";
+    	ResultSet input = stmt.executeQuery(query);
     	
     	if(input != null){
 	    	while(input.next()){
@@ -92,23 +96,23 @@ public class DerbyQuizDB extends QuizDB {
 	    		case "standaard":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Standaard(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("JuisteAntwoord"),
 	    					Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
-	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("AanmaakDatum"))));
 	    			break;
 	    		case "meerkeuze":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Meerkeuze(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("Antwoorden"),
 	    					Integer.parseInt(input.getString("JuisteAntwoord")),Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),
-	    					input.getString("AntwoordHints"),VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					input.getString("AntwoordHints"),VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("AanmaakDatum"))));
 	    			break;
 	    		case "opsomming":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Opsomming(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),input.getString("Antwoorden"),
 	    					Integer.parseInt(input.getString("MaxAantalPogingen")),Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
-	    					VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("AanmaakDatum"))));
 	    			break;
 	    		case "reproductie":
 	    			this.opdrachtenCatalogus.addOpdracht(new Vraag_Reproductie(Integer.parseInt(input.getString("OpdrachtID")),input.getString("Vraag"),
 	    					input.getString("Trefwoorden"),Integer.parseInt(input.getString("MinAantalTrefwoorden")),Integer.parseInt(input.getString("MaxAantalPogingen")),
 	    					Integer.parseInt(input.getString("MaxAntwoordTijd")),input.getString("AntwoordHints"),
-	    					VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("datumRegistratie"))));
+	    					VraagType.valueOf(input.getString("vraagType")),Leraar.valueOf(input.getString("Auteur")),OpdrachtCategorie.valueOf(input.getString("Categorie")),new Datum(input.getString("AanmaakDatum"))));
 	    			break;
 	    		}
 	    	}	
@@ -118,40 +122,44 @@ public class DerbyQuizDB extends QuizDB {
     
     public boolean OpslaanOpdrachten(OpdrachtCatalogus opdrachten)throws Exception{
     	if(opdrachten!= null){
-    		stmt.execute("DELETE * FROM TBLOpdracht");
+    		stmt.execute("DELETE FROM TBLOPDRACHTEN");
     	}
     	for(Opdracht o : opdrachten.getCatalogus().values()){
     		stmt = conn.createStatement();
     		String query = null;
     		switch (o.getVraagType().toString()){
-	    		case "standaard":
+	    		case "standaard":    
 	    			Vraag_Standaard standaard = (Vraag_Standaard)o;
-	        		query = "INSERT INTO TBLOpdracht("+standaard.getID() +','+ standaard.getVraag() +','+','+standaard.getJuisteAntwoord()+","+standaard.getMaxAantalPogingen()+","+standaard.getMaxAntwoordTijd()+","+
-	        				standaard.getHint()+","+","+","+standaard.getVraagType().toString()+","+standaard.getAuteur().toString()+","+standaard.getOpdrachtCategorie().toString()+","+standaard.getDatumRegistratie().toString(); 
+	        		query = "INSERT INTO TBLOpdrachten(OpdrachtID,Vraag,JuisteAntwoord,MaxAantalPogingen,MaxAntwoordTijd,AntwoordHints,Vraagtype,Auteur,Categorie,AanmaakDatum) "
+	        				+ " VALUES("+standaard.getID() +",'"+ standaard.getVraag() +"','"+standaard.getJuisteAntwoord()+"',"+standaard.getMaxAantalPogingen()+","+standaard.getMaxAntwoordTijd()+",'"+
+	        				standaard.getHint()+"','"+standaard.getVraagType().toString()+"','"+standaard.getAuteur().toString()+"','"+standaard.getOpdrachtCategorie().toString()+"','"+standaard.getDatumRegistratie().getDatumInEuropeesFormaat()+"')"; 
 	    			break;
 	    		case "opsomming":
 	    			Vraag_Opsomming opsomming = (Vraag_Opsomming)o;
-	    			query = "INSERT INTO TBLOpdracht("+opsomming.getID() +","+","+opsomming.getAntwoordenToString()+","+opsomming.getMaxAantalPogingen()+","+opsomming.getMaxAntwoordTijd()+","+
-	    					opsomming.getHint()+","+","+","+opsomming.getVraagType().toString()+","+opsomming.getAuteur().toString()+","+opsomming.getOpdrachtCategorie().toString()+","+opsomming.getDatumRegistratie().toString();
+	    			query = "INSERT INTO TBLOpdrachten(OpdrachtID,Vraag,JuisteAntwoord,MaxAantalPogingen,MaxAntwoordTijd,AntwoordHints,Vraagtype,Auteur,Categorie,AanmaakDatum)  "
+	    					+ "VALUES( "+opsomming.getID()+",'"+opsomming.getVraag() +"','"+opsomming.getAntwoordenToString()+"',"+opsomming.getMaxAantalPogingen()+","+opsomming.getMaxAntwoordTijd()+",'"+
+	    					opsomming.getHint()+"','"+opsomming.getVraagType().toString()+"','"+opsomming.getAuteur().toString()+"','"+opsomming.getOpdrachtCategorie().toString()+"','"+opsomming.getDatumRegistratie().getDatumInEuropeesFormaat()+"')";
 	    			break;
-	    		case "meerkeuze":
+	    		case "meerkeuze":  
 	    			Vraag_Meerkeuze meerkeuze = (Vraag_Meerkeuze)o;
-	    			query = "INSERT INTO TBLOpdracht("+meerkeuze.getID()+','+meerkeuze.getVraag()+','+meerkeuze.getAntwoordenToString()+","+String.valueOf(meerkeuze.getJuisteAntwoord())+","+
-	    			meerkeuze.getMaxAantalPogingen()+","+meerkeuze.getMaxAntwoordTijd()+","+meerkeuze.getHint()+","+","+","+meerkeuze.getVraagType().toString()+","+meerkeuze.getAuteur().toString()
-	    			+","+meerkeuze.getOpdrachtCategorie().toString()+","+meerkeuze.getDatumRegistratie().toString();
+	    			query = "INSERT INTO TBLOpdrachten(OpdrachtID,Vraag,Antwoorden,JuisteAntwoord,MaxAantalPogingen,MaxAntwoordTijd,AntwoordHints,Vraagtype,Auteur,Categorie,AanmaakDatum) "
+	    					+ " VALUES( "+meerkeuze.getID()+",'"+meerkeuze.getVraag()+"','"+meerkeuze.getAntwoordenToString()+"','"+String.valueOf(meerkeuze.getJuisteAntwoord())+"',"+
+	    			meerkeuze.getMaxAantalPogingen()+","+meerkeuze.getMaxAntwoordTijd()+",'"+meerkeuze.getHint()+"','"+meerkeuze.getVraagType().toString()+"','"+meerkeuze.getAuteur().toString()
+	    			+"','"+meerkeuze.getOpdrachtCategorie().toString()+"','"+meerkeuze.getDatumRegistratie().getDatumInEuropeesFormaat()+"')";
 	    			break;
 	    		case "reproductie":
 	    			Vraag_Reproductie reproductie = (Vraag_Reproductie)o;
-	    			query = "INSERT INTO TBLOpdracht("+reproductie.getID()+","+reproductie.getVraag()+","+","+reproductie.getMaxAantalPogingen()+","+reproductie.getMaxAntwoordTijd()+","+reproductie.getHint()+","+
-	    			reproductie.getTrefwoordenLijst()+","+reproductie.getMinAantalTrefwoorden()+","+reproductie.getVraagType().toString()+","+reproductie.getAuteur().toString()+","+reproductie.getOpdrachtCategorie().toString()+","+
-	    			reproductie.getDatumRegistratie().toString();;
+	    			query = "INSERT INTO TBLOpdrachten(OpdrachtID,Vraag,JuisteAntwoord,MaxAantalPogingen,MaxAntwoordTijd,AntwoordHints,Trefwoorden,MinAantalTrefwoorden,Vraagtype,Auteur,Categorie,AanmaakDatum) "
+	    					+ " VALUES( "+reproductie.getID()+",'"+reproductie.getVraag()+"','blaco',"+reproductie.getMaxAantalPogingen()+","+reproductie.getMaxAntwoordTijd()+",'"+reproductie.getHint()+"','"+
+	    			reproductie.getTrefwoordenLijst().toString()+"',"+reproductie.getMinAantalTrefwoorden()+",'"+reproductie.getVraagType().toString()+"','"+reproductie.getAuteur().toString()+"','"+reproductie.getOpdrachtCategorie().toString()+"','"+
+	    			reproductie.getDatumRegistratie().getDatumInEuropeesFormaat()+"')";
 	    			break;
 	    		default:
 	    			return false;
     		}
     		
     		if(query!= null){
-    			stmt.executeQuery(query);
+    			stmt.execute(query);
     		}
     	}
 		return true;
@@ -164,14 +172,17 @@ public class DerbyQuizDB extends QuizDB {
         	String query = null;
         	int scoreTeller = 0;
         	
-    		String[] quizIDs = o.getQuizIDsToString().split(";");
-    		String[] maxScore = o.getMaxScoresToString().split(";");
+    		if(o.getQuizIDsToString()!=null){
+    			String[] quizIDs = o.getQuizIDsToString().split(";");
+    			String[] maxScore = o.getMaxScoresToString().split(";");
     		
 	    		for(String id : quizIDs){
-	    			query = query + ";" +String.valueOf(o.getID())+ ";"+ String.valueOf(id)+";"+ maxScore[scoreTeller] + "\n";
+	    			query = "INSERT INTO TBLQuizOpdracht(OpdrachtID,QuizID,MaxScore) VALUES("+String.valueOf(o.getID())+ ","+ String.valueOf(id)+","+ maxScore[scoreTeller]+")";
 	    			scoreTeller++;
-	    			stmt.executeQuery(query);
-	    		}  		
+	    			stmt.execute(query);
+	    		}
+	    		
+    		}
     	}
     }
     

@@ -18,7 +18,10 @@ public class StartController extends IPaginaController{
 	public static void main(String[] args) throws Exception {
 		
 		// Database indaden. NU enkel via TEXT - kan ook van Derby komen - MaakDB("DATABASE")
-		QuizDB db = QuizDBFactory.getInstance().MaakDB("TEXT"); 
+		BeheerProperties bi = new BeheerProperties();
+		bi.keuzePersistentie();
+		
+		QuizDB db = QuizDBFactory.getInstance().MaakDB(bi.getPersistentieMethode()); 
 		
 		StartController start = new StartController(db);
 		start.Start();
@@ -58,7 +61,7 @@ public class StartController extends IPaginaController{
 	
 	
 	
-	// Listener voor Beheeropdrachten en BeheerQuizzen. De rest geen tijd. 
+	// Listener voor Beheeropdrachten en BeheerQuizzen.
 	
 	class BeheerOpdrachtenListener implements ActionListener{
 		IPaginaController.NavigatieListener vorigeListener;

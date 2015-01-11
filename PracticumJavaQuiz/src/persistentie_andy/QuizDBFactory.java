@@ -5,7 +5,6 @@ public class QuizDBFactory {
 	private static QuizDBFactory instance = null;
 	public static QuizDBFactory getInstance(){
 		if(instance == null){
-			// Lazy loading
 			instance = new QuizDBFactory();
 		}
 		return instance;

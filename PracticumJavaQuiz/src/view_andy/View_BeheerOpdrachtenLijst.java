@@ -36,19 +36,17 @@ public class View_BeheerOpdrachtenLijst extends JPanel{
 		
 		gridConstraint.gridx = 0;
 		gridConstraint.gridy = 0;
-		gridConstraint.gridwidth = 3;
 		this.add(opdrachtenLijst,gridConstraint);
 		
 		gridConstraint.gridx = 0;
 		gridConstraint.gridy = 1;
-		gridConstraint.gridwidth = 0;
 		this.add(knopNieuw,gridConstraint);
 		
-		gridConstraint.gridx = 1;
+		gridConstraint.gridx = 2;
 		gridConstraint.gridy = 1;
 		this.add(knopWijzigen,gridConstraint);
 		
-		gridConstraint.gridx = 2;
+		gridConstraint.gridx = 3;
 		gridConstraint.gridy = 1;
 		this.add(knopVerwijder,gridConstraint);		
 	}
@@ -57,10 +55,24 @@ public class View_BeheerOpdrachtenLijst extends JPanel{
 		this.opdrachtenLijst.setListData(opdrachten.toArray(new String[0]));
 	}
 	
+	public void addWijzigknopActionListener(ActionListener wijzigOpdrachtKnopListener){
+		knopNieuw.addActionListener(wijzigOpdrachtKnopListener);
+	}
+	public void verwijderVerwijderknopActionListener(ActionListener verwijderVerwijderOpdrachtKnopListener){
+		knopNieuw.removeActionListener(verwijderVerwijderOpdrachtKnopListener);
+	}
+	
+	public void addVerwijderknopActionListener(ActionListener verwijderOpdrachtKnopListener){
+		knopNieuw.addActionListener(verwijderOpdrachtKnopListener);
+	}
+	public void verwijderWijzigknopActionListener(ActionListener verwijderWijzigOpdrachtKnopListener){
+		knopNieuw.removeActionListener(verwijderWijzigOpdrachtKnopListener);
+	}
+	
 	public void addknopNieuweOpdrachtActionListener(ActionListener nieuweOpdractKnopListener){
 		knopNieuw.addActionListener(nieuweOpdractKnopListener);
 	}
-	public void verwijderknopNieuweOpdrachtActionListener(ActionListener nieuweOpdrachtKnopListener){
-		knopNieuw.removeActionListener(nieuweOpdrachtKnopListener);
+	public void verwijderknopNieuweOpdrachtActionListener(ActionListener verwijderOpdrachtKnopListener){
+		knopNieuw.removeActionListener(verwijderOpdrachtKnopListener);
 	}
 }

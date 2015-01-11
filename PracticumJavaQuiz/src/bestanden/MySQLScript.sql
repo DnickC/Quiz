@@ -53,4 +53,5 @@ REFERENCES TBLQuiz(QuizID);
 Select * 
 From TBLOPDRACHTEN
 
-
+INSERT INTO TBLQuiz (QuizID,Onderwerp,Leerjaar,IsTest,UniekeDeelname,Auteur,Status,registratieDatum) VALUES (10,'Onderwerpen',1,true,true,'LeraarA','opengesteld','28/12/2014')
+INSERT INTO TBLOpdrachten(OpdrachtID,Vraag,Antwoorden,JuisteAntwoord,MaxAantalPogingen,MaxAntwoordTijd,AntwoordHints,Trefwoorden,MinAantalTrefwoorden,Vraagtype,Auteur,Categorie,AanmaakDatum)  VALUES( 1,'vraag','juisteAntwoord',4,20,'hint','standaard','LeraarD','Aardrijkskunde','02/09/2012')
